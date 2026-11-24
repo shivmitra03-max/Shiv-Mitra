@@ -119,6 +119,7 @@
             <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms (Govt/Bank)</button>
             <button class="side-btn" onclick="viewCategoryPosts('Legal Paid Format', this)">4. Legal Paid Formats</button>
             <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">5. Online Service Guides</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">6. Call Letter / Admit Card</button>
         </div>
 
         <div class="main-content">
@@ -150,6 +151,7 @@
                             <option value="Forms">Forms</option>
                             <option value="Legal Paid Format">Legal Paid Format</option>
                             <option value="Online Service Details">Online Service Details</option>
+                            <option value="Call Letter">Call Letter / Admit Card</option>
                         </select>
                     </div>
                     <div>
@@ -214,12 +216,12 @@
 
             <!-- TAB 2: Auto-Jobs Server Queue -->
             <div id="tab-auto" class="panel-card tab-section" style="display:none;">
-                <h3>Auto-Updating Jobs Server Queue (Pending Approval)</h3>
+                <h3>Auto-Updating Jobs & Call Letters Queue (Pending Approval)</h3>
                 <p style="font-size:0.85rem; color:#475569; margin-bottom:15px;">
-                    Open any auto-fetched job using <b>Edit & Add Banner/Table</b> to generate an <b>HD Banner</b> and <b>Structured Table</b> in 1 click before publishing live.
+                    Open any auto-fetched update using <b>Edit & Add Banner/Table</b> to generate an <b>HD Banner</b> and <b>Structured Table</b> in 1 click before publishing live.
                 </p>
                 <table>
-                    <thead><tr><th>Fetched Job Title</th><th>Category</th><th>Actions</th></tr></thead>
+                    <thead><tr><th>Fetched Title</th><th>Category</th><th>Actions</th></tr></thead>
                     <tbody id="draftsTableBody"></tbody>
                 </table>
             </div>
@@ -241,7 +243,8 @@
             'Sarkari Yojana': ['Central Yojana', 'State Yojana'],
             'Forms': ['Sarkari Forms', 'Bank Forms'],
             'Legal Paid Format': ['Rent Agreement', 'Affidavit', 'NOC & Other Drafts'],
-            'Online Service Details': ['PAN & Aadhaar', 'Ration & Certificates']
+            'Online Service Details': ['PAN & Aadhaar', 'Ration & Certificates'],
+            'Call Letter': ['Gujarat Call Letter (OJAS/GPSC)', 'Central & Bank Admit Card']
         };
 
         let posts = [];
@@ -525,18 +528,18 @@
         function fillJobTemplate(mode = 'AUTO') {
             const title = document.getElementById('pTitle').value.trim() || "New Recruitment 2026";
             const lowerTitle = title.toLowerCase();
-            const gujaratKeywords = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot', 'gandhinagar', 'bhavnagar', 'jamnagar', 'junagadh', 'kutch', 'gseb', 'guj'];
+            const gujaratKeywords = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot', 'gandhinagar', 'bhavnagar', 'jamnagar', 'junagadh', 'kutch', 'gseb', 'guj'];
             const useGujarati = (mode === 'GUJ') || (mode === 'AUTO' && gujaratKeywords.some(w => lowerTitle.includes(w)));
 
             if (useGujarati) {
-                document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ નોટિફિકેશન જાહેર કરવામાં આવ્યું છે. મહત્વની તારીખો, અરજી ફી, લાયકાત અને ઓનલાઇન અરજી કરવાની સંપૂર્ણ વિગતવાર માહિતી નીચે કોષ્ટકમાં આપેલ છે.`;
-                document.getElementById('pContent').value = `<p><strong>${title}</strong> અંતર્ગત ખાલી જગ્યાઓ ભરવા માટે લાયક ઉમેદવારો પાસેથી ઓનલાઇન અરજીઓ મંગાવવામાં આવે છે. સંપૂર્ણ વિગતો નીચે મુજબ છે:</p>
+                document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ નોટિફિકેશન / કોલ લેટર જાહેર કરવામાં આવ્યું છે. મહત્વની તારીખો, લાયકાત અને ઓનલાઇન ડાઉનલોડ કરવાની સંપૂર્ણ વિગતવાર માહિતી નીચે કોષ્ટકમાં આપેલ છે.`;
+                document.getElementById('pContent').value = `<p><strong>${title}</strong> અંતર્ગત મહત્વની વિગતો અને ઓનલાઇન પ્રક્રિયા નીચે મુજબ છે:</p>
 <h3>1. મહત્વની તારીખો (Important Dates)</h3>
 <table>
   <tr><th>વિગત (Event)</th><th>તારીખ (Date)</th></tr>
-  <tr><td>ઓનલાઇન ફોર્મ ભરવાની શરૂઆતની તારીખ (Start Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>ઓનલાઇન ફોર્મ ભરવાની છેલ્લી તારીખ (Last Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>પરીક્ષાની તારીખ (Exam / Call Letter Date)</td><td>ટૂંક સમયમાં જાહેર થશે (Notify Soon)</td></tr>
+  <tr><td>ઓનલાઇન શરૂઆતની તારીખ (Start Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>છેલ્લી તારીખ / પરીક્ષા તારીખ (Last / Exam Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>કોલ લેટર / પરિણામ (Call Letter / Result)</td><td>ઓફિશિયલ વેબસાઇટ પર ઉપલબ્ધ</td></tr>
 </table>
 <h3>2. અરજી ફી (Application Fee)</h3>
 <table>
@@ -551,14 +554,14 @@
   <tr><td>ઉંમર મર્યાદા (Age Limit)</td><td>18 થી 35 વર્ષ</td></tr>
 </table>`;
             } else {
-                document.getElementById('pSummary').value = `${title} official notification has been released. Check Important Dates, Application Fee, Qualification, Age Limit, and online apply process below.`;
-                document.getElementById('pContent').value = `<p>Applications are invited from eligible candidates for <strong>${title}</strong>. Complete recruitment details are given in the tables below:</p>
+                document.getElementById('pSummary').value = `${title} official update has been released. Check Important Dates, Eligibility, Exam Schedule, and direct download link below.`;
+                document.getElementById('pContent').value = `<p>Official notification and direct link details for <strong>${title}</strong> are given in the tables below:</p>
 <h3>1. Important Dates (महत्वपूर्ण तिथियां)</h3>
 <table>
   <tr><th>Event / Activity</th><th>Date</th></tr>
-  <tr><td>Application Form Start Date (आवेदन शुरू तिथि)</td><td>DD/MM/2026</td></tr>
-  <tr><td>Application Form Last Date (अंतिम तिथि)</td><td>DD/MM/2026</td></tr>
-  <tr><td>Exam Date / Admit Card (परीक्षा तिथि)</td><td>Will be notified soon</td></tr>
+  <tr><td>Start Date (आवेदन / डाउनलोड शुरू तिथि)</td><td>DD/MM/2026</td></tr>
+  <tr><td>Last Date / Exam Date (अंतिम / परीक्षा तिथि)</td><td>DD/MM/2026</td></tr>
+  <tr><td>Admit Card / Call Letter Status</td><td>Available Now</td></tr>
 </table>
 <h3>2. Application Fee (आवेदन शुल्क)</h3>
 <table>
@@ -704,7 +707,7 @@
             if (idx !== -1) {
                 posts[idx].status = 'live';
                 posts[idx].date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-                await pushToGitHub(`Approve draft job: ${posts[idx].title}`);
+                await pushToGitHub(`Approve draft: ${posts[idx].title}`);
                 renderDrafts();
                 refreshStats();
             }
