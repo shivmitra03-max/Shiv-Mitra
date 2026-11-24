@@ -28,24 +28,29 @@ jobs:
           python -c "
           import json, time, feedparser
 
-          with open('posts.json', 'r', encoding='utf-8') as f:
-              posts = json.load(f)
+          try:
+              with open('posts.json', 'r', encoding='utf-8') as f:
+                  posts = json.load(f)
+              if not isinstance(posts, list):
+                  posts = []
+          except Exception:
+              posts = []
 
-          existing_titles = {p['title'].strip().lower() for p in posts}
+          existing_titles = {p.get('title', '').strip().lower() for p in posts}
 
           feeds = [
               {
-                  'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+GSSSB+OR+Gujarat+Recruitment+Bharti+when:7d&hl=en-IN&gl=IN&ceid=IN:en',
+                  'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+GSSSB+OR+Gujarat+Recruitment+Bharti&hl=en-IN&gl=IN&ceid=IN:en',
                   'cat': 'Jobs',
                   'sub': 'Sarkari Jobs'
               },
               {
-                  'url': 'https://news.google.com/rss/search?q=SSC+OR+IBPS+OR+RRB+Railway+Bank+Recruitment+Apply+Online+when:7d&hl=en-IN&gl=IN&ceid=IN:en',
+                  'url': 'https://news.google.com/rss/search?q=SSC+OR+IBPS+OR+RRB+Railway+Bank+Recruitment+2026&hl=en-IN&gl=IN&ceid=IN:en',
                   'cat': 'Jobs',
                   'sub': 'Bank Jobs'
               },
               {
-                  'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+SSC+OR+IBPS+Admit+Card+OR+Call+Letter+when:7d&hl=en-IN&gl=IN&ceid=IN:en',
+                  'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+SSC+OR+IBPS+Admit+Card+OR+Call+Letter&hl=en-IN&gl=IN&ceid=IN:en',
                   'cat': 'Call Letter',
                   'sub': 'Central & Bank Admit Card'
               }
@@ -56,7 +61,7 @@ jobs:
               parsed = feedparser.parse(feed_info['url'])
               for entry in parsed.entries[:5]:
                   title = entry.title.split(' - ')[0].strip()
-                  if title.lower() in existing_titles:
+                  if not title or title.lower() in existing_titles:
                       continue
 
                   lower_t = title.lower()
@@ -85,10 +90,9 @@ jobs:
                   existing_titles.add(title.lower())
                   added += 1
 
-          if added > 0:
-              with open('posts.json', 'w', encoding='utf-8') as f:
-                  json.dump(posts, f, indent=2, ensure_ascii=False)
-          print(f'Added {added} new drafts.')
+          with open('posts.json', 'w', encoding='utf-8') as f:
+              json.dump(posts, f, indent=2, ensure_ascii=False)
+          print(f'Successfully added {added} new drafts.')
           "
 
       - name: Commit and push drafts
