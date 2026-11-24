@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ShivMitra.in</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f1f5f9; color: #0f172a; }
+
+        .login-wrapper {
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            background: linear-gradient(180deg, #1e3a8a 50%, #f1f5f9 50%); padding: 20px;
+        }
+        .login-card {
+            background: white; width: 100%; max-width: 430px; padding: 34px 28px;
+            border-radius: 14px; box-shadow: 0 15px 35px rgba(0,0,0,0.12); text-align: center;
+        }
+        .login-card h2 { color: #0f172a; font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+        .login-card p { color: #64748b; font-size: 0.83rem; margin-bottom: 20px; }
+
+        .admin-layout { display: none; min-height: 100vh; }
+        .sidebar {
+            width: 260px; background: #0f172a; color: white; padding: 20px 15px;
+            position: fixed; height: 100%; overflow-y: auto;
+        }
+        .sidebar h3 { color: #f59e0b; font-size: 1.1rem; padding: 0 10px 15px; border-bottom: 1px solid #1e293b; margin-bottom: 15px; }
+        .side-label { font-size: 0.72rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
+        .side-btn {
+            width: 100%; text-align: left; background: transparent; color: #cbd5e1;
+            border: none; padding: 10px 12px; border-radius: 8px; cursor: pointer;
+            font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; display: block;
+        }
+        .side-btn:hover, .side-btn.active { background: #1e3a8a; color: white; }
+
+        .main-content { margin-left: 260px; padding: 25px; }
+        .topbar {
+            background: white; padding: 15px 22px; border-radius: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 22px; flex-wrap: wrap; gap: 10px;
+        }
+
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 22px; }
+        .stat-box { background: white; padding: 18px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .stat-box small { color: #64748b; font-weight: 600; font-size: 0.78rem; }
+        .stat-box h2 { color: #1e3a8a; font-size: 1.6rem; margin-top: 4px; }
+
+        .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
+        .panel-card h3 { color: #1e3a8a; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+
+        input, select, textarea {
+            width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1;
+            border-radius: 7px; font-size: 0.9rem; outline: none;
+        }
+        input:focus, select:focus, textarea:focus { border-color: #2563eb; }
+
+        .btn-primary { background: #2563eb; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
+        .btn-green { background: #059669; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-sm { padding: 6px 12px; border-radius: 5px; border: none; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+        .btn-edit { background: #2563eb; color: white; }
+        .btn-del { background: #dc2626; color: white; }
+        .btn-pub { background: #059669; color: white; }
+        .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+
+        .insert-toolbar {
+            background: #f8fafc; border: 1px solid #cbd5e1; border-bottom: none;
+            padding: 8px 10px; border-radius: 7px 7px 0 0; display: flex; gap: 6px; flex-wrap: wrap;
+        }
+        .tool-chip {
+            background: white; border: 1px solid #cbd5e1; color: #1e293b;
+            padding: 5px 10px; border-radius: 5px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
+        }
+        .tool-chip:hover { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+
+        .banner-studio {
+            background: #eff6ff; border: 1px dashed #2563eb; border-radius: 10px;
+            padding: 15px; margin-bottom: 14px;
+        }
+        .banner-preview-img {
+            max-width: 100%; max-height: 220px; border-radius: 8px;
+            margin-top: 10px; display: none; border: 2px solid #1e3a8a;
+        }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; color: #475569; font-weight: 700; }
+
+        @media (max-width: 850px) {
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .main-content { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loginView" class="login-wrapper">
+        <div class="login-card">
+            <h2>SHIVMITRA.IN</h2>
+            <p>GitHub Direct Publish Admin Login</p>
+            <input type="text" id="ghUser" placeholder="GitHub Username (e.g., shivmitra03)">
+            <input type="text" id="ghRepo" placeholder="Repository Name (e.g., Shiv-Online-Center)">
+            <input type="password" id="ghToken" placeholder="GitHub Fine-Grained Token (github_pat_...)">
+            <button class="btn-primary" id="loginBtn" onclick="connectGitHub()">Connect & Open Dashboard</button>
+            <p id="errMsg" style="color: #dc2626; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <div id="dashboardView" class="admin-layout">
+        <div class="sidebar">
+            <h3>SHIVMITRA ADMIN</h3>
+            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Naya Post Upload Karein</button>
+            <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">Auto-Jobs Server Queue</button>
+
+            <div class="side-label">Topic-Wise Posts Dekhein</div>
+            <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">Sabhi Posts (All)</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Sarkari/Bank/Pvt)</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. All Sarkari Yojana</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms (Sarkari/Bank)</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Legal Paid Format', this)">4. Legal Paid Formats</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">5. Online Service Details</button>
+        </div>
+
+        <div class="main-content">
+            <div class="topbar">
+                <div><strong style="color:#1e3a8a;">ShivMitra.in</strong> — Live GitHub Sync Active <span id="syncStatus" style="font-size:0.8rem; color:#059669; font-weight:700;"></span></div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh Data</button>
+                    <a href="index.html" target="_blank" style="background:#f59e0b; color:#0f172a; padding:7px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.84rem;">Website Dekhein</a>
+                    <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box"><small>TOTAL LIVE POSTS</small><h2 id="statTotal">0</h2></div>
+                <div class="stat-box"><small>AUTO-JOBS DRAFTS</small><h2 id="statDrafts">0</h2></div>
+                <div class="stat-box"><small>PAID LEGAL FORMATS</small><h2 id="statPaid">0</h2></div>
+            </div>
+
+            <!-- TAB 1: Create or Edit Post -->
+            <div id="tab-create" class="panel-card tab-section">
+                <h3 id="formHeading">+ Naya Post Upload Karein (Direct Live to GitHub & Netlify)</h3>
+                <input type="hidden" id="editPostId">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                    <div>
+                        <label style="font-size:0.8rem; font-weight:600;">Main Topic Chunein:</label>
+                        <select id="pMainCat" onchange="updateSubOptions()">
+                            <option value="Jobs">Jobs</option>
+                            <option value="Sarkari Yojana">All Sarkari Yojana</option>
+                            <option value="Forms">Forms</option>
+                            <option value="Legal Paid Format">Legal Paid Format</option>
+                            <option value="Online Service Details">Online Service Details</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem; font-weight:600;">Sub-Category Chunein:</label>
+                        <select id="pSubCat"></select>
+                    </div>
+                </div>
+
+                <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Bharti 2026: Apply Online for 3,000 Posts)">
+                
+                <div class="banner-studio">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Banner Photo (Auto-Generate Ya Custom Upload):</strong>
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button type="button" class="btn-sm" style="background:#f59e0b; color:#0f172a; font-weight:700;" onclick="generateAutoBanner()">&#127912; Auto-Generate HD Banner Photo</button>
+                            <label class="btn-sm" style="background:#1e3a8a; color:white; cursor:pointer;">
+                                &#128247; Upload Custom Photo
+                                <input type="file" accept="image/*" style="display:none;" onchange="uploadFeaturePhoto(event)">
+                            </label>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
+                        <input type="text" id="bSubText" style="margin-bottom:0; background:white;" placeholder="Banner Highlight (e.g., Qualification: 12th Pass / Graduate)">
+                        <input type="text" id="bDateText" style="margin-bottom:0; background:white;" placeholder="Banner Date Badge (e.g., Last Date: 16 Dec 2026)">
+                    </div>
+                    <input type="hidden" id="pBannerData">
+                    <img id="bannerPreview" class="banner-preview-img" alt="Banner Preview">
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                    <input type="text" id="pLink" placeholder="Official Website / Form / Payment Link">
+                    <input type="number" id="pPrice" placeholder="Price in ₹ (Sirf Legal Paid Format ke liye, baki khali chhodein)">
+                </div>
+
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                    <button type="button" class="btn-auto-fill" onclick="fillJobTemplate('AUTO')">&#9889; Smart Table Format (Gujarat = Gujarati | Central = Eng+Hindi)</button>
+                    <button type="button" class="btn-auto-fill" style="background:#059669;" onclick="fillJobTemplate('GUJ')">ગુજરાતી Column Format</button>
+                    <button type="button" class="btn-auto-fill" style="background:#2563eb;" onclick="fillJobTemplate('HIN')">English + Hindi Column Format</button>
+                </div>
+
+                <textarea id="pSummary" rows="2" placeholder="Short Summary (Card par dikhne wali 2-3 lines)..."></textarea>
+
+                <div class="insert-toolbar">
+                    <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Page Mein Kahin Bhi Jodein:</span>
+                    <button type="button" class="tool-chip" onclick="insertAtCursor('HEADING')">+ Heading</button>
+                    <button type="button" class="tool-chip" onclick="insertAtCursor('PARA')">+ Apna Paragraph</button>
+                    <label class="tool-chip" style="cursor:pointer;">
+                        + Photo Lagayein
+                        <input type="file" accept="image/*" style="display:none;" onchange="insertInlineImage(event)">
+                    </label>
+                    <button type="button" class="tool-chip" onclick="insertAtCursor('VIDEO')">+ YouTube Video</button>
+                    <button type="button" class="tool-chip" onclick="insertAtCursor('TABLE')">+ 2-Column Table</button>
+                    <button type="button" class="tool-chip" onclick="insertAtCursor('NOTE')">+ Highlight Note Box</button>
+                </div>
+                <textarea id="pContent" rows="11" style="border-radius:0 0 7px 7px;" placeholder="Yahan apni taraf se kuch bhi likhein ya upar ke buttons se Photo, Video, aur Tables beech mein set karein..."></textarea>
+
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-green" id="publishBtn" onclick="savePost()">&#128640; Publish Live to Website</button>
+                    <button id="cancelEditBtn" class="btn-sm btn-del" style="display:none; padding:11px 18px;" onclick="resetForm()">Cancel Edit</button>
+                </div>
+            </div>
+
+            <!-- TAB 2: Auto-Jobs Server Queue -->
+            <div id="tab-auto" class="panel-card tab-section" style="display:none;">
+                <h3>Auto-Updating Jobs Server Queue (Pending Approval)</h3>
+                <p style="font-size:0.85rem; color:#475569; margin-bottom:15px;">
+                    Auto-fetch jobs ko <b>Edit & Add Banner/Table</b> se khol kar 1 click mein <b>Auto Banner Photo</b> aur <b>Column Table</b> lagakar Live karein.
+                </p>
+                <table>
+                    <thead><tr><th>Fetched Job Title</th><th>Category</th><th>Actions</th></tr></thead>
+                    <tbody id="draftsTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- TAB 3: Manage Posts by Topic -->
+            <div id="tab-manage" class="panel-card tab-section" style="display:none;">
+                <h3 id="manageHeading">Published Posts Manager</h3>
+                <table>
+                    <thead><tr><th>Title</th><th>Main Topic</th><th>Sub-Category</th><th>Actions</th></tr></thead>
+                    <tbody id="postsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const subMap = {
+            'Jobs': ['Sarkari Jobs', 'Bank Jobs', 'Private Jobs', 'Apprenticeship / Contract Jobs'],
+            'Sarkari Yojana': ['Central Yojana', 'State Yojana'],
+            'Forms': ['Sarkari Forms', 'Bank Forms'],
+            'Legal Paid Format': ['Rent Agreement', 'Affidavit', 'NOC & Other Drafts'],
+            'Online Service Details': ['PAN & Aadhaar', 'Ration & Certificates']
+        };
+
+        let posts = [];
+        let fileSha = "";
+        let currentFilterCat = "ALL";
+
+        // Auto-login if GitHub credentials exist in browser
+        window.onload = function() {
+            const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            if (savedAuth && savedAuth.token) {
+                document.getElementById('loginView').style.display = 'none';
+                document.getElementById('dashboardView').style.display = 'block';
+                updateSubOptions();
+                loadFromGitHub();
+            }
+        };
+
+        async function connectGitHub() {
+            const user = document.getElementById('ghUser').value.trim();
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            const err = document.getElementById('errMsg');
+            const btn = document.getElementById('loginBtn');
+
+            if (!user || !repo || !token) {
+                err.innerText = "Username, Repo Name aur GitHub Token teeno bharna zaroori hai!";
+                return;
+            }
+
+            btn.innerText = "Connecting to GitHub...";
+            err.innerText = "";
+
+            try {
+                const res = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/posts.json`, {
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (!res.ok) throw new Error("Invalid Token ya Repo Name! Check karein ki posts.json repo mein bana hai.");
+                
+                localStorage.setItem('shiv_gh_auth', JSON.stringify({ user, repo, token }));
+                document.getElementById('loginView').style.display = 'none';
+                document.getElementById('dashboardView').style.display = 'block';
+                updateSubOptions();
+                await loadFromGitHub();
+            } catch (e) {
+                err.innerText = e.message;
+                btn.innerText = "Connect & Open Dashboard";
+            }
+        }
+
+        function doLogout() {
+            localStorage.removeItem('shiv_gh_auth');
+            location.reload();
+        }
+
+        async function loadFromGitHub() {
+            const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            if (!auth) return;
+            document.getElementById('syncStatus').innerText = "(Loading...)";
+            try {
+                const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json?t=${Date.now()}`, {
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                const data = await res.json();
+                fileSha = data.sha;
+                const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+                posts = JSON.parse(decoded) || [];
+                refreshStats();
+                renderManageTable();
+                renderDrafts();
+                document.getElementById('syncStatus').innerText = "(Synced ✔)";
+            } catch (e) {
+                document.getElementById('syncStatus').innerText = "(Sync Error)";
+            }
+        }
+
+        async function pushToGitHub(commitMsg) {
+            const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            const btn = document.getElementById('publishBtn');
+            btn.innerText = "Publishing Live to GitHub...";
+            btn.disabled = true;
+
+            try {
+                const jsonStr = JSON.stringify(posts, null, 2);
+                const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+                const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${auth.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: commitMsg,
+                        content: encoded,
+                        sha: fileSha
+                    })
+                });
+                const result = await res.json();
+                if (!res.ok) throw new Error(result.message || "Publish failed");
+                fileSha = result.content.sha;
+                alert("Success! Post GitHub par save ho gaya aur 15 second mein live website par dikhega!");
+            } catch (e) {
+                alert("Error: " + e.message);
+            } finally {
+                btn.innerText = "🚀 Publish Live to Website";
+                btn.disabled = false;
+            }
+        }
+
+        function updateSubOptions(selectedSub = "") {
+            const main = document.getElementById('pMainCat').value;
+            const subSel = document.getElementById('pSubCat');
+            subSel.innerHTML = "";
+            (subMap[main] || []).forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s; opt.innerText = s;
+                if (s === selectedSub) opt.selected = true;
+                subSel.appendChild(opt);
+            });
+        }
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-section').forEach(t => t.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+            if (btn) {
+                document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            if (tabId === 'tab-auto') renderDrafts();
+        }
+
+        function viewCategoryPosts(cat, btn) {
+            currentFilterCat = cat;
+            switchTab('tab-manage', btn);
+            document.getElementById('manageHeading').innerText = cat === 'ALL' ? 'Sabhi Published Posts' : `${cat} — Published Posts`;
+            renderManageTable();
+        }
+
+        function generateAutoBanner() {
+            const title = document.getElementById('pTitle').value.trim() || "SHIVMITRA.IN OFFICIAL UPDATE 2026";
+            const subCat = document.getElementById('pSubCat').value || "LATEST UPDATE";
+            const qualText = document.getElementById('bSubText').value.trim() || "Check Qualification, Age Limit & Full Details";
+            const dateText = document.getElementById('bDateText').value.trim() || "Apply Online at ShivMitra.in";
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 960;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            const grad = ctx.createLinearGradient(0, 0, 960, 500);
+            grad.addColorStop(0, '#0f172a');
+            grad.addColorStop(0.55, '#1e3a8a');
+            grad.addColorStop(1, '#1d4ed8');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 960, 500);
+
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 10;
+            ctx.strokeRect(12, 12, 936, 476);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.roundRect(670, 32, 250, 44, 22);
+            ctx.fill();
+            ctx.fillStyle = '#1e3a8a';
+            ctx.font = '800 20px Inter, sans-serif';
+            ctx.fillText('SHIVMITRA.IN', 705, 61);
+            ctx.fillStyle = '#059669';
+            ctx.beginPath();
+            ctx.arc(892, 54, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#dc2626';
+            ctx.beginPath();
+            ctx.roundRect(45, 36, 290, 40, 8);
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '700 18px Inter, sans-serif';
+            ctx.fillText(subCat.toUpperCase(), 62, 62);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 38px Inter, sans-serif';
+            const words = title.split(' ');
+            let line = '';
+            let y = 145;
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                if (ctx.measureText(testLine).width > 860 && n > 0) {
+                    ctx.fillText(line, 45, y);
+                    line = words[n] + ' ';
+                    y += 50;
+                    if (y > 260) break;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, 45, y);
+
+            ctx.fillStyle = 'rgba(255,255,255,0.14)';
+            ctx.beginPath();
+            ctx.roundRect(45, 305, 870, 56, 10);
+            ctx.fill();
+            ctx.fillStyle = '#fde047';
+            ctx.font = '700 22px Inter, sans-serif';
+            ctx.fillText('✔ ' + qualText, 65, 340);
+
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath();
+            ctx.roundRect(45, 385, 870, 68, 12);
+            ctx.fill();
+            ctx.fillStyle = '#0f172a';
+            ctx.font = '800 24px Inter, sans-serif';
+            ctx.fillText('📅 ' + dateText, 68, 427);
+
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.78);
+            document.getElementById('pBannerData').value = dataUrl;
+            const prev = document.getElementById('bannerPreview');
+            prev.src = dataUrl;
+            prev.style.display = 'block';
+        }
+
+        function uploadFeaturePhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('pBannerData').value = e.target.result;
+                const prev = document.getElementById('bannerPreview');
+                prev.src = e.target.result;
+                prev.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function insertAtCursor(type) {
+            const textarea = document.getElementById('pContent');
+            let snippet = "";
+
+            if (type === 'HEADING') {
+                const h = prompt("Heading likhein:");
+                if (!h) return;
+                snippet = `\n<h3>${h}</h3>\n`;
+            } else if (type === 'PARA') {
+                const p = prompt("Apna custom paragraph / jankari likhein:");
+                if (!p) return;
+                snippet = `\n<p>${p}</p>\n`;
+            } else if (type === 'VIDEO') {
+                const rawUrl = prompt("YouTube Video ya Shorts ka link paste karein:");
+                if (!rawUrl) return;
+                const regExp = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+                const match = rawUrl.trim().match(regExp);
+                if (!match || !match[1]) return alert("Valid YouTube link dalein!");
+                snippet = `\n<div class="video-embed"><iframe src="https://www.youtube.com/embed/${match[1]}" allowfullscreen></iframe></div>\n`;
+            } else if (type === 'TABLE') {
+                snippet = `\n<table>\n  <tr><th>Post / Category Name</th><th>Total Posts / Details</th></tr>\n  <tr><td>Post Name 1</td><td>Detail Here</td></tr>\n  <tr><td>Post Name 2</td><td>Detail Here</td></tr>\n</table>\n`;
+            } else if (type === 'NOTE') {
+                const n = prompt("Highlight Note / Tip likhein:");
+                if (!n) return;
+                snippet = `\n<div class="note-box"><strong>Important Note:</strong> ${n}</div>\n`;
+            }
+
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(end);
+            textarea.focus();
+        }
+
+        function insertInlineImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const textarea = document.getElementById('pContent');
+                const snippet = `\n<div class="inline-media"><img src="${e.target.result}" alt="Post Infographic"></div>\n`;
+                const start = textarea.selectionStart;
+                textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(start);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function fillJobTemplate(mode = 'AUTO') {
+            const title = document.getElementById('pTitle').value.trim() || "New Recruitment 2026";
+            const lowerTitle = title.toLowerCase();
+            const gujaratKeywords = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot', 'gandhinagar', 'bhavnagar', 'jamnagar', 'junagadh', 'kutch', 'gseb', 'guj'];
+            const useGujarati = (mode === 'GUJ') || (mode === 'AUTO' && gujaratKeywords.some(w => lowerTitle.includes(w)));
+
+            if (useGujarati) {
+                document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ નોટિફિકેશન જાહેર કરવામાં આવ્યું છે. મહત્વની તારીખો, અરજી ફી, લાયકાત અને ઓનલાઇન અરજી કરવાની સંપૂર્ણ વિગતવાર માહિતી નીચે કોષ્ટકમાં આપેલ છે.`;
+                document.getElementById('pContent').value = `<p><strong>${title}</strong> અંતર્ગત ખાલી જગ્યાઓ ભરવા માટે લાયક ઉમેદવારો પાસેથી ઓનલાઇન અરજીઓ મંગાવવામાં આવે છે. સંપૂર્ણ વિગતો નીચે મુજબ છે:</p>
+<h3>1. મહત્વની તારીખો (Important Dates)</h3>
+<table>
+  <tr><th>વિગત (Event)</th><th>તારીખ (Date)</th></tr>
+  <tr><td>ઓનલાઇન ફોર્મ ભરવાની શરૂઆતની તારીખ (Start Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>ઓનલાઇન ફોર્મ ભરવાની છેલ્લી તારીખ (Last Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>પરીક્ષાની તારીખ (Exam / Call Letter Date)</td><td>ટૂંક સમયમાં જાહેર થશે (Notify Soon)</td></tr>
+</table>
+<h3>2. અરજી ફી (Application Fee)</h3>
+<table>
+  <tr><th>કેટેગરી (Category)</th><th>ફી (Fee Amount)</th></tr>
+  <tr><td>General Category</td><td>₹100/-</td></tr>
+  <tr><td>SC / ST / SEBC / EWS / Female</td><td>₹0/- (કોઈ ફી નથી)</td></tr>
+</table>
+<h3>3. શૈક્ષણિક લાયકાત અને વય મર્યાદા (Qualification & Age Limit)</h3>
+<table>
+  <tr><th>માપદંડ (Criteria)</th><th>વિગત (Details)</th></tr>
+  <tr><td>શૈક્ષણિક લાયકાત (Qualification)</td><td>10 પાસ / 12 પાસ / ગ્રેજ્યુએશન</td></tr>
+  <tr><td>ઉંમર મર્યાદા (Age Limit)</td><td>18 થી 35 વર્ષ</td></tr>
+</table>`;
+            } else {
+                document.getElementById('pSummary').value = `${title} official notification has been released. Check Important Dates, Application Fee, Qualification, Age Limit, and online apply process below.`;
+                document.getElementById('pContent').value = `<p>Applications are invited from eligible candidates for <strong>${title}</strong>. Complete recruitment details are given in the tables below:</p>
+<h3>1. Important Dates (महत्वपूर्ण तिथियां)</h3>
+<table>
+  <tr><th>Event / Activity</th><th>Date</th></tr>
+  <tr><td>Application Form Start Date (आवेदन शुरू तिथि)</td><td>DD/MM/2026</td></tr>
+  <tr><td>Application Form Last Date (अंतिम तिथि)</td><td>DD/MM/2026</td></tr>
+  <tr><td>Exam Date / Admit Card (परीक्षा तिथि)</td><td>Will be notified soon</td></tr>
+</table>
+<h3>2. Application Fee (आवेदन शुल्क)</h3>
+<table>
+  <tr><th>Category</th><th>Application Fee</th></tr>
+  <tr><td>General / OBC / EWS</td><td>₹100/-</td></tr>
+  <tr><td>SC / ST / PwBD / All Female</td><td>₹0/- (Exempted)</td></tr>
+</table>
+<h3>3. Eligibility & Age Limit (पात्रता एवं आयु सीमा)</h3>
+<table>
+  <tr><th>Criteria</th><th>Details</th></tr>
+  <tr><td>Educational Qualification (शैक्षणिक योग्यता)</td><td>10th Pass / 12th Pass / Graduate</td></tr>
+  <tr><td>Age Limit (आयु सीमा)</td><td>18 to 35 Years (Relaxation as per rules)</td></tr>
+</table>`;
+            }
+            if (!document.getElementById('pBannerData').value) generateAutoBanner();
+        }
+
+        async function savePost() {
+            const editId = document.getElementById('editPostId').value;
+            const mainCat = document.getElementById('pMainCat').value;
+            const subCat = document.getElementById('pSubCat').value;
+            const title = document.getElementById('pTitle').value.trim();
+            const actionLink = document.getElementById('pLink').value.trim();
+            const price = document.getElementById('pPrice').value.trim();
+            const summary = document.getElementById('pSummary').value.trim();
+            const content = document.getElementById('pContent').value.trim();
+            const bannerImg = document.getElementById('pBannerData').value;
+
+            if (!title || !summary || !content) return alert("Title, Summary aur Detail Jankari bharna zaroori hai!");
+
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            if (editId) {
+                const idx = posts.findIndex(x => x.id == editId);
+                if (idx !== -1) {
+                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, price, summary, content, bannerImg, date: today, status: 'live' };
+                }
+            } else {
+                posts.unshift({
+                    id: Date.now(),
+                    mainCat, subCat, title, date: today,
+                    actionLink, price, summary, content, bannerImg, status: 'live'
+                });
+            }
+
+            await pushToGitHub(`Publish post: ${title}`);
+            resetForm();
+            refreshStats();
+        }
+
+        function editPost(id) {
+            const p = posts.find(x => x.id == id);
+            if (!p) return;
+            switchTab('tab-create', document.getElementById('nav-create'));
+            document.getElementById('formHeading').innerText = "Post Edit & Live Update Karein";
+            document.getElementById('editPostId').value = p.id;
+            document.getElementById('pMainCat').value = p.mainCat;
+            updateSubOptions(p.subCat);
+            document.getElementById('pTitle').value = p.title;
+            document.getElementById('pLink').value = p.actionLink || "";
+            document.getElementById('pPrice').value = p.price || "";
+            document.getElementById('pSummary').value = p.summary || "";
+            document.getElementById('pContent').value = p.content || "";
+            document.getElementById('pBannerData').value = p.bannerImg || "";
+            const prev = document.getElementById('bannerPreview');
+            if (p.bannerImg) { prev.src = p.bannerImg; prev.style.display = 'block'; }
+            else { prev.style.display = 'none'; }
+            document.getElementById('cancelEditBtn').style.display = 'inline-block';
+        }
+
+        function resetForm() {
+            document.getElementById('formHeading').innerText = "+ Naya Post Upload Karein (Direct Live to GitHub & Netlify)";
+            document.getElementById('editPostId').value = "";
+            document.getElementById('pTitle').value = "";
+            document.getElementById('bSubText').value = "";
+            document.getElementById('bDateText').value = "";
+            document.getElementById('pBannerData').value = "";
+            document.getElementById('bannerPreview').style.display = 'none';
+            document.getElementById('pLink').value = "";
+            document.getElementById('pPrice').value = "";
+            document.getElementById('pSummary').value = "";
+            document.getElementById('pContent').value = "";
+            document.getElementById('cancelEditBtn').style.display = 'none';
+        }
+
+        async function deletePost(id) {
+            if (!confirm("Kya aap sach mein is post ko live website se delete karna chahte hain?")) return;
+            posts = posts.filter(x => x.id != id);
+            await pushToGitHub("Delete post from website");
+            renderManageTable();
+            renderDrafts();
+            refreshStats();
+        }
+
+        function renderManageTable() {
+            const tbody = document.getElementById('postsTableBody');
+            tbody.innerHTML = "";
+            const list = posts.filter(p => p.status !== 'draft' && (currentFilterCat === 'ALL' || p.mainCat === currentFilterCat));
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">Is category mein abhi koi live post nahi hai.</td></tr>`;
+                return;
+            }
+            list.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><b>${p.title}</b></td>
+                        <td>${p.mainCat}</td>
+                        <td>${p.subCat}</td>
+                        <td style="white-space:nowrap;">
+                            <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
+                            <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderDrafts() {
+            const tbody = document.getElementById('draftsTableBody');
+            tbody.innerHTML = "";
+            const drafts = posts.filter(p => p.status === 'draft');
+            if (drafts.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">Abhi koi pending auto-job draft nahi hai.</td></tr>`;
+                return;
+            }
+            drafts.forEach(d => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><b>${d.title}</b></td>
+                        <td>${d.subCat}</td>
+                        <td style="white-space:nowrap;">
+                            <button class="btn-sm btn-edit" onclick="editPost(${d.id})">Edit & Add Banner/Table</button>
+                            <button class="btn-sm btn-pub" onclick="publishDraft(${d.id})">Direct Live</button>
+                            <button class="btn-sm btn-del" onclick="deletePost(${d.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        async function publishDraft(id) {
+            const idx = posts.findIndex(x => x.id == id);
+            if (idx !== -1) {
+                posts[idx].status = 'live';
+                posts[idx].date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                await pushToGitHub(`Approve draft job: ${posts[idx].title}`);
+                renderDrafts();
+                refreshStats();
+            }
+        }
+
+        function refreshStats() {
+            document.getElementById('statTotal').innerText = posts.filter(p => p.status !== 'draft').length;
+            document.getElementById('statDrafts').innerText = posts.filter(p => p.status === 'draft').length;
+            document.getElementById('statPaid').innerText = posts.filter(p => p.mainCat === 'Legal Paid Format').length;
+        }
+    </script>
+</body>
+</html>

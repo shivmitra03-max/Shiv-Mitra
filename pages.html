@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal & Policy Pages - ShivMitra.in</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --green-bar: #10b981;
+            --bg-body: #f8fafc;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-body); color: #1e293b; line-height: 1.75; }
+
+        /* Header with Top Right Navigation (Like Screenshot) */
+        header {
+            background: white; padding: 15px 5%; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon {
+            background: var(--primary); color: white; width: 38px; height: 38px;
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem;
+        }
+        .brand h1 { font-size: 1.25rem; color: var(--primary); font-weight: 800; }
+
+        .top-nav { display: flex; gap: 22px; flex-wrap: wrap; }
+        .top-nav a {
+            text-decoration: none; color: #0f172a; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; padding-bottom: 3px;
+        }
+        .top-nav a:hover, .top-nav a.active { color: var(--primary-light); border-bottom: 2px solid var(--primary-light); }
+
+        /* 2-Column Layout */
+        .wrapper {
+            max-width: 1180px; margin: 28px auto 50px; padding: 0 15px;
+            display: grid; grid-template-columns: 2.3fr 1fr; gap: 26px; align-items: start;
+        }
+
+        /* Left Main Policy Box */
+        .policy-card {
+            background: white; border: 1px solid var(--border); border-radius: 10px;
+            padding: 34px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        .policy-card h1 { font-size: 1.85rem; font-weight: 800; color: #0f172a; margin-bottom: 14px; }
+        .policy-card p { margin-bottom: 14px; font-size: 0.97rem; color: #334155; }
+        .policy-card h2 { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin: 24px 0 10px; }
+        .policy-card ul { margin: 10px 0 18px 22px; color: #334155; font-size: 0.95rem; }
+        .policy-card li { margin-bottom: 7px; }
+
+        /* Table of Contents Box (Like Screenshot) */
+        .toc-box {
+            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px;
+            padding: 14px 18px; margin: 16px 0 22px; display: inline-block; min-width: 280px;
+        }
+        .toc-title { font-weight: 700; font-size: 0.95rem; color: #0f172a; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .toc-list { list-style: decimal; margin-left: 18px; font-size: 0.86rem; }
+        .toc-list a { text-decoration: none; color: var(--primary-light); font-weight: 500; }
+        .toc-list a:hover { text-decoration: underline; }
+
+        .contact-highlight {
+            background: #eff6ff; border-left: 4px solid var(--primary-light);
+            padding: 14px 18px; border-radius: 6px; margin: 16px 0; font-size: 0.95rem;
+        }
+
+        /* Right Sidebar (Latest Update Green Header Like Screenshot) */
+        .sidebar-box {
+            background: white; border: 1px solid var(--border); border-radius: 10px;
+            padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        .latest-header {
+            background: var(--green-bar); color: white; text-align: center;
+            font-weight: 700; font-size: 1.05rem; padding: 10px; border-radius: 6px; margin-bottom: 14px;
+        }
+        .latest-item {
+            display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border);
+            text-decoration: none; color: #0f172a; align-items: flex-start;
+        }
+        .latest-item:last-child { border-bottom: none; }
+        .latest-thumb {
+            width: 68px; height: 52px; background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white; border-radius: 6px; font-size: 0.65rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            padding: 4px; flex-shrink: 0; line-height: 1.2;
+        }
+        .latest-info h4 { font-size: 0.84rem; font-weight: 700; line-height: 1.35; margin-bottom: 4px; }
+        .latest-info h4:hover { color: var(--primary-light); }
+        .latest-info small { font-size: 0.74rem; color: #64748b; }
+
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 26px 15px; font-size: 0.84rem; }
+        footer a { color: #cbd5e1; text-decoration: none; margin: 0 10px; }
+        footer a:hover { color: #f59e0b; }
+
+        @media (max-width: 880px) {
+            .wrapper { grid-template-columns: 1fr; }
+            .policy-card { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand">
+            <div class="brand-icon">S</div>
+            <h1>SHIVMITRA.IN</h1>
+        </a>
+        <nav class="top-nav">
+            <a href="index.html">Home</a>
+            <a id="nav-about" href="pages.html?page=about">About Us</a>
+            <a id="nav-privacy" href="pages.html?page=privacy">Privacy Policy</a>
+            <a id="nav-contact" href="pages.html?page=contact">Contact Us</a>
+            <a id="nav-disclaimer" href="pages.html?page=disclaimer">Disclaimer</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <!-- LEFT COLUMN: Policy Content -->
+        <main class="policy-card" id="policyContentArea"></main>
+
+        <!-- RIGHT SIDEBAR: Latest Update (Like Screenshot) -->
+        <aside class="sidebar-box">
+            <div class="latest-header">Latest Update</div>
+            <div id="sidebarUpdates"></div>
+        </aside>
+    </div>
+
+    <footer>
+        <div style="margin-bottom: 10px;">
+            <a href="index.html">Home</a> |
+            <a href="pages.html?page=about">About Us</a> |
+            <a href="pages.html?page=privacy">Privacy Policy</a> |
+            <a href="pages.html?page=contact">Contact Us</a> |
+            <a href="pages.html?page=disclaimer">Disclaimer</a>
+        </div>
+        &copy; 2026 ShivMitra.in. All Rights Reserved.
+    </footer>
+
+    <script>
+        const policiesData = {
+            about: {
+                title: "About Us",
+                toc: ["Welcome to ShivMitra.in", "What We Offer", "Our Mission & Editorial Standards", "Important Clarification"],
+                html: `
+                    <p>Welcome to <strong>SHIVMITRA.IN</strong>, a dedicated digital information and citizen utility portal created to make Sarkari Jobs, Government Schemes, Downloadable Forms, and Legal Document Formats easily accessible in one place.</p>
+                    <h2 id="sec1">What We Offer</h2>
+                    <p>At ShivMitra.in, we publish well-researched, easy-to-understand guides across five major areas:</p>
+                    <ul>
+                        <li><strong>Jobs Portal:</strong> Latest Sarkari Jobs, Bank Recruitment, Private Sector openings, and Apprenticeship / Contract-based opportunities.</li>
+                        <li><strong>All Sarkari Yojana:</strong> Step-by-step eligibility, benefits, and online application guides for Central and State Government welfare schemes.</li>
+                        <li><strong>Forms Download:</strong> Printable Sarkari Forms and Bank KYC/Account forms for quick offline use.</li>
+                        <li><strong>Legal Paid Formats:</strong> Ready-to-edit Rent Agreements, Affidavits, and standard legal drafts.</li>
+                        <li><strong>Online Service Details:</strong> Practical instructions for PAN Card, Aadhaar Card, Ration Card, and essential certificates.</li>
+                    </ul>
+                    <h2 id="sec2">Our Mission & Editorial Standards</h2>
+                    <p>Our goal is to save time for students, job seekers, and everyday citizens by presenting official notifications and complex procedures in clear, simple language. Every update published by the <strong>ShivMitra Editorial Team</strong> is verified against official portals before publication.</p>
+                    <h2 id="sec3">Important Clarification</h2>
+                    <p>ShivMitra.in is an independent informational platform managed by a dedicated digital team. We are <strong>not</strong> affiliated with any government ministry, recruitment board, or public sector bank.</p>
+                `
+            },
+            contact: {
+                title: "Contact Us",
+                toc: ["Get in Touch", "What Can You Contact Us About?", "Response Time"],
+                html: `
+                    <p>Thank you for visiting <strong>SHIVMITRA.IN</strong>.</p>
+                    <p>We value our readers and welcome your questions, suggestions, feedback, and inquiries related to the information published on our website.</p>
+                    <p>If you need to contact us regarding any content, correction, technical issue, or general query, you can reach us using the details below.</p>
+                    <h2 id="sec1">Get in Touch</h2>
+                    <p>For any questions or feedback related to <strong>SHIVMITRA.IN</strong>, please contact our team via email:</p>
+                    <div class="contact-highlight">
+                        <strong>Email:</strong> shivmitra03@gmail.com<br>
+                        <strong>Support Desk:</strong> ShivMitra Editorial & Support Team
+                    </div>
+                    <p>We will make reasonable efforts to review and respond to genuine inquiries as soon as possible.</p>
+                    <h2 id="sec2">What Can You Contact Us About?</h2>
+                    <p>You may contact us regarding:</p>
+                    <ul>
+                        <li>Corrections or updates to information published on our website</li>
+                        <li>Government job, bank recruitment, and apprenticeship content</li>
+                        <li>Sarkari Yojana, Admit Cards, Syllabus, and Exam Updates</li>
+                        <li>Downloadable Sarkari & Bank Forms</li>
+                        <li>Broken or incorrect links</li>
+                        <li>Technical issues while using our free Photo Compressor or Age Calculator tools</li>
+                        <li>Copyright or content-related concerns</li>
+                        <li>Suggestions, feedback, and general website inquiries</li>
+                    </ul>
+                    <h2 id="sec3">Response Time</h2>
+                    <p>Our team reviews messages Monday through Saturday (10:00 AM to 7:00 PM IST) and typically replies within 24 to 48 working hours.</p>
+                `
+            },
+            privacy: {
+                title: "Privacy Policy",
+                toc: ["Information We Collect", "How Browser Tools Work (100% Local)", "Google AdSense & Third-Party Cookies", "Consent"],
+                html: `
+                    <p>At <strong>SHIVMITRA.IN</strong>, accessible from https://shivmitra.in, one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that are collected and recorded by ShivMitra.in and how we use it.</p>
+                    <h2 id="sec1">Information We Collect</h2>
+                    <p>We do not require visitors to create an account or submit personal identity documents to browse jobs, schemes, or articles on ShivMitra.in. If you contact us directly via email, we may receive your name, email address, and message contents solely to respond to your inquiry.</p>
+                    <h2 id="sec2">How Browser Tools Work (100% Local)</h2>
+                    <p>Our free utility tools—including the <strong>Photo & Signature KB Compressor</strong> and <strong>Bharti Age Calculator</strong>—run entirely inside your local web browser. Your photos, signatures, and birth dates are never uploaded to or stored on our servers.</p>
+                    <h2 id="sec3">Google AdSense & Third-Party Cookies</h2>
+                    <p>ShivMitra.in uses standard log files and may display advertisements served by <strong>Google AdSense</strong> and other verified advertising partners. Third-party ad servers use technologies like cookies or JavaScript to measure ad effectiveness and personalize content. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to this site and other sites on the Internet. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
+                    <h2 id="sec4">Consent</h2>
+                    <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
+                `
+            },
+            disclaimer: {
+                title: "Disclaimer",
+                toc: ["Not a Government Website", "Accuracy of Information", "External Links Disclaimer", "Paid Legal Formats Disclaimer"],
+                html: `
+                    <p>All the information on this website — <strong>SHIVMITRA.IN</strong> — is published in good faith and for general educational and informational purposes only.</p>
+                    <h2 id="sec1">Not a Government Website</h2>
+                    <p><strong>IMPORTANT:</strong> ShivMitra.in is a private informational portal and is <strong>NOT</strong> associated, affiliated, endorsed, or connected in any way with the Government of India, any State Government, UPSC, SSC, IBPS, OJAS, or any government department.</p>
+                    <h2 id="sec2">Accuracy of Information</h2>
+                    <p>While our editorial team strives to keep job notifications, exam dates, yojana eligibility, and form details accurate and up to date, ShivMitra.in makes no warranties about the completeness, reliability, or absolute accuracy of this information. Candidates are strictly advised to verify all details on the respective <strong>Official Website / Official Notification PDF</strong> before submitting any application or fee.</p>
+                    <h2 id="sec3">External Links Disclaimer</h2>
+                    <p>From our website, you can visit external official government or banking portals by following hyperlinks. While we strive to provide only quality links to official sources, we have no control over the content and nature of those external sites.</p>
+                    <h2 id="sec4">Paid Legal Formats Disclaimer</h2>
+                    <p>The editable legal drafts (such as Rent Agreements and Affidavits) provided on ShivMitra.in are standard template formats for convenience. Users should consult a qualified advocate or notary if specific legal customization is required for their jurisdiction.</p>
+                `
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const pageKey = (params.get('page') || 'contact').toLowerCase();
+        const activeData = policiesData[pageKey] || policiesData.contact;
+
+        // Highlight active nav tab
+        const activeNav = document.getElementById('nav-' + pageKey);
+        if (activeNav) activeNav.classList.add('active');
+
+        document.title = `${activeData.title} - ShivMitra.in`;
+
+        // Build TOC HTML
+        let tocItems = "";
+        activeData.toc.forEach((item, index) => {
+            tocItems += `<li><a href="#sec${index + 1}">${item}</a></li>`;
+        });
+
+        document.getElementById('policyContentArea').innerHTML = `
+            <h1>${activeData.title}</h1>
+            <div class="toc-box">
+                <div class="toc-title"><span>Table of Contents</span><span>&#9776;</span></div>
+                <ol class="toc-list">${tocItems}</ol>
+            </div>
+            ${activeData.html}
+        `;
+
+        // Populate Right Sidebar "Latest Update" from localStorage posts
+        const allPosts = JSON.parse(localStorage.getItem('shiv_portal_posts')) || [];
+        const sideDiv = document.getElementById('sidebarUpdates');
+        allPosts.filter(p => p.status !== 'draft').slice(0, 6).forEach(p => {
+            sideDiv.innerHTML += `
+                <a href="post.html?id=${p.id}" class="latest-item">
+                    <div class="latest-thumb">${p.subCat || p.mainCat}</div>
+                    <div class="latest-info">
+                        <h4>${p.title}</h4>
+                        <small>${p.date || '2026'}</small>
+                    </div>
+                </a>
+            `;
+        });
+    </script>
+</body>
+</html>
