@@ -256,6 +256,20 @@
                 document.getElementById('postContentArea').innerHTML = post.content || `<p>${post.summary || ''}</p>`;
 
                 const actionBtn = document.getElementById('officialActionBtn');
+                let finalUrl = (post.actionLink || "").trim();
+                const lowerTitle = (post.title || "").toLowerCase();
+
+                // Agar link khali ho ya news.google.com ho, toh title ke hisab se official site set karein
+                if (!finalUrl || finalUrl.includes('news.google.com')) {
+                    if (lowerTitle.includes('ibps')) finalUrl = 'https://www.ibps.in/';
+                    else if (lowerTitle.includes('ojas') || lowerTitle.includes('gsssb') || lowerTitle.includes('gujarat') || lowerTitle.includes('lokrakshak') || lowerTitle.includes('lrd')) finalUrl = 'https://ojas.gujarat.gov.in/';
+                    else if (lowerTitle.includes('gpsc')) finalUrl = 'https://gpsc-ojas.gujarat.gov.in/';
+                    else if (lowerTitle.includes('ssc')) finalUrl = 'https://ssc.gov.in/';
+                    else if (lowerTitle.includes('rrb') || lowerTitle.includes('railway')) finalUrl = 'https://www.rrbapply.gov.in/';
+                    else if (lowerTitle.includes('sbi')) finalUrl = 'https://sbi.co.in/web/careers';
+                    else finalUrl = 'https://www.ncs.gov.in/';
+                }
+                actionBtn.href = finalUrl;
                 if (post.actionLink && post.actionLink.trim() !== "") {
                     actionBtn.href = post.actionLink;
                 } else {
