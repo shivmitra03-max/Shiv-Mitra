@@ -1,0 +1,86 @@
+name: Auto Fetch Jobs & Call Letters
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 feedparser
+
+      - name: Fetch Jobs and Call Letters
+        run: |
+          python -c "
+          import json, time, feedparser
+
+          with open('posts.json', 'r', encoding='utf-8') as f:
+              posts = json.load(f)
+
+          existing_titles = {p['title'].strip().lower() for p in posts}
+
+          feeds = [
+              {'url': 'https://www.freejobalert.com/feed/', 'default_cat': 'Jobs', 'default_sub': 'Sarkari Jobs'},
+              {'url': 'https://www.freejobalert.com/admit-card/feed/', 'default_cat': 'Call Letter', 'default_sub': 'Central & Bank Admit Card'}
+          ]
+
+          added = 0
+          for feed_info in feeds:
+              parsed = feedparser.parse(feed_info['url'])
+              for entry in parsed.entries[:5]:
+                  title = entry.title.strip()
+                  if title.lower() in existing_titles:
+                      continue
+
+                  is_call_letter = any(k in title.lower() for k in ['admit card', 'call letter', 'hall ticket', 'exam date'])
+                  is_gujarat = any(k in title.lower() for k in ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati'])
+
+                  if is_call_letter:
+                      main_cat = 'Call Letter'
+                      sub_cat = 'Gujarat Call Letter (OJAS/GPSC)' if is_gujarat else 'Central & Bank Admit Card'
+                  else:
+                      main_cat = feed_info['default_cat']
+                      sub_cat = feed_info['default_sub']
+
+                  posts.insert(0, {
+                      'id': int(time.time() * 1000) + added,
+                      'mainCat': main_cat,
+                      'subCat': sub_cat,
+                      'title': title,
+                      'date': time.strftime('%d %b %Y'),
+                      'actionLink': entry.link,
+                      'price': '',
+                      'summary': f'{title} - Official notification & direct download link details.',
+                      'content': f'<p>Official update released for <strong>{title}</strong>. Click Edit & Add Banner/Table to format before publishing.</p>',
+                      'bannerImg': '',
+                      'status': 'draft'
+                  })
+                  existing_titles.add(title.lower())
+                  added += 1
+
+          if added > 0:
+              with open('posts.json', 'w', encoding='utf-8') as f:
+                  json.dump(posts, f, indent=2, ensure_ascii=False)
+          print(f'Added {added} new drafts.')
+          "
+
+      - name: Commit and push drafts
+        run: |
+          git config user.name "ShivMitra AutoBot"
+          git config user.email "bot@shivmitra.in"
+          git add posts.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-fetch new jobs & call letters" && git push)
