@@ -38,6 +38,29 @@ jobs:
 
           existing_titles = {p.get('title', '').strip().lower() for p in posts}
 
+          def get_official_portal(title_lower):
+              if any(k in title_lower for k in ['ojas', 'gsssb', 'lrd', 'lokrakshak', 'psi', 'talati', 'police']):
+                  return 'https://ojas.gujarat.gov.in/'
+              if 'gpsc' in title_lower:
+                  return 'https://gpsc-ojas.gujarat.gov.in/'
+              if 'gsrtc' in title_lower:
+                  return 'https://gsrtc.in/'
+              if 'ibps' in title_lower:
+                  return 'https://www.ibps.in/'
+              if 'sbi' in title_lower:
+                  return 'https://sbi.co.in/web/careers'
+              if 'rbi' in title_lower:
+                  return 'https://opportunities.rbi.org.in/'
+              if 'ssc' in title_lower:
+                  return 'https://ssc.gov.in/'
+              if any(k in title_lower for k in ['rrb', 'railway']):
+                  return 'https://www.rrbapply.gov.in/'
+              if 'upsc' in title_lower:
+                  return 'https://upsc.gov.in/'
+              if 'gujarat' in title_lower:
+                  return 'https://ojas.gujarat.gov.in/'
+              return 'https://www.ncs.gov.in/'
+
           feeds = [
               {
                   'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+GSSSB+OR+Gujarat+Recruitment+Bharti&hl=en-IN&gl=IN&ceid=IN:en',
@@ -74,13 +97,15 @@ jobs:
                   else:
                       sub_cat = 'Bank Jobs' if is_bank else 'Sarkari Jobs'
 
+                  official_url = get_official_portal(lower_t)
+
                   posts.insert(0, {
                       'id': int(time.time() * 1000) + added,
                       'mainCat': main_cat,
                       'subCat': sub_cat,
                       'title': title,
                       'date': time.strftime('%d %b %Y'),
-                      'actionLink': entry.link,
+                      'actionLink': official_url,
                       'price': '',
                       'summary': f'{title} - Official notification, eligibility & direct apply/download link details.',
                       'content': f'<p>Official update released for <strong>{title}</strong>. Click Edit & Add Banner/Table to format before publishing.</p>',
@@ -92,7 +117,7 @@ jobs:
 
           with open('posts.json', 'w', encoding='utf-8') as f:
               json.dump(posts, f, indent=2, ensure_ascii=False)
-          print(f'Successfully added {added} new drafts.')
+          print(f'Successfully added {added} new drafts with official links.')
           "
 
       - name: Commit and push drafts
