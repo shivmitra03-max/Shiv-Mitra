@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,8 +98,8 @@
         <div class="login-card">
             <h2>SHIVMITRA.IN</h2>
             <p>GitHub Direct Publish Admin Login</p>
-            <input type="text" id="ghUser" placeholder="GitHub Username (e.g., shivmitra03)">
-            <input type="text" id="ghRepo" placeholder="Repository Name (e.g., Shiv-Online-Center)">
+            <input type="text" id="ghUser" placeholder="GitHub Username (e.g., shivmitra03-max)">
+            <input type="text" id="ghRepo" placeholder="Repository Name (e.g., Shiv-Mitra)">
             <input type="password" id="ghToken" placeholder="GitHub Fine-Grained Token (github_pat_...)">
             <button class="btn-primary" id="loginBtn" onclick="connectGitHub()">Connect & Open Dashboard</button>
             <p id="errMsg" style="color: #dc2626; margin-top: 10px;"></p>
@@ -109,17 +109,16 @@
     <div id="dashboardView" class="admin-layout">
         <div class="sidebar">
             <h3>SHIVMITRA ADMIN</h3>
-            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Naya Post Upload Karein</button>
+            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Create New Post</button>
             <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">Auto-Jobs Server Queue</button>
 
-            <div class="side-label">Topic-Wise Posts Dekhein</div>
-            <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">Sabhi Posts (All)</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Sarkari/Bank/Pvt)</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. All Sarkari Yojana</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms (Sarkari/Bank)</button>
+            <div class="side-label">View Posts by Category</div>
+            <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">All Published Posts</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Govt/Bank/Private)</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. Government Schemes</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms (Govt/Bank)</button>
             <button class="side-btn" onclick="viewCategoryPosts('Legal Paid Format', this)">4. Legal Paid Formats</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">5. Online Service Details</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">6. Call Letter / Admit Card</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">5. Online Service Guides</button>
         </div>
 
         <div class="main-content">
@@ -127,7 +126,7 @@
                 <div><strong style="color:#1e3a8a;">ShivMitra.in</strong> — Live GitHub Sync Active <span id="syncStatus" style="font-size:0.8rem; color:#059669; font-weight:700;"></span></div>
                 <div style="display:flex; gap:10px; align-items:center;">
                     <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh Data</button>
-                    <a href="index.html" target="_blank" style="background:#f59e0b; color:#0f172a; padding:7px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.84rem;">Website Dekhein</a>
+                    <a href="index.html" target="_blank" style="background:#f59e0b; color:#0f172a; padding:7px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.84rem;">View Live Website</a>
                     <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
                 </div>
             </div>
@@ -140,35 +139,34 @@
 
             <!-- TAB 1: Create or Edit Post -->
             <div id="tab-create" class="panel-card tab-section">
-                <h3 id="formHeading">+ Naya Post Upload Karein (Direct Live to GitHub & Netlify)</h3>
+                <h3 id="formHeading">+ Create New Post (Direct Live to GitHub)</h3>
                 <input type="hidden" id="editPostId">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div>
-                        <label style="font-size:0.8rem; font-weight:600;">Main Topic Chunein:</label>
+                        <label style="font-size:0.8rem; font-weight:600;">Select Main Category:</label>
                         <select id="pMainCat" onchange="updateSubOptions()">
                             <option value="Jobs">Jobs</option>
                             <option value="Sarkari Yojana">All Sarkari Yojana</option>
                             <option value="Forms">Forms</option>
                             <option value="Legal Paid Format">Legal Paid Format</option>
                             <option value="Online Service Details">Online Service Details</option>
-                            <option value="Call Letter">Call Letter / Admit Card</option>
                         </select>
                     </div>
                     <div>
-                        <label style="font-size:0.8rem; font-weight:600;">Sub-Category Chunein:</label>
+                        <label style="font-size:0.8rem; font-weight:600;">Select Sub-Category:</label>
                         <select id="pSubCat"></select>
                     </div>
                 </div>
 
-                <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Bharti 2026: Apply Online for 3,000 Posts)">
+                <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Recruitment 2026: Apply Online for 3,000 Posts)">
                 
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Banner Photo (Auto-Generate Ya Custom Upload):</strong>
+                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Banner Image (Auto-Generate or Custom Upload):</strong>
                         <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                            <button type="button" class="btn-sm" style="background:#f59e0b; color:#0f172a; font-weight:700;" onclick="generateAutoBanner()">&#127912; Auto-Generate HD Banner Photo</button>
+                            <button type="button" class="btn-sm" style="background:#f59e0b; color:#0f172a; font-weight:700;" onclick="generateAutoBanner()">&#127912; Auto-Generate HD Banner</button>
                             <label class="btn-sm" style="background:#1e3a8a; color:white; cursor:pointer;">
-                                &#128247; Upload Custom Photo
+                                &#128247; Upload Custom Image
                                 <input type="file" accept="image/*" style="display:none;" onchange="uploadFeaturePhoto(event)">
                             </label>
                         </div>
@@ -183,7 +181,7 @@
 
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <input type="text" id="pLink" placeholder="Official Website / Form / Payment Link">
-                    <input type="number" id="pPrice" placeholder="Price in ₹ (Sirf Legal Paid Format ke liye, baki khali chhodein)">
+                    <input type="number" id="pPrice" placeholder="Price in ₹ (Only for Legal Paid Formats, leave blank otherwise)">
                 </div>
 
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
@@ -192,21 +190,21 @@
                     <button type="button" class="btn-auto-fill" style="background:#2563eb;" onclick="fillJobTemplate('HIN')">English + Hindi Column Format</button>
                 </div>
 
-                <textarea id="pSummary" rows="2" placeholder="Short Summary (Card par dikhne wali 2-3 lines)..."></textarea>
+                <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on the homepage card)..."></textarea>
 
                 <div class="insert-toolbar">
-                    <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Page Mein Kahin Bhi Jodein:</span>
+                    <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Insert Anywhere in Article:</span>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('HEADING')">+ Heading</button>
-                    <button type="button" class="tool-chip" onclick="insertAtCursor('PARA')">+ Apna Paragraph</button>
+                    <button type="button" class="tool-chip" onclick="insertAtCursor('PARA')">+ Paragraph</button>
                     <label class="tool-chip" style="cursor:pointer;">
-                        + Photo Lagayein
+                        + Insert Image
                         <input type="file" accept="image/*" style="display:none;" onchange="insertInlineImage(event)">
                     </label>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('VIDEO')">+ YouTube Video</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('TABLE')">+ 2-Column Table</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('NOTE')">+ Highlight Note Box</button>
                 </div>
-                <textarea id="pContent" rows="11" style="border-radius:0 0 7px 7px;" placeholder="Yahan apni taraf se kuch bhi likhein ya upar ke buttons se Photo, Video, aur Tables beech mein set karein..."></textarea>
+                <textarea id="pContent" rows="11" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here or use the toolbar buttons above to insert Headings, Images, Videos, and Tables..."></textarea>
 
                 <div style="display:flex; gap:10px;">
                     <button class="btn-green" id="publishBtn" onclick="savePost()">&#128640; Publish Live to Website</button>
@@ -218,7 +216,7 @@
             <div id="tab-auto" class="panel-card tab-section" style="display:none;">
                 <h3>Auto-Updating Jobs Server Queue (Pending Approval)</h3>
                 <p style="font-size:0.85rem; color:#475569; margin-bottom:15px;">
-                    Auto-fetch jobs ko <b>Edit & Add Banner/Table</b> se khol kar 1 click mein <b>Auto Banner Photo</b> aur <b>Column Table</b> lagakar Live karein.
+                    Open any auto-fetched job using <b>Edit & Add Banner/Table</b> to generate an <b>HD Banner</b> and <b>Structured Table</b> in 1 click before publishing live.
                 </p>
                 <table>
                     <thead><tr><th>Fetched Job Title</th><th>Category</th><th>Actions</th></tr></thead>
@@ -230,7 +228,7 @@
             <div id="tab-manage" class="panel-card tab-section" style="display:none;">
                 <h3 id="manageHeading">Published Posts Manager</h3>
                 <table>
-                    <thead><tr><th>Title</th><th>Main Topic</th><th>Sub-Category</th><th>Actions</th></tr></thead>
+                    <thead><tr><th>Title</th><th>Main Category</th><th>Sub-Category</th><th>Actions</th></tr></thead>
                     <tbody id="postsTableBody"></tbody>
                 </table>
             </div>
@@ -250,7 +248,6 @@
         let fileSha = "";
         let currentFilterCat = "ALL";
 
-        // Auto-login if GitHub credentials exist in browser
         window.onload = function() {
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (savedAuth && savedAuth.token) {
@@ -269,7 +266,7 @@
             const btn = document.getElementById('loginBtn');
 
             if (!user || !repo || !token) {
-                err.innerText = "Username, Repo Name aur GitHub Token teeno bharna zaroori hai!";
+                err.innerText = "Username, Repository Name, and GitHub Token are all required!";
                 return;
             }
 
@@ -280,7 +277,7 @@
                 const res = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/posts.json`, {
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
-                if (!res.ok) throw new Error("Invalid Token ya Repo Name! Check karein ki posts.json repo mein bana hai.");
+                if (!res.ok) throw new Error("Invalid Token or Repository Name! Ensure posts.json exists in your repo.");
                 
                 localStorage.setItem('shiv_gh_auth', JSON.stringify({ user, repo, token }));
                 document.getElementById('loginView').style.display = 'none';
@@ -345,7 +342,7 @@
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message || "Publish failed");
                 fileSha = result.content.sha;
-                alert("Success! Post GitHub par save ho gaya aur 15 second mein live website par dikhega!");
+                alert("Success! Post saved to GitHub and will appear live on your website in 30–60 seconds.");
             } catch (e) {
                 alert("Error: " + e.message);
             } finally {
@@ -379,7 +376,7 @@
         function viewCategoryPosts(cat, btn) {
             currentFilterCat = cat;
             switchTab('tab-manage', btn);
-            document.getElementById('manageHeading').innerText = cat === 'ALL' ? 'Sabhi Published Posts' : `${cat} — Published Posts`;
+            document.getElementById('manageHeading').innerText = cat === 'ALL' ? 'All Published Posts' : `${cat} — Published Posts`;
             renderManageTable();
         }
 
@@ -484,24 +481,24 @@
             let snippet = "";
 
             if (type === 'HEADING') {
-                const h = prompt("Heading likhein:");
+                const h = prompt("Enter Heading text:");
                 if (!h) return;
                 snippet = `\n<h3>${h}</h3>\n`;
             } else if (type === 'PARA') {
-                const p = prompt("Apna custom paragraph / jankari likhein:");
+                const p = prompt("Enter Paragraph text:");
                 if (!p) return;
                 snippet = `\n<p>${p}</p>\n`;
             } else if (type === 'VIDEO') {
-                const rawUrl = prompt("YouTube Video ya Shorts ka link paste karein:");
+                const rawUrl = prompt("Paste YouTube Video or Shorts URL:");
                 if (!rawUrl) return;
                 const regExp = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
                 const match = rawUrl.trim().match(regExp);
-                if (!match || !match[1]) return alert("Valid YouTube link dalein!");
+                if (!match || !match[1]) return alert("Please enter a valid YouTube link!");
                 snippet = `\n<div class="video-embed"><iframe src="https://www.youtube.com/embed/${match[1]}" allowfullscreen></iframe></div>\n`;
             } else if (type === 'TABLE') {
                 snippet = `\n<table>\n  <tr><th>Post / Category Name</th><th>Total Posts / Details</th></tr>\n  <tr><td>Post Name 1</td><td>Detail Here</td></tr>\n  <tr><td>Post Name 2</td><td>Detail Here</td></tr>\n</table>\n`;
             } else if (type === 'NOTE') {
-                const n = prompt("Highlight Note / Tip likhein:");
+                const n = prompt("Enter Highlight Note / Tip:");
                 if (!n) return;
                 snippet = `\n<div class="note-box"><strong>Important Note:</strong> ${n}</div>\n`;
             }
@@ -590,7 +587,7 @@
             const content = document.getElementById('pContent').value.trim();
             const bannerImg = document.getElementById('pBannerData').value;
 
-            if (!title || !summary || !content) return alert("Title, Summary aur Detail Jankari bharna zaroori hai!");
+            if (!title || !summary || !content) return alert("Title, Summary, and Full Article Content are required!");
 
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
@@ -616,7 +613,7 @@
             const p = posts.find(x => x.id == id);
             if (!p) return;
             switchTab('tab-create', document.getElementById('nav-create'));
-            document.getElementById('formHeading').innerText = "Post Edit & Live Update Karein";
+            document.getElementById('formHeading').innerText = "Edit & Update Live Post";
             document.getElementById('editPostId').value = p.id;
             document.getElementById('pMainCat').value = p.mainCat;
             updateSubOptions(p.subCat);
@@ -633,7 +630,7 @@
         }
 
         function resetForm() {
-            document.getElementById('formHeading').innerText = "+ Naya Post Upload Karein (Direct Live to GitHub & Netlify)";
+            document.getElementById('formHeading').innerText = "+ Create New Post (Direct Live to GitHub)";
             document.getElementById('editPostId').value = "";
             document.getElementById('pTitle').value = "";
             document.getElementById('bSubText').value = "";
@@ -648,7 +645,7 @@
         }
 
         async function deletePost(id) {
-            if (!confirm("Kya aap sach mein is post ko live website se delete karna chahte hain?")) return;
+            if (!confirm("Are you sure you want to permanently delete this post from the live website?")) return;
             posts = posts.filter(x => x.id != id);
             await pushToGitHub("Delete post from website");
             renderManageTable();
@@ -661,7 +658,7 @@
             tbody.innerHTML = "";
             const list = posts.filter(p => p.status !== 'draft' && (currentFilterCat === 'ALL' || p.mainCat === currentFilterCat));
             if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">Is category mein abhi koi live post nahi hai.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live posts found in this category yet.</td></tr>`;
                 return;
             }
             list.forEach(p => {
@@ -684,7 +681,7 @@
             tbody.innerHTML = "";
             const drafts = posts.filter(p => p.status === 'draft');
             if (drafts.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">Abhi koi pending auto-job draft nahi hai.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">No pending auto-job drafts right now.</td></tr>`;
                 return;
             }
             drafts.forEach(d => {
