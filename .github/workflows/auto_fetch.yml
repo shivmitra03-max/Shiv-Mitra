@@ -34,28 +34,40 @@ jobs:
           existing_titles = {p['title'].strip().lower() for p in posts}
 
           feeds = [
-              {'url': 'https://news.google.com/rss/search?q=Gujarat+OJAS+GPSC+GSSSB+Recruitment+2026&hl=en-IN&gl=IN&ceid=IN:en', 'default_cat': 'Jobs', 'default_sub': 'Sarkari Jobs'},
-              {'url': 'https://news.google.com/rss/search?q=Sarkari+Naukri+Bank+SSC+Railway+Recruitment+2026&hl=en-IN&gl=IN&ceid=IN:en', 'default_cat': 'Jobs', 'default_sub': 'Sarkari Jobs'},
-              {'url': 'https://news.google.com/rss/search?q=OJAS+GPSC+SSC+IBPS+Admit+Card+Call+Letter+2026&hl=en-IN&gl=IN&ceid=IN:en', 'default_cat': 'Call Letter', 'default_sub': 'Central & Bank Admit Card'}
+              {
+                  'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+GSSSB+OR+Gujarat+Recruitment+Bharti+when:7d&hl=en-IN&gl=IN&ceid=IN:en',
+                  'cat': 'Jobs',
+                  'sub': 'Sarkari Jobs'
+              },
+              {
+                  'url': 'https://news.google.com/rss/search?q=SSC+OR+IBPS+OR+RRB+Railway+Bank+Recruitment+Apply+Online+when:7d&hl=en-IN&gl=IN&ceid=IN:en',
+                  'cat': 'Jobs',
+                  'sub': 'Bank Jobs'
+              },
+              {
+                  'url': 'https://news.google.com/rss/search?q=OJAS+OR+GPSC+OR+SSC+OR+IBPS+Admit+Card+OR+Call+Letter+when:7d&hl=en-IN&gl=IN&ceid=IN:en',
+                  'cat': 'Call Letter',
+                  'sub': 'Central & Bank Admit Card'
+              }
           ]
 
           added = 0
           for feed_info in feeds:
               parsed = feedparser.parse(feed_info['url'])
-              for entry in parsed.entries[:4]:
+              for entry in parsed.entries[:5]:
                   title = entry.title.split(' - ')[0].strip()
                   if title.lower() in existing_titles:
                       continue
 
-                  is_call_letter = any(k in title.lower() for k in ['admit card', 'call letter', 'hall ticket', 'exam date'])
-                  is_gujarat = any(k in title.lower() for k in ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati'])
+                  lower_t = title.lower()
+                  is_gujarat = any(k in lower_t for k in ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot'])
+                  is_bank = any(k in lower_t for k in ['bank', 'ibps', 'sbi', 'rbi', 'nabard'])
 
-                  if is_call_letter:
-                      main_cat = 'Call Letter'
+                  main_cat = feed_info['cat']
+                  if main_cat == 'Call Letter':
                       sub_cat = 'Gujarat Call Letter (OJAS/GPSC)' if is_gujarat else 'Central & Bank Admit Card'
                   else:
-                      main_cat = feed_info['default_cat']
-                      sub_cat = feed_info['default_sub']
+                      sub_cat = 'Bank Jobs' if is_bank else 'Sarkari Jobs'
 
                   posts.insert(0, {
                       'id': int(time.time() * 1000) + added,
@@ -65,7 +77,7 @@ jobs:
                       'date': time.strftime('%d %b %Y'),
                       'actionLink': entry.link,
                       'price': '',
-                      'summary': f'{title} - Official notification, eligibility & direct download link details.',
+                      'summary': f'{title} - Official notification, eligibility & direct apply/download link details.',
                       'content': f'<p>Official update released for <strong>{title}</strong>. Click Edit & Add Banner/Table to format before publishing.</p>',
                       'bannerImg': '',
                       'status': 'draft'
