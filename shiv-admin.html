@@ -22,31 +22,45 @@
 
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
-            width: 265px; background: #0f172a; color: white; padding: 20px 15px;
+            width: 270px; background: #0f172a; color: white; padding: 20px 14px;
             position: fixed; height: 100%; overflow-y: auto;
         }
-        .sidebar h3 { color: #f59e0b; font-size: 1.1rem; padding: 0 10px 15px; border-bottom: 1px solid #1e293b; margin-bottom: 15px; }
-        .side-label { font-size: 0.72rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
+        .sidebar h3 { color: #f59e0b; font-size: 1.1rem; padding: 0 10px 15px; border-bottom: 1px solid #1e293b; margin-bottom: 12px; }
+        .side-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
         .side-btn {
             width: 100%; text-align: left; background: transparent; color: #cbd5e1;
-            border: none; padding: 10px 12px; border-radius: 8px; cursor: pointer;
-            font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; display: block;
+            border: none; padding: 9px 12px; border-radius: 8px; cursor: pointer;
+            font-size: 0.86rem; font-weight: 600; margin-bottom: 4px; display: block;
         }
         .side-btn:hover, .side-btn.active { background: #1e3a8a; color: white; }
-        .side-btn.legal-btn { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-        .side-btn.legal-btn:hover, .side-btn.legal-btn.active { background: #d97706; color: white; }
+        .side-btn.accent-amber { background: rgba(245, 158, 11, 0.14); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .side-btn.accent-amber.active { background: #d97706; color: white; }
+        .side-btn.accent-teal { background: rgba(13, 148, 136, 0.16); color: #5eead4; border: 1px solid rgba(13, 148, 136, 0.35); }
+        .side-btn.accent-teal.active { background: #0d9488; color: white; }
+        .side-btn.accent-purple { background: rgba(124, 58, 237, 0.16); color: #c4b5fd; border: 1px solid rgba(124, 58, 237, 0.35); }
+        .side-btn.accent-purple.active { background: #7c3aed; color: white; }
 
-        .main-content { margin-left: 265px; padding: 25px; }
+        .main-content { margin-left: 270px; padding: 24px; }
         .topbar {
-            background: white; padding: 15px 22px; border-radius: 10px;
+            background: white; padding: 14px 20px; border-radius: 10px;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 22px; flex-wrap: wrap; gap: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
         }
 
-        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 22px; }
-        .stat-box { background: white; padding: 18px; border-radius: 10px; border: 1px solid #e2e8f0; }
-        .stat-box small { color: #64748b; font-weight: 600; font-size: 0.78rem; }
-        .stat-box h2 { color: #1e3a8a; font-size: 1.6rem; margin-top: 4px; }
+        /* Traffic & Portal Stats Bar */
+        .analytics-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 20px;
+        }
+        .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 14px; }
+        .traffic-card {
+            background: rgba(255, 255, 255, 0.09); border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px; border-radius: 10px;
+        }
+        .traffic-card small { color: #93c5fd; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; display: block; }
+        .traffic-card h2 { font-size: 1.55rem; font-weight: 800; margin-top: 4px; color: #ffffff; }
+        .traffic-card span { font-size: 0.74rem; color: #34d399; font-weight: 600; }
 
         .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
         .panel-card h3 { color: #1e3a8a; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
@@ -59,33 +73,31 @@
 
         .btn-primary { background: #2563eb; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
         .btn-green { background: #059669; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
-        .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; font-size: 0.95rem; }
+        .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-teal { background: #0d9488; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-sm { padding: 6px 12px; border-radius: 5px; border: none; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
         .btn-edit { background: #2563eb; color: white; }
         .btn-del { background: #dc2626; color: white; }
         .btn-pub { background: #059669; color: white; }
         .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 
-        /* Legal Format Studio Specific Styling */
-        .legal-studio-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
-        .studio-box {
-            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
-            padding: 16px; margin-bottom: 16px;
-        }
-        .studio-box h4 { color: #0f172a; font-size: 0.92rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .price-calc-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: center; }
-        .discount-pill {
-            background: #dcfce7; color: #166534; border: 1px solid #86efac;
-            padding: 10px; border-radius: 7px; text-align: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px;
-        }
+        .studio-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+        .studio-box h4 { color: #0f172a; font-size: 0.92rem; margin-bottom: 10px; }
         .file-upload-zone {
-            border: 2px dashed #d97706; background: #fffbeb; padding: 18px;
-            border-radius: 10px; text-align: center; cursor: pointer; margin-bottom: 12px;
+            border: 2px dashed #2563eb; background: #eff6ff; padding: 18px;
+            border-radius: 10px; text-align: center; cursor: pointer; margin-bottom: 12px; display: block;
         }
         .uploaded-file-chip {
             display: flex; justify-content: space-between; align-items: center;
             background: white; border: 1px solid #cbd5e1; padding: 8px 12px;
             border-radius: 6px; margin-bottom: 6px; font-size: 0.82rem; font-weight: 600;
+        }
+
+        .legal-studio-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+        .price-calc-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: center; }
+        .discount-pill {
+            background: #dcfce7; color: #166534; border: 1px solid #86efac;
+            padding: 10px; border-radius: 7px; text-align: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px;
         }
         .live-offer-card {
             background: white; border: 2px solid #f59e0b; border-radius: 12px;
@@ -96,7 +108,6 @@
             font-weight: 800; padding: 3px 9px; border-radius: 4px; margin-bottom: 8px;
         }
 
-        /* Horizontal Filter Bar for Drafts */
         .draft-toolbar {
             display: flex; justify-content: space-between; align-items: center;
             flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
@@ -105,8 +116,7 @@
         .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
         .filter-pill {
             background: white; border: 1px solid #cbd5e1; color: #334155;
-            padding: 7px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
-            cursor: pointer; transition: 0.15s;
+            padding: 7px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
         }
         .filter-pill.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
 
@@ -118,18 +128,8 @@
             background: white; border: 1px solid #cbd5e1; color: #1e293b;
             padding: 5px 10px; border-radius: 5px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
         }
-        .banner-studio {
-            background: #eff6ff; border: 1px dashed #2563eb; border-radius: 10px;
-            padding: 15px; margin-bottom: 14px;
-        }
-        .banner-preview-img {
-            max-width: 100%; max-height: 220px; border-radius: 8px;
-            margin-top: 10px; display: none; border: 2px solid #1e3a8a;
-        }
-        .links-box {
-            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
-            padding: 14px; margin-bottom: 14px;
-        }
+        .banner-studio { background: #eff6ff; border: 1px dashed #2563eb; border-radius: 10px; padding: 15px; margin-bottom: 14px; }
+        .banner-preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; border: 2px solid #1e3a8a; }
 
         table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
         th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #e2e8f0; }
@@ -159,39 +159,74 @@
     <div id="dashboardView" class="admin-layout">
         <div class="sidebar">
             <h3>SHIVMITRA ADMIN</h3>
-            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Create Job / Yojana Post</button>
-            <button class="side-btn legal-btn" id="nav-legal" onclick="switchTab('tab-legal', this)">&#9878; Legal Format Studio</button>
+            
+            <div class="side-label">Dedicated Content Studios</div>
+            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Jobs / Yojana / Call Letter</button>
+            <button class="side-btn accent-teal" id="nav-forms" onclick="switchTab('tab-forms', this)">&#128196; Forms Upload Studio</button>
+            <button class="side-btn accent-purple" id="nav-service" onclick="switchTab('tab-service', this)">&#128187; Online Service Studio</button>
+            <button class="side-btn accent-amber" id="nav-legal" onclick="switchTab('tab-legal', this)">&#9878; Legal Format Studio</button>
+            
+            <div class="side-label">Automation & Monetization</div>
             <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">Auto-Jobs Server Queue</button>
+            <button class="side-btn" id="nav-ads" onclick="switchTab('tab-ads', this)">&#128176; AdSense & Ads Manager</button>
 
-            <div class="side-label">Manage Live Posts</div>
-            <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">All Published Posts</button>
+            <div class="side-label">Manage Live Content</div>
+            <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">All Published Items</button>
             <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Govt/Bank/Private)</button>
             <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. Government Schemes</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms (Govt/Bank)</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">4. Legal Format (Store)</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">5. Online Service Guides</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms Directory</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">4. Online Service Guides</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">5. Legal Format Store</button>
             <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">6. Call Letter / Admit Card</button>
         </div>
 
         <div class="main-content">
             <div class="topbar">
                 <div><strong style="color:#1e3a8a;">ShivMitra.in</strong> — Live GitHub Sync Active <span id="syncStatus" style="font-size:0.8rem; color:#059669; font-weight:700;"></span></div>
-                <div style="display:flex; gap:10px; align-items:center;">
-                    <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh Data</button>
-                    <a href="index.html" target="_blank" style="background:#f59e0b; color:#0f172a; padding:7px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.84rem;">View Live Website</a>
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                    <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh</button>
+                    <a href="forms.html" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Open Forms Page &#8599;</a>
+                    <a href="index.html" target="_blank" style="background:#f59e0b; color:#0f172a; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
                     <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
                 </div>
             </div>
 
-            <div class="stats-row">
-                <div class="stat-box"><small>TOTAL LIVE POSTS</small><h2 id="statTotal">0</h2></div>
-                <div class="stat-box"><small>AUTO-JOBS DRAFTS</small><h2 id="statDrafts">0</h2></div>
-                <div class="stat-box"><small>LEGAL FORMAT PACKS</small><h2 id="statPaid">0</h2></div>
+            <!-- PROFESSIONAL WEBSITE TRAFFIC ANALYTICS (DAILY / WEEKLY / MONTHLY) -->
+            <div class="analytics-banner">
+                <div class="analytics-header">
+                    <div>
+                        <strong style="font-size:1rem; letter-spacing:0.3px;">&#128202; Live Website Traffic & Portal Overview</strong>
+                        <div style="font-size:0.78rem; color:#cbd5e1;">Real-time visitor counter across Home, Posts & Forms pages</div>
+                    </div>
+                    <button class="btn-sm" style="background:rgba(255,255,255,0.15); color:white;" onclick="resetTrafficStats()">Reset Counter</button>
+                </div>
+                <div class="analytics-grid">
+                    <div class="traffic-card">
+                        <small>Today's Visitors (Per Day)</small>
+                        <h2 id="trToday">0</h2>
+                        <span>Active Today</span>
+                    </div>
+                    <div class="traffic-card">
+                        <small>Last 7 Days (Weekly)</small>
+                        <h2 id="trWeekly">0</h2>
+                        <span>This Week</span>
+                    </div>
+                    <div class="traffic-card">
+                        <small>Last 30 Days (Monthly)</small>
+                        <h2 id="trMonthly">0</h2>
+                        <span>This Month</span>
+                    </div>
+                    <div class="traffic-card">
+                        <small>Total Live Content</small>
+                        <h2 id="statTotal">0</h2>
+                        <span id="statDraftsBadge">0 Auto Drafts</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- TAB 1: Create Normal Post (Jobs, Yojana, Forms, Call Letter) -->
+            <!-- TAB 1: JOBS / YOJANA / CALL LETTER POST CREATOR -->
             <div id="tab-create" class="panel-card tab-section">
-                <h3 id="formHeading">+ Create New Information / Job Post</h3>
+                <h3 id="formHeading">+ Create Job / Yojana / Call Letter Post</h3>
                 <input type="hidden" id="editPostId">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div>
@@ -199,8 +234,6 @@
                         <select id="pMainCat" onchange="updateSubOptions()">
                             <option value="Jobs">Jobs</option>
                             <option value="Sarkari Yojana">All Sarkari Yojana</option>
-                            <option value="Forms">Forms</option>
-                            <option value="Online Service Details">Online Service Details</option>
                             <option value="Call Letter">Call Letter / Admit Card</option>
                         </select>
                     </div>
@@ -210,12 +243,12 @@
                     </div>
                 </div>
 
-                <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Recruitment 2026: Apply Online for 3,000 Posts)">
+                <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Recruitment 2026: Apply Online)">
                 
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                         <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Image (Upload Custom Banner):</strong>
-                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <div style="display:flex; gap:8px;">
                             <label class="btn-sm" style="background:#1e3a8a; color:white; cursor:pointer;">
                                 &#128247; Upload Custom Image
                                 <input type="file" accept="image/*" style="display:none;" onchange="uploadFeaturePhoto(event)">
@@ -227,8 +260,8 @@
                     <img id="bannerPreview" class="banner-preview-img" alt="Banner Preview">
                 </div>
 
-                <div class="links-box">
-                    <strong style="font-size:0.85rem; color:#1e3a8a; display:block; margin-bottom:10px;">Direct Official Portal & PDF Links:</strong>
+                <div class="studio-box">
+                    <h4>Direct Official Portal & PDF Links:</h4>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                         <input type="text" id="pLink" style="background:white;" placeholder="1. Apply Online / Call Letter Direct Link">
                         <input type="text" id="pPdfLink" style="background:white;" placeholder="2. Official Notification / Exam Notice PDF Link">
@@ -247,15 +280,12 @@
                     <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Insert Anywhere:</span>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('HEADING')">+ Heading</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('PARA')">+ Paragraph</button>
-                    <label class="tool-chip" style="cursor:pointer;">
-                        + Insert Image
-                        <input type="file" accept="image/*" style="display:none;" onchange="insertInlineImage(event)">
-                    </label>
+                    <label class="tool-chip" style="cursor:pointer;">+ Image<input type="file" accept="image/*" style="display:none;" onchange="insertInlineImage(event)"></label>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('VIDEO')">+ YouTube Video</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('TABLE')">+ 2-Column Table</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('NOTE')">+ Highlight Note Box</button>
                 </div>
-                <textarea id="pContent" rows="10" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here..."></textarea>
+                <textarea id="pContent" rows="9" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here..."></textarea>
 
                 <div style="display:flex; gap:10px;">
                     <button class="btn-green" id="publishBtn" onclick="savePost()">&#128640; Publish Live to Website</button>
@@ -263,13 +293,99 @@
                 </div>
             </div>
 
-            <!-- TAB 2: DEDICATED LEGAL FORMAT STUDIO -->
+            <!-- TAB 2: DEDICATED FORMS UPLOAD STUDIO (ONLY TITLE + CATEGORY + ANY FILE UPLOAD) -->
+            <div id="tab-forms" class="panel-card tab-section" style="display:none;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:16px;">
+                    <h3 style="border:none; margin:0; padding:0; color:#0d9488;">&#128196; Forms Upload Studio (Clean Title & Direct File Upload)</h3>
+                    <a href="forms.html" target="_blank" class="btn-sm" style="background:#0f172a; color:white; text-decoration:none;">View Dedicated Forms Page (forms.html) &#8599;</a>
+                </div>
+                <input type="hidden" id="editFormItemId">
+
+                <div class="studio-box">
+                    <h4>1. Select Form Category</h4>
+                    <select id="fmSubCat">
+                        <option value="Aadhaar Card Forms">Aadhaar Card Forms (Enrollment, Update, Address Change)</option>
+                        <option value="PAN Card Forms">PAN Card Forms (Form 49A, Correction, NRI)</option>
+                        <option value="Ration Card & Civil Supplies">Ration Card & Civil Supplies Forms</option>
+                        <option value="Certificates (Caste / Income / Domicile)">Certificates (Caste, Income, Non-Creamy Layer, Domicile)</option>
+                        <option value="Birth, Death & Marriage Registration">Birth, Death & Marriage Registration Forms</option>
+                        <option value="Bank Account, KYC & Loan Forms">Bank Account Opening, KYC, RTGS/NEFT & Loan Forms</option>
+                        <option value="Driving Licence & RTO Forms">Driving Licence & RTO Forms (Form 2, 4, 29, 30)</option>
+                        <option value="Passport & Voter ID Forms">Passport & Voter ID (EPIC) Forms</option>
+                        <option value="Scholarship & Pension Forms">Scholarship, Vrudh Pension & Vidhva Sahay Forms</option>
+                        <option value="Other Forms">Other Miscellaneous Forms</option>
+                    </select>
+
+                    <h4>2. Form Title (Only Title Needed)</h4>
+                    <input type="text" id="fmTitle" placeholder="Enter Exact Form Title (e.g., Aadhaar Card Address & Mobile Update Form PDF 2026)">
+
+                    <h4>3. Upload Form File (PDF, Word, Excel, JPG, PNG, ZIP — Any Format Supported)</h4>
+                    <label class="file-upload-zone" style="border-color:#0d9488; background:#f0fdfa;">
+                        <strong style="color:#0f766e;">&#128228; Click to Upload Form File (.pdf, .doc, .docx, .xls, .xlsx, .jpg, .png, .zip)</strong><br>
+                        <span style="font-size:0.78rem; color:#64748b;">Upload direct printable file so users can download in 1 click from forms.html</span>
+                        <input type="file" id="fmFileInput" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip" style="display:none;" onchange="handleFormFileUpload(event)">
+                    </label>
+                    <div id="fmUploadedChip"></div>
+                    <input type="text" id="fmDirectUrl" placeholder="OR Paste Official Govt Form Direct PDF URL (Optional if file uploaded above)">
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-teal" id="publishFormBtn" onclick="saveFormItem()">&#128196; Publish Form to Forms Page</button>
+                    <button id="cancelFormItemBtn" class="btn-sm btn-del" style="display:none; padding:11px 18px;" onclick="resetFormStudio()">Cancel</button>
+                </div>
+            </div>
+
+            <!-- TAB 3: DEDICATED ONLINE SERVICE GUIDE STUDIO -->
+            <div id="tab-service" class="panel-card tab-section" style="display:none;">
+                <h3 style="color:#7c3aed;">&#128187; Online Service Studio (Step-by-Step Citizen Service Guide)</h3>
+                <input type="hidden" id="editServiceId">
+
+                <div class="studio-box">
+                    <h4>1. Service Category & Title</h4>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <select id="osSubCat">
+                            <option value="PAN & Aadhaar Services">PAN & Aadhaar Services</option>
+                            <option value="Ration Card & Civil Supplies">Ration Card & Civil Supplies</option>
+                            <option value="Certificates (Income / Caste / Domicile)">Certificates (Income / Caste / Domicile)</option>
+                            <option value="Passport & Driving Licence (RTO)">Passport & Driving Licence (RTO)</option>
+                            <option value="Digital Gujarat & e-District">Digital Gujarat & e-District Services</option>
+                            <option value="PM Kisan, Ayushman & Pension">PM Kisan, Ayushman Card & Pension</option>
+                        </select>
+                        <input type="text" id="osPortalLink" placeholder="Official Service Portal Link (e.g., https://myaadhaar.uidai.gov.in/)">
+                    </div>
+                    <input type="text" id="osTitle" placeholder="Service Guide Title (e.g., How to Link PAN with Aadhaar Online & Check Status 2026)">
+                </div>
+
+                <div class="studio-box">
+                    <h4>2. Quick Service Summary Box (Documents, Fee & Processing Time)</h4>
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                        <input type="text" id="osFee" placeholder="Govt Fee (e.g., ₹50 / Free)">
+                        <input type="text" id="osTime" placeholder="Processing Time (e.g., 3 to 7 Days)">
+                        <input type="text" id="osMode" placeholder="Apply Mode (e.g., Online / CSC Centre)">
+                    </div>
+                    <textarea id="osDocs" rows="3" placeholder="Required Documents (One per line):
+Aadhaar Card with Registered Mobile Number
+PAN Card Copy
+Passport Size Photograph"></textarea>
+                    <textarea id="osSteps" rows="5" placeholder="Step-by-Step Online Process (One step per line):
+Visit the official portal link given below.
+Click on Login and verify via Aadhaar OTP.
+Fill in your personal details and upload scanned documents.
+Pay the prescribed fee online and download acknowledgement receipt."></textarea>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-auto-fill" id="publishServiceBtn" style="padding:12px 22px; font-size:0.95rem;" onclick="saveOnlineService()">&#128187; Publish Online Service Guide</button>
+                    <button id="cancelServiceBtn" class="btn-sm btn-del" style="display:none; padding:12px 18px;" onclick="resetServiceStudio()">Cancel</button>
+                </div>
+            </div>
+
+            <!-- TAB 4: DEDICATED LEGAL FORMAT STUDIO -->
             <div id="tab-legal" class="panel-card tab-section" style="display:none;">
                 <h3 style="color:#b45309;">&#9878; Legal Format Studio — Professional Drafts & Bundle Uploader</h3>
                 <input type="hidden" id="editLegalId">
 
                 <div class="legal-studio-grid">
-                    <!-- Left Column: Input & File Upload -->
                     <div>
                         <div class="studio-box">
                             <h4>1. Legal Format Category & Title</h4>
@@ -295,39 +411,38 @@
                             <div class="price-calc-row">
                                 <div>
                                     <label style="font-size:0.75rem; font-weight:700; color:#475569;">Original Price (₹):</label>
-                                    <input type="number" id="lfOrigPrice" value="100" oninput="updateLegalPreview()" placeholder="e.g., 100">
+                                    <input type="number" id="lfOrigPrice" value="100" oninput="updateLegalPreview()">
                                 </div>
                                 <div>
                                     <label style="font-size:0.75rem; font-weight:700; color:#059669;">Offer Price (₹):</label>
-                                    <input type="number" id="lfOfferPrice" value="70" oninput="updateLegalPreview()" placeholder="e.g., 70">
+                                    <input type="number" id="lfOfferPrice" value="70" oninput="updateLegalPreview()">
                                 </div>
                                 <div>
                                     <label style="font-size:0.75rem; font-weight:700; color:#dc2626;">Auto Discount:</label>
                                     <div id="lfDiscountBox" class="discount-pill">30% OFF</div>
                                 </div>
                             </div>
-                            <input type="text" id="lfOfferTag" oninput="updateLegalPreview()" value="Limited Time Offer — Instant Download" placeholder="Offer Tagline (e.g., Limited Time Offer / Best Seller)">
+                            <input type="text" id="lfOfferTag" oninput="updateLegalPreview()" value="Limited Time Offer — Instant Download">
                         </div>
 
                         <div class="studio-box">
                             <h4>3. Upload Formats & Merge Multiple Drafts (Word, PDF, RTF, ZIP)</h4>
-                            <label class="file-upload-zone" style="display:block;">
-                                <strong style="color:#b45309; font-size:0.92rem;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong><br>
-                                <span style="font-size:0.78rem; color:#64748b;">Select multiple files together to automatically create a Merged Legal Bundle!</span>
+                            <label class="file-upload-zone" style="border-color:#d97706; background:#fffbeb;">
+                                <strong style="color:#b45309;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong><br>
+                                <span style="font-size:0.78rem; color:#64748b;">Select multiple files together to create a Merged Legal Bundle!</span>
                                 <input type="file" id="lfFileInput" multiple accept=".doc,.docx,.pdf,.rtf,.txt,.zip" style="display:none;" onchange="handleLegalFiles(event)">
                             </label>
                             <div id="uploadedFilesList"></div>
-                            <input type="text" id="lfExternalDriveLink" oninput="updateLegalPreview()" placeholder="OR Paste Google Drive / Payment Download Link (Optional if files uploaded above)">
+                            <input type="text" id="lfExternalDriveLink" oninput="updateLegalPreview()" placeholder="OR Paste Google Drive / Payment Download Link (Optional)">
                         </div>
 
                         <div class="studio-box">
                             <h4>4. Customer Convincing Details & Key Highlights</h4>
-                            <textarea id="lfPitch" rows="3" oninput="updateLegalPreview()" placeholder="Write why the customer must buy this format (e.g., 100% Court & Notary approved advocate draft. Just fill in your name and address and print on stamp paper in 2 minutes!)"></textarea>
+                            <textarea id="lfPitch" rows="3" oninput="updateLegalPreview()" placeholder="Write why the customer must buy this format..."></textarea>
                             <textarea id="lfHighlights" rows="4" oninput="updateLegalPreview()">✔ 100% Advocate Verified & Notary Ready Format
 ✔ Instant Editable MS Word (.docx) + Print-Ready PDF Included
 ✔ Easy Fill-in-the-Blank Fields (Save ₹500+ Advocate Drafting Fee)
 ✔ Instant Download Access Immediately After Payment</textarea>
-                            <label style="font-size:0.78rem; font-weight:700; color:#1e3a8a;">Upload Sample Watermark / Cover Image (Optional):</label>
                             <input type="file" accept="image/*" onchange="uploadLegalCover(event)">
                             <input type="hidden" id="lfCoverData">
                         </div>
@@ -338,7 +453,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Live Customer Card Preview -->
                     <div>
                         <div style="position:sticky; top:20px;">
                             <h4 style="font-size:0.85rem; color:#64748b; text-transform:uppercase; margin-bottom:10px;">Live Customer Store Preview</h4>
@@ -346,19 +460,14 @@
                                 <span class="offer-badge" id="prevBadge">30% OFF • LIMITED TIME OFFER</span>
                                 <div style="font-size:0.75rem; color:#b45309; font-weight:700; margin-bottom:4px;" id="prevSubCat">RENT AGREEMENT • GUJARATI + ENGLISH</div>
                                 <h3 style="font-size:1.15rem; color:#0f172a; margin-bottom:10px; border:none; padding:0;" id="prevTitle">11 Months Residential Rent Agreement</h3>
-                                
                                 <div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:8px; margin-bottom:12px; display:flex; align-items:baseline; gap:10px;">
                                     <span style="font-size:1.6rem; font-weight:800; color:#059669;" id="prevOfferPrice">₹70</span>
                                     <span style="font-size:1rem; color:#94a3b8; text-decoration:line-through;" id="prevOrigPrice">₹100</span>
                                     <span style="font-size:0.8rem; font-weight:700; color:#dc2626;" id="prevSaveText">(You Save ₹30)</span>
                                 </div>
-
-                                <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:12px;" id="prevPitch">
-                                    100% Advocate verified draft ready for stamp paper printing. Save time and drafting fees!
-                                </p>
-
+                                <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:12px;" id="prevPitch">100% Advocate verified draft ready for stamp paper printing.</p>
                                 <div style="background:#f8fafc; padding:10px; border-radius:8px; font-size:0.8rem; color:#1e293b; line-height:1.6; margin-bottom:12px;" id="prevHighlights"></div>
-                                <div style="font-size:0.78rem; font-weight:700; color:#1e3a8a; margin-bottom:12px;" id="prevFilesInfo">Included Files: Ready to upload</div>
+                                <div style="font-size:0.78rem; font-weight:700; color:#1e3a8a; margin-bottom:12px;" id="prevFilesInfo">Included Format: Word + PDF</div>
                                 <button type="button" class="btn-green" style="width:100%; pointer-events:none;">Download Instant Format Now</button>
                             </div>
                         </div>
@@ -366,7 +475,7 @@
                 </div>
             </div>
 
-            <!-- TAB 3: Auto-Jobs Server Queue -->
+            <!-- TAB 5: AUTO-JOBS SERVER QUEUE -->
             <div id="tab-auto" class="panel-card tab-section" style="display:none;">
                 <h3>Auto-Updating Jobs & Call Letters Queue (Pending Approval)</h3>
                 <div class="draft-toolbar">
@@ -381,7 +490,28 @@
                 </table>
             </div>
 
-            <!-- TAB 4: Manage Posts by Topic -->
+            <!-- TAB 6: ADSENSE & BANNER ADS PLACEMENT MANAGER -->
+            <div id="tab-ads" class="panel-card tab-section" style="display:none;">
+                <h3>&#128176; AdSense & Banner Ads Placement Manager</h3>
+                <p style="font-size:0.85rem; color:#475569; margin-bottom:16px;">
+                    Paste your Google AdSense unit code (<code>&lt;ins class="adsbygoogle"...&gt;</code>) or custom banner HTML below. These ads will automatically appear in the designated high-CTR slots on your Homepage, Post pages, and Forms Directory.
+                </p>
+
+                <div class="studio-box">
+                    <h4>Slot 1: Header Leaderboard Ad (728x90 / Responsive — Top of Every Page)</h4>
+                    <textarea id="adHeaderSlot" rows="3" placeholder="Paste Google AdSense Header Ad Code here..."></textarea>
+
+                    <h4>Slot 2: In-Article Middle Ad (336x280 / Responsive — Inside Job & Service Posts)</h4>
+                    <textarea id="adArticleSlot" rows="3" placeholder="Paste Google AdSense In-Article Ad Code here..."></textarea>
+
+                    <h4>Slot 3: Sidebar / Footer Sticky Ad (300x250 / Responsive — Right Sidebar & Bottom)</h4>
+                    <textarea id="adSidebarSlot" rows="3" placeholder="Paste Google AdSense Sidebar / Footer Ad Code here..."></textarea>
+                </div>
+
+                <button class="btn-green" id="saveAdsBtn" onclick="saveAdsConfig()">&#128190; Save & Activate Ad Slots on Live Website</button>
+            </div>
+
+            <!-- TAB 7: MANAGE LIVE POSTS -->
             <div id="tab-manage" class="panel-card tab-section" style="display:none;">
                 <h3 id="manageHeading">Published Posts Manager</h3>
                 <table>
@@ -396,16 +526,16 @@
         const subMap = {
             'Jobs': ['Sarkari Jobs', 'Bank Jobs', 'Private Jobs', 'Apprenticeship / Contract Jobs'],
             'Sarkari Yojana': ['Central Yojana', 'State Yojana'],
-            'Forms': ['Sarkari Forms', 'Bank Forms'],
-            'Online Service Details': ['PAN & Aadhaar', 'Ration & Certificates'],
             'Call Letter': ['Gujarat Call Letter (OJAS/GPSC)', 'Central & Bank Admit Card']
         };
 
         let posts = [];
         let fileSha = "";
+        let adsSha = "";
         let currentFilterCat = "ALL";
         let currentDraftFilter = "ALL";
-        let legalUploadedFiles = []; // Stores { name, type, size, dataUrl }
+        let legalUploadedFiles = [];
+        let uploadedFormFile = null;
 
         window.onload = function() {
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
@@ -414,10 +544,39 @@
                 document.getElementById('dashboardView').style.display = 'block';
                 updateSubOptions();
                 updateLegalPreview();
+                loadTrafficAnalytics();
                 loadFromGitHub();
+                loadAdsConfig();
             }
         };
 
+        // ==========================================
+        // TRAFFIC ANALYTICS (DAILY / WEEKLY / MONTHLY)
+        // ==========================================
+        function loadTrafficAnalytics() {
+            const logs = JSON.parse(localStorage.getItem('shiv_traffic_logs') || '[]');
+            const now = Date.now();
+            const dayMs = 24 * 60 * 60 * 1000;
+            const todayStr = new Date().toISOString().slice(0, 10);
+
+            const todayCount = logs.filter(ts => new Date(ts).toISOString().slice(0, 10) === todayStr).length;
+            const weekCount = logs.filter(ts => (now - ts) <= 7 * dayMs).length;
+            const monthCount = logs.filter(ts => (now - ts) <= 30 * dayMs).length;
+
+            document.getElementById('trToday').innerText = todayCount;
+            document.getElementById('trWeekly').innerText = weekCount;
+            document.getElementById('trMonthly').innerText = monthCount;
+        }
+
+        function resetTrafficStats() {
+            if (!confirm("Reset local traffic visitor logs?")) return;
+            localStorage.removeItem('shiv_traffic_logs');
+            loadTrafficAnalytics();
+        }
+
+        // ==========================================
+        // GITHUB CONNECTION & SYNC
+        // ==========================================
         async function connectGitHub() {
             const user = document.getElementById('ghUser').value.trim();
             const repo = document.getElementById('ghRepo').value.trim();
@@ -429,8 +588,7 @@
                 err.innerText = "Username, Repository Name, and GitHub Token are all required!";
                 return;
             }
-
-            btn.innerText = "Connecting to GitHub...";
+            btn.innerText = "Connecting...";
             err.innerText = "";
 
             try {
@@ -438,13 +596,14 @@
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
                 if (!res.ok) throw new Error("Invalid Token or Repository Name!");
-                
                 localStorage.setItem('shiv_gh_auth', JSON.stringify({ user, repo, token }));
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
                 updateSubOptions();
                 updateLegalPreview();
+                loadTrafficAnalytics();
                 await loadFromGitHub();
+                await loadAdsConfig();
             } catch (e) {
                 err.innerText = e.message;
                 btn.innerText = "Connect & Open Dashboard";
@@ -482,7 +641,6 @@
             try {
                 const jsonStr = JSON.stringify(posts, null, 2);
                 const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-
                 const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json`, {
                     method: 'PUT',
                     headers: {
@@ -490,11 +648,7 @@
                         'Accept': 'application/vnd.github.v3+json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        message: commitMsg,
-                        content: encoded,
-                        sha: fileSha
-                    })
+                    body: JSON.stringify({ message: commitMsg, content: encoded, sha: fileSha })
                 });
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message || "Update failed");
@@ -505,6 +659,63 @@
             }
         }
 
+        // ==========================================
+        // ADSENSE CONFIG MANAGER (ads.json)
+        // ==========================================
+        async function loadAdsConfig() {
+            const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            if (!auth) return;
+            try {
+                const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/ads.json?t=${Date.now()}`, {
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    adsSha = data.sha;
+                    const decoded = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
+                    document.getElementById('adHeaderSlot').value = decoded.headerAd || "";
+                    document.getElementById('adArticleSlot').value = decoded.articleAd || "";
+                    document.getElementById('adSidebarSlot').value = decoded.sidebarAd || "";
+                }
+            } catch (e) {}
+        }
+
+        async function saveAdsConfig() {
+            const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            const btn = document.getElementById('saveAdsBtn');
+            btn.innerText = "Saving Ads...";
+            btn.disabled = true;
+
+            const payloadObj = {
+                headerAd: document.getElementById('adHeaderSlot').value.trim(),
+                articleAd: document.getElementById('adArticleSlot').value.trim(),
+                sidebarAd: document.getElementById('adSidebarSlot').value.trim()
+            };
+            const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payloadObj, null, 2))));
+            const bodyData = { message: "Update AdSense placements", content: encoded };
+            if (adsSha) bodyData.sha = adsSha;
+
+            try {
+                const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/ads.json`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bodyData)
+                });
+                const result = await res.json();
+                if (!res.ok) throw new Error(result.message);
+                adsSha = result.content.sha;
+                alert("AdSense slots saved! Ads will now show in the designated areas of your website.");
+            } catch (e) {
+                alert("Error saving ads: " + e.message);
+            } finally {
+                btn.innerText = "💾 Save & Activate Ad Slots on Live Website";
+                btn.disabled = false;
+            }
+        }
+
+        // ==========================================
+        // NAVIGATION & HELPERS
+        // ==========================================
         function updateSubOptions(selectedSub = "") {
             const main = document.getElementById('pMainCat').value;
             const subSel = document.getElementById('pSubCat');
@@ -531,12 +742,175 @@
         function viewCategoryPosts(cat, btn) {
             currentFilterCat = cat;
             switchTab('tab-manage', btn);
-            document.getElementById('manageHeading').innerText = cat === 'ALL' ? 'All Published Posts' : `${cat} — Published Posts`;
+            document.getElementById('manageHeading').innerText = cat === 'ALL' ? 'All Published Items' : `${cat} — Published Items`;
             renderManageTable();
         }
 
         // ==========================================
-        // LEGAL FORMAT STUDIO LOGIC
+        // 1. FORMS UPLOAD STUDIO LOGIC
+        // ==========================================
+        function handleFormFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedFormFile = {
+                    name: file.name,
+                    size: Math.round(file.size / 1024) + " KB",
+                    ext: file.name.split('.').pop().toUpperCase(),
+                    dataUrl: e.target.result
+                };
+                document.getElementById('fmUploadedChip').innerHTML = `
+                    <div class="uploaded-file-chip">
+                        <span>&#128196; ${uploadedFormFile.name} (${uploadedFormFile.ext} • ${uploadedFormFile.size})</span>
+                        <button type="button" class="btn-sm btn-del" onclick="clearFormFile()">Remove</button>
+                    </div>`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearFormFile() {
+            uploadedFormFile = null;
+            document.getElementById('fmUploadedChip').innerHTML = "";
+        }
+
+        async function saveFormItem() {
+            const editId = document.getElementById('editFormItemId').value;
+            const subCat = document.getElementById('fmSubCat').value;
+            const title = document.getElementById('fmTitle').value.trim();
+            const directUrl = document.getElementById('fmDirectUrl').value.trim();
+
+            if (!title) return alert("Please enter the Form Title!");
+            if (!uploadedFormFile && !directUrl) return alert("Please upload a Form file OR provide a direct PDF link!");
+
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            const fileFormatLabel = uploadedFormFile ? uploadedFormFile.ext : "PDF";
+            const fileSizeLabel = uploadedFormFile ? uploadedFormFile.size : "Official Form";
+
+            const formPost = {
+                id: editId ? Number(editId) : Date.now(),
+                mainCat: "Forms",
+                subCat: subCat,
+                title: title,
+                date: today,
+                fileType: fileFormatLabel,
+                fileSize: fileSizeLabel,
+                formFileData: uploadedFormFile,
+                pdfLink: directUrl || "",
+                actionLink: directUrl || "forms.html",
+                summary: `Download official ${title} (${fileFormatLabel} format) under ${subCat}.`,
+                content: `<p>Official printable form for <strong>${title}</strong> (${subCat}). Click the download button on the Forms Directory page to save this ${fileFormatLabel} file.</p>`,
+                status: "live"
+            };
+
+            const btn = document.getElementById('publishFormBtn');
+            btn.innerText = "Publishing Form...";
+            btn.disabled = true;
+
+            if (editId) {
+                const idx = posts.findIndex(x => x.id == editId);
+                if (idx !== -1) posts[idx] = formPost;
+            } else {
+                posts.unshift(formPost);
+            }
+
+            await pushToGitHub(`Publish Form: ${title}`);
+            btn.innerText = "📄 Publish Form to Forms Page";
+            btn.disabled = false;
+            resetFormStudio();
+            refreshStats();
+        }
+
+        function resetFormStudio() {
+            document.getElementById('editFormItemId').value = "";
+            document.getElementById('fmTitle').value = "";
+            document.getElementById('fmDirectUrl').value = "";
+            clearFormFile();
+            document.getElementById('cancelFormItemBtn').style.display = "none";
+        }
+
+        // ==========================================
+        // 2. ONLINE SERVICE STUDIO LOGIC
+        // ==========================================
+        async function saveOnlineService() {
+            const editId = document.getElementById('editServiceId').value;
+            const subCat = document.getElementById('osSubCat').value;
+            const portalLink = document.getElementById('osPortalLink').value.trim();
+            const title = document.getElementById('osTitle').value.trim();
+            const fee = document.getElementById('osFee').value.trim() || "As per Govt Rules";
+            const procTime = document.getElementById('osTime').value.trim() || "3 to 7 Working Days";
+            const mode = document.getElementById('osMode').value.trim() || "Online / CSC Centre";
+            const docsRaw = document.getElementById('osDocs').value.trim();
+            const stepsRaw = document.getElementById('osSteps').value.trim();
+
+            if (!title || !stepsRaw) return alert("Please enter Service Title and Step-by-Step Process!");
+
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            const docsRows = docsRaw.split('\n').filter(Boolean).map(d => `<tr><td>&#10004; ${d}</td></tr>`).join('');
+            const stepsHtml = stepsRaw.split('\n').filter(Boolean).map((s, idx) => `<p><strong>Step ${idx + 1}:</strong> ${s}</p>`).join('');
+
+            const contentHtml = `
+<h3>1. Service Overview (Fee & Processing Time)</h3>
+<table>
+  <tr><th>Parameter</th><th>Details</th></tr>
+  <tr><td>Government / Service Fee</td><td>${fee}</td></tr>
+  <tr><td>Estimated Processing Time</td><td>${procTime}</td></tr>
+  <tr><td>Application Mode</td><td>${mode}</td></tr>
+</table>
+<h3>2. Required Documents Checklist</h3>
+<table>
+  <tr><th>Mandatory Documents</th></tr>
+  ${docsRows || '<tr><td>Aadhaar Card & Passport Photo</td></tr>'}
+</table>
+<h3>3. Step-by-Step Online Application Guide</h3>
+${stepsHtml}`;
+
+            const servicePost = {
+                id: editId ? Number(editId) : Date.now(),
+                mainCat: "Online Service Details",
+                subCat: subCat,
+                title: title,
+                date: today,
+                actionLink: portalLink,
+                officialSite: portalLink,
+                pdfLink: "",
+                summary: `Complete step-by-step online guide for ${title}. Check required documents, govt fee (${fee}), and official portal link.`,
+                content: contentHtml,
+                status: "live"
+            };
+
+            const btn = document.getElementById('publishServiceBtn');
+            btn.innerText = "Publishing Guide...";
+            btn.disabled = true;
+
+            if (editId) {
+                const idx = posts.findIndex(x => x.id == editId);
+                if (idx !== -1) posts[idx] = servicePost;
+            } else {
+                posts.unshift(servicePost);
+            }
+
+            await pushToGitHub(`Publish Online Service: ${title}`);
+            btn.innerText = "💻 Publish Online Service Guide";
+            btn.disabled = false;
+            resetServiceStudio();
+            refreshStats();
+        }
+
+        function resetServiceStudio() {
+            document.getElementById('editServiceId').value = "";
+            document.getElementById('osTitle').value = "";
+            document.getElementById('osPortalLink').value = "";
+            document.getElementById('osFee').value = "";
+            document.getElementById('osTime').value = "";
+            document.getElementById('osMode').value = "";
+            document.getElementById('osDocs').value = "";
+            document.getElementById('osSteps').value = "";
+            document.getElementById('cancelServiceBtn').style.display = "none";
+        }
+
+        // ==========================================
+        // 3. LEGAL FORMAT STUDIO LOGIC
         // ==========================================
         function handleLegalFiles(event) {
             const files = Array.from(event.target.files);
@@ -564,28 +938,21 @@
 
         function renderUploadedFilesList() {
             const box = document.getElementById('uploadedFilesList');
-            if (legalUploadedFiles.length === 0) {
-                box.innerHTML = "";
-                return;
-            }
+            if (legalUploadedFiles.length === 0) { box.innerHTML = ""; return; }
             const mergeBanner = legalUploadedFiles.length > 1
-                ? `<div style="background:#dcfce7; color:#166534; padding:6px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; margin-bottom:8px;">&#128279; Merged Bundle Mode Active (${legalUploadedFiles.length} Formats Combined)</div>`
-                : "";
+                ? `<div style="background:#dcfce7; color:#166534; padding:6px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; margin-bottom:8px;">&#128279; Merged Bundle Mode Active (${legalUploadedFiles.length} Formats Combined)</div>` : "";
             box.innerHTML = mergeBanner + legalUploadedFiles.map((f, i) => `
                 <div class="uploaded-file-chip">
                     <span>&#128196; ${f.name} (${f.size})</span>
                     <button type="button" class="btn-sm btn-del" onclick="removeLegalFile(${i})">Remove</button>
-                </div>
-            `).join('');
+                </div>`).join('');
         }
 
         function uploadLegalCover(event) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('lfCoverData').value = e.target.result;
-            };
+            reader.onload = function(e) { document.getElementById('lfCoverData').value = e.target.result; };
             reader.readAsDataURL(file);
         }
 
@@ -596,7 +963,7 @@
             const orig = parseFloat(document.getElementById('lfOrigPrice').value) || 100;
             const offer = parseFloat(document.getElementById('lfOfferPrice').value) || 70;
             const tag = document.getElementById('lfOfferTag').value.trim() || "Limited Time Offer";
-            const pitch = document.getElementById('lfPitch').value.trim() || "100% Advocate verified legal format ready to print on stamp paper. Save time and high advocate fees!";
+            const pitch = document.getElementById('lfPitch').value.trim() || "100% Advocate verified legal format ready to print on stamp paper.";
             const highlights = document.getElementById('lfHighlights').value.trim();
 
             const discountPct = orig > offer ? Math.round(((orig - offer) / orig) * 100) : 0;
@@ -631,17 +998,13 @@
             const extLink = document.getElementById('lfExternalDriveLink').value.trim();
             const coverImg = document.getElementById('lfCoverData').value;
 
-            if (!title || !offerPrice || !pitch) {
-                return alert("Please enter Title, Offer Price, and Customer Description!");
-            }
+            if (!title || !offerPrice || !pitch) return alert("Title, Offer Price, and Customer Description are required!");
 
             const discountPct = origPrice > offerPrice ? Math.round(((origPrice - offerPrice) / origPrice) * 100) : 0;
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-
             const highlightItems = highlights.split('\n').filter(Boolean).map(line => `<tr><td>${line}</td></tr>`).join('');
             const filesSummaryHtml = legalUploadedFiles.length > 0
-                ? `<p><strong>Included Downloadable Files (${legalUploadedFiles.length}):</strong> ${legalUploadedFiles.map(f => `${f.name} (${f.size})`).join(' | ')}</p>`
-                : "";
+                ? `<p><strong>Included Downloadable Files (${legalUploadedFiles.length}):</strong> ${legalUploadedFiles.map(f => `${f.name} (${f.size})`).join(' | ')}</p>` : "";
 
             const formattedHtml = `
 <div class="note-box">
@@ -657,23 +1020,13 @@ ${filesSummaryHtml}`;
 
             const postPayload = {
                 id: editId ? Number(editId) : Date.now(),
-                mainCat: "Legal Format",
-                subCat: subCat,
-                title: title,
-                date: today,
-                price: String(offerPrice),
-                originalPrice: String(origPrice),
-                discountPercent: discountPct,
-                offerTag: offerTag,
-                language: lang,
+                mainCat: "Legal Format", subCat, title, date: today,
+                price: String(offerPrice), originalPrice: String(origPrice),
+                discountPercent: discountPct, offerTag, language: lang,
                 actionLink: extLink || "#buy-legal-format",
-                pdfLink: "",
-                officialSite: "",
                 legalFiles: legalUploadedFiles,
                 summary: `${discountPct > 0 ? `[${discountPct}% OFF — ₹${offerPrice} Only] ` : `[₹${offerPrice}] `}${pitch}`,
-                content: formattedHtml,
-                bannerImg: coverImg,
-                status: "live"
+                content: formattedHtml, bannerImg: coverImg, status: "live"
             };
 
             const btn = document.getElementById('publishLegalBtn');
@@ -709,7 +1062,7 @@ ${filesSummaryHtml}`;
         }
 
         // ==========================================
-        // NORMAL POSTS & DRAFTS LOGIC
+        // 4. JOBS / YOJANA / CALL LETTER LOGIC
         // ==========================================
         function uploadFeaturePhoto(event) {
             const file = event.target.files[0];
@@ -734,28 +1087,16 @@ ${filesSummaryHtml}`;
         function insertAtCursor(type) {
             const textarea = document.getElementById('pContent');
             let snippet = "";
-            if (type === 'HEADING') {
-                const h = prompt("Enter Heading text:");
-                if (!h) return;
-                snippet = `\n<h3>${h}</h3>\n`;
-            } else if (type === 'PARA') {
-                const p = prompt("Enter Paragraph text:");
-                if (!p) return;
-                snippet = `\n<p>${p}</p>\n`;
-            } else if (type === 'VIDEO') {
-                const rawUrl = prompt("Paste YouTube Video URL:");
+            if (type === 'HEADING') { const h = prompt("Enter Heading:"); if (!h) return; snippet = `\n<h3>${h}</h3>\n`; }
+            else if (type === 'PARA') { const p = prompt("Enter Paragraph:"); if (!p) return; snippet = `\n<p>${p}</p>\n`; }
+            else if (type === 'VIDEO') {
+                const rawUrl = prompt("Paste YouTube URL:");
                 if (!rawUrl) return;
-                const regExp = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-                const match = rawUrl.trim().match(regExp);
+                const match = rawUrl.trim().match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
                 if (!match || !match[1]) return alert("Invalid YouTube link!");
                 snippet = `\n<div class="video-embed"><iframe src="https://www.youtube.com/embed/${match[1]}" allowfullscreen></iframe></div>\n`;
-            } else if (type === 'TABLE') {
-                snippet = `\n<table>\n  <tr><th>Post / Category Name</th><th>Total Posts / Details</th></tr>\n  <tr><td>Post Name 1</td><td>Detail Here</td></tr>\n</table>\n`;
-            } else if (type === 'NOTE') {
-                const n = prompt("Enter Highlight Note:");
-                if (!n) return;
-                snippet = `\n<div class="note-box"><strong>Important Note:</strong> ${n}</div>\n`;
-            }
+            } else if (type === 'TABLE') { snippet = `\n<table>\n  <tr><th>Post Name</th><th>Details</th></tr>\n  <tr><td>Post 1</td><td>Details</td></tr>\n</table>\n`; }
+            else if (type === 'NOTE') { const n = prompt("Enter Highlight Note:"); if (!n) return; snippet = `\n<div class="note-box"><strong>Important Note:</strong> ${n}</div>\n`; }
             const start = textarea.selectionStart;
             textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(textarea.selectionEnd);
         }
@@ -766,7 +1107,7 @@ ${filesSummaryHtml}`;
             const reader = new FileReader();
             reader.onload = function(e) {
                 const textarea = document.getElementById('pContent');
-                const snippet = `\n<div class="inline-media"><img src="${e.target.result}" alt="Post Infographic"></div>\n`;
+                const snippet = `\n<div class="inline-media"><img src="${e.target.result}" alt="Infographic"></div>\n`;
                 const start = textarea.selectionStart;
                 textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(start);
             };
@@ -775,41 +1116,14 @@ ${filesSummaryHtml}`;
 
         function fillTemplate(type) {
             const title = document.getElementById('pTitle').value.trim() || "Official Update 2026";
-            const lowerTitle = title.toLowerCase();
-            const isGujarat = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi'].some(w => lowerTitle.includes(w));
-
             if (type === 'CALL_LETTER') {
                 document.getElementById('pMainCat').value = 'Call Letter';
-                updateSubOptions(isGujarat ? 'Gujarat Call Letter (OJAS/GPSC)' : 'Central & Bank Admit Card');
-                document.getElementById('pSummary').value = `${title} official Admit Card / Call Letter released. Check Exam Date and download steps below.`;
-                document.getElementById('pContent').value = `<p>Candidates can download <strong>${title}</strong> Call Letter using the schedule below:</p>
-<h3>1. Exam & Call Letter Schedule</h3>
-<table>
-  <tr><th>Event</th><th>Date</th></tr>
-  <tr><td>Call Letter Release Date</td><td>DD/MM/2026</td></tr>
-  <tr><td>Exam Date</td><td>DD/MM/2026</td></tr>
-</table>
-<h3>2. Required Login Details</h3>
-<table>
-  <tr><th>Credential</th><th>Format</th></tr>
-  <tr><td>Confirmation / Roll Number</td><td>As per Application Form</td></tr>
-  <tr><td>Date of Birth</td><td>DD-MM-YYYY</td></tr>
-</table>`;
+                updateSubOptions('Central & Bank Admit Card');
+                document.getElementById('pSummary').value = `${title} Admit Card / Call Letter released. Check Exam Date and download steps below.`;
+                document.getElementById('pContent').value = `<h3>1. Exam & Call Letter Schedule</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Release Date</td><td>DD/MM/2026</td></tr><tr><td>Exam Date</td><td>DD/MM/2026</td></tr></table><h3>2. Required Login Details</h3><table><tr><th>Field</th><th>Format</th></tr><tr><td>Confirmation / Roll No.</td><td>As per Form</td></tr><tr><td>Date of Birth</td><td>DD-MM-YYYY</td></tr></table>`;
             } else {
                 document.getElementById('pSummary').value = `${title} official notification released. Check Important Dates, Eligibility, Fee, and Apply Online link below.`;
-                document.getElementById('pContent').value = `<p>Official recruitment details for <strong>${title}</strong>:</p>
-<h3>1. Important Dates</h3>
-<table>
-  <tr><th>Event</th><th>Date</th></tr>
-  <tr><td>Start Date</td><td>DD/MM/2026</td></tr>
-  <tr><td>Last Date</td><td>DD/MM/2026</td></tr>
-</table>
-<h3>2. Eligibility & Fee</h3>
-<table>
-  <tr><th>Criteria</th><th>Details</th></tr>
-  <tr><td>Qualification</td><td>10th / 12th / Graduate</td></tr>
-  <tr><td>Application Fee</td><td>₹100/- (General) | ₹0/- (Reserved)</td></tr>
-</table>`;
+                document.getElementById('pContent').value = `<h3>1. Important Dates</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Start Date</td><td>DD/MM/2026</td></tr><tr><td>Last Date</td><td>DD/MM/2026</td></tr></table><h3>2. Eligibility & Fee</h3><table><tr><th>Criteria</th><th>Details</th></tr><tr><td>Qualification</td><td>10th / 12th / Graduate</td></tr><tr><td>Fee</td><td>₹100/- (General) | ₹0/- (Reserved)</td></tr></table>`;
             }
         }
 
@@ -826,7 +1140,6 @@ ${filesSummaryHtml}`;
             const bannerImg = document.getElementById('pBannerData').value;
 
             if (!title || !summary || !content) return alert("Title, Summary, and Content are required!");
-
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
             const btn = document.getElementById('publishBtn');
             btn.innerText = "Publishing Live...";
@@ -834,14 +1147,9 @@ ${filesSummaryHtml}`;
 
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
-                if (idx !== -1) {
-                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
-                }
+                if (idx !== -1) posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
             } else {
-                posts.unshift({
-                    id: Date.now(), mainCat, subCat, title, date: today,
-                    actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live'
-                });
+                posts.unshift({ id: Date.now(), mainCat, subCat, title, date: today, actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live' });
             }
 
             await pushToGitHub(`Publish post: ${title}`);
@@ -854,6 +1162,28 @@ ${filesSummaryHtml}`;
         function editPost(id) {
             const p = posts.find(x => x.id == id);
             if (!p) return;
+
+            if (p.mainCat === 'Forms') {
+                switchTab('tab-forms', document.getElementById('nav-forms'));
+                document.getElementById('editFormItemId').value = p.id;
+                document.getElementById('fmSubCat').value = p.subCat;
+                document.getElementById('fmTitle').value = p.title;
+                document.getElementById('fmDirectUrl').value = p.pdfLink || "";
+                uploadedFormFile = p.formFileData || null;
+                document.getElementById('fmUploadedChip').innerHTML = uploadedFormFile ? `<div class="uploaded-file-chip"><span>&#128196; ${uploadedFormFile.name}</span><button type="button" class="btn-sm btn-del" onclick="clearFormFile()">Remove</button></div>` : "";
+                document.getElementById('cancelFormItemBtn').style.display = "inline-block";
+                return;
+            }
+
+            if (p.mainCat === 'Online Service Details') {
+                switchTab('tab-service', document.getElementById('nav-service'));
+                document.getElementById('editServiceId').value = p.id;
+                document.getElementById('osSubCat').value = p.subCat;
+                document.getElementById('osTitle').value = p.title;
+                document.getElementById('osPortalLink').value = p.actionLink || "";
+                document.getElementById('cancelServiceBtn').style.display = "inline-block";
+                return;
+            }
 
             if (p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format') {
                 switchTab('tab-legal', document.getElementById('nav-legal'));
@@ -892,7 +1222,7 @@ ${filesSummaryHtml}`;
         }
 
         function resetForm() {
-            document.getElementById('formHeading').innerText = "+ Create New Information / Job Post";
+            document.getElementById('formHeading').innerText = "+ Create Job / Yojana / Call Letter Post";
             document.getElementById('editPostId').value = "";
             document.getElementById('pTitle').value = "";
             document.getElementById('pBannerData').value = "";
@@ -906,7 +1236,7 @@ ${filesSummaryHtml}`;
         }
 
         async function deletePost(id) {
-            if (!confirm("Are you sure you want to permanently delete this item?")) return;
+            if (!confirm("Permanently delete this item?")) return;
             posts = posts.filter(x => x.id != id);
             await pushToGitHub("Delete item from website");
             renderManageTable();
@@ -924,30 +1254,25 @@ ${filesSummaryHtml}`;
                 return p.mainCat === currentFilterCat;
             });
             if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live posts found in this category yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live items found in this category yet.</td></tr>`;
                 return;
             }
             list.forEach(p => {
-                const priceTag = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">₹${p.price}</span>` : "";
+                const badge = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">₹${p.price}</span>` : (p.fileType ? ` <span style="background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.fileType}</span>` : "");
                 tbody.innerHTML += `
                     <tr>
-                        <td><b>${p.title}</b>${priceTag}</td>
+                        <td><b>${p.title}</b>${badge}</td>
                         <td>${p.mainCat === 'Legal Paid Format' ? 'Legal Format' : p.mainCat}</td>
                         <td>${p.subCat}</td>
                         <td style="white-space:nowrap;">
                             <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Delete</button>
                         </td>
-                    </tr>
-                `;
+                    </tr>`;
             });
         }
 
-        function setDraftFilter(cat) {
-            currentDraftFilter = cat;
-            renderDrafts();
-        }
-
+        function setDraftFilter(cat) { currentDraftFilter = cat; renderDrafts(); }
         function getFilteredDraftsList(allDrafts) {
             if (currentDraftFilter === 'ALL') return allDrafts;
             if (currentDraftFilter === 'Call Letter') return allDrafts.filter(d => d.mainCat === 'Call Letter');
@@ -964,20 +1289,16 @@ ${filesSummaryHtml}`;
                 { key: 'Private Jobs', label: `Private Jobs (${allDrafts.filter(d => d.subCat === 'Private Jobs').length})` },
                 { key: 'Call Letter', label: `Call Letter (${allDrafts.filter(d => d.mainCat === 'Call Letter').length})` }
             ];
-
             document.getElementById('draftFilterPills').innerHTML = filterCats.map(fc => `
-                <button type="button" class="filter-pill ${currentDraftFilter === fc.key ? 'active' : ''}" onclick="setDraftFilter('${fc.key}')">
-                    ${fc.label}
-                </button>
+                <button type="button" class="filter-pill ${currentDraftFilter === fc.key ? 'active' : ''}" onclick="setDraftFilter('${fc.key}')">${fc.label}</button>
             `).join('');
 
             const filtered = getFilteredDraftsList(allDrafts);
             document.getElementById('deleteCountBadge').innerText = filtered.length;
-
             const tbody = document.getElementById('draftsTableBody');
             tbody.innerHTML = "";
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">No pending drafts in this filter category right now.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">No pending drafts in this filter right now.</td></tr>`;
                 return;
             }
             filtered.forEach(d => {
@@ -990,19 +1311,15 @@ ${filesSummaryHtml}`;
                             <button class="btn-sm btn-pub" onclick="publishDraft(${d.id})">Direct Live</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${d.id})">Delete</button>
                         </td>
-                    </tr>
-                `;
+                    </tr>`;
             });
         }
 
         async function deleteFilteredDrafts() {
             const allDrafts = posts.filter(p => p.status === 'draft');
             const toDelete = getFilteredDraftsList(allDrafts);
-            if (toDelete.length === 0) return alert("No drafts available to delete!");
-
-            const label = currentDraftFilter === 'ALL' ? 'ALL pending drafts' : `all ${toDelete.length} drafts in "${currentDraftFilter}"`;
-            if (!confirm(`Are you sure you want to permanently delete ${label}?`)) return;
-
+            if (toDelete.length === 0) return alert("No drafts to delete!");
+            if (!confirm(`Permanently delete ${toDelete.length} drafts?`)) return;
             const deleteIds = new Set(toDelete.map(x => x.id));
             posts = posts.filter(p => !deleteIds.has(p.id));
             await pushToGitHub(`Bulk delete ${toDelete.length} drafts`);
@@ -1023,8 +1340,7 @@ ${filesSummaryHtml}`;
 
         function refreshStats() {
             document.getElementById('statTotal').innerText = posts.filter(p => p.status !== 'draft').length;
-            document.getElementById('statDrafts').innerText = posts.filter(p => p.status === 'draft').length;
-            document.getElementById('statPaid').innerText = posts.filter(p => p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format').length;
+            document.getElementById('statDraftsBadge').innerText = `${posts.filter(p => p.status === 'draft').length} Auto Drafts Pending`;
         }
     </script>
 </body>
