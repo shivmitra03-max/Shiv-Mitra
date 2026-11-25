@@ -14,7 +14,7 @@
             background: #ffffff; padding: 8px 16px; border-bottom: 1px solid #e2e8f0;
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
         }
-        .brand-logo-img { height: 46px; width: auto; max-width: 230px; object-fit: contain; display: block; }
+        .brand-logo-img { height: 58px; width: auto; max-width: 290px; object-fit: contain; display: block; }
         .navbar a.nav-item { color: #1e293b; text-decoration: none; font-weight: 700; font-size: 0.85rem; }
 
         .hero-box {
@@ -59,7 +59,7 @@
             text-decoration: none; display: inline-block; white-space: nowrap;
         }
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 20px; margin-top: 36px; font-size: 0.8rem; }
-        @media (max-width: 650px) { .nav-links { display: none; } }
+        @media (max-width: 650px) { .nav-links { display: none; } .brand-logo-img { height: 50px; } }
     </style>
 </head>
 <body>
@@ -110,33 +110,32 @@
         let allForms = [];
         let activeCategory = "ALL";
 
-       (function trackRealVisitor() {
-    // 1. Agar Admin khud site dekh raha hai toh count NA karein
-    if (localStorage.getItem('shiv_gh_auth')) return;
+        function initGoogleAnalytics(gaId) {
+            if (!gaId || localStorage.getItem('shiv_gh_auth')) return;
+            const s1 = document.createElement('script');
+            s1.async = true;
+            s1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+            document.head.appendChild(s1);
 
-    // 2. Ek hi visitor ke baar-baar refresh ko rokne ke liye (30 min session)
-    const lastHit = sessionStorage.getItem('shiv_session_counted');
-    if (lastHit) return;
-    sessionStorage.setItem('shiv_session_counted', '1');
-
-    // 3. Global Cloud Counter API par real visitor hit bhejein
-    const todayKey = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    fetch(`https://api.counterapi.dev/v1/shivmitra-in/total/up`).catch(() => {});
-    fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${todayKey}/up`).catch(() => {});
-})();
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', gaId);
+        }
 
         window.onload = async function() {
-            await loadAds();
+            await loadSiteConfig();
             await loadForms();
         };
 
-        async function loadAds() {
+        async function loadSiteConfig() {
             try {
                 const res = await fetch(`ads.json?t=${Date.now()}`);
                 if (!res.ok) return;
-                const ads = await res.json();
-                if (ads.headerAd) { const h = document.getElementById('adHeaderBox'); h.style.display = 'flex'; h.innerHTML = ads.headerAd; }
-                if (ads.sidebarAd) { const f = document.getElementById('adFooterBox'); f.style.display = 'flex'; f.innerHTML = ads.sidebarAd; }
+                const cfg = await res.json();
+                if (cfg.gaId) initGoogleAnalytics(cfg.gaId);
+                if (cfg.headerAd) { const h = document.getElementById('adHeaderBox'); h.style.display = 'flex'; h.innerHTML = cfg.headerAd; }
+                if (cfg.sidebarAd) { const f = document.getElementById('adFooterBox'); f.style.display = 'flex'; f.innerHTML = cfg.sidebarAd; }
             } catch (e) {}
         }
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - ShivMitra.in</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -14,18 +15,23 @@
             background: linear-gradient(180deg, #1e3a8a 50%, #f1f5f9 50%); padding: 20px;
         }
         .login-card {
-            background: white; width: 100%; max-width: 430px; padding: 34px 28px;
+            background: white; width: 100%; max-width: 430px; padding: 30px 28px;
             border-radius: 14px; box-shadow: 0 15px 35px rgba(0,0,0,0.12); text-align: center;
         }
-        .login-card h2 { color: #0f172a; font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+        .login-logo { height: 64px; width: auto; max-width: 260px; object-fit: contain; margin: 0 auto 10px; display: block; }
         .login-card p { color: #64748b; font-size: 0.83rem; margin-bottom: 20px; }
 
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
-            width: 270px; background: #0f172a; color: white; padding: 20px 14px;
+            width: 270px; background: #0f172a; color: white; padding: 18px 14px;
             position: fixed; height: 100%; overflow-y: auto;
         }
-        .sidebar h3 { color: #f59e0b; font-size: 1.1rem; padding: 0 10px 15px; border-bottom: 1px solid #1e293b; margin-bottom: 12px; }
+        .sidebar-logo-box {
+            background: white; padding: 8px 10px; border-radius: 10px;
+            margin-bottom: 14px; text-align: center;
+        }
+        .sidebar-logo-box img { height: 48px; width: auto; max-width: 220px; object-fit: contain; display: block; margin: 0 auto; }
+
         .side-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
         .side-btn {
             width: 100%; text-align: left; background: transparent; color: #cbd5e1;
@@ -47,20 +53,29 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
         }
 
-        /* Traffic & Portal Stats Bar */
+        /* Google Analytics 4 & Portal Overview Banner */
         .analytics-banner {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             color: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
         }
-        .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
-        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 14px; }
-        .traffic-card {
-            background: rgba(255, 255, 255, 0.09); border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 14px; border-radius: 10px;
+        .ga-input-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .ga-input-row input {
+            width: 220px; margin-bottom: 0; padding: 8px 12px; font-size: 0.84rem;
+            border-radius: 7px; border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.12); color: white;
         }
-        .traffic-card small { color: #93c5fd; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; display: block; }
-        .traffic-card h2 { font-size: 1.55rem; font-weight: 800; margin-top: 4px; color: #ffffff; }
-        .traffic-card span { font-size: 0.74rem; color: #34d399; font-weight: 600; }
+        .ga-input-row input::placeholder { color: #cbd5e1; }
+        .btn-ga-open {
+            background: #f59e0b; color: #0f172a; text-decoration: none; padding: 10px 18px;
+            border-radius: 8px; font-weight: 800; font-size: 0.86rem; display: inline-block;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 20px; }
+        .stat-box { background: white; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .stat-box small { color: #64748b; font-weight: 700; font-size: 0.75rem; }
+        .stat-box h2 { color: #1e3a8a; font-size: 1.55rem; margin-top: 4px; }
 
         .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
         .panel-card h3 { color: #1e3a8a; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
@@ -146,7 +161,7 @@
 
     <div id="loginView" class="login-wrapper">
         <div class="login-card">
-            <h2>SHIVMITRA.IN</h2>
+            <img src="logo.png" alt="ShivMitra.in - Shiv Online Centre" class="login-logo">
             <p>GitHub Direct Publish Admin Login</p>
             <input type="text" id="ghUser" placeholder="GitHub Username (e.g., shivmitra03-max)">
             <input type="text" id="ghRepo" placeholder="Repository Name (e.g., Shiv-Mitra)">
@@ -158,7 +173,9 @@
 
     <div id="dashboardView" class="admin-layout">
         <div class="sidebar">
-            <h3>SHIVMITRA ADMIN</h3>
+            <div class="sidebar-logo-box">
+                <img src="logo.png" alt="ShivMitra.in">
+            </div>
             
             <div class="side-label">Dedicated Content Studios</div>
             <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Jobs / Yojana / Call Letter</button>
@@ -182,46 +199,37 @@
 
         <div class="main-content">
             <div class="topbar">
-                <div><strong style="color:#1e3a8a;">ShivMitra.in</strong> — Live GitHub Sync Active <span id="syncStatus" style="font-size:0.8rem; color:#059669; font-weight:700;"></span></div>
+                <div><strong style="color:#1e3a8a;">Shiv Online Centre</strong> — Admin Panel <span id="syncStatus" style="font-size:0.8rem; color:#059669; font-weight:700;"></span></div>
                 <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh</button>
-                    <a href="forms.html" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Open Forms Page &#8599;</a>
-                    <a href="index.html" target="_blank" style="background:#f59e0b; color:#0f172a; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
+                    <a href="forms.html" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Forms Page &#8599;</a>
+                    <a href="index.html" target="_blank" style="background:#1e3a8a; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
                     <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
                 </div>
             </div>
 
-            <!-- PROFESSIONAL WEBSITE TRAFFIC ANALYTICS (DAILY / WEEKLY / MONTHLY) -->
+            <!-- GOOGLE ANALYTICS 4 (GA4) TRAFFIC CONTROL & REPORT LAUNCHER -->
             <div class="analytics-banner">
-                <div class="analytics-header">
-                    <div>
-                        <strong style="font-size:1rem; letter-spacing:0.3px;">&#128202; Live Website Traffic & Portal Overview</strong>
-                        <div style="font-size:0.78rem; color:#cbd5e1;">Real-time visitor counter across Home, Posts & Forms pages</div>
-                    </div>
-                    <button class="btn-sm" style="background:rgba(255,255,255,0.15); color:white;" onclick="resetTrafficStats()">Reset Counter</button>
-                </div>
-                <div class="analytics-grid">
-                    <div class="traffic-card">
-                        <small>Today's Visitors (Per Day)</small>
-                        <h2 id="trToday">0</h2>
-                        <span>Active Today</span>
-                    </div>
-                    <div class="traffic-card">
-                        <small>Last 7 Days (Weekly)</small>
-                        <h2 id="trWeekly">0</h2>
-                        <span>This Week</span>
-                    </div>
-                    <div class="traffic-card">
-                        <small>Last 30 Days (Monthly)</small>
-                        <h2 id="trMonthly">0</h2>
-                        <span>This Month</span>
-                    </div>
-                    <div class="traffic-card">
-                        <small>Total Live Content</small>
-                        <h2 id="statTotal">0</h2>
-                        <span id="statDraftsBadge">0 Auto Drafts</span>
+                <div>
+                    <strong style="font-size:1.05rem;">&#128202; Google Analytics 4 (GA4) — Live Traffic Monitor</strong>
+                    <div style="font-size:0.78rem; color:#cbd5e1; margin-top:2px;">100% Ad-Blocker Safe Daily, Weekly & Monthly Visitor Tracking</div>
+                    <div class="ga-input-row">
+                        <input type="text" id="gaMeasurementId" placeholder="Paste GA4 ID (e.g., G-XXXXXXXXXX)">
+                        <button type="button" class="btn-sm btn-pub" id="saveGaBtn" onclick="saveGaIdConfig()">Save GA4 ID</button>
                     </div>
                 </div>
+                <div>
+                    <a href="https://analytics.google.com/" target="_blank" class="btn-ga-open">
+                        Open Live Google Analytics Report &#8599;
+                    </a>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box"><small>TOTAL LIVE POSTS</small><h2 id="statTotal">0</h2></div>
+                <div class="stat-box"><small>AUTO-JOBS DRAFTS</small><h2 id="statDrafts">0</h2></div>
+                <div class="stat-box"><small>FORMS DIRECTORY</small><h2 id="statForms">0</h2></div>
+                <div class="stat-box"><small>LEGAL FORMATS</small><h2 id="statPaid">0</h2></div>
             </div>
 
             <!-- TAB 1: JOBS / YOJANA / CALL LETTER POST CREATOR -->
@@ -293,11 +301,11 @@
                 </div>
             </div>
 
-            <!-- TAB 2: DEDICATED FORMS UPLOAD STUDIO (ONLY TITLE + CATEGORY + ANY FILE UPLOAD) -->
+            <!-- TAB 2: DEDICATED FORMS UPLOAD STUDIO -->
             <div id="tab-forms" class="panel-card tab-section" style="display:none;">
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:16px;">
                     <h3 style="border:none; margin:0; padding:0; color:#0d9488;">&#128196; Forms Upload Studio (Clean Title & Direct File Upload)</h3>
-                    <a href="forms.html" target="_blank" class="btn-sm" style="background:#0f172a; color:white; text-decoration:none;">View Dedicated Forms Page (forms.html) &#8599;</a>
+                    <a href="forms.html" target="_blank" class="btn-sm" style="background:#0f172a; color:white; text-decoration:none;">View Dedicated Forms Page &#8599;</a>
                 </div>
                 <input type="hidden" id="editFormItemId">
 
@@ -319,10 +327,9 @@
                     <h4>2. Form Title (Only Title Needed)</h4>
                     <input type="text" id="fmTitle" placeholder="Enter Exact Form Title (e.g., Aadhaar Card Address & Mobile Update Form PDF 2026)">
 
-                    <h4>3. Upload Form File (PDF, Word, Excel, JPG, PNG, ZIP — Any Format Supported)</h4>
+                    <h4>3. Upload Form File (PDF, Word, Excel, JPG, PNG, ZIP)</h4>
                     <label class="file-upload-zone" style="border-color:#0d9488; background:#f0fdfa;">
-                        <strong style="color:#0f766e;">&#128228; Click to Upload Form File (.pdf, .doc, .docx, .xls, .xlsx, .jpg, .png, .zip)</strong><br>
-                        <span style="font-size:0.78rem; color:#64748b;">Upload direct printable file so users can download in 1 click from forms.html</span>
+                        <strong style="color:#0f766e;">&#128228; Click to Upload Form File (.pdf, .doc, .docx, .xls, .xlsx, .jpg, .png, .zip)</strong>
                         <input type="file" id="fmFileInput" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip" style="display:none;" onchange="handleFormFileUpload(event)">
                     </label>
                     <div id="fmUploadedChip"></div>
@@ -351,27 +358,20 @@
                             <option value="Digital Gujarat & e-District">Digital Gujarat & e-District Services</option>
                             <option value="PM Kisan, Ayushman & Pension">PM Kisan, Ayushman Card & Pension</option>
                         </select>
-                        <input type="text" id="osPortalLink" placeholder="Official Service Portal Link (e.g., https://myaadhaar.uidai.gov.in/)">
+                        <input type="text" id="osPortalLink" placeholder="Official Service Portal Link">
                     </div>
                     <input type="text" id="osTitle" placeholder="Service Guide Title (e.g., How to Link PAN with Aadhaar Online & Check Status 2026)">
                 </div>
 
                 <div class="studio-box">
-                    <h4>2. Quick Service Summary Box (Documents, Fee & Processing Time)</h4>
+                    <h4>2. Quick Service Summary Box</h4>
                     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
                         <input type="text" id="osFee" placeholder="Govt Fee (e.g., ₹50 / Free)">
                         <input type="text" id="osTime" placeholder="Processing Time (e.g., 3 to 7 Days)">
                         <input type="text" id="osMode" placeholder="Apply Mode (e.g., Online / CSC Centre)">
                     </div>
-                    <textarea id="osDocs" rows="3" placeholder="Required Documents (One per line):
-Aadhaar Card with Registered Mobile Number
-PAN Card Copy
-Passport Size Photograph"></textarea>
-                    <textarea id="osSteps" rows="5" placeholder="Step-by-Step Online Process (One step per line):
-Visit the official portal link given below.
-Click on Login and verify via Aadhaar OTP.
-Fill in your personal details and upload scanned documents.
-Pay the prescribed fee online and download acknowledgement receipt."></textarea>
+                    <textarea id="osDocs" rows="3" placeholder="Required Documents (One per line)..."></textarea>
+                    <textarea id="osSteps" rows="5" placeholder="Step-by-Step Online Process (One step per line)..."></textarea>
                 </div>
 
                 <div style="display:flex; gap:10px;">
@@ -403,7 +403,7 @@ Pay the prescribed fee online and download acknowledgement receipt."></textarea>
                                     <option value="Hindi + English">Hindi + English</option>
                                 </select>
                             </div>
-                            <input type="text" id="lfTitle" oninput="updateLegalPreview()" placeholder="Format Title (e.g., 11 Months Residential Rent Agreement — Editable Word + PDF)">
+                            <input type="text" id="lfTitle" oninput="updateLegalPreview()" placeholder="Format Title">
                         </div>
 
                         <div class="studio-box">
@@ -426,10 +426,9 @@ Pay the prescribed fee online and download acknowledgement receipt."></textarea>
                         </div>
 
                         <div class="studio-box">
-                            <h4>3. Upload Formats & Merge Multiple Drafts (Word, PDF, RTF, ZIP)</h4>
+                            <h4>3. Upload Formats & Merge Multiple Drafts</h4>
                             <label class="file-upload-zone" style="border-color:#d97706; background:#fffbeb;">
-                                <strong style="color:#b45309;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong><br>
-                                <span style="font-size:0.78rem; color:#64748b;">Select multiple files together to create a Merged Legal Bundle!</span>
+                                <strong style="color:#b45309;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong>
                                 <input type="file" id="lfFileInput" multiple accept=".doc,.docx,.pdf,.rtf,.txt,.zip" style="display:none;" onchange="handleLegalFiles(event)">
                             </label>
                             <div id="uploadedFilesList"></div>
@@ -494,21 +493,17 @@ Pay the prescribed fee online and download acknowledgement receipt."></textarea>
             <div id="tab-ads" class="panel-card tab-section" style="display:none;">
                 <h3>&#128176; AdSense & Banner Ads Placement Manager</h3>
                 <p style="font-size:0.85rem; color:#475569; margin-bottom:16px;">
-                    Paste your Google AdSense unit code (<code>&lt;ins class="adsbygoogle"...&gt;</code>) or custom banner HTML below. These ads will automatically appear in the designated high-CTR slots on your Homepage, Post pages, and Forms Directory.
+                    Paste your Google AdSense unit code below after AdSense approval. Until then, slots remain hidden on your live site.
                 </p>
-
                 <div class="studio-box">
-                    <h4>Slot 1: Header Leaderboard Ad (728x90 / Responsive — Top of Every Page)</h4>
+                    <h4>Slot 1: Header Leaderboard Ad (Top of Pages)</h4>
                     <textarea id="adHeaderSlot" rows="3" placeholder="Paste Google AdSense Header Ad Code here..."></textarea>
-
-                    <h4>Slot 2: In-Article Middle Ad (336x280 / Responsive — Inside Job & Service Posts)</h4>
+                    <h4>Slot 2: In-Article Middle Ad (Inside Job & Service Posts)</h4>
                     <textarea id="adArticleSlot" rows="3" placeholder="Paste Google AdSense In-Article Ad Code here..."></textarea>
-
-                    <h4>Slot 3: Sidebar / Footer Sticky Ad (300x250 / Responsive — Right Sidebar & Bottom)</h4>
-                    <textarea id="adSidebarSlot" rows="3" placeholder="Paste Google AdSense Sidebar / Footer Ad Code here..."></textarea>
+                    <h4>Slot 3: Sidebar / Footer Ad (Bottom of Pages)</h4>
+                    <textarea id="adSidebarSlot" rows="3" placeholder="Paste Google AdSense Footer Ad Code here..."></textarea>
                 </div>
-
-                <button class="btn-green" id="saveAdsBtn" onclick="saveAdsConfig()">&#128190; Save & Activate Ad Slots on Live Website</button>
+                <button class="btn-green" id="saveAdsBtn" onclick="saveSiteConfig()">&#128190; Save & Activate Ad Slots on Live Website</button>
             </div>
 
             <!-- TAB 7: MANAGE LIVE POSTS -->
@@ -531,74 +526,25 @@ Pay the prescribed fee online and download acknowledgement receipt."></textarea>
 
         let posts = [];
         let fileSha = "";
-        let adsSha = "";
+        let configSha = "";
         let currentFilterCat = "ALL";
         let currentDraftFilter = "ALL";
         let legalUploadedFiles = [];
         let uploadedFormFile = null;
 
         window.onload = function() {
+            localStorage.removeItem('shiv_traffic_logs'); // Remove old local counter logs
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (savedAuth && savedAuth.token) {
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
                 updateSubOptions();
                 updateLegalPreview();
-                loadTrafficAnalytics();
                 loadFromGitHub();
-                loadAdsConfig();
+                loadSiteConfig();
             }
         };
 
-        // ==========================================
-        // TRAFFIC ANALYTICS (DAILY / WEEKLY / MONTHLY)
-        // ==========================================
-        async function loadTrafficAnalytics() {
-    const dayMs = 24 * 60 * 60 * 1000;
-    const now = Date.now();
-    const todayKey = new Date(now).toISOString().slice(0, 10);
-
-    try {
-        // 1. Today's Real Visitors
-        const todayRes = await fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${todayKey}`);
-        const todayData = todayRes.ok ? await todayRes.json() : { count: 0 };
-        document.getElementById('trToday').innerText = todayData.count || 0;
-
-        // 2. Last 7 Days (Weekly) Real Visitors Sum
-        let weeklySum = 0;
-        const weekPromises = [];
-        for (let i = 0; i < 7; i++) {
-            const dKey = new Date(now - i * dayMs).toISOString().slice(0, 10);
-            weekPromises.push(
-                fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${dKey}`)
-                    .then(r => r.ok ? r.json() : { count: 0 })
-                    .catch(() => ({ count: 0 }))
-            );
-        }
-        const weekResults = await Promise.all(weekPromises);
-        weekResults.forEach(item => { weeklySum += (item.count || 0); });
-        document.getElementById('trWeekly').innerText = weeklySum;
-
-        // 3. Monthly / Overall Real Visitors
-        const totalRes = await fetch(`https://api.counterapi.dev/v1/shivmitra-in/total`);
-        const totalData = totalRes.ok ? await totalRes.json() : { count: 0 };
-        document.getElementById('trMonthly').innerText = totalData.count || 0;
-    } catch (e) {
-        document.getElementById('trToday').innerText = "0";
-        document.getElementById('trWeekly').innerText = "0";
-        document.getElementById('trMonthly').innerText = "0";
-    }
-}
-
-function resetTrafficStats() {
-    localStorage.removeItem('shiv_traffic_logs');
-    loadTrafficAnalytics();
-    alert("Traffic view refreshed with live cloud data!");
-}
-
-        // ==========================================
-        // GITHUB CONNECTION & SYNC
-        // ==========================================
         async function connectGitHub() {
             const user = document.getElementById('ghUser').value.trim();
             const repo = document.getElementById('ghRepo').value.trim();
@@ -623,9 +569,8 @@ function resetTrafficStats() {
                 document.getElementById('dashboardView').style.display = 'block';
                 updateSubOptions();
                 updateLegalPreview();
-                loadTrafficAnalytics();
                 await loadFromGitHub();
-                await loadAdsConfig();
+                await loadSiteConfig();
             } catch (e) {
                 err.innerText = e.message;
                 btn.innerText = "Connect & Open Dashboard";
@@ -681,10 +626,8 @@ function resetTrafficStats() {
             }
         }
 
-        // ==========================================
-        // ADSENSE CONFIG MANAGER (ads.json)
-        // ==========================================
-        async function loadAdsConfig() {
+        // Load & Save GA4 ID + AdSense Slots in ads.json
+        async function loadSiteConfig() {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (!auth) return;
             try {
@@ -693,8 +636,9 @@ function resetTrafficStats() {
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    adsSha = data.sha;
+                    configSha = data.sha;
                     const decoded = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
+                    document.getElementById('gaMeasurementId').value = decoded.gaId || "";
                     document.getElementById('adHeaderSlot').value = decoded.headerAd || "";
                     document.getElementById('adArticleSlot').value = decoded.articleAd || "";
                     document.getElementById('adSidebarSlot').value = decoded.sidebarAd || "";
@@ -702,20 +646,27 @@ function resetTrafficStats() {
             } catch (e) {}
         }
 
-        async function saveAdsConfig() {
+        async function saveGaIdConfig() {
+            const btn = document.getElementById('saveGaBtn');
+            btn.innerText = "Saving...";
+            await saveSiteConfig(true);
+            btn.innerText = "Save GA4 ID";
+        }
+
+        async function saveSiteConfig(isGaOnly = false) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             const btn = document.getElementById('saveAdsBtn');
-            btn.innerText = "Saving Ads...";
-            btn.disabled = true;
+            if (!isGaOnly) { btn.innerText = "Saving Ads..."; btn.disabled = true; }
 
             const payloadObj = {
+                gaId: document.getElementById('gaMeasurementId').value.trim(),
                 headerAd: document.getElementById('adHeaderSlot').value.trim(),
                 articleAd: document.getElementById('adArticleSlot').value.trim(),
                 sidebarAd: document.getElementById('adSidebarSlot').value.trim()
             };
             const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payloadObj, null, 2))));
-            const bodyData = { message: "Update AdSense placements", content: encoded };
-            if (adsSha) bodyData.sha = adsSha;
+            const bodyData = { message: "Update GA4 & AdSense configuration", content: encoded };
+            if (configSha) bodyData.sha = configSha;
 
             try {
                 const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/ads.json`, {
@@ -725,19 +676,15 @@ function resetTrafficStats() {
                 });
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message);
-                adsSha = result.content.sha;
-                alert("AdSense slots saved! Ads will now show in the designated areas of your website.");
+                configSha = result.content.sha;
+                alert(isGaOnly ? "Google Analytics 4 ID saved! All pages will now track real visitors." : "AdSense slots saved!");
             } catch (e) {
-                alert("Error saving ads: " + e.message);
+                alert("Error saving settings: " + e.message);
             } finally {
-                btn.innerText = "💾 Save & Activate Ad Slots on Live Website";
-                btn.disabled = false;
+                if (!isGaOnly) { btn.innerText = "💾 Save & Activate Ad Slots on Live Website"; btn.disabled = false; }
             }
         }
 
-        // ==========================================
-        // NAVIGATION & HELPERS
-        // ==========================================
         function updateSubOptions(selectedSub = "") {
             const main = document.getElementById('pMainCat').value;
             const subSel = document.getElementById('pSubCat');
@@ -768,9 +715,6 @@ function resetTrafficStats() {
             renderManageTable();
         }
 
-        // ==========================================
-        // 1. FORMS UPLOAD STUDIO LOGIC
-        // ==========================================
         function handleFormFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -791,10 +735,7 @@ function resetTrafficStats() {
             reader.readAsDataURL(file);
         }
 
-        function clearFormFile() {
-            uploadedFormFile = null;
-            document.getElementById('fmUploadedChip').innerHTML = "";
-        }
+        function clearFormFile() { uploadedFormFile = null; document.getElementById('fmUploadedChip').innerHTML = ""; }
 
         async function saveFormItem() {
             const editId = document.getElementById('editFormItemId').value;
@@ -811,36 +752,21 @@ function resetTrafficStats() {
 
             const formPost = {
                 id: editId ? Number(editId) : Date.now(),
-                mainCat: "Forms",
-                subCat: subCat,
-                title: title,
-                date: today,
-                fileType: fileFormatLabel,
-                fileSize: fileSizeLabel,
-                formFileData: uploadedFormFile,
-                pdfLink: directUrl || "",
-                actionLink: directUrl || "forms.html",
-                summary: `Download official ${title} (${fileFormatLabel} format) under ${subCat}.`,
-                content: `<p>Official printable form for <strong>${title}</strong> (${subCat}). Click the download button on the Forms Directory page to save this ${fileFormatLabel} file.</p>`,
+                mainCat: "Forms", subCat, title, date: today,
+                fileType: fileFormatLabel, fileSize: fileSizeLabel,
+                formFileData: uploadedFormFile, pdfLink: directUrl || "", actionLink: directUrl || "forms.html",
+                summary: `Download official ${title} (${fileFormatLabel}) under ${subCat}.`,
+                content: `<p>Official printable form for <strong>${title}</strong> (${subCat}).</p>`,
                 status: "live"
             };
 
             const btn = document.getElementById('publishFormBtn');
-            btn.innerText = "Publishing Form...";
-            btn.disabled = true;
-
-            if (editId) {
-                const idx = posts.findIndex(x => x.id == editId);
-                if (idx !== -1) posts[idx] = formPost;
-            } else {
-                posts.unshift(formPost);
-            }
-
+            btn.innerText = "Publishing Form..."; btn.disabled = true;
+            if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = formPost; }
+            else { posts.unshift(formPost); }
             await pushToGitHub(`Publish Form: ${title}`);
-            btn.innerText = "📄 Publish Form to Forms Page";
-            btn.disabled = false;
-            resetFormStudio();
-            refreshStats();
+            btn.innerText = "📄 Publish Form to Forms Page"; btn.disabled = false;
+            resetFormStudio(); refreshStats();
         }
 
         function resetFormStudio() {
@@ -851,9 +777,6 @@ function resetTrafficStats() {
             document.getElementById('cancelFormItemBtn').style.display = "none";
         }
 
-        // ==========================================
-        // 2. ONLINE SERVICE STUDIO LOGIC
-        // ==========================================
         async function saveOnlineService() {
             const editId = document.getElementById('editServiceId').value;
             const subCat = document.getElementById('osSubCat').value;
@@ -865,58 +788,28 @@ function resetTrafficStats() {
             const docsRaw = document.getElementById('osDocs').value.trim();
             const stepsRaw = document.getElementById('osSteps').value.trim();
 
-            if (!title || !stepsRaw) return alert("Please enter Service Title and Step-by-Step Process!");
-
+            if (!title || !stepsRaw) return alert("Please enter Service Title and Steps!");
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
             const docsRows = docsRaw.split('\n').filter(Boolean).map(d => `<tr><td>&#10004; ${d}</td></tr>`).join('');
             const stepsHtml = stepsRaw.split('\n').filter(Boolean).map((s, idx) => `<p><strong>Step ${idx + 1}:</strong> ${s}</p>`).join('');
 
-            const contentHtml = `
-<h3>1. Service Overview (Fee & Processing Time)</h3>
-<table>
-  <tr><th>Parameter</th><th>Details</th></tr>
-  <tr><td>Government / Service Fee</td><td>${fee}</td></tr>
-  <tr><td>Estimated Processing Time</td><td>${procTime}</td></tr>
-  <tr><td>Application Mode</td><td>${mode}</td></tr>
-</table>
-<h3>2. Required Documents Checklist</h3>
-<table>
-  <tr><th>Mandatory Documents</th></tr>
-  ${docsRows || '<tr><td>Aadhaar Card & Passport Photo</td></tr>'}
-</table>
-<h3>3. Step-by-Step Online Application Guide</h3>
-${stepsHtml}`;
+            const contentHtml = `<h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>${fee}</td></tr><tr><td>Processing Time</td><td>${procTime}</td></tr><tr><td>Mode</td><td>${mode}</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr>${docsRows || '<tr><td>Aadhaar Card</td></tr>'}</table><h3>3. Step-by-Step Process</h3>${stepsHtml}`;
 
             const servicePost = {
                 id: editId ? Number(editId) : Date.now(),
-                mainCat: "Online Service Details",
-                subCat: subCat,
-                title: title,
-                date: today,
-                actionLink: portalLink,
-                officialSite: portalLink,
-                pdfLink: "",
-                summary: `Complete step-by-step online guide for ${title}. Check required documents, govt fee (${fee}), and official portal link.`,
-                content: contentHtml,
-                status: "live"
+                mainCat: "Online Service Details", subCat, title, date: today,
+                actionLink: portalLink, officialSite: portalLink, pdfLink: "",
+                summary: `Step-by-step guide for ${title}. Required documents, fee (${fee}) & official portal link.`,
+                content: contentHtml, status: "live"
             };
 
             const btn = document.getElementById('publishServiceBtn');
-            btn.innerText = "Publishing Guide...";
-            btn.disabled = true;
-
-            if (editId) {
-                const idx = posts.findIndex(x => x.id == editId);
-                if (idx !== -1) posts[idx] = servicePost;
-            } else {
-                posts.unshift(servicePost);
-            }
-
+            btn.innerText = "Publishing..."; btn.disabled = true;
+            if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = servicePost; }
+            else { posts.unshift(servicePost); }
             await pushToGitHub(`Publish Online Service: ${title}`);
-            btn.innerText = "💻 Publish Online Service Guide";
-            btn.disabled = false;
-            resetServiceStudio();
-            refreshStats();
+            btn.innerText = "💻 Publish Online Service Guide"; btn.disabled = false;
+            resetServiceStudio(); refreshStats();
         }
 
         function resetServiceStudio() {
@@ -931,20 +824,13 @@ ${stepsHtml}`;
             document.getElementById('cancelServiceBtn').style.display = "none";
         }
 
-        // ==========================================
-        // 3. LEGAL FORMAT STUDIO LOGIC
-        // ==========================================
         function handleLegalFiles(event) {
             const files = Array.from(event.target.files);
             if (!files.length) return;
             files.forEach(file => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    legalUploadedFiles.push({
-                        name: file.name,
-                        size: Math.round(file.size / 1024) + " KB",
-                        dataUrl: e.target.result
-                    });
+                    legalUploadedFiles.push({ name: file.name, size: Math.round(file.size / 1024) + " KB", dataUrl: e.target.result });
                     renderUploadedFilesList();
                     updateLegalPreview();
                 };
@@ -952,11 +838,7 @@ ${stepsHtml}`;
             });
         }
 
-        function removeLegalFile(idx) {
-            legalUploadedFiles.splice(idx, 1);
-            renderUploadedFilesList();
-            updateLegalPreview();
-        }
+        function removeLegalFile(idx) { legalUploadedFiles.splice(idx, 1); renderUploadedFilesList(); updateLegalPreview(); }
 
         function renderUploadedFilesList() {
             const box = document.getElementById('uploadedFilesList');
@@ -1002,9 +884,7 @@ ${stepsHtml}`;
             document.getElementById('prevHighlights').innerHTML = highlights.split('\n').filter(Boolean).join('<br>');
 
             const fileNames = legalUploadedFiles.map(f => f.name).join(', ');
-            document.getElementById('prevFilesInfo').innerText = fileNames
-                ? `Included Bundle (${legalUploadedFiles.length} Files): ${fileNames}`
-                : "Included Format: Editable Word + PDF Package";
+            document.getElementById('prevFilesInfo').innerText = fileNames ? `Included Bundle (${legalUploadedFiles.length} Files): ${fileNames}` : "Included Format: Editable Word + PDF Package";
         }
 
         async function saveLegalFormat() {
@@ -1021,52 +901,30 @@ ${stepsHtml}`;
             const coverImg = document.getElementById('lfCoverData').value;
 
             if (!title || !offerPrice || !pitch) return alert("Title, Offer Price, and Customer Description are required!");
-
             const discountPct = origPrice > offerPrice ? Math.round(((origPrice - offerPrice) / origPrice) * 100) : 0;
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
             const highlightItems = highlights.split('\n').filter(Boolean).map(line => `<tr><td>${line}</td></tr>`).join('');
-            const filesSummaryHtml = legalUploadedFiles.length > 0
-                ? `<p><strong>Included Downloadable Files (${legalUploadedFiles.length}):</strong> ${legalUploadedFiles.map(f => `${f.name} (${f.size})`).join(' | ')}</p>` : "";
+            const filesSummaryHtml = legalUploadedFiles.length > 0 ? `<p><strong>Included Files (${legalUploadedFiles.length}):</strong> ${legalUploadedFiles.map(f => `${f.name} (${f.size})`).join(' | ')}</p>` : "";
 
-            const formattedHtml = `
-<div class="note-box">
-  <strong>Special Discount Offer (${discountPct}% OFF):</strong> Original Price <del>₹${origPrice}</del> — Today's Offer Price <strong>₹${offerPrice}</strong> (${offerTag})
-</div>
-<p>${pitch}</p>
-<h3>Why Choose This Legal Format? (${lang})</h3>
-<table>
-  <tr><th>Key Benefits & Included Features</th></tr>
-  ${highlightItems}
-</table>
-${filesSummaryHtml}`;
+            const formattedHtml = `<div class="note-box"><strong>Special Discount Offer (${discountPct}% OFF):</strong> Original Price <del>₹${origPrice}</del> — Today's Offer Price <strong>₹${offerPrice}</strong> (${offerTag})</div><p>${pitch}</p><h3>Why Choose This Legal Format? (${lang})</h3><table><tr><th>Key Benefits</th></tr>${highlightItems}</table>${filesSummaryHtml}`;
 
             const postPayload = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Legal Format", subCat, title, date: today,
                 price: String(offerPrice), originalPrice: String(origPrice),
                 discountPercent: discountPct, offerTag, language: lang,
-                actionLink: extLink || "#buy-legal-format",
-                legalFiles: legalUploadedFiles,
+                actionLink: extLink || "#buy-legal-format", legalFiles: legalUploadedFiles,
                 summary: `${discountPct > 0 ? `[${discountPct}% OFF — ₹${offerPrice} Only] ` : `[₹${offerPrice}] `}${pitch}`,
                 content: formattedHtml, bannerImg: coverImg, status: "live"
             };
 
             const btn = document.getElementById('publishLegalBtn');
-            btn.innerText = "Publishing Legal Format...";
-            btn.disabled = true;
-
-            if (editId) {
-                const idx = posts.findIndex(x => x.id == editId);
-                if (idx !== -1) posts[idx] = postPayload;
-            } else {
-                posts.unshift(postPayload);
-            }
-
+            btn.innerText = "Publishing..."; btn.disabled = true;
+            if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = postPayload; }
+            else { posts.unshift(postPayload); }
             await pushToGitHub(`Publish Legal Format: ${title}`);
-            btn.innerText = "⚖ Publish Legal Format Offer Live";
-            btn.disabled = false;
-            resetLegalForm();
-            refreshStats();
+            btn.innerText = "⚖ Publish Legal Format Offer Live"; btn.disabled = false;
+            resetLegalForm(); refreshStats();
         }
 
         function resetLegalForm() {
@@ -1083,9 +941,6 @@ ${filesSummaryHtml}`;
             updateLegalPreview();
         }
 
-        // ==========================================
-        // 4. JOBS / YOJANA / CALL LETTER LOGIC
-        // ==========================================
         function uploadFeaturePhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1093,18 +948,12 @@ ${filesSummaryHtml}`;
             reader.onload = function(e) {
                 document.getElementById('pBannerData').value = e.target.result;
                 const prev = document.getElementById('bannerPreview');
-                prev.src = e.target.result;
-                prev.style.display = 'block';
+                prev.src = e.target.result; prev.style.display = 'block';
             };
             reader.readAsDataURL(file);
         }
 
-        function removeBannerImage() {
-            document.getElementById('pBannerData').value = "";
-            const prev = document.getElementById('bannerPreview');
-            prev.src = "";
-            prev.style.display = 'none';
-        }
+        function removeBannerImage() { document.getElementById('pBannerData').value = ""; const prev = document.getElementById('bannerPreview'); prev.src = ""; prev.style.display = 'none'; }
 
         function insertAtCursor(type) {
             const textarea = document.getElementById('pContent');
@@ -1164,8 +1013,7 @@ ${filesSummaryHtml}`;
             if (!title || !summary || !content) return alert("Title, Summary, and Content are required!");
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
             const btn = document.getElementById('publishBtn');
-            btn.innerText = "Publishing Live...";
-            btn.disabled = true;
+            btn.innerText = "Publishing Live..."; btn.disabled = true;
 
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
@@ -1175,10 +1023,8 @@ ${filesSummaryHtml}`;
             }
 
             await pushToGitHub(`Publish post: ${title}`);
-            btn.innerText = "🚀 Publish Live to Website";
-            btn.disabled = false;
-            resetForm();
-            refreshStats();
+            btn.innerText = "🚀 Publish Live to Website"; btn.disabled = false;
+            resetForm(); refreshStats();
         }
 
         function editPost(id) {
@@ -1261,9 +1107,7 @@ ${filesSummaryHtml}`;
             if (!confirm("Permanently delete this item?")) return;
             posts = posts.filter(x => x.id != id);
             await pushToGitHub("Delete item from website");
-            renderManageTable();
-            renderDrafts();
-            refreshStats();
+            renderManageTable(); renderDrafts(); refreshStats();
         }
 
         function renderManageTable() {
@@ -1345,8 +1189,7 @@ ${filesSummaryHtml}`;
             const deleteIds = new Set(toDelete.map(x => x.id));
             posts = posts.filter(p => !deleteIds.has(p.id));
             await pushToGitHub(`Bulk delete ${toDelete.length} drafts`);
-            renderDrafts();
-            refreshStats();
+            renderDrafts(); refreshStats();
         }
 
         async function publishDraft(id) {
@@ -1355,14 +1198,15 @@ ${filesSummaryHtml}`;
                 posts[idx].status = 'live';
                 posts[idx].date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
                 await pushToGitHub(`Approve draft: ${posts[idx].title}`);
-                renderDrafts();
-                refreshStats();
+                renderDrafts(); refreshStats();
             }
         }
 
         function refreshStats() {
             document.getElementById('statTotal').innerText = posts.filter(p => p.status !== 'draft').length;
-            document.getElementById('statDraftsBadge').innerText = `${posts.filter(p => p.status === 'draft').length} Auto Drafts Pending`;
+            document.getElementById('statDrafts').innerText = posts.filter(p => p.status === 'draft').length;
+            document.getElementById('statForms').innerText = posts.filter(p => p.mainCat === 'Forms').length;
+            document.getElementById('statPaid').innerText = posts.filter(p => p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format').length;
         }
     </script>
 </body>

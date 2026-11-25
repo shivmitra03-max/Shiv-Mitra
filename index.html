@@ -10,29 +10,27 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f1f5f9; color: #0f172a; padding-bottom: 65px; }
 
-        /* Top Mini Info Strip */
         .top-strip {
             background: #0f172a; color: #cbd5e1; font-size: 0.72rem;
             padding: 5px 16px; display: flex; justify-content: space-between; align-items: center;
         }
         .top-strip strong { color: #f59e0b; }
 
-        /* Sticky Header with Custom Logo */
+        /* Larger, Prominent Header Logo */
         .header {
             background: #ffffff; padding: 8px 16px; border-bottom: 1px solid #e2e8f0;
             position: sticky; top: 0; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         .brand-logo-img {
-            height: 48px; width: auto; max-width: 240px; object-fit: contain; display: block;
+            height: 62px; width: auto; max-width: 310px; object-fit: contain; display: block;
         }
 
         .nav-links { display: flex; gap: 15px; align-items: center; }
-        .nav-links a { text-decoration: none; color: #1e293b; font-size: 0.84rem; font-weight: 700; }
+        .nav-links a { text-decoration: none; color: #1e293b; font-size: 0.85rem; font-weight: 700; }
         .nav-links a:hover { color: #1e3a8a; }
 
-        /* Slim & Compact Hero Section */
         .hero {
             background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
             color: white; padding: 16px 14px 20px; text-align: center;
@@ -40,7 +38,6 @@
         .hero h1 { font-size: 1.25rem; font-weight: 800; line-height: 1.3; margin-bottom: 5px; }
         .hero p { font-size: 0.78rem; color: #dbeafe; max-width: 560px; margin: 0 auto 12px; }
 
-        /* Compact Slim Search Bar */
         .search-bar {
             max-width: 440px; margin: 0 auto; background: white; padding: 3px;
             border-radius: 8px; display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.14);
@@ -54,14 +51,11 @@
         }
 
         .container { max-width: 1120px; margin: 16px auto; padding: 0 14px; }
-
-        /* AdSense Safe Container (Hidden until ad code added) */
         .ad-slot {
             min-height: 90px; background: #e2e8f0; border-radius: 8px;
             margin-bottom: 16px; display: flex; justify-content: center; align-items: center; overflow: hidden;
         }
 
-        /* 2-Column Mobile App Grid for Categories */
         .cat-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
         }
@@ -77,7 +71,6 @@
         .cat-card h3 { font-size: 0.85rem; font-weight: 800; color: #1e3a8a; line-height: 1.2; }
         .cat-card span { font-size: 0.7rem; color: #64748b; margin-top: 2px; line-height: 1.25; }
 
-        /* Sub-category Horizontal Pills */
         .sub-pills { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
         .sub-pills::-webkit-scrollbar { display: none; }
         .sub-pill {
@@ -87,7 +80,6 @@
         }
         .sub-pill.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
 
-        /* Section Header */
         .sec-head {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px;
@@ -95,7 +87,6 @@
         .sec-head h2 { font-size: 1.02rem; font-weight: 800; color: #0f172a; }
         .sec-count { font-size: 0.74rem; font-weight: 700; color: #64748b; background: #e2e8f0; padding: 3px 9px; border-radius: 12px; }
 
-        /* Feed Grid */
         .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
         .post-card {
             background: white; border: 1px solid #e2e8f0; border-radius: 12px;
@@ -132,7 +123,6 @@
         }
         .btn-read.legal { background: #d97706; }
 
-        /* Clean Compact Floating WhatsApp Button */
         .wa-float {
             position: fixed; bottom: 16px; right: 16px; z-index: 99;
             background: #16a34a; color: white; text-decoration: none;
@@ -148,10 +138,9 @@
         .footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
         .footer-links a { color: #e2e8f0; text-decoration: none; font-weight: 600; }
 
-        /* Mobile Adjustments */
         @media (max-width: 650px) {
             .top-strip { font-size: 0.68rem; padding: 4px 10px; }
-            .brand-logo-img { height: 42px; max-width: 210px; }
+            .brand-logo-img { height: 54px; max-width: 270px; }
             .nav-links { display: none; }
             .hero { padding: 14px 12px 16px; }
             .hero h1 { font-size: 1.08rem; }
@@ -198,10 +187,8 @@
     </section>
 
     <div class="container">
-        <!-- AdSense Slot 1: Header Leaderboard -->
         <div id="adHeaderSlot" class="ad-slot" style="display:none;"></div>
 
-        <!-- 2-Column Mobile App Grid for Categories -->
         <div class="cat-grid">
             <div class="cat-card active" id="card-ALL" onclick="filterMain('ALL', this)">
                 <div class="cat-icon">&#128240;</div>
@@ -240,7 +227,6 @@
             </div>
         </div>
 
-        <!-- Horizontal Sub-Category Pills -->
         <div class="sub-pills" id="subPillsBar"></div>
 
         <div class="sec-head">
@@ -252,7 +238,6 @@
             <p style="color:#64748b; padding:20px;">Loading latest updates...</p>
         </div>
 
-        <!-- AdSense Slot 3: Footer Banner -->
         <div id="adFooterSlot" class="ad-slot" style="display:none; margin-top:24px;"></div>
     </div>
 
@@ -274,44 +259,35 @@
         let activeMain = "ALL";
         let activeSub = "ALL";
 
-       (function trackRealVisitor() {
-    // 1. Agar Admin khud site dekh raha hai toh count NA karein
-    if (localStorage.getItem('shiv_gh_auth')) return;
+        function initGoogleAnalytics(gaId) {
+            if (!gaId || localStorage.getItem('shiv_gh_auth')) return;
+            const s1 = document.createElement('script');
+            s1.async = true;
+            s1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+            document.head.appendChild(s1);
 
-    // 2. Ek hi visitor ke baar-baar refresh ko rokne ke liye (30 min session)
-    const lastHit = sessionStorage.getItem('shiv_session_counted');
-    if (lastHit) return;
-    sessionStorage.setItem('shiv_session_counted', '1');
-
-    // 3. Global Cloud Counter API par real visitor hit bhejein
-    const todayKey = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    fetch(`https://api.counterapi.dev/v1/shivmitra-in/total/up`).catch(() => {});
-    fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${todayKey}/up`).catch(() => {});
-})();
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', gaId);
+        }
 
         window.onload = async function() {
             const params = new URLSearchParams(window.location.search);
             const urlCat = params.get('cat');
             if (urlCat) activeMain = urlCat;
-            await loadAds();
+            await loadSiteConfig();
             await loadPosts();
         };
 
-        async function loadAds() {
+        async function loadSiteConfig() {
             try {
                 const res = await fetch(`ads.json?t=${Date.now()}`);
                 if (!res.ok) return;
-                const ads = await res.json();
-                if (ads.headerAd) {
-                    const h = document.getElementById('adHeaderSlot');
-                    h.style.display = 'flex';
-                    h.innerHTML = ads.headerAd;
-                }
-                if (ads.sidebarAd) {
-                    const f = document.getElementById('adFooterSlot');
-                    f.style.display = 'flex';
-                    f.innerHTML = ads.sidebarAd;
-                }
+                const cfg = await res.json();
+                if (cfg.gaId) initGoogleAnalytics(cfg.gaId);
+                if (cfg.headerAd) { const h = document.getElementById('adHeaderSlot'); h.style.display = 'flex'; h.innerHTML = cfg.headerAd; }
+                if (cfg.sidebarAd) { const f = document.getElementById('adFooterSlot'); f.style.display = 'flex'; f.innerHTML = cfg.sidebarAd; }
             } catch (e) {}
         }
 
