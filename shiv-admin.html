@@ -63,6 +63,21 @@
         .btn-pub { background: #059669; color: white; }
         .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 
+        /* Horizontal Filter Bar for Drafts */
+        .draft-toolbar {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
+            background: #f8fafc; padding: 12px; border-radius: 9px; border: 1px solid #e2e8f0;
+        }
+        .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-pill {
+            background: white; border: 1px solid #cbd5e1; color: #334155;
+            padding: 7px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+            cursor: pointer; transition: 0.15s;
+        }
+        .filter-pill:hover { border-color: #1e3a8a; color: #1e3a8a; }
+        .filter-pill.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+
         .insert-toolbar {
             background: #f8fafc; border: 1px solid #cbd5e1; border-bottom: none;
             padding: 8px 10px; border-radius: 7px 7px 0 0; display: flex; gap: 6px; flex-wrap: wrap;
@@ -80,6 +95,11 @@
         .banner-preview-img {
             max-width: 100%; max-height: 220px; border-radius: 8px;
             margin-top: 10px; display: none; border: 2px solid #1e3a8a;
+        }
+
+        .links-box {
+            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
+            padding: 14px; margin-bottom: 14px;
         }
 
         table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
@@ -164,32 +184,32 @@
                 
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Banner Image (Auto-Generate or Custom Upload):</strong>
+                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Image (Upload Custom Bharti / Admit Card Banner):</strong>
                         <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                            <button type="button" class="btn-sm" style="background:#f59e0b; color:#0f172a; font-weight:700;" onclick="generateAutoBanner()">&#127912; Auto-Generate HD Banner</button>
                             <label class="btn-sm" style="background:#1e3a8a; color:white; cursor:pointer;">
                                 &#128247; Upload Custom Image
                                 <input type="file" accept="image/*" style="display:none;" onchange="uploadFeaturePhoto(event)">
                             </label>
+                            <button type="button" class="btn-sm btn-del" onclick="removeBannerImage()">Remove Image</button>
                         </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
-                        <input type="text" id="bSubText" style="margin-bottom:0; background:white;" placeholder="Banner Highlight (e.g., Qualification: 12th Pass / Graduate)">
-                        <input type="text" id="bDateText" style="margin-bottom:0; background:white;" placeholder="Banner Date Badge (e.g., Last Date: 16 Dec 2026)">
                     </div>
                     <input type="hidden" id="pBannerData">
                     <img id="bannerPreview" class="banner-preview-img" alt="Banner Preview">
                 </div>
 
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-                    <input type="text" id="pLink" placeholder="Official Website / Form / Payment Link">
-                    <input type="number" id="pPrice" placeholder="Price in ₹ (Only for Legal Paid Formats, leave blank otherwise)">
+                <div class="links-box">
+                    <strong style="font-size:0.85rem; color:#1e3a8a; display:block; margin-bottom:10px;">Direct Official Portal & PDF Links (Zero Wrong Redirects):</strong>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <input type="text" id="pLink" style="background:white;" placeholder="1. Apply Online / Call Letter Direct Link">
+                        <input type="text" id="pPdfLink" style="background:white;" placeholder="2. Official Notification / Exam Notice PDF Link">
+                        <input type="text" id="pOfficialSite" style="background:white; margin-bottom:0;" placeholder="3. Official Website Homepage (e.g., https://ojas.gujarat.gov.in/)">
+                        <input type="number" id="pPrice" style="background:white; margin-bottom:0;" placeholder="Price in ₹ (Only for Legal Paid Formats, leave blank otherwise)">
+                    </div>
                 </div>
 
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-                    <button type="button" class="btn-auto-fill" onclick="fillJobTemplate('AUTO')">&#9889; Smart Table Format (Gujarat = Gujarati | Central = Eng+Hindi)</button>
-                    <button type="button" class="btn-auto-fill" style="background:#059669;" onclick="fillJobTemplate('GUJ')">ગુજરાતી Column Format</button>
-                    <button type="button" class="btn-auto-fill" style="background:#2563eb;" onclick="fillJobTemplate('HIN')">English + Hindi Column Format</button>
+                    <button type="button" class="btn-auto-fill" onclick="fillTemplate('JOB')">&#128188; Insert Job Table Format (Dates, Fee, Age, Qualification)</button>
+                    <button type="button" class="btn-auto-fill" style="background:#0d9488;" onclick="fillTemplate('CALL_LETTER')">&#127915; Insert Call Letter Format (Exam Date, Login Details, Download Steps)</button>
                 </div>
 
                 <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on the homepage card)..."></textarea>
@@ -206,7 +226,7 @@
                     <button type="button" class="tool-chip" onclick="insertAtCursor('TABLE')">+ 2-Column Table</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('NOTE')">+ Highlight Note Box</button>
                 </div>
-                <textarea id="pContent" rows="11" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here or use the toolbar buttons above to insert Headings, Images, Videos, and Tables..."></textarea>
+                <textarea id="pContent" rows="11" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here or use the format buttons above..."></textarea>
 
                 <div style="display:flex; gap:10px;">
                     <button class="btn-green" id="publishBtn" onclick="savePost()">&#128640; Publish Live to Website</button>
@@ -214,12 +234,17 @@
                 </div>
             </div>
 
-            <!-- TAB 2: Auto-Jobs Server Queue -->
+            <!-- TAB 2: Auto-Jobs Server Queue with Horizontal Category Filter & Delete All -->
             <div id="tab-auto" class="panel-card tab-section" style="display:none;">
                 <h3>Auto-Updating Jobs & Call Letters Queue (Pending Approval)</h3>
-                <p style="font-size:0.85rem; color:#475569; margin-bottom:15px;">
-                    Open any auto-fetched update using <b>Edit & Add Banner/Table</b> to generate an <b>HD Banner</b> and <b>Structured Table</b> in 1 click before publishing live.
-                </p>
+                
+                <div class="draft-toolbar">
+                    <div class="filter-pills" id="draftFilterPills"></div>
+                    <button type="button" class="btn-sm btn-del" style="padding:8px 14px; font-weight:700;" onclick="deleteFilteredDrafts()">
+                        &#128465; Delete All (<span id="deleteCountBadge">0</span>)
+                    </button>
+                </div>
+
                 <table>
                     <thead><tr><th>Fetched Title</th><th>Category</th><th>Actions</th></tr></thead>
                     <tbody id="draftsTableBody"></tbody>
@@ -250,6 +275,7 @@
         let posts = [];
         let fileSha = "";
         let currentFilterCat = "ALL";
+        let currentDraftFilter = "ALL";
 
         window.onload = function() {
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
@@ -322,7 +348,7 @@
         async function pushToGitHub(commitMsg) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             const btn = document.getElementById('publishBtn');
-            btn.innerText = "Publishing Live to GitHub...";
+            btn.innerText = "Syncing with GitHub...";
             btn.disabled = true;
 
             try {
@@ -343,9 +369,9 @@
                     })
                 });
                 const result = await res.json();
-                if (!res.ok) throw new Error(result.message || "Publish failed");
+                if (!res.ok) throw new Error(result.message || "Update failed");
                 fileSha = result.content.sha;
-                alert("Success! Post saved to GitHub and will appear live on your website in 30–60 seconds.");
+                alert("Success! Changes saved to GitHub.");
             } catch (e) {
                 alert("Error: " + e.message);
             } finally {
@@ -383,89 +409,6 @@
             renderManageTable();
         }
 
-        function generateAutoBanner() {
-            const title = document.getElementById('pTitle').value.trim() || "SHIVMITRA.IN OFFICIAL UPDATE 2026";
-            const subCat = document.getElementById('pSubCat').value || "LATEST UPDATE";
-            const qualText = document.getElementById('bSubText').value.trim() || "Check Qualification, Age Limit & Full Details";
-            const dateText = document.getElementById('bDateText').value.trim() || "Apply Online at ShivMitra.in";
-
-            const canvas = document.createElement('canvas');
-            canvas.width = 960;
-            canvas.height = 500;
-            const ctx = canvas.getContext('2d');
-
-            const grad = ctx.createLinearGradient(0, 0, 960, 500);
-            grad.addColorStop(0, '#0f172a');
-            grad.addColorStop(0.55, '#1e3a8a');
-            grad.addColorStop(1, '#1d4ed8');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, 960, 500);
-
-            ctx.strokeStyle = '#f59e0b';
-            ctx.lineWidth = 10;
-            ctx.strokeRect(12, 12, 936, 476);
-
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.roundRect(670, 32, 250, 44, 22);
-            ctx.fill();
-            ctx.fillStyle = '#1e3a8a';
-            ctx.font = '800 20px Inter, sans-serif';
-            ctx.fillText('SHIVMITRA.IN', 705, 61);
-            ctx.fillStyle = '#059669';
-            ctx.beginPath();
-            ctx.arc(892, 54, 12, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = '#dc2626';
-            ctx.beginPath();
-            ctx.roundRect(45, 36, 290, 40, 8);
-            ctx.fill();
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '700 18px Inter, sans-serif';
-            ctx.fillText(subCat.toUpperCase(), 62, 62);
-
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '800 38px Inter, sans-serif';
-            const words = title.split(' ');
-            let line = '';
-            let y = 145;
-            for (let n = 0; n < words.length; n++) {
-                const testLine = line + words[n] + ' ';
-                if (ctx.measureText(testLine).width > 860 && n > 0) {
-                    ctx.fillText(line, 45, y);
-                    line = words[n] + ' ';
-                    y += 50;
-                    if (y > 260) break;
-                } else {
-                    line = testLine;
-                }
-            }
-            ctx.fillText(line, 45, y);
-
-            ctx.fillStyle = 'rgba(255,255,255,0.14)';
-            ctx.beginPath();
-            ctx.roundRect(45, 305, 870, 56, 10);
-            ctx.fill();
-            ctx.fillStyle = '#fde047';
-            ctx.font = '700 22px Inter, sans-serif';
-            ctx.fillText('✔ ' + qualText, 65, 340);
-
-            ctx.fillStyle = '#f59e0b';
-            ctx.beginPath();
-            ctx.roundRect(45, 385, 870, 68, 12);
-            ctx.fill();
-            ctx.fillStyle = '#0f172a';
-            ctx.font = '800 24px Inter, sans-serif';
-            ctx.fillText('📅 ' + dateText, 68, 427);
-
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.78);
-            document.getElementById('pBannerData').value = dataUrl;
-            const prev = document.getElementById('bannerPreview');
-            prev.src = dataUrl;
-            prev.style.display = 'block';
-        }
-
         function uploadFeaturePhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -477,6 +420,13 @@
                 prev.style.display = 'block';
             };
             reader.readAsDataURL(file);
+        }
+
+        function removeBannerImage() {
+            document.getElementById('pBannerData').value = "";
+            const prev = document.getElementById('bannerPreview');
+            prev.src = "";
+            prev.style.display = 'none';
         }
 
         function insertAtCursor(type) {
@@ -525,21 +475,68 @@
             reader.readAsDataURL(file);
         }
 
-        function fillJobTemplate(mode = 'AUTO') {
-            const title = document.getElementById('pTitle').value.trim() || "New Recruitment 2026";
+        function fillTemplate(type) {
+            const title = document.getElementById('pTitle').value.trim() || "Official Update 2026";
             const lowerTitle = title.toLowerCase();
-            const gujaratKeywords = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot', 'gandhinagar', 'bhavnagar', 'jamnagar', 'junagadh', 'kutch', 'gseb', 'guj'];
-            const useGujarati = (mode === 'GUJ') || (mode === 'AUTO' && gujaratKeywords.some(w => lowerTitle.includes(w)));
+            const isGujarat = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot'].some(w => lowerTitle.includes(w));
 
-            if (useGujarati) {
-                document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ નોટિફિકેશન / કોલ લેટર જાહેર કરવામાં આવ્યું છે. મહત્વની તારીખો, લાયકાત અને ઓનલાઇન ડાઉનલોડ કરવાની સંપૂર્ણ વિગતવાર માહિતી નીચે કોષ્ટકમાં આપેલ છે.`;
-                document.getElementById('pContent').value = `<p><strong>${title}</strong> અંતર્ગત મહત્વની વિગતો અને ઓનલાઇન પ્રક્રિયા નીચે મુજબ છે:</p>
+            if (type === 'CALL_LETTER') {
+                document.getElementById('pMainCat').value = 'Call Letter';
+                updateSubOptions(isGujarat ? 'Gujarat Call Letter (OJAS/GPSC)' : 'Central & Bank Admit Card');
+
+                if (isGujarat) {
+                    document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ કોલ લેટર / હોલ ટિકિટ ડાઉનલોડ કરવાની લિંક જાહેર થઈ ગઈ છે. પરીક્ષાની તારીખ અને કોલ લેટર ડાઉનલોડ કરવાની સંપૂર્ણ વિગત નીચે મુજબ છે.`;
+                    document.getElementById('pContent').value = `<p><strong>${title}</strong> ની લેખિત / શારીરિક પરીક્ષા માટે કોલ લેટર (Admit Card) ઓફિશિયલ વેબસાઇટ પર મૂકવામાં આવ્યા છે:</p>
+<h3>1. પરીક્ષા અને કોલ લેટરની મહત્વની તારીખો (Important Exam Dates)</h3>
+<table>
+  <tr><th>વિગત (Exam Event)</th><th>તારીખ (Date)</th></tr>
+  <tr><td>કોલ લેટર ડાઉનલોડ શરૂ તારીખ (Call Letter Release Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>પરીક્ષાની તારીખ (Exam Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>પરીક્ષાનું સ્થળ અને સમય (Exam Center & Shift)</td><td>કોલ લેટરમાં દર્શાવ્યા મુજબ</td></tr>
+</table>
+<h3>2. કોલ લેટર ડાઉનલોડ કરવા માટે જરૂરી વિગતો (Required Login Details)</h3>
+<table>
+  <tr><th>જરૂરી માહિતી (Credential)</th><th>વિગત (Details)</th></tr>
+  <tr><td>કન્ફર્મેશન નંબર (Confirmation Number)</td><td>ઓનલાઇન અરજી ફોર્મ મુજબ (8 અંકનો નંબર)</td></tr>
+  <tr><td>જન્મ તારીખ (Date of Birth)</td><td>DD-MM-YYYY ફોર્મેટમાં</td></tr>
+</table>
+<h3>3. કોલ લેટર કેવી રીતે ડાઉનલોડ કરવો? (How to Download)</h3>
+<p>1. નીચે આપેલ <strong>Download Call Letter</strong> લિંક પર ક્લિક કરો.<br>
+2. તમારી ભરતી (Select Job) પસંદ કરો.<br>
+3. તમારો <strong>Confirmation Number</strong> અને <strong>Birth Date</strong> દાખલ કરો.<br>
+4. <strong>Print Call Letter</strong> બટન પર ક્લિક કરીને PDF સેવ કરો અને પ્રિન્ટ કાઢો.</p>`;
+                } else {
+                    document.getElementById('pSummary').value = `${title} has been officially released. Check Exam Date, Shift Timings, Required Login Credentials, and direct Admit Card download link below.`;
+                    document.getElementById('pContent').value = `<p>Candidates appearing for <strong>${title}</strong> can now download their official Hall Ticket / Admit Card using the details below:</p>
+<h3>1. Admit Card & Exam Schedule (महत्वपूर्ण तिथियां)</h3>
+<table>
+  <tr><th>Activity / Event</th><th>Date & Status</th></tr>
+  <tr><td>Admit Card Release Date</td><td>DD/MM/2026 (Available Now)</td></tr>
+  <tr><td>Examination Date</td><td>DD/MM/2026</td></tr>
+  <tr><td>Exam City & Reporting Time</td><td>Mentioned on Call Letter</td></tr>
+</table>
+<h3>2. Credentials Required to Download (जरूरी जानकारी)</h3>
+<table>
+  <tr><th>Field</th><th>Details</th></tr>
+  <tr><td>Registration No. / Roll No.</td><td>As per Application Form</td></tr>
+  <tr><td>Password / Date of Birth</td><td>DD-MM-YYYY Format</td></tr>
+</table>
+<h3>3. Step-by-Step Download Process</h3>
+<p>1. Click on the <strong>Download Call Letter / Admit Card</strong> link below.<br>
+2. Enter your <strong>Registration Number / Roll Number</strong> and <strong>Date of Birth / Password</strong>.<br>
+3. Enter the Captcha code and click <strong>Login / Submit</strong>.<br>
+4. Download your Admit Card PDF and carry a printed copy along with a valid Photo ID to the exam center.</p>`;
+                }
+            } else {
+                if (isGujarat) {
+                    document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ નોટિફિકેશન જાહેર કરવામાં આવ્યું છે. મહત્વની તારીખો, લાયકાત, પગાર ધોરણ અને ઓનલાઇન અરજી કરવાની વિગત નીચે કોષ્ટકમાં આપેલ છે.`;
+                    document.getElementById('pContent').value = `<p><strong>${title}</strong> અંતર્ગત ભરતીની મહત્વની વિગતો અને ઓનલાઇન અરજી પ્રક્રિયા નીચે મુજબ છે:</p>
 <h3>1. મહત્વની તારીખો (Important Dates)</h3>
 <table>
   <tr><th>વિગત (Event)</th><th>તારીખ (Date)</th></tr>
-  <tr><td>ઓનલાઇન શરૂઆતની તારીખ (Start Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>છેલ્લી તારીખ / પરીક્ષા તારીખ (Last / Exam Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>કોલ લેટર / પરિણામ (Call Letter / Result)</td><td>ઓફિશિયલ વેબસાઇટ પર ઉપલબ્ધ</td></tr>
+  <tr><td>ઓનલાઇન અરજી શરૂ તારીખ (Start Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>અરજી કરવાની છેલ્લી તારીખ (Last Date)</td><td>DD/MM/2026</td></tr>
+  <tr><td>ફી ભરવાની છેલ્લી તારીખ (Fee Payment Last Date)</td><td>DD/MM/2026</td></tr>
 </table>
 <h3>2. અરજી ફી (Application Fee)</h3>
 <table>
@@ -551,17 +548,17 @@
 <table>
   <tr><th>માપદંડ (Criteria)</th><th>વિગત (Details)</th></tr>
   <tr><td>શૈક્ષણિક લાયકાત (Qualification)</td><td>10 પાસ / 12 પાસ / ગ્રેજ્યુએશન</td></tr>
-  <tr><td>ઉંમર મર્યાદા (Age Limit)</td><td>18 થી 35 વર્ષ</td></tr>
+  <tr><td>ઉંમર મર્યાદા (Age Limit)</td><td>18 થી 35 વર્ષ (નિયમ મુજબ છૂટછાટ)</td></tr>
 </table>`;
-            } else {
-                document.getElementById('pSummary').value = `${title} official update has been released. Check Important Dates, Eligibility, Exam Schedule, and direct download link below.`;
-                document.getElementById('pContent').value = `<p>Official notification and direct link details for <strong>${title}</strong> are given in the tables below:</p>
+                } else {
+                    document.getElementById('pSummary').value = `${title} official notification has been released. Check Important Dates, Eligibility, Application Fee, and direct Apply Online link below.`;
+                    document.getElementById('pContent').value = `<p>Official recruitment details and direct apply online links for <strong>${title}</strong> are provided below:</p>
 <h3>1. Important Dates (महत्वपूर्ण तिथियां)</h3>
 <table>
   <tr><th>Event / Activity</th><th>Date</th></tr>
-  <tr><td>Start Date (आवेदन / डाउनलोड शुरू तिथि)</td><td>DD/MM/2026</td></tr>
-  <tr><td>Last Date / Exam Date (अंतिम / परीक्षा तिथि)</td><td>DD/MM/2026</td></tr>
-  <tr><td>Admit Card / Call Letter Status</td><td>Available Now</td></tr>
+  <tr><td>Online Application Start Date</td><td>DD/MM/2026</td></tr>
+  <tr><td>Last Date to Apply Online</td><td>DD/MM/2026</td></tr>
+  <tr><td>Last Date for Fee Payment</td><td>DD/MM/2026</td></tr>
 </table>
 <h3>2. Application Fee (आवेदन शुल्क)</h3>
 <table>
@@ -572,11 +569,11 @@
 <h3>3. Eligibility & Age Limit (पात्रता एवं आयु सीमा)</h3>
 <table>
   <tr><th>Criteria</th><th>Details</th></tr>
-  <tr><td>Educational Qualification (शैक्षणिक योग्यता)</td><td>10th Pass / 12th Pass / Graduate</td></tr>
-  <tr><td>Age Limit (आयु सीमा)</td><td>18 to 35 Years (Relaxation as per rules)</td></tr>
+  <tr><td>Educational Qualification</td><td>10th Pass / 12th Pass / Graduate</td></tr>
+  <tr><td>Age Limit</td><td>18 to 35 Years (Age relaxation as per rules)</td></tr>
 </table>`;
+                }
             }
-            if (!document.getElementById('pBannerData').value) generateAutoBanner();
         }
 
         async function savePost() {
@@ -585,6 +582,8 @@
             const subCat = document.getElementById('pSubCat').value;
             const title = document.getElementById('pTitle').value.trim();
             const actionLink = document.getElementById('pLink').value.trim();
+            const pdfLink = document.getElementById('pPdfLink').value.trim();
+            const officialSite = document.getElementById('pOfficialSite').value.trim();
             const price = document.getElementById('pPrice').value.trim();
             const summary = document.getElementById('pSummary').value.trim();
             const content = document.getElementById('pContent').value.trim();
@@ -597,13 +596,13 @@
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
                 if (idx !== -1) {
-                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, price, summary, content, bannerImg, date: today, status: 'live' };
+                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, price, summary, content, bannerImg, date: today, status: 'live' };
                 }
             } else {
                 posts.unshift({
                     id: Date.now(),
                     mainCat, subCat, title, date: today,
-                    actionLink, price, summary, content, bannerImg, status: 'live'
+                    actionLink, pdfLink, officialSite, price, summary, content, bannerImg, status: 'live'
                 });
             }
 
@@ -616,12 +615,14 @@
             const p = posts.find(x => x.id == id);
             if (!p) return;
             switchTab('tab-create', document.getElementById('nav-create'));
-            document.getElementById('formHeading').innerText = "Edit & Update Live Post";
+            document.getElementById('formHeading').innerText = "Edit & Update Post";
             document.getElementById('editPostId').value = p.id;
             document.getElementById('pMainCat').value = p.mainCat;
             updateSubOptions(p.subCat);
             document.getElementById('pTitle').value = p.title;
             document.getElementById('pLink').value = p.actionLink || "";
+            document.getElementById('pPdfLink').value = p.pdfLink || "";
+            document.getElementById('pOfficialSite').value = p.officialSite || "";
             document.getElementById('pPrice').value = p.price || "";
             document.getElementById('pSummary').value = p.summary || "";
             document.getElementById('pContent').value = p.content || "";
@@ -636,11 +637,11 @@
             document.getElementById('formHeading').innerText = "+ Create New Post (Direct Live to GitHub)";
             document.getElementById('editPostId').value = "";
             document.getElementById('pTitle').value = "";
-            document.getElementById('bSubText').value = "";
-            document.getElementById('bDateText').value = "";
             document.getElementById('pBannerData').value = "";
             document.getElementById('bannerPreview').style.display = 'none';
             document.getElementById('pLink').value = "";
+            document.getElementById('pPdfLink').value = "";
+            document.getElementById('pOfficialSite').value = "";
             document.getElementById('pPrice').value = "";
             document.getElementById('pSummary').value = "";
             document.getElementById('pContent').value = "";
@@ -648,7 +649,7 @@
         }
 
         async function deletePost(id) {
-            if (!confirm("Are you sure you want to permanently delete this post from the live website?")) return;
+            if (!confirm("Are you sure you want to permanently delete this post?")) return;
             posts = posts.filter(x => x.id != id);
             await pushToGitHub("Delete post from website");
             renderManageTable();
@@ -679,27 +680,73 @@
             });
         }
 
+        // Horizontal Filter Pills + Drafts Rendering
+        function setDraftFilter(cat) {
+            currentDraftFilter = cat;
+            renderDrafts();
+        }
+
+        function getFilteredDraftsList(allDrafts) {
+            if (currentDraftFilter === 'ALL') return allDrafts;
+            if (currentDraftFilter === 'Call Letter') return allDrafts.filter(d => d.mainCat === 'Call Letter');
+            return allDrafts.filter(d => d.subCat === currentDraftFilter);
+        }
+
         function renderDrafts() {
+            const allDrafts = posts.filter(p => p.status === 'draft');
+            const filterCats = [
+                { key: 'ALL', label: `All Drafts (${allDrafts.length})` },
+                { key: 'Sarkari Jobs', label: `Sarkari Jobs (${allDrafts.filter(d => d.subCat === 'Sarkari Jobs').length})` },
+                { key: 'Bank Jobs', label: `Bank Jobs (${allDrafts.filter(d => d.subCat === 'Bank Jobs').length})` },
+                { key: 'Apprenticeship / Contract Jobs', label: `Apprentice / Contract (${allDrafts.filter(d => d.subCat === 'Apprenticeship / Contract Jobs').length})` },
+                { key: 'Private Jobs', label: `Private Jobs (${allDrafts.filter(d => d.subCat === 'Private Jobs').length})` },
+                { key: 'Call Letter', label: `Call Letter (${allDrafts.filter(d => d.mainCat === 'Call Letter').length})` }
+            ];
+
+            const pillsContainer = document.getElementById('draftFilterPills');
+            pillsContainer.innerHTML = filterCats.map(fc => `
+                <button type="button" class="filter-pill ${currentDraftFilter === fc.key ? 'active' : ''}" onclick="setDraftFilter('${fc.key}')">
+                    ${fc.label}
+                </button>
+            `).join('');
+
+            const filtered = getFilteredDraftsList(allDrafts);
+            document.getElementById('deleteCountBadge').innerText = filtered.length;
+
             const tbody = document.getElementById('draftsTableBody');
             tbody.innerHTML = "";
-            const drafts = posts.filter(p => p.status === 'draft');
-            if (drafts.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">No pending auto-job drafts right now.</td></tr>`;
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="color:#64748b;">No pending drafts in this filter category right now.</td></tr>`;
                 return;
             }
-            drafts.forEach(d => {
+            filtered.forEach(d => {
                 tbody.innerHTML += `
                     <tr>
                         <td><b>${d.title}</b></td>
-                        <td>${d.subCat}</td>
+                        <td><span style="background:#e0e7ff; color:#1e3a8a; padding:3px 8px; border-radius:4px; font-size:0.78rem; font-weight:700;">${d.subCat}</span></td>
                         <td style="white-space:nowrap;">
-                            <button class="btn-sm btn-edit" onclick="editPost(${d.id})">Edit & Add Banner/Table</button>
+                            <button class="btn-sm btn-edit" onclick="editPost(${d.id})">Edit & Upload Image</button>
                             <button class="btn-sm btn-pub" onclick="publishDraft(${d.id})">Direct Live</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${d.id})">Delete</button>
                         </td>
                     </tr>
                 `;
             });
+        }
+
+        async function deleteFilteredDrafts() {
+            const allDrafts = posts.filter(p => p.status === 'draft');
+            const toDelete = getFilteredDraftsList(allDrafts);
+            if (toDelete.length === 0) return alert("No drafts available to delete in this tab!");
+
+            const label = currentDraftFilter === 'ALL' ? 'ALL pending drafts' : `all ${toDelete.length} drafts in "${currentDraftFilter}"`;
+            if (!confirm(`Are you sure you want to permanently delete ${label}?`)) return;
+
+            const deleteIds = new Set(toDelete.map(x => x.id));
+            posts = posts.filter(p => !deleteIds.has(p.id));
+            await pushToGitHub(`Bulk delete ${toDelete.length} drafts (${currentDraftFilter})`);
+            renderDrafts();
+            refreshStats();
         }
 
         async function publishDraft(id) {
