@@ -3,289 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Details - ShivMitra.in</title>
-    <meta name="description" content="Complete recruitment details, important dates, eligibility, call letter and direct official links at ShivMitra.in.">
+    <title>ShivMitra.in — Official Details & Download</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f1f5f9; color: #0f172a; line-height: 1.65; }
+        body { background: #f1f5f9; color: #0f172a; line-height: 1.6; }
 
-        .topbar {
-            background: #0f172a; color: #cbd5e1; font-size: 0.78rem;
-            padding: 7px 5%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+        .header {
+            background: #ffffff; padding: 8px 16px; border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        header {
-            background: white; padding: 14px 5%; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
-            flex-wrap: wrap; gap: 12px;
+        .brand-logo-img { height: 46px; width: auto; max-width: 230px; object-fit: contain; display: block; }
+        .back-btn {
+            background: #eff6ff; color: #1e3a8a; text-decoration: none;
+            padding: 7px 14px; border-radius: 7px; font-weight: 700; font-size: 0.82rem;
         }
-        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0f172a; font-weight: 800; font-size: 1.25rem; }
-        .brand-badge {
-            background: #1e3a8a; color: white; width: 34px; height: 34px; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center; font-weight: 800;
-        }
-        .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
-        .nav-links a { text-decoration: none; color: #334155; font-size: 0.88rem; font-weight: 600; }
-        .nav-links a:hover { color: #1e3a8a; }
 
-        .container { max-width: 1180px; margin: 22px auto; padding: 0 18px; }
-        .breadcrumb { font-size: 0.82rem; color: #64748b; margin-bottom: 16px; }
-        .breadcrumb a { color: #2563eb; text-decoration: none; font-weight: 600; }
-
-        .layout-grid { display: grid; grid-template-columns: 1fr 330px; gap: 24px; align-items: start; }
+        .container { max-width: 880px; margin: 20px auto; padding: 0 14px; }
+        .ad-slot {
+            min-height: 90px; background: #e2e8f0; border-radius: 8px;
+            margin: 16px 0; display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
 
         .article-card {
-            background: white; border-radius: 12px; padding: 28px;
-            border: 1px solid #e2e8f0; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            background: white; border-radius: 14px; border: 1px solid #e2e8f0;
+            padding: 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);
         }
-        .cat-pill {
-            display: inline-block; background: #dbeafe; color: #1e40af;
-            font-size: 0.74rem; font-weight: 800; padding: 4px 11px; border-radius: 6px;
-            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;
+        .meta-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+        .badge-cat { background: #1e3a8a; color: white; padding: 4px 11px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+        .badge-date { color: #64748b; font-size: 0.8rem; font-weight: 600; }
+
+        h1.post-title { font-size: 1.45rem; font-weight: 800; color: #0f172a; line-height: 1.35; margin-bottom: 16px; }
+        .feature-img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 10px; margin-bottom: 18px; border: 1px solid #e2e8f0; }
+
+        /* Legal Format Offer Box */
+        .legal-offer-box {
+            background: #fffbeb; border: 2px solid #f59e0b; border-radius: 12px;
+            padding: 18px; margin-bottom: 20px;
         }
-        .article-card h1 { font-size: 1.55rem; font-weight: 800; color: #0f172a; line-height: 1.35; margin-bottom: 10px; }
-        .meta-line { font-size: 0.82rem; color: #64748b; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; margin-bottom: 20px; display: flex; gap: 18px; flex-wrap: wrap; }
+        .legal-price-row { display: flex; align-items: baseline; gap: 12px; margin: 8px 0 14px; }
+        .offer-now { font-size: 1.8rem; font-weight: 800; color: #059669; }
+        .offer-old { font-size: 1.1rem; color: #94a3b8; text-decoration: line-through; }
+        .offer-pct { background: #dc2626; color: white; padding: 3px 9px; border-radius: 5px; font-size: 0.78rem; font-weight: 800; }
 
-        .post-banner {
-            width: 100%; max-height: 360px; object-fit: cover; border-radius: 10px;
-            margin-bottom: 22px; border: 1px solid #cbd5e1; display: none;
+        .article-body h3 { color: #1e3a8a; font-size: 1.1rem; margin: 20px 0 10px; border-left: 4px solid #2563eb; padding-left: 10px; }
+        .article-body p { margin-bottom: 12px; color: #334155; font-size: 0.94rem; }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88rem; }
+        .article-body th, .article-body td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; }
+        .article-body th { background: #f8fafc; color: #0f172a; font-weight: 700; }
+        .note-box { background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 15px; border-radius: 6px; margin: 14px 0; font-size: 0.9rem; }
+        .inline-media img { max-width: 100%; border-radius: 8px; margin: 12px 0; }
+        .video-embed { position: relative; padding-bottom: 56.25%; height: 0; margin: 16px 0; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; border: none; }
+
+        /* Official Links Box */
+        .action-links-box {
+            margin-top: 24px; background: #f8fafc; border: 1.5px solid #cbd5e1;
+            border-radius: 12px; padding: 18px;
         }
-
-        .section-box { margin-bottom: 24px; border: 1px solid #cbd5e1; border-radius: 9px; overflow: hidden; }
-        .section-header { background: #1e3a8a; color: white; padding: 11px 16px; font-weight: 700; font-size: 0.96rem; }
-
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        th, td { padding: 11px 15px; border-bottom: 1px solid #e2e8f0; text-align: left; }
-        th { background: #f8fafc; color: #1e3a8a; font-weight: 700; }
-        tr:last-child td { border-bottom: none; }
-
-        .article-body { font-size: 0.96rem; color: #1e293b; margin-bottom: 25px; }
-        .article-body h3 { color: #1e3a8a; font-size: 1.12rem; margin: 22px 0 10px; padding-left: 10px; border-left: 4px solid #f59e0b; }
-        .article-body p { margin-bottom: 14px; }
-        .article-body table { border: 1px solid #cbd5e1; margin: 14px 0 20px; border-radius: 6px; overflow: hidden; }
-        .article-body .inline-media img { max-width: 100%; border-radius: 8px; margin: 14px 0; border: 1px solid #cbd5e1; }
-        .article-body .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 16px 0; border-radius: 8px; }
-        .article-body .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .article-body .note-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 13px 16px; border-radius: 6px; margin: 15px 0; color: #78350f; }
-
+        .action-links-box h3 { color: #0f172a; font-size: 1rem; margin-bottom: 12px; }
+        .link-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 11px 14px; background: white; border: 1px solid #e2e8f0;
+            border-radius: 8px; margin-bottom: 9px; gap: 10px;
+        }
         .btn-action {
-            display: inline-block; background: #2563eb; color: white; padding: 8px 18px;
-            border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85rem;
+            background: #059669; color: white; text-decoration: none; padding: 8px 16px;
+            border-radius: 6px; font-weight: 700; font-size: 0.82rem; white-space: nowrap; border: none; cursor: pointer;
         }
-        .btn-action:hover { background: #1d4ed8; }
-        .btn-wa { background: #16a34a; }
-        .btn-home { background: #475569; }
+        .btn-action.blue { background: #1e3a8a; }
+        .btn-action.amber { background: #d97706; }
 
-        .share-bar {
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px;
-            padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-        }
-
-        .sidebar-card {
-            background: white; border-radius: 12px; padding: 20px;
-            border: 1px solid #e2e8f0; margin-bottom: 20px;
-        }
-        .sidebar-card h3 { color: #1e3a8a; font-size: 1rem; padding-bottom: 10px; border-bottom: 2px solid #1e3a8a; margin-bottom: 14px; }
-        .recent-item { display: block; padding: 10px 0; border-bottom: 1px solid #f1f5f9; text-decoration: none; color: #0f172a; font-size: 0.87rem; font-weight: 600; }
-        .recent-item:hover { color: #2563eb; }
-        .recent-item small { display: block; color: #64748b; font-weight: 400; font-size: 0.76rem; margin-top: 2px; }
-
-        .cat-link {
-            display: flex; justify-content: space-between; padding: 10px 13px;
-            border: 1px solid #e2e8f0; border-radius: 7px; margin-bottom: 9px;
-            text-decoration: none; color: #1e293b; font-size: 0.86rem; font-weight: 600;
-        }
-        .cat-link:hover { background: #eff6ff; border-color: #2563eb; color: #1e3a8a; }
-
-        @media (max-width: 900px) {
-            .layout-grid { grid-template-columns: 1fr; }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 20px; margin-top: 36px; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .article-card { padding: 16px; }
+            h1.post-title { font-size: 1.2rem; }
+            .link-row { flex-direction: column; align-items: flex-start; }
+            .btn-action { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="topbar">
-        <span>ShivMitra.in — Sarkari Jobs, Yojana, Call Letter & Forms</span>
-        <span>Updated Daily</span>
-    </div>
-
-    <header>
-        <a href="index.html" class="brand">
-            <div class="brand-badge">S</div>
-            <span>SHIVMITRA.IN</span>
-        </a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="pages.html?page=about">About Us</a>
-            <a href="pages.html?page=privacy">Privacy Policy</a>
-            <a href="pages.html?page=contact">Contact Us</a>
-            <a href="pages.html?page=disclaimer">Disclaimer</a>
-        </div>
+    <header class="header">
+        <a href="index.html"><img src="logo.png" alt="ShivMitra.in - Shiv Online Centre" class="brand-logo-img"></a>
+        <a href="index.html" class="back-btn">&#8592; Back to Home</a>
     </header>
 
     <div class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Home</a> &raquo; <span id="bcCat">Updates</span> &raquo; Details
+        <div id="adHeaderSlot" class="ad-slot" style="display:none;"></div>
+
+        <div class="article-card" id="postContainer">
+            <p style="color:#64748b;">Loading official details...</p>
         </div>
 
-        <div class="layout-grid">
-            <div class="article-card">
-                <span class="cat-pill" id="postSubCat">CATEGORY</span>
-                <h1 id="postTitle">Loading...</h1>
-                <div class="meta-line">
-                    <span>Updated: <strong id="postDate">Today</strong></span>
-                    <span>Author: <strong>ShivMitra Editorial Team</strong></span>
-                </div>
-
-                <img id="postBannerImg" class="post-banner" alt="Post Banner">
-
-                <div class="section-box">
-                    <div class="section-header">Quick Overview & Highlights</div>
-                    <table>
-                        <tr><td style="width:42%; font-weight:700; color:#1e3a8a;">Portal Name</td><td>ShivMitra.in</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Category / Type</td><td id="ovCategory">-</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Post / Scheme Name</td><td id="ovName">-</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Apply / Process Mode</td><td id="ovMode">Online / Official Portal</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Update Date</td><td id="ovDate">-</td></tr>
-                    </table>
-                </div>
-
-                <div class="article-body" id="postContentArea"></div>
-
-                <div class="section-box">
-                    <div class="section-header">Important Links & Official Portal</div>
-                    <table>
-                        <tr>
-                            <td style="font-weight:700; color:#1e3a8a;" id="linkLabel">Official Website / Apply Online Link</td>
-                            <td style="text-align:center;"><a id="officialActionBtn" href="index.html" target="_blank" rel="noopener noreferrer" class="btn-action">Click Here &rarr;</a></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight:700; color:#1e3a8a;">Join WhatsApp / Support Desk</td>
-                            <td style="text-align:center;"><a href="pages.html?page=contact" class="btn-action btn-wa">Join Now</a></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight:700; color:#1e3a8a;">ShivMitra Home Page (More Jobs & Yojana)</td>
-                            <td style="text-align:center;"><a href="index.html" class="btn-action btn-home">Visit Home</a></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="share-bar">
-                    <span style="font-size:0.86rem; font-weight:600; color:#334155;">Share this update with friends & groups:</span>
-                    <a id="waShareBtn" href="#" target="_blank" class="btn-action btn-wa">Share on WhatsApp</a>
-                </div>
-            </div>
-
-            <div>
-                <div class="sidebar-card">
-                    <h3>Latest Updates & Jobs</h3>
-                    <div id="recentPostsList"><small style="color:#64748b;">Loading latest updates...</small></div>
-                </div>
-
-                <div class="sidebar-card">
-                    <h3>Browse Categories</h3>
-                    <a href="index.html?cat=Jobs" class="cat-link"><span>1. Sarkari & Bank Jobs</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Call%20Letter" class="cat-link"><span>2. Call Letter / Admit Card</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Sarkari%20Yojana" class="cat-link"><span>3. All Sarkari Yojana</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Forms" class="cat-link"><span>4. Sarkari & Bank Forms</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Legal%20Paid%20Format" class="cat-link"><span>5. Legal Paid Formats</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Online%20Service%20Details" class="cat-link"><span>6. Online Service Details</span><span>&rarr;</span></a>
-                </div>
-            </div>
-        </div>
+        <div id="adFooterSlot" class="ad-slot" style="display:none;"></div>
     </div>
 
+    <footer>&copy; 2026 Shiv Online Centre (ShivMitra.in). All Rights Reserved.</footer>
+
     <script>
-        async function loadPostDetails() {
+        let currentPost = null;
+
+        (function trackVisit() {
+            const logs = JSON.parse(localStorage.getItem('shiv_traffic_logs') || '[]');
+            logs.push(Date.now());
+            if (logs.length > 5000) logs.splice(0, logs.length - 5000);
+            localStorage.setItem('shiv_traffic_logs', JSON.stringify(logs));
+        })();
+
+        window.onload = async function() {
             const params = new URLSearchParams(window.location.search);
             const postId = params.get('id');
+            await loadAds();
+            if (!postId) {
+                document.getElementById('postContainer').innerHTML = `<p style="color:#dc2626;">Post not found.</p>`;
+                return;
+            }
+            await loadPostDetails(postId);
+        };
 
+        async function loadAds() {
+            try {
+                const res = await fetch(`ads.json?t=${Date.now()}`);
+                if (!res.ok) return;
+                const ads = await res.json();
+                if (ads.headerAd) { const h = document.getElementById('adHeaderSlot'); h.style.display = 'flex'; h.innerHTML = ads.headerAd; }
+                if (ads.sidebarAd) { const f = document.getElementById('adFooterSlot'); f.style.display = 'flex'; f.innerHTML = ads.sidebarAd; }
+            } catch (e) {}
+        }
+
+        function downloadLegalBundleFile(idx) {
+            if (!currentPost || !currentPost.legalFiles || !currentPost.legalFiles[idx]) return;
+            const file = currentPost.legalFiles[idx];
+            const a = document.createElement('a');
+            a.href = file.dataUrl;
+            a.download = file.name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        async function loadPostDetails(postId) {
             try {
                 const res = await fetch(`posts.json?t=${Date.now()}`);
-                const allPosts = await res.json();
-                const livePosts = allPosts.filter(p => p.status !== 'draft');
+                const posts = await res.json();
+                currentPost = (posts || []).find(p => String(p.id) === String(postId));
 
-                // Populate sidebar recent posts
-                const recentContainer = document.getElementById('recentPostsList');
-                recentContainer.innerHTML = "";
-                livePosts.slice(0, 6).forEach(item => {
-                    recentContainer.innerHTML += `
-                        <a href="post.html?id=${item.id}" class="recent-item">
-                            ${item.title}
-                            <small>${item.subCat || item.mainCat} • ${item.date || ''}</small>
-                        </a>
-                    `;
-                });
-
-                // Find matching post (supports both string and number IDs)
-                let post = livePosts.find(p => String(p.id) === String(postId));
-                if (!post && livePosts.length > 0) {
-                    post = livePosts[0];
-                }
-
-                if (!post) {
-                    document.getElementById('postTitle').innerText = "Post Not Found";
-                    document.getElementById('postContentArea').innerHTML = "<p>The requested post is currently unavailable. Please return to the homepage.</p>";
+                if (!currentPost) {
+                    document.getElementById('postContainer').innerHTML = `<p style="color:#dc2626;">This post may have been removed.</p>`;
                     return;
                 }
 
-                document.title = `${post.title} - ShivMitra.in`;
-                document.getElementById('bcCat').innerText = post.mainCat || "Updates";
-                document.getElementById('postSubCat').innerText = post.subCat || post.mainCat || "UPDATE";
-                document.getElementById('postTitle').innerText = post.title;
-                document.getElementById('postDate').innerText = post.date || "Recently Updated";
+                document.title = `${currentPost.title} — ShivMitra.in`;
+                const isLegal = currentPost.mainCat === 'Legal Format' || currentPost.mainCat === 'Legal Paid Format';
+                const bannerHtml = currentPost.bannerImg ? `<img src="${currentPost.bannerImg}" class="feature-img" alt="${currentPost.title}">` : "";
 
-                document.getElementById('ovCategory').innerText = `${post.mainCat || ''} (${post.subCat || ''})`;
-                document.getElementById('ovName').innerText = post.title;
-                document.getElementById('ovDate').innerText = post.date || "Recently Updated";
+                let legalBoxHtml = "";
+                if (isLegal && currentPost.price) {
+                    const filesBtns = (currentPost.legalFiles || []).map((f, i) => `
+                        <button type="button" class="btn-action amber" style="margin:4px 6px 4px 0;" onclick="downloadLegalBundleFile(${i})">
+                            &#11015; Download ${f.name} (${f.size})
+                        </button>`).join('');
 
-                if (post.price && Number(post.price) > 0) {
-                    document.getElementById('ovMode').innerText = `Instant Digital Draft (₹${post.price})`;
-                    document.getElementById('linkLabel').innerText = `Download / Order Paid Format (₹${post.price})`;
-                } else if (post.mainCat === 'Call Letter') {
-                    document.getElementById('ovMode').innerText = "Online Admit Card / Call Letter Download";
-                    document.getElementById('linkLabel').innerText = "Download Call Letter / Admit Card Direct Link";
+                    const extBtn = (currentPost.actionLink && currentPost.actionLink !== "#buy-legal-format")
+                        ? `<a href="${currentPost.actionLink}" target="_blank" class="btn-action">Get Instant Format Pack &#8594;</a>` : "";
+
+                    legalBoxHtml = `
+                        <div class="legal-offer-box">
+                            <span class="offer-pct">${currentPost.discountPercent > 0 ? currentPost.discountPercent + '% OFF • ' : ''}${currentPost.offerTag || 'SPECIAL OFFER'}</span>
+                            <div class="legal-price-row">
+                                <span class="offer-now">₹${currentPost.price}</span>
+                                ${currentPost.originalPrice && Number(currentPost.originalPrice) > Number(currentPost.price) ? `<span class="offer-old">₹${currentPost.originalPrice}</span>` : ''}
+                            </div>
+                            <div>${filesBtns} ${extBtn}</div>
+                        </div>`;
                 }
 
-                if (post.bannerImg) {
-                    const bannerEl = document.getElementById('postBannerImg');
-                    bannerEl.src = post.bannerImg;
-                    bannerEl.style.display = 'block';
+                let linksSection = "";
+                if (!isLegal) {
+                    const isCL = currentPost.mainCat === 'Call Letter';
+                    linksSection = `
+                        <div class="action-links-box">
+                            <h3>Important Direct Official Links</h3>
+                            ${currentPost.actionLink ? `<div class="link-row"><strong>${isCL ? 'Download Call Letter / Admit Card' : 'Apply Online / Direct Portal'}</strong><a href="${currentPost.actionLink}" target="_blank" class="btn-action">Click Here &#8594;</a></div>` : ''}
+                            ${currentPost.pdfLink ? `<div class="link-row"><strong>Official Notification / Notice PDF</strong><a href="${currentPost.pdfLink}" target="_blank" class="btn-action blue">View / Download PDF &#8594;</a></div>` : ''}
+                            ${currentPost.officialSite ? `<div class="link-row"><strong>Official Website Homepage</strong><a href="${currentPost.officialSite}" target="_blank" class="btn-action amber">Visit Website &#8594;</a></div>` : ''}
+                        </div>`;
                 }
 
-                document.getElementById('postContentArea').innerHTML = post.content || `<p>${post.summary || ''}</p>`;
-
-                const actionBtn = document.getElementById('officialActionBtn');
-                let finalUrl = (post.actionLink || "").trim();
-                const lowerTitle = (post.title || "").toLowerCase();
-
-                // Agar link khali ho ya news.google.com ho, toh title ke hisab se official site set karein
-                if (!finalUrl || finalUrl.includes('news.google.com')) {
-                    if (lowerTitle.includes('ibps')) finalUrl = 'https://www.ibps.in/';
-                    else if (lowerTitle.includes('ojas') || lowerTitle.includes('gsssb') || lowerTitle.includes('gujarat') || lowerTitle.includes('lokrakshak') || lowerTitle.includes('lrd')) finalUrl = 'https://ojas.gujarat.gov.in/';
-                    else if (lowerTitle.includes('gpsc')) finalUrl = 'https://gpsc-ojas.gujarat.gov.in/';
-                    else if (lowerTitle.includes('ssc')) finalUrl = 'https://ssc.gov.in/';
-                    else if (lowerTitle.includes('rrb') || lowerTitle.includes('railway')) finalUrl = 'https://www.rrbapply.gov.in/';
-                    else if (lowerTitle.includes('sbi')) finalUrl = 'https://sbi.co.in/web/careers';
-                    else finalUrl = 'https://www.ncs.gov.in/';
-                }
-                actionBtn.href = finalUrl;
-                if (post.actionLink && post.actionLink.trim() !== "") {
-                    actionBtn.href = post.actionLink;
-                } else {
-                    actionBtn.href = "index.html";
-                }
-
-                const shareText = encodeURIComponent(`${post.title}\nCheck full details here: ${window.location.href}`);
-                document.getElementById('waShareBtn').href = `https://api.whatsapp.com/send?text=${shareText}`;
-
-            } catch (err) {
-                document.getElementById('postTitle').innerText = "Unable to Load Post";
-                document.getElementById('postContentArea').innerHTML = "<p>Please check your internet connection and refresh the page.</p>";
+                document.getElementById('postContainer').innerHTML = `
+                    <div class="meta-bar">
+                        <span class="badge-cat">${currentPost.subCat || currentPost.mainCat}</span>
+                        <span class="badge-date">Updated: ${currentPost.date || '2026'}</span>
+                    </div>
+                    <h1 class="post-title">${currentPost.title}</h1>
+                    ${bannerHtml}
+                    ${legalBoxHtml}
+                    <div class="article-body">${currentPost.content || ''}</div>
+                    ${linksSection}
+                `;
+            } catch (e) {
+                document.getElementById('postContainer').innerHTML = `<p style="color:#dc2626;">Error loading content.</p>`;
             }
         }
-
-        window.onload = loadPostDetails;
     </script>
 </body>
 </html>
