@@ -553,26 +553,48 @@ Pay the prescribed fee online and download acknowledgement receipt."></textarea>
         // ==========================================
         // TRAFFIC ANALYTICS (DAILY / WEEKLY / MONTHLY)
         // ==========================================
-        function loadTrafficAnalytics() {
-            const logs = JSON.parse(localStorage.getItem('shiv_traffic_logs') || '[]');
-            const now = Date.now();
-            const dayMs = 24 * 60 * 60 * 1000;
-            const todayStr = new Date().toISOString().slice(0, 10);
+        async function loadTrafficAnalytics() {
+    const dayMs = 24 * 60 * 60 * 1000;
+    const now = Date.now();
+    const todayKey = new Date(now).toISOString().slice(0, 10);
 
-            const todayCount = logs.filter(ts => new Date(ts).toISOString().slice(0, 10) === todayStr).length;
-            const weekCount = logs.filter(ts => (now - ts) <= 7 * dayMs).length;
-            const monthCount = logs.filter(ts => (now - ts) <= 30 * dayMs).length;
+    try {
+        // 1. Today's Real Visitors
+        const todayRes = await fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${todayKey}`);
+        const todayData = todayRes.ok ? await todayRes.json() : { count: 0 };
+        document.getElementById('trToday').innerText = todayData.count || 0;
 
-            document.getElementById('trToday').innerText = todayCount;
-            document.getElementById('trWeekly').innerText = weekCount;
-            document.getElementById('trMonthly').innerText = monthCount;
+        // 2. Last 7 Days (Weekly) Real Visitors Sum
+        let weeklySum = 0;
+        const weekPromises = [];
+        for (let i = 0; i < 7; i++) {
+            const dKey = new Date(now - i * dayMs).toISOString().slice(0, 10);
+            weekPromises.push(
+                fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${dKey}`)
+                    .then(r => r.ok ? r.json() : { count: 0 })
+                    .catch(() => ({ count: 0 }))
+            );
         }
+        const weekResults = await Promise.all(weekPromises);
+        weekResults.forEach(item => { weeklySum += (item.count || 0); });
+        document.getElementById('trWeekly').innerText = weeklySum;
 
-        function resetTrafficStats() {
-            if (!confirm("Reset local traffic visitor logs?")) return;
-            localStorage.removeItem('shiv_traffic_logs');
-            loadTrafficAnalytics();
-        }
+        // 3. Monthly / Overall Real Visitors
+        const totalRes = await fetch(`https://api.counterapi.dev/v1/shivmitra-in/total`);
+        const totalData = totalRes.ok ? await totalRes.json() : { count: 0 };
+        document.getElementById('trMonthly').innerText = totalData.count || 0;
+    } catch (e) {
+        document.getElementById('trToday').innerText = "0";
+        document.getElementById('trWeekly').innerText = "0";
+        document.getElementById('trMonthly').innerText = "0";
+    }
+}
+
+function resetTrafficStats() {
+    localStorage.removeItem('shiv_traffic_logs');
+    loadTrafficAnalytics();
+    alert("Traffic view refreshed with live cloud data!");
+}
 
         // ==========================================
         // GITHUB CONNECTION & SYNC

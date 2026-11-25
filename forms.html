@@ -110,12 +110,20 @@
         let allForms = [];
         let activeCategory = "ALL";
 
-        (function trackVisit() {
-            const logs = JSON.parse(localStorage.getItem('shiv_traffic_logs') || '[]');
-            logs.push(Date.now());
-            if (logs.length > 5000) logs.splice(0, logs.length - 5000);
-            localStorage.setItem('shiv_traffic_logs', JSON.stringify(logs));
-        })();
+       (function trackRealVisitor() {
+    // 1. Agar Admin khud site dekh raha hai toh count NA karein
+    if (localStorage.getItem('shiv_gh_auth')) return;
+
+    // 2. Ek hi visitor ke baar-baar refresh ko rokne ke liye (30 min session)
+    const lastHit = sessionStorage.getItem('shiv_session_counted');
+    if (lastHit) return;
+    sessionStorage.setItem('shiv_session_counted', '1');
+
+    // 3. Global Cloud Counter API par real visitor hit bhejein
+    const todayKey = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    fetch(`https://api.counterapi.dev/v1/shivmitra-in/total/up`).catch(() => {});
+    fetch(`https://api.counterapi.dev/v1/shivmitra-in/day-${todayKey}/up`).catch(() => {});
+})();
 
         window.onload = async function() {
             await loadAds();
