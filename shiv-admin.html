@@ -22,7 +22,7 @@
 
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
-            width: 260px; background: #0f172a; color: white; padding: 20px 15px;
+            width: 265px; background: #0f172a; color: white; padding: 20px 15px;
             position: fixed; height: 100%; overflow-y: auto;
         }
         .sidebar h3 { color: #f59e0b; font-size: 1.1rem; padding: 0 10px 15px; border-bottom: 1px solid #1e293b; margin-bottom: 15px; }
@@ -33,8 +33,10 @@
             font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; display: block;
         }
         .side-btn:hover, .side-btn.active { background: #1e3a8a; color: white; }
+        .side-btn.legal-btn { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .side-btn.legal-btn:hover, .side-btn.legal-btn.active { background: #d97706; color: white; }
 
-        .main-content { margin-left: 260px; padding: 25px; }
+        .main-content { margin-left: 265px; padding: 25px; }
         .topbar {
             background: white; padding: 15px 22px; border-radius: 10px;
             display: flex; justify-content: space-between; align-items: center;
@@ -47,7 +49,7 @@
         .stat-box h2 { color: #1e3a8a; font-size: 1.6rem; margin-top: 4px; }
 
         .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
-        .panel-card h3 { color: #1e3a8a; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+        .panel-card h3 { color: #1e3a8a; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
 
         input, select, textarea {
             width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1;
@@ -57,11 +59,42 @@
 
         .btn-primary { background: #2563eb; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
         .btn-green { background: #059669; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; font-size: 0.95rem; }
         .btn-sm { padding: 6px 12px; border-radius: 5px; border: none; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
         .btn-edit { background: #2563eb; color: white; }
         .btn-del { background: #dc2626; color: white; }
         .btn-pub { background: #059669; color: white; }
         .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+
+        /* Legal Format Studio Specific Styling */
+        .legal-studio-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+        .studio-box {
+            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
+            padding: 16px; margin-bottom: 16px;
+        }
+        .studio-box h4 { color: #0f172a; font-size: 0.92rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .price-calc-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: center; }
+        .discount-pill {
+            background: #dcfce7; color: #166534; border: 1px solid #86efac;
+            padding: 10px; border-radius: 7px; text-align: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px;
+        }
+        .file-upload-zone {
+            border: 2px dashed #d97706; background: #fffbeb; padding: 18px;
+            border-radius: 10px; text-align: center; cursor: pointer; margin-bottom: 12px;
+        }
+        .uploaded-file-chip {
+            display: flex; justify-content: space-between; align-items: center;
+            background: white; border: 1px solid #cbd5e1; padding: 8px 12px;
+            border-radius: 6px; margin-bottom: 6px; font-size: 0.82rem; font-weight: 600;
+        }
+        .live-offer-card {
+            background: white; border: 2px solid #f59e0b; border-radius: 12px;
+            padding: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        .offer-badge {
+            display: inline-block; background: #dc2626; color: white; font-size: 0.74rem;
+            font-weight: 800; padding: 3px 9px; border-radius: 4px; margin-bottom: 8px;
+        }
 
         /* Horizontal Filter Bar for Drafts */
         .draft-toolbar {
@@ -75,7 +108,6 @@
             padding: 7px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
             cursor: pointer; transition: 0.15s;
         }
-        .filter-pill:hover { border-color: #1e3a8a; color: #1e3a8a; }
         .filter-pill.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
 
         .insert-toolbar {
@@ -86,8 +118,6 @@
             background: white; border: 1px solid #cbd5e1; color: #1e293b;
             padding: 5px 10px; border-radius: 5px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
         }
-        .tool-chip:hover { background: #1e3a8a; color: white; border-color: #1e3a8a; }
-
         .banner-studio {
             background: #eff6ff; border: 1px dashed #2563eb; border-radius: 10px;
             padding: 15px; margin-bottom: 14px;
@@ -96,7 +126,6 @@
             max-width: 100%; max-height: 220px; border-radius: 8px;
             margin-top: 10px; display: none; border: 2px solid #1e3a8a;
         }
-
         .links-box {
             background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
             padding: 14px; margin-bottom: 14px;
@@ -106,9 +135,10 @@
         th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #e2e8f0; }
         th { background: #f8fafc; color: #475569; font-weight: 700; }
 
-        @media (max-width: 850px) {
+        @media (max-width: 900px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .main-content { margin-left: 0; }
+            .legal-studio-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -129,15 +159,16 @@
     <div id="dashboardView" class="admin-layout">
         <div class="sidebar">
             <h3>SHIVMITRA ADMIN</h3>
-            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Create New Post</button>
+            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Create Job / Yojana Post</button>
+            <button class="side-btn legal-btn" id="nav-legal" onclick="switchTab('tab-legal', this)">&#9878; Legal Format Studio</button>
             <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">Auto-Jobs Server Queue</button>
 
-            <div class="side-label">View Posts by Category</div>
+            <div class="side-label">Manage Live Posts</div>
             <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">All Published Posts</button>
             <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Govt/Bank/Private)</button>
             <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. Government Schemes</button>
             <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms (Govt/Bank)</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Legal Paid Format', this)">4. Legal Paid Formats</button>
+            <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">4. Legal Format (Store)</button>
             <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">5. Online Service Guides</button>
             <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">6. Call Letter / Admit Card</button>
         </div>
@@ -155,12 +186,12 @@
             <div class="stats-row">
                 <div class="stat-box"><small>TOTAL LIVE POSTS</small><h2 id="statTotal">0</h2></div>
                 <div class="stat-box"><small>AUTO-JOBS DRAFTS</small><h2 id="statDrafts">0</h2></div>
-                <div class="stat-box"><small>PAID LEGAL FORMATS</small><h2 id="statPaid">0</h2></div>
+                <div class="stat-box"><small>LEGAL FORMAT PACKS</small><h2 id="statPaid">0</h2></div>
             </div>
 
-            <!-- TAB 1: Create or Edit Post -->
+            <!-- TAB 1: Create Normal Post (Jobs, Yojana, Forms, Call Letter) -->
             <div id="tab-create" class="panel-card tab-section">
-                <h3 id="formHeading">+ Create New Post (Direct Live to GitHub)</h3>
+                <h3 id="formHeading">+ Create New Information / Job Post</h3>
                 <input type="hidden" id="editPostId">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div>
@@ -169,7 +200,6 @@
                             <option value="Jobs">Jobs</option>
                             <option value="Sarkari Yojana">All Sarkari Yojana</option>
                             <option value="Forms">Forms</option>
-                            <option value="Legal Paid Format">Legal Paid Format</option>
                             <option value="Online Service Details">Online Service Details</option>
                             <option value="Call Letter">Call Letter / Admit Card</option>
                         </select>
@@ -184,7 +214,7 @@
                 
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Image (Upload Custom Bharti / Admit Card Banner):</strong>
+                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Image (Upload Custom Banner):</strong>
                         <div style="display:flex; gap:8px; flex-wrap:wrap;">
                             <label class="btn-sm" style="background:#1e3a8a; color:white; cursor:pointer;">
                                 &#128247; Upload Custom Image
@@ -198,24 +228,23 @@
                 </div>
 
                 <div class="links-box">
-                    <strong style="font-size:0.85rem; color:#1e3a8a; display:block; margin-bottom:10px;">Direct Official Portal & PDF Links (Zero Wrong Redirects):</strong>
+                    <strong style="font-size:0.85rem; color:#1e3a8a; display:block; margin-bottom:10px;">Direct Official Portal & PDF Links:</strong>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                         <input type="text" id="pLink" style="background:white;" placeholder="1. Apply Online / Call Letter Direct Link">
                         <input type="text" id="pPdfLink" style="background:white;" placeholder="2. Official Notification / Exam Notice PDF Link">
-                        <input type="text" id="pOfficialSite" style="background:white; margin-bottom:0;" placeholder="3. Official Website Homepage (e.g., https://ojas.gujarat.gov.in/)">
-                        <input type="number" id="pPrice" style="background:white; margin-bottom:0;" placeholder="Price in ₹ (Only for Legal Paid Formats, leave blank otherwise)">
+                        <input type="text" id="pOfficialSite" style="background:white; margin-bottom:0; grid-column: span 2;" placeholder="3. Official Website Homepage (e.g., https://ojas.gujarat.gov.in/)">
                     </div>
                 </div>
 
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-                    <button type="button" class="btn-auto-fill" onclick="fillTemplate('JOB')">&#128188; Insert Job Table Format (Dates, Fee, Age, Qualification)</button>
-                    <button type="button" class="btn-auto-fill" style="background:#0d9488;" onclick="fillTemplate('CALL_LETTER')">&#127915; Insert Call Letter Format (Exam Date, Login Details, Download Steps)</button>
+                    <button type="button" class="btn-auto-fill" onclick="fillTemplate('JOB')">&#128188; Insert Job Table Format</button>
+                    <button type="button" class="btn-auto-fill" style="background:#0d9488;" onclick="fillTemplate('CALL_LETTER')">&#127915; Insert Call Letter Format</button>
                 </div>
 
                 <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on the homepage card)..."></textarea>
 
                 <div class="insert-toolbar">
-                    <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Insert Anywhere in Article:</span>
+                    <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Insert Anywhere:</span>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('HEADING')">+ Heading</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('PARA')">+ Paragraph</button>
                     <label class="tool-chip" style="cursor:pointer;">
@@ -226,7 +255,7 @@
                     <button type="button" class="tool-chip" onclick="insertAtCursor('TABLE')">+ 2-Column Table</button>
                     <button type="button" class="tool-chip" onclick="insertAtCursor('NOTE')">+ Highlight Note Box</button>
                 </div>
-                <textarea id="pContent" rows="11" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here or use the format buttons above..."></textarea>
+                <textarea id="pContent" rows="10" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here..."></textarea>
 
                 <div style="display:flex; gap:10px;">
                     <button class="btn-green" id="publishBtn" onclick="savePost()">&#128640; Publish Live to Website</button>
@@ -234,24 +263,125 @@
                 </div>
             </div>
 
-            <!-- TAB 2: Auto-Jobs Server Queue with Horizontal Category Filter & Delete All -->
+            <!-- TAB 2: DEDICATED LEGAL FORMAT STUDIO -->
+            <div id="tab-legal" class="panel-card tab-section" style="display:none;">
+                <h3 style="color:#b45309;">&#9878; Legal Format Studio — Professional Drafts & Bundle Uploader</h3>
+                <input type="hidden" id="editLegalId">
+
+                <div class="legal-studio-grid">
+                    <!-- Left Column: Input & File Upload -->
+                    <div>
+                        <div class="studio-box">
+                            <h4>1. Legal Format Category & Title</h4>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                                <select id="lfSubCat" onchange="updateLegalPreview()">
+                                    <option value="Rent Agreement">Rent Agreement</option>
+                                    <option value="Affidavit">Affidavit (All Types)</option>
+                                    <option value="NOC & Other Drafts">NOC & Other Legal Drafts</option>
+                                    <option value="Merged Combo Pack">Merged Legal Combo Pack</option>
+                                </select>
+                                <select id="lfLanguage" onchange="updateLegalPreview()">
+                                    <option value="Gujarati + English">Gujarati + English</option>
+                                    <option value="English Only">English Only</option>
+                                    <option value="Gujarati Only">Gujarati Only</option>
+                                    <option value="Hindi + English">Hindi + English</option>
+                                </select>
+                            </div>
+                            <input type="text" id="lfTitle" oninput="updateLegalPreview()" placeholder="Format Title (e.g., 11 Months Residential Rent Agreement — Editable Word + PDF)">
+                        </div>
+
+                        <div class="studio-box">
+                            <h4>2. Smart Pricing & Discount Offer</h4>
+                            <div class="price-calc-row">
+                                <div>
+                                    <label style="font-size:0.75rem; font-weight:700; color:#475569;">Original Price (₹):</label>
+                                    <input type="number" id="lfOrigPrice" value="100" oninput="updateLegalPreview()" placeholder="e.g., 100">
+                                </div>
+                                <div>
+                                    <label style="font-size:0.75rem; font-weight:700; color:#059669;">Offer Price (₹):</label>
+                                    <input type="number" id="lfOfferPrice" value="70" oninput="updateLegalPreview()" placeholder="e.g., 70">
+                                </div>
+                                <div>
+                                    <label style="font-size:0.75rem; font-weight:700; color:#dc2626;">Auto Discount:</label>
+                                    <div id="lfDiscountBox" class="discount-pill">30% OFF</div>
+                                </div>
+                            </div>
+                            <input type="text" id="lfOfferTag" oninput="updateLegalPreview()" value="Limited Time Offer — Instant Download" placeholder="Offer Tagline (e.g., Limited Time Offer / Best Seller)">
+                        </div>
+
+                        <div class="studio-box">
+                            <h4>3. Upload Formats & Merge Multiple Drafts (Word, PDF, RTF, ZIP)</h4>
+                            <label class="file-upload-zone" style="display:block;">
+                                <strong style="color:#b45309; font-size:0.92rem;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong><br>
+                                <span style="font-size:0.78rem; color:#64748b;">Select multiple files together to automatically create a Merged Legal Bundle!</span>
+                                <input type="file" id="lfFileInput" multiple accept=".doc,.docx,.pdf,.rtf,.txt,.zip" style="display:none;" onchange="handleLegalFiles(event)">
+                            </label>
+                            <div id="uploadedFilesList"></div>
+                            <input type="text" id="lfExternalDriveLink" oninput="updateLegalPreview()" placeholder="OR Paste Google Drive / Payment Download Link (Optional if files uploaded above)">
+                        </div>
+
+                        <div class="studio-box">
+                            <h4>4. Customer Convincing Details & Key Highlights</h4>
+                            <textarea id="lfPitch" rows="3" oninput="updateLegalPreview()" placeholder="Write why the customer must buy this format (e.g., 100% Court & Notary approved advocate draft. Just fill in your name and address and print on stamp paper in 2 minutes!)"></textarea>
+                            <textarea id="lfHighlights" rows="4" oninput="updateLegalPreview()">✔ 100% Advocate Verified & Notary Ready Format
+✔ Instant Editable MS Word (.docx) + Print-Ready PDF Included
+✔ Easy Fill-in-the-Blank Fields (Save ₹500+ Advocate Drafting Fee)
+✔ Instant Download Access Immediately After Payment</textarea>
+                            <label style="font-size:0.78rem; font-weight:700; color:#1e3a8a;">Upload Sample Watermark / Cover Image (Optional):</label>
+                            <input type="file" accept="image/*" onchange="uploadLegalCover(event)">
+                            <input type="hidden" id="lfCoverData">
+                        </div>
+
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn-amber" id="publishLegalBtn" onclick="saveLegalFormat()" style="flex:1;">&#9878; Publish Legal Format Offer Live</button>
+                            <button id="cancelLegalBtn" class="btn-sm btn-del" style="display:none; padding:12px 18px;" onclick="resetLegalForm()">Cancel</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Live Customer Card Preview -->
+                    <div>
+                        <div style="position:sticky; top:20px;">
+                            <h4 style="font-size:0.85rem; color:#64748b; text-transform:uppercase; margin-bottom:10px;">Live Customer Store Preview</h4>
+                            <div class="live-offer-card">
+                                <span class="offer-badge" id="prevBadge">30% OFF • LIMITED TIME OFFER</span>
+                                <div style="font-size:0.75rem; color:#b45309; font-weight:700; margin-bottom:4px;" id="prevSubCat">RENT AGREEMENT • GUJARATI + ENGLISH</div>
+                                <h3 style="font-size:1.15rem; color:#0f172a; margin-bottom:10px; border:none; padding:0;" id="prevTitle">11 Months Residential Rent Agreement</h3>
+                                
+                                <div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:8px; margin-bottom:12px; display:flex; align-items:baseline; gap:10px;">
+                                    <span style="font-size:1.6rem; font-weight:800; color:#059669;" id="prevOfferPrice">₹70</span>
+                                    <span style="font-size:1rem; color:#94a3b8; text-decoration:line-through;" id="prevOrigPrice">₹100</span>
+                                    <span style="font-size:0.8rem; font-weight:700; color:#dc2626;" id="prevSaveText">(You Save ₹30)</span>
+                                </div>
+
+                                <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:12px;" id="prevPitch">
+                                    100% Advocate verified draft ready for stamp paper printing. Save time and drafting fees!
+                                </p>
+
+                                <div style="background:#f8fafc; padding:10px; border-radius:8px; font-size:0.8rem; color:#1e293b; line-height:1.6; margin-bottom:12px;" id="prevHighlights"></div>
+                                <div style="font-size:0.78rem; font-weight:700; color:#1e3a8a; margin-bottom:12px;" id="prevFilesInfo">Included Files: Ready to upload</div>
+                                <button type="button" class="btn-green" style="width:100%; pointer-events:none;">Download Instant Format Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Auto-Jobs Server Queue -->
             <div id="tab-auto" class="panel-card tab-section" style="display:none;">
                 <h3>Auto-Updating Jobs & Call Letters Queue (Pending Approval)</h3>
-                
                 <div class="draft-toolbar">
                     <div class="filter-pills" id="draftFilterPills"></div>
                     <button type="button" class="btn-sm btn-del" style="padding:8px 14px; font-weight:700;" onclick="deleteFilteredDrafts()">
                         &#128465; Delete All (<span id="deleteCountBadge">0</span>)
                     </button>
                 </div>
-
                 <table>
                     <thead><tr><th>Fetched Title</th><th>Category</th><th>Actions</th></tr></thead>
                     <tbody id="draftsTableBody"></tbody>
                 </table>
             </div>
 
-            <!-- TAB 3: Manage Posts by Topic -->
+            <!-- TAB 4: Manage Posts by Topic -->
             <div id="tab-manage" class="panel-card tab-section" style="display:none;">
                 <h3 id="manageHeading">Published Posts Manager</h3>
                 <table>
@@ -267,7 +397,6 @@
             'Jobs': ['Sarkari Jobs', 'Bank Jobs', 'Private Jobs', 'Apprenticeship / Contract Jobs'],
             'Sarkari Yojana': ['Central Yojana', 'State Yojana'],
             'Forms': ['Sarkari Forms', 'Bank Forms'],
-            'Legal Paid Format': ['Rent Agreement', 'Affidavit', 'NOC & Other Drafts'],
             'Online Service Details': ['PAN & Aadhaar', 'Ration & Certificates'],
             'Call Letter': ['Gujarat Call Letter (OJAS/GPSC)', 'Central & Bank Admit Card']
         };
@@ -276,6 +405,7 @@
         let fileSha = "";
         let currentFilterCat = "ALL";
         let currentDraftFilter = "ALL";
+        let legalUploadedFiles = []; // Stores { name, type, size, dataUrl }
 
         window.onload = function() {
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
@@ -283,6 +413,7 @@
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
                 updateSubOptions();
+                updateLegalPreview();
                 loadFromGitHub();
             }
         };
@@ -306,12 +437,13 @@
                 const res = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/posts.json`, {
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
-                if (!res.ok) throw new Error("Invalid Token or Repository Name! Ensure posts.json exists in your repo.");
+                if (!res.ok) throw new Error("Invalid Token or Repository Name!");
                 
                 localStorage.setItem('shiv_gh_auth', JSON.stringify({ user, repo, token }));
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
                 updateSubOptions();
+                updateLegalPreview();
                 await loadFromGitHub();
             } catch (e) {
                 err.innerText = e.message;
@@ -347,10 +479,6 @@
 
         async function pushToGitHub(commitMsg) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
-            const btn = document.getElementById('publishBtn');
-            btn.innerText = "Syncing with GitHub...";
-            btn.disabled = true;
-
             try {
                 const jsonStr = JSON.stringify(posts, null, 2);
                 const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
@@ -371,12 +499,9 @@
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message || "Update failed");
                 fileSha = result.content.sha;
-                alert("Success! Changes saved to GitHub.");
+                alert("Success! Saved & published live to GitHub.");
             } catch (e) {
                 alert("Error: " + e.message);
-            } finally {
-                btn.innerText = "🚀 Publish Live to Website";
-                btn.disabled = false;
             }
         }
 
@@ -400,6 +525,7 @@
                 btn.classList.add('active');
             }
             if (tabId === 'tab-auto') renderDrafts();
+            if (tabId === 'tab-legal') updateLegalPreview();
         }
 
         function viewCategoryPosts(cat, btn) {
@@ -409,6 +535,182 @@
             renderManageTable();
         }
 
+        // ==========================================
+        // LEGAL FORMAT STUDIO LOGIC
+        // ==========================================
+        function handleLegalFiles(event) {
+            const files = Array.from(event.target.files);
+            if (!files.length) return;
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    legalUploadedFiles.push({
+                        name: file.name,
+                        size: Math.round(file.size / 1024) + " KB",
+                        dataUrl: e.target.result
+                    });
+                    renderUploadedFilesList();
+                    updateLegalPreview();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeLegalFile(idx) {
+            legalUploadedFiles.splice(idx, 1);
+            renderUploadedFilesList();
+            updateLegalPreview();
+        }
+
+        function renderUploadedFilesList() {
+            const box = document.getElementById('uploadedFilesList');
+            if (legalUploadedFiles.length === 0) {
+                box.innerHTML = "";
+                return;
+            }
+            const mergeBanner = legalUploadedFiles.length > 1
+                ? `<div style="background:#dcfce7; color:#166534; padding:6px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; margin-bottom:8px;">&#128279; Merged Bundle Mode Active (${legalUploadedFiles.length} Formats Combined)</div>`
+                : "";
+            box.innerHTML = mergeBanner + legalUploadedFiles.map((f, i) => `
+                <div class="uploaded-file-chip">
+                    <span>&#128196; ${f.name} (${f.size})</span>
+                    <button type="button" class="btn-sm btn-del" onclick="removeLegalFile(${i})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function uploadLegalCover(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('lfCoverData').value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateLegalPreview() {
+            const subCat = document.getElementById('lfSubCat').value;
+            const lang = document.getElementById('lfLanguage').value;
+            const title = document.getElementById('lfTitle').value.trim() || "11 Months Residential Rent Agreement — Editable Word + PDF";
+            const orig = parseFloat(document.getElementById('lfOrigPrice').value) || 100;
+            const offer = parseFloat(document.getElementById('lfOfferPrice').value) || 70;
+            const tag = document.getElementById('lfOfferTag').value.trim() || "Limited Time Offer";
+            const pitch = document.getElementById('lfPitch').value.trim() || "100% Advocate verified legal format ready to print on stamp paper. Save time and high advocate fees!";
+            const highlights = document.getElementById('lfHighlights').value.trim();
+
+            const discountPct = orig > offer ? Math.round(((orig - offer) / orig) * 100) : 0;
+            const savings = orig > offer ? (orig - offer) : 0;
+
+            document.getElementById('lfDiscountBox').innerText = discountPct > 0 ? `${discountPct}% OFF` : "NO DISCOUNT";
+            document.getElementById('prevBadge').innerText = discountPct > 0 ? `${discountPct}% OFF • ${tag.toUpperCase()}` : tag.toUpperCase();
+            document.getElementById('prevSubCat').innerText = `${subCat.toUpperCase()} • ${lang.toUpperCase()}`;
+            document.getElementById('prevTitle').innerText = title;
+            document.getElementById('prevOfferPrice').innerText = `₹${offer}`;
+            document.getElementById('prevOrigPrice').innerText = orig > offer ? `₹${orig}` : "";
+            document.getElementById('prevSaveText').innerText = savings > 0 ? `(You Save ₹${savings})` : "";
+            document.getElementById('prevPitch').innerText = pitch;
+            document.getElementById('prevHighlights').innerHTML = highlights.split('\n').filter(Boolean).join('<br>');
+
+            const fileNames = legalUploadedFiles.map(f => f.name).join(', ');
+            document.getElementById('prevFilesInfo').innerText = fileNames
+                ? `Included Bundle (${legalUploadedFiles.length} Files): ${fileNames}`
+                : "Included Format: Editable Word + PDF Package";
+        }
+
+        async function saveLegalFormat() {
+            const editId = document.getElementById('editLegalId').value;
+            const subCat = document.getElementById('lfSubCat').value;
+            const lang = document.getElementById('lfLanguage').value;
+            const title = document.getElementById('lfTitle').value.trim();
+            const origPrice = parseFloat(document.getElementById('lfOrigPrice').value) || 0;
+            const offerPrice = parseFloat(document.getElementById('lfOfferPrice').value) || 0;
+            const offerTag = document.getElementById('lfOfferTag').value.trim();
+            const pitch = document.getElementById('lfPitch').value.trim();
+            const highlights = document.getElementById('lfHighlights').value.trim();
+            const extLink = document.getElementById('lfExternalDriveLink').value.trim();
+            const coverImg = document.getElementById('lfCoverData').value;
+
+            if (!title || !offerPrice || !pitch) {
+                return alert("Please enter Title, Offer Price, and Customer Description!");
+            }
+
+            const discountPct = origPrice > offerPrice ? Math.round(((origPrice - offerPrice) / origPrice) * 100) : 0;
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            const highlightItems = highlights.split('\n').filter(Boolean).map(line => `<tr><td>${line}</td></tr>`).join('');
+            const filesSummaryHtml = legalUploadedFiles.length > 0
+                ? `<p><strong>Included Downloadable Files (${legalUploadedFiles.length}):</strong> ${legalUploadedFiles.map(f => `${f.name} (${f.size})`).join(' | ')}</p>`
+                : "";
+
+            const formattedHtml = `
+<div class="note-box">
+  <strong>Special Discount Offer (${discountPct}% OFF):</strong> Original Price <del>₹${origPrice}</del> — Today's Offer Price <strong>₹${offerPrice}</strong> (${offerTag})
+</div>
+<p>${pitch}</p>
+<h3>Why Choose This Legal Format? (${lang})</h3>
+<table>
+  <tr><th>Key Benefits & Included Features</th></tr>
+  ${highlightItems}
+</table>
+${filesSummaryHtml}`;
+
+            const postPayload = {
+                id: editId ? Number(editId) : Date.now(),
+                mainCat: "Legal Format",
+                subCat: subCat,
+                title: title,
+                date: today,
+                price: String(offerPrice),
+                originalPrice: String(origPrice),
+                discountPercent: discountPct,
+                offerTag: offerTag,
+                language: lang,
+                actionLink: extLink || "#buy-legal-format",
+                pdfLink: "",
+                officialSite: "",
+                legalFiles: legalUploadedFiles,
+                summary: `${discountPct > 0 ? `[${discountPct}% OFF — ₹${offerPrice} Only] ` : `[₹${offerPrice}] `}${pitch}`,
+                content: formattedHtml,
+                bannerImg: coverImg,
+                status: "live"
+            };
+
+            const btn = document.getElementById('publishLegalBtn');
+            btn.innerText = "Publishing Legal Format...";
+            btn.disabled = true;
+
+            if (editId) {
+                const idx = posts.findIndex(x => x.id == editId);
+                if (idx !== -1) posts[idx] = postPayload;
+            } else {
+                posts.unshift(postPayload);
+            }
+
+            await pushToGitHub(`Publish Legal Format: ${title}`);
+            btn.innerText = "⚖ Publish Legal Format Offer Live";
+            btn.disabled = false;
+            resetLegalForm();
+            refreshStats();
+        }
+
+        function resetLegalForm() {
+            document.getElementById('editLegalId').value = "";
+            document.getElementById('lfTitle').value = "";
+            document.getElementById('lfOrigPrice').value = "100";
+            document.getElementById('lfOfferPrice').value = "70";
+            document.getElementById('lfPitch').value = "";
+            document.getElementById('lfExternalDriveLink').value = "";
+            document.getElementById('lfCoverData').value = "";
+            legalUploadedFiles = [];
+            renderUploadedFilesList();
+            document.getElementById('cancelLegalBtn').style.display = "none";
+            updateLegalPreview();
+        }
+
+        // ==========================================
+        // NORMAL POSTS & DRAFTS LOGIC
+        // ==========================================
         function uploadFeaturePhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -432,7 +734,6 @@
         function insertAtCursor(type) {
             const textarea = document.getElementById('pContent');
             let snippet = "";
-
             if (type === 'HEADING') {
                 const h = prompt("Enter Heading text:");
                 if (!h) return;
@@ -442,24 +743,21 @@
                 if (!p) return;
                 snippet = `\n<p>${p}</p>\n`;
             } else if (type === 'VIDEO') {
-                const rawUrl = prompt("Paste YouTube Video or Shorts URL:");
+                const rawUrl = prompt("Paste YouTube Video URL:");
                 if (!rawUrl) return;
                 const regExp = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
                 const match = rawUrl.trim().match(regExp);
-                if (!match || !match[1]) return alert("Please enter a valid YouTube link!");
+                if (!match || !match[1]) return alert("Invalid YouTube link!");
                 snippet = `\n<div class="video-embed"><iframe src="https://www.youtube.com/embed/${match[1]}" allowfullscreen></iframe></div>\n`;
             } else if (type === 'TABLE') {
-                snippet = `\n<table>\n  <tr><th>Post / Category Name</th><th>Total Posts / Details</th></tr>\n  <tr><td>Post Name 1</td><td>Detail Here</td></tr>\n  <tr><td>Post Name 2</td><td>Detail Here</td></tr>\n</table>\n`;
+                snippet = `\n<table>\n  <tr><th>Post / Category Name</th><th>Total Posts / Details</th></tr>\n  <tr><td>Post Name 1</td><td>Detail Here</td></tr>\n</table>\n`;
             } else if (type === 'NOTE') {
-                const n = prompt("Enter Highlight Note / Tip:");
+                const n = prompt("Enter Highlight Note:");
                 if (!n) return;
                 snippet = `\n<div class="note-box"><strong>Important Note:</strong> ${n}</div>\n`;
             }
-
             const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(end);
-            textarea.focus();
+            textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(textarea.selectionEnd);
         }
 
         function insertInlineImage(event) {
@@ -478,101 +776,40 @@
         function fillTemplate(type) {
             const title = document.getElementById('pTitle').value.trim() || "Official Update 2026";
             const lowerTitle = title.toLowerCase();
-            const isGujarat = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi', 'ahmedabad', 'surat', 'vadodara', 'rajkot'].some(w => lowerTitle.includes(w));
+            const isGujarat = ['gujarat', 'ojas', 'gpsc', 'gsssb', 'gsrtc', 'talati', 'lrd', 'lokrakshak', 'psi'].some(w => lowerTitle.includes(w));
 
             if (type === 'CALL_LETTER') {
                 document.getElementById('pMainCat').value = 'Call Letter';
                 updateSubOptions(isGujarat ? 'Gujarat Call Letter (OJAS/GPSC)' : 'Central & Bank Admit Card');
-
-                if (isGujarat) {
-                    document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ કોલ લેટર / હોલ ટિકિટ ડાઉનલોડ કરવાની લિંક જાહેર થઈ ગઈ છે. પરીક્ષાની તારીખ અને કોલ લેટર ડાઉનલોડ કરવાની સંપૂર્ણ વિગત નીચે મુજબ છે.`;
-                    document.getElementById('pContent').value = `<p><strong>${title}</strong> ની લેખિત / શારીરિક પરીક્ષા માટે કોલ લેટર (Admit Card) ઓફિશિયલ વેબસાઇટ પર મૂકવામાં આવ્યા છે:</p>
-<h3>1. પરીક્ષા અને કોલ લેટરની મહત્વની તારીખો (Important Exam Dates)</h3>
+                document.getElementById('pSummary').value = `${title} official Admit Card / Call Letter released. Check Exam Date and download steps below.`;
+                document.getElementById('pContent').value = `<p>Candidates can download <strong>${title}</strong> Call Letter using the schedule below:</p>
+<h3>1. Exam & Call Letter Schedule</h3>
 <table>
-  <tr><th>વિગત (Exam Event)</th><th>તારીખ (Date)</th></tr>
-  <tr><td>કોલ લેટર ડાઉનલોડ શરૂ તારીખ (Call Letter Release Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>પરીક્ષાની તારીખ (Exam Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>પરીક્ષાનું સ્થળ અને સમય (Exam Center & Shift)</td><td>કોલ લેટરમાં દર્શાવ્યા મુજબ</td></tr>
+  <tr><th>Event</th><th>Date</th></tr>
+  <tr><td>Call Letter Release Date</td><td>DD/MM/2026</td></tr>
+  <tr><td>Exam Date</td><td>DD/MM/2026</td></tr>
 </table>
-<h3>2. કોલ લેટર ડાઉનલોડ કરવા માટે જરૂરી વિગતો (Required Login Details)</h3>
+<h3>2. Required Login Details</h3>
 <table>
-  <tr><th>જરૂરી માહિતી (Credential)</th><th>વિગત (Details)</th></tr>
-  <tr><td>કન્ફર્મેશન નંબર (Confirmation Number)</td><td>ઓનલાઇન અરજી ફોર્મ મુજબ (8 અંકનો નંબર)</td></tr>
-  <tr><td>જન્મ તારીખ (Date of Birth)</td><td>DD-MM-YYYY ફોર્મેટમાં</td></tr>
-</table>
-<h3>3. કોલ લેટર કેવી રીતે ડાઉનલોડ કરવો? (How to Download)</h3>
-<p>1. નીચે આપેલ <strong>Download Call Letter</strong> લિંક પર ક્લિક કરો.<br>
-2. તમારી ભરતી (Select Job) પસંદ કરો.<br>
-3. તમારો <strong>Confirmation Number</strong> અને <strong>Birth Date</strong> દાખલ કરો.<br>
-4. <strong>Print Call Letter</strong> બટન પર ક્લિક કરીને PDF સેવ કરો અને પ્રિન્ટ કાઢો.</p>`;
-                } else {
-                    document.getElementById('pSummary').value = `${title} has been officially released. Check Exam Date, Shift Timings, Required Login Credentials, and direct Admit Card download link below.`;
-                    document.getElementById('pContent').value = `<p>Candidates appearing for <strong>${title}</strong> can now download their official Hall Ticket / Admit Card using the details below:</p>
-<h3>1. Admit Card & Exam Schedule (महत्वपूर्ण तिथियां)</h3>
-<table>
-  <tr><th>Activity / Event</th><th>Date & Status</th></tr>
-  <tr><td>Admit Card Release Date</td><td>DD/MM/2026 (Available Now)</td></tr>
-  <tr><td>Examination Date</td><td>DD/MM/2026</td></tr>
-  <tr><td>Exam City & Reporting Time</td><td>Mentioned on Call Letter</td></tr>
-</table>
-<h3>2. Credentials Required to Download (जरूरी जानकारी)</h3>
-<table>
-  <tr><th>Field</th><th>Details</th></tr>
-  <tr><td>Registration No. / Roll No.</td><td>As per Application Form</td></tr>
-  <tr><td>Password / Date of Birth</td><td>DD-MM-YYYY Format</td></tr>
-</table>
-<h3>3. Step-by-Step Download Process</h3>
-<p>1. Click on the <strong>Download Call Letter / Admit Card</strong> link below.<br>
-2. Enter your <strong>Registration Number / Roll Number</strong> and <strong>Date of Birth / Password</strong>.<br>
-3. Enter the Captcha code and click <strong>Login / Submit</strong>.<br>
-4. Download your Admit Card PDF and carry a printed copy along with a valid Photo ID to the exam center.</p>`;
-                }
-            } else {
-                if (isGujarat) {
-                    document.getElementById('pSummary').value = `${title} માટે ઓફિશિયલ નોટિફિકેશન જાહેર કરવામાં આવ્યું છે. મહત્વની તારીખો, લાયકાત, પગાર ધોરણ અને ઓનલાઇન અરજી કરવાની વિગત નીચે કોષ્ટકમાં આપેલ છે.`;
-                    document.getElementById('pContent').value = `<p><strong>${title}</strong> અંતર્ગત ભરતીની મહત્વની વિગતો અને ઓનલાઇન અરજી પ્રક્રિયા નીચે મુજબ છે:</p>
-<h3>1. મહત્વની તારીખો (Important Dates)</h3>
-<table>
-  <tr><th>વિગત (Event)</th><th>તારીખ (Date)</th></tr>
-  <tr><td>ઓનલાઇન અરજી શરૂ તારીખ (Start Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>અરજી કરવાની છેલ્લી તારીખ (Last Date)</td><td>DD/MM/2026</td></tr>
-  <tr><td>ફી ભરવાની છેલ્લી તારીખ (Fee Payment Last Date)</td><td>DD/MM/2026</td></tr>
-</table>
-<h3>2. અરજી ફી (Application Fee)</h3>
-<table>
-  <tr><th>કેટેગરી (Category)</th><th>ફી (Fee Amount)</th></tr>
-  <tr><td>General Category</td><td>₹100/-</td></tr>
-  <tr><td>SC / ST / SEBC / EWS / Female</td><td>₹0/- (કોઈ ફી નથી)</td></tr>
-</table>
-<h3>3. શૈક્ષણિક લાયકાત અને વય મર્યાદા (Qualification & Age Limit)</h3>
-<table>
-  <tr><th>માપદંડ (Criteria)</th><th>વિગત (Details)</th></tr>
-  <tr><td>શૈક્ષણિક લાયકાત (Qualification)</td><td>10 પાસ / 12 પાસ / ગ્રેજ્યુએશન</td></tr>
-  <tr><td>ઉંમર મર્યાદા (Age Limit)</td><td>18 થી 35 વર્ષ (નિયમ મુજબ છૂટછાટ)</td></tr>
+  <tr><th>Credential</th><th>Format</th></tr>
+  <tr><td>Confirmation / Roll Number</td><td>As per Application Form</td></tr>
+  <tr><td>Date of Birth</td><td>DD-MM-YYYY</td></tr>
 </table>`;
-                } else {
-                    document.getElementById('pSummary').value = `${title} official notification has been released. Check Important Dates, Eligibility, Application Fee, and direct Apply Online link below.`;
-                    document.getElementById('pContent').value = `<p>Official recruitment details and direct apply online links for <strong>${title}</strong> are provided below:</p>
-<h3>1. Important Dates (महत्वपूर्ण तिथियां)</h3>
+            } else {
+                document.getElementById('pSummary').value = `${title} official notification released. Check Important Dates, Eligibility, Fee, and Apply Online link below.`;
+                document.getElementById('pContent').value = `<p>Official recruitment details for <strong>${title}</strong>:</p>
+<h3>1. Important Dates</h3>
 <table>
-  <tr><th>Event / Activity</th><th>Date</th></tr>
-  <tr><td>Online Application Start Date</td><td>DD/MM/2026</td></tr>
-  <tr><td>Last Date to Apply Online</td><td>DD/MM/2026</td></tr>
-  <tr><td>Last Date for Fee Payment</td><td>DD/MM/2026</td></tr>
+  <tr><th>Event</th><th>Date</th></tr>
+  <tr><td>Start Date</td><td>DD/MM/2026</td></tr>
+  <tr><td>Last Date</td><td>DD/MM/2026</td></tr>
 </table>
-<h3>2. Application Fee (आवेदन शुल्क)</h3>
-<table>
-  <tr><th>Category</th><th>Application Fee</th></tr>
-  <tr><td>General / OBC / EWS</td><td>₹100/-</td></tr>
-  <tr><td>SC / ST / PwBD / All Female</td><td>₹0/- (Exempted)</td></tr>
-</table>
-<h3>3. Eligibility & Age Limit (पात्रता एवं आयु सीमा)</h3>
+<h3>2. Eligibility & Fee</h3>
 <table>
   <tr><th>Criteria</th><th>Details</th></tr>
-  <tr><td>Educational Qualification</td><td>10th Pass / 12th Pass / Graduate</td></tr>
-  <tr><td>Age Limit</td><td>18 to 35 Years (Age relaxation as per rules)</td></tr>
+  <tr><td>Qualification</td><td>10th / 12th / Graduate</td></tr>
+  <tr><td>Application Fee</td><td>₹100/- (General) | ₹0/- (Reserved)</td></tr>
 </table>`;
-                }
             }
         }
 
@@ -584,29 +821,32 @@
             const actionLink = document.getElementById('pLink').value.trim();
             const pdfLink = document.getElementById('pPdfLink').value.trim();
             const officialSite = document.getElementById('pOfficialSite').value.trim();
-            const price = document.getElementById('pPrice').value.trim();
             const summary = document.getElementById('pSummary').value.trim();
             const content = document.getElementById('pContent').value.trim();
             const bannerImg = document.getElementById('pBannerData').value;
 
-            if (!title || !summary || !content) return alert("Title, Summary, and Full Article Content are required!");
+            if (!title || !summary || !content) return alert("Title, Summary, and Content are required!");
 
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            const btn = document.getElementById('publishBtn');
+            btn.innerText = "Publishing Live...";
+            btn.disabled = true;
 
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
                 if (idx !== -1) {
-                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, price, summary, content, bannerImg, date: today, status: 'live' };
+                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
                 }
             } else {
                 posts.unshift({
-                    id: Date.now(),
-                    mainCat, subCat, title, date: today,
-                    actionLink, pdfLink, officialSite, price, summary, content, bannerImg, status: 'live'
+                    id: Date.now(), mainCat, subCat, title, date: today,
+                    actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live'
                 });
             }
 
             await pushToGitHub(`Publish post: ${title}`);
+            btn.innerText = "🚀 Publish Live to Website";
+            btn.disabled = false;
             resetForm();
             refreshStats();
         }
@@ -614,6 +854,25 @@
         function editPost(id) {
             const p = posts.find(x => x.id == id);
             if (!p) return;
+
+            if (p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format') {
+                switchTab('tab-legal', document.getElementById('nav-legal'));
+                document.getElementById('editLegalId').value = p.id;
+                document.getElementById('lfSubCat').value = p.subCat || "Rent Agreement";
+                document.getElementById('lfLanguage').value = p.language || "Gujarati + English";
+                document.getElementById('lfTitle').value = p.title;
+                document.getElementById('lfOrigPrice').value = p.originalPrice || p.price || "100";
+                document.getElementById('lfOfferPrice').value = p.price || "70";
+                document.getElementById('lfOfferTag').value = p.offerTag || "Limited Time Offer";
+                document.getElementById('lfExternalDriveLink').value = p.actionLink !== "#buy-legal-format" ? (p.actionLink || "") : "";
+                document.getElementById('lfCoverData').value = p.bannerImg || "";
+                legalUploadedFiles = p.legalFiles || [];
+                renderUploadedFilesList();
+                document.getElementById('cancelLegalBtn').style.display = "inline-block";
+                updateLegalPreview();
+                return;
+            }
+
             switchTab('tab-create', document.getElementById('nav-create'));
             document.getElementById('formHeading').innerText = "Edit & Update Post";
             document.getElementById('editPostId').value = p.id;
@@ -623,7 +882,6 @@
             document.getElementById('pLink').value = p.actionLink || "";
             document.getElementById('pPdfLink').value = p.pdfLink || "";
             document.getElementById('pOfficialSite').value = p.officialSite || "";
-            document.getElementById('pPrice').value = p.price || "";
             document.getElementById('pSummary').value = p.summary || "";
             document.getElementById('pContent').value = p.content || "";
             document.getElementById('pBannerData').value = p.bannerImg || "";
@@ -634,7 +892,7 @@
         }
 
         function resetForm() {
-            document.getElementById('formHeading').innerText = "+ Create New Post (Direct Live to GitHub)";
+            document.getElementById('formHeading').innerText = "+ Create New Information / Job Post";
             document.getElementById('editPostId').value = "";
             document.getElementById('pTitle').value = "";
             document.getElementById('pBannerData').value = "";
@@ -642,16 +900,15 @@
             document.getElementById('pLink').value = "";
             document.getElementById('pPdfLink').value = "";
             document.getElementById('pOfficialSite').value = "";
-            document.getElementById('pPrice').value = "";
             document.getElementById('pSummary').value = "";
             document.getElementById('pContent').value = "";
             document.getElementById('cancelEditBtn').style.display = 'none';
         }
 
         async function deletePost(id) {
-            if (!confirm("Are you sure you want to permanently delete this post?")) return;
+            if (!confirm("Are you sure you want to permanently delete this item?")) return;
             posts = posts.filter(x => x.id != id);
-            await pushToGitHub("Delete post from website");
+            await pushToGitHub("Delete item from website");
             renderManageTable();
             renderDrafts();
             refreshStats();
@@ -660,16 +917,22 @@
         function renderManageTable() {
             const tbody = document.getElementById('postsTableBody');
             tbody.innerHTML = "";
-            const list = posts.filter(p => p.status !== 'draft' && (currentFilterCat === 'ALL' || p.mainCat === currentFilterCat));
+            const list = posts.filter(p => {
+                if (p.status === 'draft') return false;
+                if (currentFilterCat === 'ALL') return true;
+                if (currentFilterCat === 'Legal Format') return p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format';
+                return p.mainCat === currentFilterCat;
+            });
             if (list.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live posts found in this category yet.</td></tr>`;
                 return;
             }
             list.forEach(p => {
+                const priceTag = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">₹${p.price}</span>` : "";
                 tbody.innerHTML += `
                     <tr>
-                        <td><b>${p.title}</b></td>
-                        <td>${p.mainCat}</td>
+                        <td><b>${p.title}</b>${priceTag}</td>
+                        <td>${p.mainCat === 'Legal Paid Format' ? 'Legal Format' : p.mainCat}</td>
                         <td>${p.subCat}</td>
                         <td style="white-space:nowrap;">
                             <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
@@ -680,7 +943,6 @@
             });
         }
 
-        // Horizontal Filter Pills + Drafts Rendering
         function setDraftFilter(cat) {
             currentDraftFilter = cat;
             renderDrafts();
@@ -703,8 +965,7 @@
                 { key: 'Call Letter', label: `Call Letter (${allDrafts.filter(d => d.mainCat === 'Call Letter').length})` }
             ];
 
-            const pillsContainer = document.getElementById('draftFilterPills');
-            pillsContainer.innerHTML = filterCats.map(fc => `
+            document.getElementById('draftFilterPills').innerHTML = filterCats.map(fc => `
                 <button type="button" class="filter-pill ${currentDraftFilter === fc.key ? 'active' : ''}" onclick="setDraftFilter('${fc.key}')">
                     ${fc.label}
                 </button>
@@ -737,14 +998,14 @@
         async function deleteFilteredDrafts() {
             const allDrafts = posts.filter(p => p.status === 'draft');
             const toDelete = getFilteredDraftsList(allDrafts);
-            if (toDelete.length === 0) return alert("No drafts available to delete in this tab!");
+            if (toDelete.length === 0) return alert("No drafts available to delete!");
 
             const label = currentDraftFilter === 'ALL' ? 'ALL pending drafts' : `all ${toDelete.length} drafts in "${currentDraftFilter}"`;
             if (!confirm(`Are you sure you want to permanently delete ${label}?`)) return;
 
             const deleteIds = new Set(toDelete.map(x => x.id));
             posts = posts.filter(p => !deleteIds.has(p.id));
-            await pushToGitHub(`Bulk delete ${toDelete.length} drafts (${currentDraftFilter})`);
+            await pushToGitHub(`Bulk delete ${toDelete.length} drafts`);
             renderDrafts();
             refreshStats();
         }
@@ -763,7 +1024,7 @@
         function refreshStats() {
             document.getElementById('statTotal').innerText = posts.filter(p => p.status !== 'draft').length;
             document.getElementById('statDrafts').innerText = posts.filter(p => p.status === 'draft').length;
-            document.getElementById('statPaid').innerText = posts.filter(p => p.mainCat === 'Legal Paid Format').length;
+            document.getElementById('statPaid').innerText = posts.filter(p => p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format').length;
         }
     </script>
 </body>
