@@ -23,10 +23,33 @@
     .search-box input { padding: 8px 12px; border-radius: 6px; border: none; width: 240px; font-size: 0.9rem; }
     .search-box button { background: #0284c7; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; }
 
-    .main-nav { background: #1e3a8a; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    /* Navigation Bar with Sub-Category Dropdowns */
+    .main-nav { background: #1e3a8a; box-shadow: 0 2px 6px rgba(0,0,0,0.14); position: sticky; top: 0; z-index: 200; }
     .nav-list { max-width: 1180px; margin: auto; display: flex; flex-wrap: wrap; list-style: none; }
-    .nav-list li a { display: block; color: #fff; text-decoration: none; padding: 10px 14px; font-size: 0.88rem; font-weight: 700; border-right: 1px solid rgba(255,255,255,0.12); }
-    .nav-list li a:hover, .nav-list li a.active { background: #0f2942; color: #38bdf8; }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: flex; align-items: center; gap: 5px; color: #fff; text-decoration: none;
+      padding: 11px 14px; font-size: 0.88rem; font-weight: 700;
+      border-right: 1px solid rgba(255,255,255,0.12); cursor: pointer;
+    }
+    .nav-link:hover, .nav-link.active { background: #0f2942; color: #38bdf8; }
+    .caret { font-size: 0.68rem; opacity: 0.85; }
+
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0; min-width: 240px;
+      background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #38bdf8;
+      border-radius: 0 0 8px 8px; box-shadow: 0 10px 25px rgba(15, 41, 66, 0.18);
+      z-index: 300; list-style: none; padding: 6px 0;
+    }
+    .nav-item:hover .dropdown-menu,
+    .nav-item.open .dropdown-menu { display: block; }
+    .dropdown-menu li a {
+      display: block; padding: 9px 15px; color: #0f172a; text-decoration: none;
+      font-size: 0.85rem; font-weight: 600; border-bottom: 1px solid #f1f5f9;
+    }
+    .dropdown-menu li:last-child a { border-bottom: none; }
+    .dropdown-menu li a:hover { background: #eff6ff; color: #1d4ed8; padding-left: 19px; transition: 0.15s; }
+    .dropdown-menu li a.view-all-sub { background: #f8fafc; color: #0f2942; font-weight: 800; }
 
     /* Social Join Strip */
     .social-strip { max-width: 1180px; margin: 12px auto 0; padding: 0 12px; }
@@ -77,6 +100,12 @@
 
     #filteredSection { display: none; background: #fff; border: 2px solid var(--blue); border-radius: 8px; padding: 16px; margin-bottom: 20px; }
     .filter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+    .sub-pills-bar { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px; }
+    .sub-pill {
+      background: #f1f5f9; border: 1px solid #cbd5e1; color: #0f2942;
+      padding: 5px 12px; border-radius: 18px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+    }
+    .sub-pill.active { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
 
     footer { background: var(--navy); color: #cbd5e1; margin-top: 32px; padding: 24px 16px; font-size: 0.88rem; }
     .footer-inner { max-width: 1180px; margin: auto; text-align: center; }
@@ -101,22 +130,80 @@
 
 <nav class="main-nav">
   <ul class="nav-list">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="#sarkari-jobs" onclick="openCategoryView('SARKARI')">Sarkari Jobs</a></li>
-    <li><a href="#call-letters" onclick="openCategoryView('CALL_LETTER')">Call Letters</a></li>
-    <li><a href="#bank-private" onclick="openCategoryView('BANK_PRIVATE')">Bank & Private Jobs</a></li>
-    <li><a href="#sarkari-yojana" onclick="openCategoryView('YOJANA')">Sarkari Yojana</a></li>
-    <li><a href="#legal-services" onclick="openCategoryView('LEGAL_SERVICES')">Paid Legal Formats & Services</a></li>
-    <li><a href="#download-forms" onclick="openCategoryView('FORMS')">Download Forms</a></li>
+    <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+
+    <!-- 1. Sarkari Jobs Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Sarkari Jobs <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="javascript:void(0)" onclick="openCategoryView('SARKARI', 'ALL')">All Sarkari Jobs</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('SARKARI', 'OJAS')">OJAS Gujarat Bharti</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('SARKARI', 'GPSC')">GPSC / GSSSB Updates</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('SARKARI', 'SSC')">SSC / Railway / Central Govt</a></li>
+      </ul>
+    </li>
+
+    <!-- 2. Call Letters Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Call Letters <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="javascript:void(0)" onclick="openCategoryView('CALL_LETTER', 'ALL')">All Call Letters / Admit Cards</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('CALL_LETTER', 'Gujarat Call Letter')">Gujarat Call Letter (OJAS/GPSC)</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('CALL_LETTER', 'Central & Bank')">Central & Bank Admit Card</a></li>
+      </ul>
+    </li>
+
+    <!-- 3. Bank & Private Jobs Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Bank & Private Jobs <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="javascript:void(0)" onclick="openCategoryView('BANK_PRIVATE', 'ALL')">All Bank & Private Jobs</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('BANK_PRIVATE', 'Bank Jobs')">Bank Jobs (IBPS / SBI / RBI)</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('BANK_PRIVATE', 'Private Jobs')">Private Jobs</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('BANK_PRIVATE', 'Apprenticeship')">Apprenticeship / Contract Jobs</a></li>
+      </ul>
+    </li>
+
+    <!-- 4. Sarkari Yojana Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Sarkari Yojana <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="javascript:void(0)" onclick="openCategoryView('YOJANA', 'ALL')">All Government Schemes</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('YOJANA', 'State Yojana')">Gujarat State Yojana</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('YOJANA', 'Central Yojana')">Central Govt Yojana</a></li>
+      </ul>
+    </li>
+
+    <!-- 5. Paid Legal Formats & Services Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Paid Legal Formats & Services <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'ALL')">All Legal Formats & Services</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'Rent Agreement')">Rent Agreement Formats</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'Affidavit')">Affidavit & NOC Drafts</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'Online Service')">Online Citizen Service Guides</a></li>
+      </ul>
+    </li>
+
+    <!-- 6. Download Forms Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Download Forms <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="forms.html" class="view-all-sub">Open Full Forms Directory &rarr;</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'Aadhaar')">Aadhaar & PAN Card Forms</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'Certificates')">Caste / Income / Domicile Forms</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'Bank')">Bank KYC & Account Forms</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'RTO')">RTO / Driving Licence Forms</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
-<!-- Repeat Visitor WhatsApp & Telegram Channel Strip -->
+<!-- English Social Join Strip -->
 <div class="social-strip">
   <div class="social-bar">
-    <span style="font-size:0.9rem; font-weight:700; color:#0f2942;">&#128276; Rojani Sarkari Bharti ane Call Letter Updates Mate Join Karo:</span>
+    <span style="font-size:0.9rem; font-weight:700; color:#0f2942;">&#128276; Join Our Channels for Daily Government Job & Call Letter Updates:</span>
     <div class="social-btns">
-      <!-- Apna WhatsApp Channel aur Telegram Link yahan daalein -->
       <a href="https://whatsapp.com/channel/" target="_blank" rel="noopener" class="btn-social wa-join">&#128172; Join WhatsApp Channel</a>
       <a href="https://t.me/" target="_blank" rel="noopener" class="btn-social tg-join">&#9992; Join Telegram Group</a>
     </div>
@@ -137,12 +224,13 @@
 <div class="ad-slot" id="headerAdSlot"></div>
 
 <div class="container">
-  <!-- Full Category / Search View Box -->
+  <!-- Full Category & Sub-Category View Box -->
   <div id="filteredSection">
     <div class="filter-header">
       <h3 id="filteredHeading" style="color:#0f2942;">Filtered Results</h3>
       <button onclick="closeFilteredView()" style="background:#dc2626; color:#fff; border:none; padding:5px 12px; border-radius:5px; font-weight:700; cursor:pointer;">Close &times;</button>
     </div>
+    <div class="sub-pills-bar" id="subPillsBar"></div>
     <ul class="cat-list" id="filteredResultsList"></ul>
   </div>
 
@@ -154,37 +242,37 @@
     <section class="cat-box" id="sarkari-jobs">
       <div class="cat-header bg-navy"><span>Sarkari Bharti (OJAS / GPSC / SSC)</span><span>&#128188;</span></div>
       <ul class="cat-list" id="listSarkari"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('SARKARI')">View All Sarkari Jobs &rarr;</button></div>
+      <div class="cat-footer"><button onclick="openCategoryView('SARKARI', 'ALL')">View All Sarkari Jobs &rarr;</button></div>
     </section>
 
     <section class="cat-box" id="call-letters">
       <div class="cat-header bg-green"><span>Call Letter / Admit Card</span><span>&#127915;</span></div>
       <ul class="cat-list" id="listCallLetter"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('CALL_LETTER')">View All Call Letters &rarr;</button></div>
+      <div class="cat-footer"><button onclick="openCategoryView('CALL_LETTER', 'ALL')">View All Call Letters &rarr;</button></div>
     </section>
 
     <section class="cat-box" id="bank-private">
       <div class="cat-header bg-blue"><span>Bank, Private & Apprentice Jobs</span><span>&#127974;</span></div>
       <ul class="cat-list" id="listBankPrivate"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('BANK_PRIVATE')">View All Bank & Private &rarr;</button></div>
+      <div class="cat-footer"><button onclick="openCategoryView('BANK_PRIVATE', 'ALL')">View All Bank & Private &rarr;</button></div>
     </section>
 
     <section class="cat-box" id="sarkari-yojana">
       <div class="cat-header bg-orange"><span>Sarkari Yojana (Govt Schemes)</span><span>&#127963;</span></div>
       <ul class="cat-list" id="listYojana"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('YOJANA')">View All Schemes &rarr;</button></div>
+      <div class="cat-footer"><button onclick="openCategoryView('YOJANA', 'ALL')">View All Schemes &rarr;</button></div>
     </section>
 
     <section class="cat-box" id="legal-services">
       <div class="cat-header bg-purple"><span>Legal Paid Formats & Online Services</span><span>&#9878;</span></div>
       <ul class="cat-list" id="listLegalServices"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('LEGAL_SERVICES')">View All Services &rarr;</button></div>
+      <div class="cat-footer"><button onclick="openCategoryView('LEGAL_SERVICES', 'ALL')">View All Services &rarr;</button></div>
     </section>
 
     <section class="cat-box" id="download-forms">
       <div class="cat-header bg-teal"><span>Download Bank & Govt Forms</span><span>&#128196;</span></div>
       <ul class="cat-list" id="listForms"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('FORMS')">View All Forms &rarr;</button></div>
+      <div class="cat-footer"><button onclick="openCategoryView('FORMS', 'ALL')">View All Forms &rarr;</button></div>
     </section>
   </div>
 </div>
@@ -194,11 +282,11 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="disclaimer.html">Disclaimer</a>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About Us</a> |
+      <a href="contact.html">Contact Us</a> |
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="disclaimer.html">Disclaimer</a> |
       <a href="terms.html">Terms & Conditions</a>
     </div>
     <p>&copy; 2026 Shiv Online Centre (ShivMitra.in). All Rights Reserved.</p>
@@ -211,6 +299,57 @@
 <script>
   let ALL_LIVE_POSTS = [];
   let CAT_BUCKETS = {};
+
+  const SUB_CHIPS_CONFIG = {
+    SARKARI: [
+      { key: "ALL", label: "All Sarkari Jobs" },
+      { key: "OJAS", label: "OJAS Gujarat" },
+      { key: "GPSC", label: "GPSC / GSSSB" },
+      { key: "SSC", label: "SSC / Railway / Central" }
+    ],
+    CALL_LETTER: [
+      { key: "ALL", label: "All Call Letters" },
+      { key: "Gujarat Call Letter", label: "Gujarat Call Letter (OJAS/GPSC)" },
+      { key: "Central & Bank", label: "Central & Bank Admit Card" }
+    ],
+    BANK_PRIVATE: [
+      { key: "ALL", label: "All Bank & Private" },
+      { key: "Bank Jobs", label: "Bank Jobs" },
+      { key: "Private Jobs", label: "Private Jobs" },
+      { key: "Apprenticeship", label: "Apprenticeship / Contract" }
+    ],
+    YOJANA: [
+      { key: "ALL", label: "All Schemes" },
+      { key: "State Yojana", label: "Gujarat State Yojana" },
+      { key: "Central Yojana", label: "Central Govt Yojana" }
+    ],
+    LEGAL_SERVICES: [
+      { key: "ALL", label: "All Formats & Services" },
+      { key: "Rent Agreement", label: "Rent Agreement" },
+      { key: "Affidavit", label: "Affidavit & NOC" },
+      { key: "Online Service", label: "Online Service Guides" }
+    ],
+    FORMS: [
+      { key: "ALL", label: "All Forms" },
+      { key: "Aadhaar", label: "Aadhaar & PAN" },
+      { key: "Certificates", label: "Caste / Income / Domicile" },
+      { key: "Bank", label: "Bank KYC & Loan" },
+      { key: "RTO", label: "RTO / Driving Licence" }
+    ]
+  };
+
+  function toggleNavDropdown(e, linkEl) {
+    e.preventDefault();
+    e.stopPropagation();
+    const parentLi = linkEl.parentElement;
+    const wasOpen = parentLi.classList.contains("open");
+    document.querySelectorAll(".nav-item.open").forEach(el => el.classList.remove("open"));
+    if (!wasOpen) parentLi.classList.add("open");
+  }
+
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".nav-item.open").forEach(el => el.classList.remove("open"));
+  });
 
   function renderItemRow(post) {
     const badge = post.price
@@ -280,30 +419,49 @@
     }
   }
 
-  function openCategoryView(bucketKey) {
+  function openCategoryView(bucketKey, subFilter = "ALL") {
+    document.querySelectorAll(".nav-item.open").forEach(el => el.classList.remove("open"));
     const names = {
-      SARKARI: "All Sarkari Bharti (OJAS / GPSC / SSC / Railway)",
-      CALL_LETTER: "All Call Letters & Admit Cards",
-      BANK_PRIVATE: "All Bank, Private & Apprenticeship Jobs",
-      YOJANA: "All Sarkari Yojana (Government Schemes)",
-      LEGAL_SERVICES: "All Legal Paid Formats & Online Services",
-      FORMS: "All Downloadable Bank & Government Forms"
+      SARKARI: "Sarkari Bharti (OJAS / GPSC / SSC / Railway)",
+      CALL_LETTER: "Call Letters & Admit Cards",
+      BANK_PRIVATE: "Bank, Private & Apprenticeship Jobs",
+      YOJANA: "Sarkari Yojana (Government Schemes)",
+      LEGAL_SERVICES: "Paid Legal Formats & Online Services",
+      FORMS: "Downloadable Bank & Government Forms"
     };
-    const items = CAT_BUCKETS[bucketKey] || [];
-    document.getElementById("filteredHeading").innerText = `${names[bucketKey]} (${items.length})`;
-    document.getElementById("filteredResultsList").innerHTML = items.length ? items.map(renderItemRow).join("") : "<li>No posts available in this category yet.</li>";
+
+    const baseItems = CAT_BUCKETS[bucketKey] || [];
+    const filteredItems = subFilter === "ALL"
+      ? baseItems
+      : baseItems.filter(p =>
+          (p.subCat || "").toLowerCase().includes(subFilter.toLowerCase()) ||
+          (p.title || "").toLowerCase().includes(subFilter.toLowerCase())
+        );
+
+    const pills = SUB_CHIPS_CONFIG[bucketKey] || [];
+    document.getElementById("subPillsBar").innerHTML = pills.map(sp =>
+      `<button type="button" class="sub-pill ${subFilter === sp.key ? 'active' : ''}" onclick="openCategoryView('${bucketKey}', '${sp.key}')">${sp.label}</button>`
+    ).join("");
+
+    const labelSuffix = subFilter === "ALL" ? "" : ` — ${subFilter}`;
+    document.getElementById("filteredHeading").innerText = `${names[bucketKey]}${labelSuffix} (${filteredItems.length})`;
+    document.getElementById("filteredResultsList").innerHTML = filteredItems.length
+      ? filteredItems.map(renderItemRow).join("")
+      : `<li style="color:#64748b;">No posts found under "${subFilter}" right now.</li>`;
     document.getElementById("filteredSection").style.display = "block";
     window.scrollTo({ top: 140, behavior: "smooth" });
   }
 
   function closeFilteredView() {
     document.getElementById("filteredSection").style.display = "none";
+    document.getElementById("subPillsBar").innerHTML = "";
     document.getElementById("searchInput").value = "";
   }
 
   function filterPosts() {
     const q = document.getElementById("searchInput").value.trim().toLowerCase();
     const sec = document.getElementById("filteredSection");
+    document.getElementById("subPillsBar").innerHTML = "";
     if (!q) { sec.style.display = "none"; return; }
     const matches = ALL_LIVE_POSTS.filter(p => (p.title || "").toLowerCase().includes(q) || (p.subCat || "").toLowerCase().includes(q));
     document.getElementById("filteredHeading").innerText = `Search Results for "${q}" (${matches.length})`;

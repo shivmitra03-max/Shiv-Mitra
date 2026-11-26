@@ -10,16 +10,27 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f1f5f9; color: #0f172a; }
 
+        /* Centered & Clickable Login Screen */
         .login-wrapper {
-            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center;
             background: linear-gradient(180deg, #0f2942 50%, #f1f5f9 50%); padding: 20px;
+            position: relative; z-index: 10;
         }
         .login-card {
-            background: white; width: 100%; max-width: 430px; padding: 30px 28px;
-            border-radius: 14px; box-shadow: 0 15px 35px rgba(0,0,0,0.12); text-align: center;
+            background: white; width: 100%; max-width: 420px; padding: 32px 28px;
+            border-radius: 14px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); text-align: center;
+            margin: 0 auto; position: relative; z-index: 20;
         }
         .login-logo { height: 64px; width: auto; max-width: 260px; object-fit: contain; margin: 0 auto 10px; display: block; }
-        .login-card p { color: #64748b; font-size: 0.83rem; margin-bottom: 20px; }
+        .login-card p { color: #64748b; font-size: 0.85rem; margin-bottom: 20px; }
+        .login-card input {
+            display: block; width: 100%; padding: 11px 13px; margin-bottom: 12px;
+            border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.92rem;
+        }
+        .login-card button {
+            display: block; width: 100%; padding: 12px; background: #1d4ed8; color: white;
+            border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+        }
 
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
@@ -166,7 +177,7 @@
             <input type="text" id="ghUser" value="shivmitra03-max" placeholder="GitHub Username (e.g., shivmitra03-max)">
             <input type="text" id="ghRepo" value="Shiv-Mitra" placeholder="Repository Name (e.g., Shiv-Mitra)">
             <input type="password" id="ghToken" placeholder="GitHub Fine-Grained Token (github_pat_...)">
-            <button class="btn-primary" id="loginBtn" onclick="connectGitHub()">Connect & Open Dashboard</button>
+            <button type="button" class="btn-primary" id="loginBtn" onclick="connectGitHub()">Connect & Open Dashboard</button>
             <p id="errMsg" style="color: #dc2626; margin-top: 10px; font-weight:600;"></p>
         </div>
     </div>
@@ -205,7 +216,7 @@
                 </div>
                 <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh</button>
-                    <a href="index.html#download-forms" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Forms Section &#8599;</a>
+                    <a href="forms.html" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Forms Page &#8599;</a>
                     <a href="index.html" target="_blank" style="background:#0f2942; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
                     <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
                 </div>
@@ -308,8 +319,8 @@
             <!-- TAB 2: DEDICATED FORMS UPLOAD STUDIO -->
             <div id="tab-forms" class="panel-card tab-section" style="display:none;">
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:16px;">
-                    <h3 style="border:none; margin:0; padding:0; color:#0d9488;">&#128196; Forms Upload Studio (Clean Title & Direct File Upload)</h3>
-                    <a href="index.html#download-forms" target="_blank" class="btn-sm" style="background:#0f2942; color:white; text-decoration:none;">View Forms on Home &#8599;</a>
+                    <h3 style="border:none; margin:0; padding:0; color:#0d9488;">&#128196; Forms Upload Studio (Fast GitHub /uploads/ Storage)</h3>
+                    <a href="forms.html" target="_blank" class="btn-sm" style="background:#0f2942; color:white; text-decoration:none;">View Forms Directory &#8599;</a>
                 </div>
                 <input type="hidden" id="editFormItemId">
 
@@ -329,15 +340,15 @@
                     </select>
 
                     <h4>2. Form Title (Only Title Needed)</h4>
-                    <input type="text" id="fmTitle" placeholder="Enter Exact Form Title (e.g., Aadhaar Card Address & Mobile Update Form PDF 2026)">
+                    <input type="text" id="fmTitle" placeholder="Enter Exact Form Title (e.g., PAN Card Correction Form 49A PDF 2026)">
 
-                    <h4>3. Upload Form File (PDF, Word, Excel, JPG, PNG, ZIP)</h4>
+                    <h4>3. Upload Form File (PDF, Word, Excel, JPG, PNG, ZIP — Saved to /uploads/)</h4>
                     <label class="file-upload-zone" style="border-color:#0d9488; background:#f0fdfa;">
                         <strong style="color:#0f766e;">&#128228; Click to Upload Form File (.pdf, .doc, .docx, .xls, .xlsx, .jpg, .png, .zip)</strong>
                         <input type="file" id="fmFileInput" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip" style="display:none;" onchange="handleFormFileUpload(event)">
                     </label>
                     <div id="fmUploadedChip"></div>
-                    <input type="text" id="fmDirectUrl" placeholder="OR Paste Official Govt Form Direct PDF URL (Optional if file uploaded above)">
+                    <input type="text" id="fmDirectUrl" placeholder="OR Paste Official Govt Form Direct PDF URL (Auto-filled on upload)">
                 </div>
 
                 <div style="display:flex; gap:10px;">
@@ -430,7 +441,7 @@
                         </div>
 
                         <div class="studio-box">
-                            <h4>3. Upload Formats & Merge Multiple Drafts</h4>
+                            <h4>3. Upload Formats & Merge Multiple Drafts (Saved to /uploads/)</h4>
                             <label class="file-upload-zone" style="border-color:#d97706; background:#fffbeb;">
                                 <strong style="color:#b45309;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong>
                                 <input type="file" id="lfFileInput" multiple accept=".doc,.docx,.pdf,.rtf,.txt,.zip" style="display:none;" onchange="handleLegalFiles(event)">
@@ -636,6 +647,40 @@
             }
         }
 
+        async function updateSitemapXml() {
+            const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            if (!auth) return;
+            try {
+                const livePosts = posts.filter(p => p.status !== 'draft');
+                const baseUrl = "https://shivmitra.in";
+                const todayIso = new Date().toISOString().split('T')[0];
+                const staticPages = ["", "forms.html", "about.html", "contact.html", "privacy.html", "disclaimer.html", "terms.html"];
+
+                const urls = staticPages.map(sp => {
+                    const loc = sp ? `${baseUrl}/${sp}` : baseUrl;
+                    return `  <url><loc>${loc}</loc><lastmod>${todayIso}</lastmod><priority>0.9</priority></url>`;
+                });
+                livePosts.forEach(p => {
+                    if (p.id) urls.push(`  <url><loc>${baseUrl}/post.html?id=${p.id}</loc><lastmod>${todayIso}</lastmod><priority>0.8</priority></url>`);
+                });
+
+                const xmlStr = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
+                let sha = "";
+                const chk = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/sitemap.xml?t=${Date.now()}`, {
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (chk.ok) sha = (await chk.json()).sha || "";
+
+                const body = { message: "Auto-update sitemap.xml", content: btoa(unescape(encodeURIComponent(xmlStr))) };
+                if (sha) body.sha = sha;
+                await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/sitemap.xml`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+            } catch (_) {}
+        }
+
         async function pushToGitHub(commitMsg) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             try {
@@ -661,12 +706,39 @@
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message || "Update failed");
                 fileSha = result.content.sha;
+                await updateSitemapXml();
                 document.getElementById('syncStatus').style.color = "#15803d";
                 document.getElementById('syncStatus').innerText = `(Synced ✔ ${posts.length} items)`;
-                alert("Success! Saved & published live to GitHub.");
+                alert("Success! Saved, Sitemap updated & published live.");
             } catch (e) {
                 alert("Error: " + e.message);
             }
+        }
+
+        // Upload binary file directly to /uploads/ folder on GitHub so posts.json stays ultra-fast
+        async function uploadBinaryToGitHubUploads(file) {
+            const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
+            const safeName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+            const ghPath = `uploads/${safeName}`;
+
+            const base64Body = await new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(r.result.split(',')[1]);
+                r.onerror = reject;
+                r.readAsDataURL(file);
+            });
+
+            const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/${ghPath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${auth.token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: `Upload file ${safeName}`, content: base64Body })
+            });
+            if (!res.ok) throw new Error("File upload to GitHub /uploads/ failed");
+            return ghPath;
         }
 
         async function loadSiteConfig() {
@@ -757,24 +829,29 @@
             renderManageTable();
         }
 
-        function handleFormFileUpload(event) {
+        async function handleFormFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
+            const chipBox = document.getElementById('fmUploadedChip');
+            chipBox.innerHTML = `<div class="uploaded-file-chip"><span>&#9203; Uploading ${file.name} to /uploads/...</span></div>`;
+            try {
+                const uploadedUrl = await uploadBinaryToGitHubUploads(file);
                 uploadedFormFile = {
                     name: file.name,
                     size: Math.round(file.size / 1024) + " KB",
                     ext: file.name.split('.').pop().toUpperCase(),
-                    dataUrl: e.target.result
+                    url: uploadedUrl
                 };
-                document.getElementById('fmUploadedChip').innerHTML = `
+                document.getElementById('fmDirectUrl').value = uploadedUrl;
+                chipBox.innerHTML = `
                     <div class="uploaded-file-chip">
-                        <span>&#128196; ${uploadedFormFile.name} (${uploadedFormFile.ext} • ${uploadedFormFile.size})</span>
+                        <span>&#128196; ${uploadedFormFile.name} (${uploadedFormFile.ext} • ${uploadedFormFile.size}) ✔</span>
                         <button type="button" class="btn-sm btn-del" onclick="clearFormFile()">Remove</button>
                     </div>`;
-            };
-            reader.readAsDataURL(file);
+            } catch (e) {
+                chipBox.innerHTML = "";
+                alert("Upload error: " + e.message);
+            }
         }
 
         function clearFormFile() { uploadedFormFile = null; document.getElementById('fmUploadedChip').innerHTML = ""; }
@@ -791,13 +868,14 @@
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
             const fileFormatLabel = uploadedFormFile ? uploadedFormFile.ext : "PDF";
             const fileSizeLabel = uploadedFormFile ? uploadedFormFile.size : "Official Form";
+            const finalUrl = directUrl || (uploadedFormFile ? uploadedFormFile.url : "forms.html");
 
             const formPost = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Forms", subCat, title, date: today,
                 fileType: fileFormatLabel, fileSize: fileSizeLabel,
-                formFileData: uploadedFormFile, pdfLink: directUrl || "", actionLink: directUrl || "index.html#download-forms",
-                officialSite: "https://ojas.gujarat.gov.in/",
+                pdfLink: finalUrl, actionLink: finalUrl,
+                officialSite: "forms.html",
                 summary: `Download official ${title} (${fileFormatLabel}) under ${subCat}.`,
                 content: `<p>Official printable form for <strong>${title}</strong> (${subCat}).</p>`,
                 status: "live"
@@ -841,6 +919,7 @@
             const servicePost = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Online Service Details", subCat, title, date: today,
+                serviceMeta: { fee, procTime, mode, docsRaw, stepsRaw },
                 actionLink: portalLink || "index.html", officialSite: portalLink || "index.html", pdfLink: portalLink || "index.html",
                 summary: `Step-by-step guide for ${title}. Required documents, fee (${fee}) & official portal link.`,
                 content: contentHtml, status: "live"
@@ -867,18 +946,22 @@
             document.getElementById('cancelServiceBtn').style.display = "none";
         }
 
-        function handleLegalFiles(event) {
+        async function handleLegalFiles(event) {
             const files = Array.from(event.target.files);
             if (!files.length) return;
-            files.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    legalUploadedFiles.push({ name: file.name, size: Math.round(file.size / 1024) + " KB", dataUrl: e.target.result });
+            for (const file of files) {
+                try {
+                    const url = await uploadBinaryToGitHubUploads(file);
+                    legalUploadedFiles.push({ name: file.name, size: Math.round(file.size / 1024) + " KB", url });
+                    if (!document.getElementById('lfExternalDriveLink').value.trim()) {
+                        document.getElementById('lfExternalDriveLink').value = url;
+                    }
                     renderUploadedFilesList();
                     updateLegalPreview();
-                };
-                reader.readAsDataURL(file);
-            });
+                } catch (e) {
+                    alert(`Failed to upload ${file.name}: ${e.message}`);
+                }
+            }
         }
 
         function removeLegalFile(idx) { legalUploadedFiles.splice(idx, 1); renderUploadedFilesList(); updateLegalPreview(); }
@@ -890,7 +973,7 @@
                 ? `<div style="background:#dcfce7; color:#166534; padding:6px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; margin-bottom:8px;">&#128279; Merged Bundle Mode Active (${legalUploadedFiles.length} Formats Combined)</div>` : "";
             box.innerHTML = mergeBanner + legalUploadedFiles.map((f, i) => `
                 <div class="uploaded-file-chip">
-                    <span>&#128196; ${f.name} (${f.size})</span>
+                    <span>&#128196; ${f.name} (${f.size}) ✔</span>
                     <button type="button" class="btn-sm btn-del" onclick="removeLegalFile(${i})">Remove</button>
                 </div>`).join('');
         }
@@ -1081,8 +1164,6 @@
                 document.getElementById('fmSubCat').value = p.subCat;
                 document.getElementById('fmTitle').value = p.title;
                 document.getElementById('fmDirectUrl').value = p.pdfLink || "";
-                uploadedFormFile = p.formFileData || null;
-                document.getElementById('fmUploadedChip').innerHTML = uploadedFormFile ? `<div class="uploaded-file-chip"><span>&#128196; ${uploadedFormFile.name}</span><button type="button" class="btn-sm btn-del" onclick="clearFormFile()">Remove</button></div>` : "";
                 document.getElementById('cancelFormItemBtn').style.display = "inline-block";
                 return;
             }
@@ -1093,6 +1174,13 @@
                 document.getElementById('osSubCat').value = p.subCat;
                 document.getElementById('osTitle').value = p.title;
                 document.getElementById('osPortalLink').value = p.actionLink || "";
+                if (p.serviceMeta) {
+                    document.getElementById('osFee').value = p.serviceMeta.fee || "";
+                    document.getElementById('osTime').value = p.serviceMeta.procTime || "";
+                    document.getElementById('osMode').value = p.serviceMeta.mode || "";
+                    document.getElementById('osDocs').value = p.serviceMeta.docsRaw || "";
+                    document.getElementById('osSteps').value = p.serviceMeta.stepsRaw || "";
+                }
                 document.getElementById('cancelServiceBtn').style.display = "inline-block";
                 return;
             }
@@ -1255,4 +1343,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
