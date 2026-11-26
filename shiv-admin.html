@@ -79,6 +79,17 @@
         .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
         .panel-card h3 { color: #0f2942; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
 
+        /* AI Magic Box */
+        .ai-magic-box {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border: 2px solid #8b5cf6; border-radius: 12px; padding: 16px; margin-bottom: 18px;
+        }
+        .ai-magic-header {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;
+        }
+        .ai-key-row { display: flex; gap: 8px; align-items: center; }
+        .ai-key-row input { width: 240px; margin-bottom: 0; padding: 7px 10px; font-size: 0.82rem; background: white; }
+
         input, select, textarea {
             width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1;
             border-radius: 7px; font-size: 0.9rem; outline: none;
@@ -89,6 +100,8 @@
         .btn-green { background: #15803d; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-teal { background: #0d9488; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-ai-magic { background: #6d28d9; color: white; border: none; padding: 10px 18px; border-radius: 7px; font-weight: 800; cursor: pointer; font-size: 0.88rem; }
+        .btn-ai-magic:hover { background: #5b21b6; }
         .btn-sm { padding: 6px 11px; border-radius: 5px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
         .btn-edit { background: #1d4ed8; color: white; }
         .btn-del { background: #dc2626; color: white; }
@@ -239,6 +252,23 @@
             <div id="tab-create" class="panel-card tab-section">
                 <h3 id="formHeading">+ Create Job / Yojana / Call Letter Post</h3>
                 <input type="hidden" id="editPostId">
+
+                <!-- 1-CLICK AI TEXT-TO-HTML FORMATTER -->
+                <div class="ai-magic-box">
+                    <div class="ai-magic-header">
+                        <strong style="color:#4c1d95; font-size:0.95rem;">&#10024; 1-Click AI Article & Table Generator (Gujarati / English)</strong>
+                        <div class="ai-key-row">
+                            <input type="password" id="geminiApiKeyInput" placeholder="Paste Gemini API Key (AIzaSy...)">
+                            <button type="button" class="btn-sm btn-pub" onclick="saveGeminiKey()">Save Key</button>
+                        </div>
+                    </div>
+                    <textarea id="rawAiInputText" rows="3" style="background:white; margin-bottom:8px;" placeholder="Koi bhi raw notification, PDF text, ya draft article yahan paste karein... AI apne aap Title, Summary aur poora HTML Table + FAQs article bana kar neeche fill kar dega!"></textarea>
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                        <button type="button" class="btn-ai-magic" id="aiFormatBtn" onclick="autoFormatWithGemini()">&#10024; Auto-Generate Complete HTML Article</button>
+                        <span id="aiFormatStatus" style="font-size:0.82rem; font-weight:700; color:#5b21b6;"></span>
+                    </div>
+                </div>
+
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div>
                         <label style="font-size:0.8rem; font-weight:600;">Select Main Category:</label>
@@ -537,6 +567,9 @@
 
         window.onload = function() {
             localStorage.removeItem('shiv_traffic_logs');
+            const savedGemini = localStorage.getItem('shiv_gemini_key');
+            if (savedGemini) document.getElementById('geminiApiKeyInput').value = savedGemini;
+
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (savedAuth && savedAuth.token) {
                 document.getElementById('loginView').style.display = 'none';
@@ -547,6 +580,77 @@
                 loadSiteConfig();
             }
         };
+
+        function saveGeminiKey() {
+            const key = document.getElementById('geminiApiKeyInput').value.trim();
+            if (!key) return alert("Please enter your Gemini API Key!");
+            localStorage.setItem('shiv_gemini_key', key);
+            alert("Gemini API Key saved in browser!");
+        }
+
+        async function autoFormatWithGemini() {
+            const apiKey = document.getElementById('geminiApiKeyInput').value.trim() || localStorage.getItem('shiv_gemini_key');
+            const rawText = document.getElementById('rawAiInputText').value.trim();
+            const statusEl = document.getElementById('aiFormatStatus');
+            const btn = document.getElementById('aiFormatBtn');
+
+            if (!apiKey) return alert("Pehle upar box mein apni Gemini API Key paste karke Save Key dabayein!");
+            if (rawText.length < 30) return alert("Pehle neeche wale box mein koi raw notification ya text paste karein!");
+
+            localStorage.setItem('shiv_gemini_key', apiKey);
+            btn.disabled = true;
+            btn.innerText = "Generating HTML Tables...";
+            statusEl.innerText = "AI is reading text & building clean tables...";
+
+            const systemPrompt = `Convert the user's raw Indian/Gujarat recruitment, yojana, or call letter text into a structured JSON object for ShivMitra.in.
+Return ONLY valid JSON with these exact keys:
+{
+  "mainCat": "Jobs" | "Sarkari Yojana" | "Call Letter",
+  "subCat": "Sarkari Jobs" | "Bank Jobs" | "Private Jobs" | "Apprenticeship / Contract Jobs" | "Central Yojana" | "State Yojana" | "Gujarat Call Letter (OJAS/GPSC)" | "Central & Bank Admit Card",
+  "title": "Clean SEO headline in same language (Gujarati or English)",
+  "summary": "2-3 line crisp summary",
+  "htmlContent": "Complete HTML article using <div class='note-box'>, <p>, <h3>, and clean <table><tr><th>...</th></tr><tr><td>...</td></tr></table> tags for Highlights, Dates, Qualification, Salary, Selection Process, Required Documents, and FAQs. Never include third-party blog names."
+}`;
+
+            const models = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.8-flash"];
+            let success = false;
+
+            for (const model of models) {
+                try {
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: systemPrompt + "\n\nRAW TEXT:\n" + rawText }] }],
+                            generationConfig: { responseMimeType: "application/json", temperature: 0.15 }
+                        })
+                    });
+                    if (!res.ok) continue;
+                    const data = await res.json();
+                    const jsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!jsonText) continue;
+
+                    const parsed = JSON.parse(jsonText);
+                    document.getElementById('pMainCat').value = parsed.mainCat || "Jobs";
+                    updateSubOptions(parsed.subCat || "");
+                    document.getElementById('pTitle').value = parsed.title || "";
+                    document.getElementById('pSummary').value = parsed.summary || "";
+                    document.getElementById('pContent').value = parsed.htmlContent || "";
+
+                    statusEl.style.color = "#15803d";
+                    statusEl.innerText = "✔ Ready! Niche check karke 'Publish Live to Website' dabayein.";
+                    success = true;
+                    break;
+                } catch (e) {}
+            }
+
+            if (!success) {
+                statusEl.style.color = "#dc2626";
+                statusEl.innerText = "Error: Check Gemini API Key or internet connection.";
+            }
+            btn.disabled = false;
+            btn.innerText = "✨ Auto-Generate Complete HTML Article";
+        }
 
         async function connectGitHub() {
             const user = document.getElementById('ghUser').value.trim();
@@ -604,7 +708,6 @@
                 if (data.content && data.content.trim().length > 0) {
                     rawText = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
                 } else if (data.download_url) {
-                    // Fallback for files larger than 1MB where GitHub API leaves content empty
                     const rawRes = await fetch(`${data.download_url}?t=${Date.now()}`);
                     rawText = await rawRes.text();
                 }
@@ -618,7 +721,6 @@
                 statusEl.style.color = "#15803d";
                 statusEl.innerText = `(Synced ✔ ${posts.length} items)`;
             } catch (e) {
-                // Emergency fallback: read public posts.json if API fails
                 try {
                     const pubRes = await fetch(`posts.json?t=${Date.now()}`);
                     if (pubRes.ok) {
@@ -627,7 +729,7 @@
                         renderManageTable();
                         renderDrafts();
                         statusEl.style.color = "#d97706";
-                        statusEl.innerText = `(Read-Only Mode: ${e.message} — Re-login with valid Token to edit)`;
+                        statusEl.innerText = `(Read-Only Mode: ${e.message})`;
                         return;
                     }
                 } catch (_) {}
@@ -639,7 +741,6 @@
         async function pushToGitHub(commitMsg) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             try {
-                // Always fetch latest SHA before pushing to avoid 409 Conflict
                 const latestRes = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json?t=${Date.now()}`, {
                     headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
@@ -837,7 +938,7 @@
             const docsRows = docsRaw.split('\n').filter(Boolean).map(d => `<tr><td>&#10004; ${d}</td></tr>`).join('');
             const stepsHtml = stepsRaw.split('\n').filter(Boolean).map((s, idx) => `<p><strong>Step ${idx + 1}:</strong> ${s}</p>`).join('');
 
-            const contentHtml = `<div class="note-box"><strong>Quick Service Summary:</strong> Apply online for ${title}. Govt Fee: ${fee} | Processing Time: ${procTime}.</div><h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>${fee}</td></tr><tr><td>Processing Time</td><td>${procTime}</td></tr><tr><td>Mode</td><td>${mode}</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr>${docsRows || '<tr><td>Aadhaar Card</td></tr>'}</table><h3>3. Step-by-Step Process</h3>${stepsHtml}`;
+            const contentHtml = `<div class="note-box"><strong>Quick Service Summary:</strong> Apply online for ${title}. Govt Fee: ${fee} | Processing Time: ${procTime}.</div><h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>${fee}</td></tr><tr><td>Processing Time</td><td>${procTime}</td></tr><tr><td>Mode</td><td>${mode}</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr>${docsRows || '<tr><td>Government Photo ID</td></tr>'}</table><h3>3. Step-by-Step Process</h3>${stepsHtml}`;
 
             const servicePost = {
                 id: editId ? Number(editId) : Date.now(),
@@ -1137,6 +1238,8 @@
         function resetForm() {
             document.getElementById('formHeading').innerText = "+ Create Job / Yojana / Call Letter Post";
             document.getElementById('editPostId').value = "";
+            document.getElementById('rawAiInputText').value = "";
+            document.getElementById('aiFormatStatus').innerText = "";
             document.getElementById('pTitle').value = "";
             document.getElementById('pBannerData').value = "";
             document.getElementById('bannerPreview').style.display = 'none';
