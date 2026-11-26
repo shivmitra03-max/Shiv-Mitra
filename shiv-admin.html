@@ -12,7 +12,7 @@
 
         .login-wrapper {
             min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            background: linear-gradient(180deg, #1e3a8a 50%, #f1f5f9 50%); padding: 20px;
+            background: linear-gradient(180deg, #0f2942 50%, #f1f5f9 50%); padding: 20px;
         }
         .login-card {
             background: white; width: 100%; max-width: 430px; padding: 30px 28px;
@@ -23,7 +23,7 @@
 
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
-            width: 270px; background: #0f172a; color: white; padding: 18px 14px;
+            width: 270px; background: #0f2942; color: white; padding: 18px 14px;
             position: fixed; height: 100%; overflow-y: auto;
         }
         .sidebar-logo-box {
@@ -32,13 +32,13 @@
         }
         .sidebar-logo-box img { height: 48px; width: auto; max-width: 220px; object-fit: contain; display: block; margin: 0 auto; }
 
-        .side-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
+        .side-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
         .side-btn {
             width: 100%; text-align: left; background: transparent; color: #cbd5e1;
             border: none; padding: 9px 12px; border-radius: 8px; cursor: pointer;
             font-size: 0.86rem; font-weight: 600; margin-bottom: 4px; display: block;
         }
-        .side-btn:hover, .side-btn.active { background: #1e3a8a; color: white; }
+        .side-btn:hover, .side-btn.active { background: #1d4ed8; color: white; }
         .side-btn.accent-amber { background: rgba(245, 158, 11, 0.14); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
         .side-btn.accent-amber.active { background: #d97706; color: white; }
         .side-btn.accent-teal { background: rgba(13, 148, 136, 0.16); color: #5eead4; border: 1px solid rgba(13, 148, 136, 0.35); }
@@ -53,9 +53,8 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
         }
 
-        /* Google Analytics 4 & Portal Overview Banner */
         .analytics-banner {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            background: linear-gradient(135deg, #0f2942 0%, #1e3a8a 100%);
             color: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 20px;
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
         }
@@ -75,10 +74,10 @@
         .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 20px; }
         .stat-box { background: white; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0; }
         .stat-box small { color: #64748b; font-weight: 700; font-size: 0.75rem; }
-        .stat-box h2 { color: #1e3a8a; font-size: 1.55rem; margin-top: 4px; }
+        .stat-box h2 { color: #0f2942; font-size: 1.55rem; margin-top: 4px; }
 
         .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
-        .panel-card h3 { color: #1e3a8a; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+        .panel-card h3 { color: #0f2942; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
 
         input, select, textarea {
             width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1;
@@ -86,14 +85,15 @@
         }
         input:focus, select:focus, textarea:focus { border-color: #2563eb; }
 
-        .btn-primary { background: #2563eb; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
-        .btn-green { background: #059669; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-primary { background: #1d4ed8; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
+        .btn-green { background: #15803d; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-teal { background: #0d9488; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
-        .btn-sm { padding: 6px 12px; border-radius: 5px; border: none; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
-        .btn-edit { background: #2563eb; color: white; }
+        .btn-sm { padding: 6px 11px; border-radius: 5px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-edit { background: #1d4ed8; color: white; }
         .btn-del { background: #dc2626; color: white; }
-        .btn-pub { background: #059669; color: white; }
+        .btn-pub { background: #15803d; color: white; }
+        .btn-view { background: #0f2942; color: white; }
         .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 
         .studio-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
@@ -133,7 +133,7 @@
             background: white; border: 1px solid #cbd5e1; color: #334155;
             padding: 7px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
         }
-        .filter-pill.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+        .filter-pill.active { background: #0f2942; color: white; border-color: #0f2942; }
 
         .insert-toolbar {
             background: #f8fafc; border: 1px solid #cbd5e1; border-bottom: none;
@@ -144,7 +144,7 @@
             padding: 5px 10px; border-radius: 5px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
         }
         .banner-studio { background: #eff6ff; border: 1px dashed #2563eb; border-radius: 10px; padding: 15px; margin-bottom: 14px; }
-        .banner-preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; border: 2px solid #1e3a8a; }
+        .banner-preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; border: 2px solid #0f2942; }
 
         table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
         th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #e2e8f0; }
@@ -163,11 +163,11 @@
         <div class="login-card">
             <img src="logo.png" alt="ShivMitra.in - Shiv Online Centre" class="login-logo">
             <p>GitHub Direct Publish Admin Login</p>
-            <input type="text" id="ghUser" placeholder="GitHub Username (e.g., shivmitra03-max)">
-            <input type="text" id="ghRepo" placeholder="Repository Name (e.g., Shiv-Mitra)">
+            <input type="text" id="ghUser" value="shivmitra03-max" placeholder="GitHub Username (e.g., shivmitra03-max)">
+            <input type="text" id="ghRepo" value="Shiv-Mitra" placeholder="Repository Name (e.g., Shiv-Mitra)">
             <input type="password" id="ghToken" placeholder="GitHub Fine-Grained Token (github_pat_...)">
             <button class="btn-primary" id="loginBtn" onclick="connectGitHub()">Connect & Open Dashboard</button>
-            <p id="errMsg" style="color: #dc2626; margin-top: 10px;"></p>
+            <p id="errMsg" style="color: #dc2626; margin-top: 10px; font-weight:600;"></p>
         </div>
     </div>
 
@@ -188,7 +188,7 @@
             <button class="side-btn" id="nav-ads" onclick="switchTab('tab-ads', this)">&#128176; AdSense & Ads Manager</button>
 
             <div class="side-label">Manage Live Content</div>
-            <button class="side-btn" onclick="viewCategoryPosts('ALL', this)">All Published Items</button>
+            <button class="side-btn" id="nav-manage-all" onclick="viewCategoryPosts('ALL', this)">All Published Items</button>
             <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Govt/Bank/Private)</button>
             <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. Government Schemes</button>
             <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms Directory</button>
@@ -199,16 +199,19 @@
 
         <div class="main-content">
             <div class="topbar">
-                <div><strong style="color:#1e3a8a;">Shiv Online Centre</strong> — Admin Panel <span id="syncStatus" style="font-size:0.8rem; color:#059669; font-weight:700;"></span></div>
+                <div>
+                    <strong style="color:#0f2942;">Shiv Online Centre</strong> — Admin Panel
+                    <span id="syncStatus" style="font-size:0.82rem; font-weight:700; margin-left:6px;"></span>
+                </div>
                 <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh</button>
-                    <a href="forms.html" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Forms Page &#8599;</a>
-                    <a href="index.html" target="_blank" style="background:#1e3a8a; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
+                    <a href="index.html#download-forms" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Forms Section &#8599;</a>
+                    <a href="index.html" target="_blank" style="background:#0f2942; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
                     <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
                 </div>
             </div>
 
-            <!-- GOOGLE ANALYTICS 4 (GA4) TRAFFIC CONTROL & REPORT LAUNCHER -->
+            <!-- GOOGLE ANALYTICS 4 (GA4) TRAFFIC CONTROL -->
             <div class="analytics-banner">
                 <div>
                     <strong style="font-size:1.05rem;">&#128202; Google Analytics 4 (GA4) — Live Traffic Monitor</strong>
@@ -241,8 +244,8 @@
                         <label style="font-size:0.8rem; font-weight:600;">Select Main Category:</label>
                         <select id="pMainCat" onchange="updateSubOptions()">
                             <option value="Jobs">Jobs</option>
-                            <option value="Sarkari Yojana">All Sarkari Yojana</option>
-                            <option value="Call Letter">Call Letter / Admit Card</option>
+                            <option value="Sarkari Yojana">Sarkari Yojana</option>
+                            <option value="Call Letter">Call Letter</option>
                         </select>
                     </div>
                     <div>
@@ -255,9 +258,9 @@
                 
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                        <strong style="font-size:0.86rem; color:#1e3a8a;">Post Feature Image (Upload Custom Banner):</strong>
+                        <strong style="font-size:0.86rem; color:#0f2942;">Post Feature Image (Upload Custom Banner):</strong>
                         <div style="display:flex; gap:8px;">
-                            <label class="btn-sm" style="background:#1e3a8a; color:white; cursor:pointer;">
+                            <label class="btn-sm" style="background:#0f2942; color:white; cursor:pointer;">
                                 &#128247; Upload Custom Image
                                 <input type="file" accept="image/*" style="display:none;" onchange="uploadFeaturePhoto(event)">
                             </label>
@@ -305,7 +308,7 @@
             <div id="tab-forms" class="panel-card tab-section" style="display:none;">
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:16px;">
                     <h3 style="border:none; margin:0; padding:0; color:#0d9488;">&#128196; Forms Upload Studio (Clean Title & Direct File Upload)</h3>
-                    <a href="forms.html" target="_blank" class="btn-sm" style="background:#0f172a; color:white; text-decoration:none;">View Dedicated Forms Page &#8599;</a>
+                    <a href="index.html#download-forms" target="_blank" class="btn-sm" style="background:#0f2942; color:white; text-decoration:none;">View Forms on Home &#8599;</a>
                 </div>
                 <input type="hidden" id="editFormItemId">
 
@@ -337,7 +340,7 @@
                 </div>
 
                 <div style="display:flex; gap:10px;">
-                    <button class="btn-teal" id="publishFormBtn" onclick="saveFormItem()">&#128196; Publish Form to Forms Page</button>
+                    <button class="btn-teal" id="publishFormBtn" onclick="saveFormItem()">&#128196; Publish Form to Website</button>
                     <button id="cancelFormItemBtn" class="btn-sm btn-del" style="display:none; padding:11px 18px;" onclick="resetFormStudio()">Cancel</button>
                 </div>
             </div>
@@ -466,7 +469,7 @@
                                 </div>
                                 <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:12px;" id="prevPitch">100% Advocate verified draft ready for stamp paper printing.</p>
                                 <div style="background:#f8fafc; padding:10px; border-radius:8px; font-size:0.8rem; color:#1e293b; line-height:1.6; margin-bottom:12px;" id="prevHighlights"></div>
-                                <div style="font-size:0.78rem; font-weight:700; color:#1e3a8a; margin-bottom:12px;" id="prevFilesInfo">Included Format: Word + PDF</div>
+                                <div style="font-size:0.78rem; font-weight:700; color:#0f2942; margin-bottom:12px;" id="prevFilesInfo">Included Format: Word + PDF</div>
                                 <button type="button" class="btn-green" style="width:100%; pointer-events:none;">Download Instant Format Now</button>
                             </div>
                         </div>
@@ -533,7 +536,7 @@
         let uploadedFormFile = null;
 
         window.onload = function() {
-            localStorage.removeItem('shiv_traffic_logs'); // Remove old local counter logs
+            localStorage.removeItem('shiv_traffic_logs');
             const savedAuth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (savedAuth && savedAuth.token) {
                 document.getElementById('loginView').style.display = 'none';
@@ -560,10 +563,10 @@
             err.innerText = "";
 
             try {
-                const res = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/posts.json`, {
+                const res = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/posts.json?t=${Date.now()}`, {
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
-                if (!res.ok) throw new Error("Invalid Token or Repository Name!");
+                if (!res.ok) throw new Error(`GitHub Error (${res.status}): Check Token or Repo Name!`);
                 localStorage.setItem('shiv_gh_auth', JSON.stringify({ user, repo, token }));
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
@@ -585,27 +588,66 @@
         async function loadFromGitHub() {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (!auth) return;
-            document.getElementById('syncStatus').innerText = "(Loading...)";
+            const statusEl = document.getElementById('syncStatus');
+            statusEl.style.color = "#0284c7";
+            statusEl.innerText = "(Loading...)";
+
             try {
                 const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json?t=${Date.now()}`, {
                     headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
-                fileSha = data.sha;
-                const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-                posts = JSON.parse(decoded) || [];
+                fileSha = data.sha || "";
+
+                let rawText = "";
+                if (data.content && data.content.trim().length > 0) {
+                    rawText = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+                } else if (data.download_url) {
+                    // Fallback for files larger than 1MB where GitHub API leaves content empty
+                    const rawRes = await fetch(`${data.download_url}?t=${Date.now()}`);
+                    rawText = await rawRes.text();
+                }
+
+                posts = rawText.trim() ? JSON.parse(rawText) : [];
+                if (!Array.isArray(posts)) posts = [];
+
                 refreshStats();
                 renderManageTable();
                 renderDrafts();
-                document.getElementById('syncStatus').innerText = "(Synced ✔)";
+                statusEl.style.color = "#15803d";
+                statusEl.innerText = `(Synced ✔ ${posts.length} items)`;
             } catch (e) {
-                document.getElementById('syncStatus').innerText = "(Sync Error)";
+                // Emergency fallback: read public posts.json if API fails
+                try {
+                    const pubRes = await fetch(`posts.json?t=${Date.now()}`);
+                    if (pubRes.ok) {
+                        posts = await pubRes.json();
+                        refreshStats();
+                        renderManageTable();
+                        renderDrafts();
+                        statusEl.style.color = "#d97706";
+                        statusEl.innerText = `(Read-Only Mode: ${e.message} — Re-login with valid Token to edit)`;
+                        return;
+                    }
+                } catch (_) {}
+                statusEl.style.color = "#dc2626";
+                statusEl.innerText = `(Sync Error: ${e.message})`;
             }
         }
 
         async function pushToGitHub(commitMsg) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             try {
+                // Always fetch latest SHA before pushing to avoid 409 Conflict
+                const latestRes = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json?t=${Date.now()}`, {
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (latestRes.ok) {
+                    const latestData = await latestRes.json();
+                    fileSha = latestData.sha;
+                }
+
                 const jsonStr = JSON.stringify(posts, null, 2);
                 const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
                 const res = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json`, {
@@ -620,13 +662,14 @@
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message || "Update failed");
                 fileSha = result.content.sha;
+                document.getElementById('syncStatus').style.color = "#15803d";
+                document.getElementById('syncStatus').innerText = `(Synced ✔ ${posts.length} items)`;
                 alert("Success! Saved & published live to GitHub.");
             } catch (e) {
                 alert("Error: " + e.message);
             }
         }
 
-        // Load & Save GA4 ID + AdSense Slots in ads.json
         async function loadSiteConfig() {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (!auth) return;
@@ -677,7 +720,7 @@
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message);
                 configSha = result.content.sha;
-                alert(isGaOnly ? "Google Analytics 4 ID saved! All pages will now track real visitors." : "AdSense slots saved!");
+                alert(isGaOnly ? "Google Analytics 4 ID saved!" : "AdSense slots saved!");
             } catch (e) {
                 alert("Error saving settings: " + e.message);
             } finally {
@@ -754,7 +797,8 @@
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Forms", subCat, title, date: today,
                 fileType: fileFormatLabel, fileSize: fileSizeLabel,
-                formFileData: uploadedFormFile, pdfLink: directUrl || "", actionLink: directUrl || "forms.html",
+                formFileData: uploadedFormFile, pdfLink: directUrl || "", actionLink: directUrl || "index.html#download-forms",
+                officialSite: "https://ojas.gujarat.gov.in/",
                 summary: `Download official ${title} (${fileFormatLabel}) under ${subCat}.`,
                 content: `<p>Official printable form for <strong>${title}</strong> (${subCat}).</p>`,
                 status: "live"
@@ -765,8 +809,8 @@
             if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = formPost; }
             else { posts.unshift(formPost); }
             await pushToGitHub(`Publish Form: ${title}`);
-            btn.innerText = "📄 Publish Form to Forms Page"; btn.disabled = false;
-            resetFormStudio(); refreshStats();
+            btn.innerText = "📄 Publish Form to Website"; btn.disabled = false;
+            resetFormStudio(); refreshStats(); renderManageTable();
         }
 
         function resetFormStudio() {
@@ -793,12 +837,12 @@
             const docsRows = docsRaw.split('\n').filter(Boolean).map(d => `<tr><td>&#10004; ${d}</td></tr>`).join('');
             const stepsHtml = stepsRaw.split('\n').filter(Boolean).map((s, idx) => `<p><strong>Step ${idx + 1}:</strong> ${s}</p>`).join('');
 
-            const contentHtml = `<h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>${fee}</td></tr><tr><td>Processing Time</td><td>${procTime}</td></tr><tr><td>Mode</td><td>${mode}</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr>${docsRows || '<tr><td>Aadhaar Card</td></tr>'}</table><h3>3. Step-by-Step Process</h3>${stepsHtml}`;
+            const contentHtml = `<div class="note-box"><strong>Quick Service Summary:</strong> Apply online for ${title}. Govt Fee: ${fee} | Processing Time: ${procTime}.</div><h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>${fee}</td></tr><tr><td>Processing Time</td><td>${procTime}</td></tr><tr><td>Mode</td><td>${mode}</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr>${docsRows || '<tr><td>Aadhaar Card</td></tr>'}</table><h3>3. Step-by-Step Process</h3>${stepsHtml}`;
 
             const servicePost = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Online Service Details", subCat, title, date: today,
-                actionLink: portalLink, officialSite: portalLink, pdfLink: "",
+                actionLink: portalLink || "index.html", officialSite: portalLink || "index.html", pdfLink: portalLink || "index.html",
                 summary: `Step-by-step guide for ${title}. Required documents, fee (${fee}) & official portal link.`,
                 content: contentHtml, status: "live"
             };
@@ -809,7 +853,7 @@
             else { posts.unshift(servicePost); }
             await pushToGitHub(`Publish Online Service: ${title}`);
             btn.innerText = "💻 Publish Online Service Guide"; btn.disabled = false;
-            resetServiceStudio(); refreshStats();
+            resetServiceStudio(); refreshStats(); renderManageTable();
         }
 
         function resetServiceStudio() {
@@ -911,9 +955,10 @@
             const postPayload = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Legal Format", subCat, title, date: today,
-                price: String(offerPrice), originalPrice: String(origPrice),
+                price: `₹${offerPrice}`, originalPrice: String(origPrice),
                 discountPercent: discountPct, offerTag, language: lang,
-                actionLink: extLink || "#buy-legal-format", legalFiles: legalUploadedFiles,
+                actionLink: extLink || "#buy-legal-format", pdfLink: extLink || "#buy-legal-format", officialSite: "index.html",
+                legalFiles: legalUploadedFiles,
                 summary: `${discountPct > 0 ? `[${discountPct}% OFF — ₹${offerPrice} Only] ` : `[₹${offerPrice}] `}${pitch}`,
                 content: formattedHtml, bannerImg: coverImg, status: "live"
             };
@@ -924,7 +969,7 @@
             else { posts.unshift(postPayload); }
             await pushToGitHub(`Publish Legal Format: ${title}`);
             btn.innerText = "⚖ Publish Legal Format Offer Live"; btn.disabled = false;
-            resetLegalForm(); refreshStats();
+            resetLegalForm(); refreshStats(); renderManageTable();
         }
 
         function resetLegalForm() {
@@ -989,12 +1034,12 @@
             const title = document.getElementById('pTitle').value.trim() || "Official Update 2026";
             if (type === 'CALL_LETTER') {
                 document.getElementById('pMainCat').value = 'Call Letter';
-                updateSubOptions('Central & Bank Admit Card');
+                updateSubOptions('Gujarat Call Letter (OJAS/GPSC)');
                 document.getElementById('pSummary').value = `${title} Admit Card / Call Letter released. Check Exam Date and download steps below.`;
-                document.getElementById('pContent').value = `<h3>1. Exam & Call Letter Schedule</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Release Date</td><td>DD/MM/2026</td></tr><tr><td>Exam Date</td><td>DD/MM/2026</td></tr></table><h3>2. Required Login Details</h3><table><tr><th>Field</th><th>Format</th></tr><tr><td>Confirmation / Roll No.</td><td>As per Form</td></tr><tr><td>Date of Birth</td><td>DD-MM-YYYY</td></tr></table>`;
+                document.getElementById('pContent').value = `<div class="note-box"><strong>Quick Overview:</strong> ${title} Call Letter is now available for download.</div><h3>1. Exam & Call Letter Schedule</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Release Date</td><td>DD/MM/2026</td></tr><tr><td>Exam Date</td><td>DD/MM/2026</td></tr></table><h3>2. Required Login Details</h3><table><tr><th>Field</th><th>Format</th></tr><tr><td>Confirmation / Roll No.</td><td>As per Application Form</td></tr><tr><td>Date of Birth</td><td>DD-MM-YYYY</td></tr></table>`;
             } else {
                 document.getElementById('pSummary').value = `${title} official notification released. Check Important Dates, Eligibility, Fee, and Apply Online link below.`;
-                document.getElementById('pContent').value = `<h3>1. Important Dates</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Start Date</td><td>DD/MM/2026</td></tr><tr><td>Last Date</td><td>DD/MM/2026</td></tr></table><h3>2. Eligibility & Fee</h3><table><tr><th>Criteria</th><th>Details</th></tr><tr><td>Qualification</td><td>10th / 12th / Graduate</td></tr><tr><td>Fee</td><td>₹100/- (General) | ₹0/- (Reserved)</td></tr></table>`;
+                document.getElementById('pContent').value = `<div class="note-box"><strong>Quick Overview:</strong> ${title} notification details are given below.</div><h3>1. Important Dates</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Start Date</td><td>DD/MM/2026</td></tr><tr><td>Last Date</td><td>DD/MM/2026</td></tr></table><h3>2. Eligibility & Fee</h3><table><tr><th>Criteria</th><th>Details</th></tr><tr><td>Qualification</td><td>10th / 12th / Graduate</td></tr><tr><td>Fee</td><td>₹100/- (General) | ₹0/- (Reserved)</td></tr></table>`;
             }
         }
 
@@ -1024,7 +1069,7 @@
 
             await pushToGitHub(`Publish post: ${title}`);
             btn.innerText = "🚀 Publish Live to Website"; btn.disabled = false;
-            resetForm(); refreshStats();
+            resetForm(); refreshStats(); renderManageTable();
         }
 
         function editPost(id) {
@@ -1059,8 +1104,8 @@
                 document.getElementById('lfSubCat').value = p.subCat || "Rent Agreement";
                 document.getElementById('lfLanguage').value = p.language || "Gujarati + English";
                 document.getElementById('lfTitle').value = p.title;
-                document.getElementById('lfOrigPrice').value = p.originalPrice || p.price || "100";
-                document.getElementById('lfOfferPrice').value = p.price || "70";
+                document.getElementById('lfOrigPrice').value = p.originalPrice || String(p.price || "100").replace('₹', '');
+                document.getElementById('lfOfferPrice').value = String(p.price || "70").replace('₹', '');
                 document.getElementById('lfOfferTag').value = p.offerTag || "Limited Time Offer";
                 document.getElementById('lfExternalDriveLink').value = p.actionLink !== "#buy-legal-format" ? (p.actionLink || "") : "";
                 document.getElementById('lfCoverData').value = p.bannerImg || "";
@@ -1074,7 +1119,7 @@
             switchTab('tab-create', document.getElementById('nav-create'));
             document.getElementById('formHeading').innerText = "Edit & Update Post";
             document.getElementById('editPostId').value = p.id;
-            document.getElementById('pMainCat').value = p.mainCat;
+            document.getElementById('pMainCat').value = p.mainCat || 'Jobs';
             updateSubOptions(p.subCat);
             document.getElementById('pTitle').value = p.title;
             document.getElementById('pLink').value = p.actionLink || "";
@@ -1124,13 +1169,14 @@
                 return;
             }
             list.forEach(p => {
-                const badge = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">₹${p.price}</span>` : (p.fileType ? ` <span style="background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.fileType}</span>` : "");
+                const badge = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.price}</span>` : (p.fileType ? ` <span style="background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.fileType}</span>` : "");
                 tbody.innerHTML += `
                     <tr>
                         <td><b>${p.title}</b>${badge}</td>
-                        <td>${p.mainCat === 'Legal Paid Format' ? 'Legal Format' : p.mainCat}</td>
-                        <td>${p.subCat}</td>
+                        <td>${p.mainCat === 'Legal Paid Format' ? 'Legal Format' : (p.mainCat || 'Jobs')}</td>
+                        <td>${p.subCat || '-'}</td>
                         <td style="white-space:nowrap;">
+                            <a href="post.html?id=${p.id}" target="_blank" class="btn-sm btn-view">View &#8599;</a>
                             <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Delete</button>
                         </td>
@@ -1198,7 +1244,7 @@
                 posts[idx].status = 'live';
                 posts[idx].date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
                 await pushToGitHub(`Approve draft: ${posts[idx].title}`);
-                renderDrafts(); refreshStats();
+                renderDrafts(); refreshStats(); renderManageTable();
             }
         }
 
