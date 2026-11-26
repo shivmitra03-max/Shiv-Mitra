@@ -1,402 +1,510 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShivMitra.in — Shiv Online Centre | Jobs, Yojana, Forms & Legal Formats</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f1f5f9; color: #0f172a; padding-bottom: 65px; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShivMitra.in | Sarkari Bharti, Call Letter, Yojana, Legal Formats & Forms</title>
+  <meta name="description" content="Shiv Online Centre (ShivMitra.in) - Latest Gujarat & Central Sarkari Jobs, Bank Bharti, Call Letters, Sarkari Yojana, Paid Legal Formats & Downloadable Forms." />
+  <style>
+    :root {
+      --navy: #0f2942;
+      --blue: #1d4ed8;
+      --red: #b91c1c;
+      --green: #15803d;
+      --purple: #6d28d9;
+      --orange: #c2410c;
+      --teal: #0f766e;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #cbd5e1;
+      --text: #1e293b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
 
-        .top-strip {
-            background: #0f172a; color: #cbd5e1; font-size: 0.72rem;
-            padding: 5px 16px; display: flex; justify-content: space-between; align-items: center;
-        }
-        .top-strip strong { color: #f59e0b; }
+    /* Top Header */
+    .top-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 16px 20px;
+      border-bottom: 3px solid #38bdf8;
+    }
+    .header-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo-area h1 { font-size: 1.7rem; font-weight: 900; letter-spacing: 0.3px; }
+    .logo-area h1 span { color: #38bdf8; }
+    .logo-area p { font-size: 0.85rem; color: #cbd5e1; }
+    .search-box { display: flex; gap: 6px; }
+    .search-box input {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      width: 240px;
+      font-size: 0.9rem;
+    }
+    .search-box button {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-        /* Larger, Prominent Header Logo */
-        .header {
-            background: #ffffff; padding: 8px 16px; border-bottom: 1px solid #e2e8f0;
-            position: sticky; top: 0; z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .brand-logo-img {
-            height: 62px; width: auto; max-width: 310px; object-fit: contain; display: block;
-        }
+    /* Navigation Bar */
+    .main-nav {
+      background: #1e3a8a;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-list {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+    .nav-list li a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      transition: background 0.2s;
+    }
+    .nav-list li a:hover, .nav-list li a.active { background: #0f2942; color: #38bdf8; }
 
-        .nav-links { display: flex; gap: 15px; align-items: center; }
-        .nav-links a { text-decoration: none; color: #1e293b; font-size: 0.85rem; font-weight: 700; }
-        .nav-links a:hover { color: #1e3a8a; }
+    /* Breaking News Ticker */
+    .ticker-wrap {
+      max-width: 1180px;
+      margin: 12px auto 0;
+      padding: 0 12px;
+    }
+    .ticker-bar {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .ticker-label {
+      background: var(--red);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 8px 14px;
+      white-space: nowrap;
+    }
+    .ticker-content {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+    }
+    .ticker-content a { color: var(--navy); text-decoration: none; margin-right: 28px; }
+    .ticker-content a:hover { color: var(--red); text-decoration: underline; }
 
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
-            color: white; padding: 16px 14px 20px; text-align: center;
-        }
-        .hero h1 { font-size: 1.25rem; font-weight: 800; line-height: 1.3; margin-bottom: 5px; }
-        .hero p { font-size: 0.78rem; color: #dbeafe; max-width: 560px; margin: 0 auto 12px; }
+    /* Main Container */
+    .container { max-width: 1180px; margin: 16px auto; padding: 0 12px; }
 
-        .search-bar {
-            max-width: 440px; margin: 0 auto; background: white; padding: 3px;
-            border-radius: 8px; display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.14);
-        }
-        .search-bar input {
-            flex: 1; border: none; padding: 7px 11px; font-size: 0.82rem; outline: none; border-radius: 6px;
-        }
-        .search-bar button {
-            background: #f59e0b; color: #0f172a; border: none; padding: 7px 14px;
-            border-radius: 6px; font-weight: 800; font-size: 0.8rem; cursor: pointer;
-        }
+    /* Top Highlight Boxes (MaruGujarat Style Quick Coloured Boxes) */
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 850px) { .highlight-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .highlight-grid { grid-template-columns: 1fr; } }
 
-        .container { max-width: 1120px; margin: 16px auto; padding: 0 14px; }
-        .ad-slot {
-            min-height: 90px; background: #e2e8f0; border-radius: 8px;
-            margin-bottom: 16px; display: flex; justify-content: center; align-items: center; overflow: hidden;
-        }
+    .hl-box {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 7px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      transition: transform 0.15s;
+    }
+    .hl-box:hover { transform: translateY(-2px); }
+    .hl-0 { background: #1d4ed8; }
+    .hl-1 { background: #15803d; }
+    .hl-2 { background: #b91c1c; }
+    .hl-3 { background: #7e22ce; }
+    .hl-4 { background: #c2410c; }
+    .hl-5 { background: #0f766e; }
 
-        .cat-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
-        }
-        .cat-card {
-            background: white; border: 1.5px solid #e2e8f0; border-radius: 10px;
-            padding: 11px 10px; cursor: pointer; transition: 0.15s;
-            display: flex; flex-direction: column; justify-content: center; text-decoration: none; color: inherit;
-        }
-        .cat-card:hover, .cat-card.active {
-            border-color: #2563eb; background: #eff6ff; box-shadow: 0 4px 10px rgba(37,99,235,0.09);
-        }
-        .cat-icon { font-size: 1.25rem; margin-bottom: 3px; }
-        .cat-card h3 { font-size: 0.85rem; font-weight: 800; color: #1e3a8a; line-height: 1.2; }
-        .cat-card span { font-size: 0.7rem; color: #64748b; margin-top: 2px; line-height: 1.25; }
+    /* 3-Column Category Boxes Grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 950px) { .portal-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .portal-grid { grid-template-columns: 1fr; } }
 
-        .sub-pills { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
-        .sub-pills::-webkit-scrollbar { display: none; }
-        .sub-pill {
-            background: white; border: 1px solid #cbd5e1; color: #334155;
-            padding: 5px 12px; border-radius: 20px; font-size: 0.76rem; font-weight: 700;
-            white-space: nowrap; cursor: pointer;
-        }
-        .sub-pill.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+    .cat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .cat-header {
+      padding: 11px 15px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bg-navy { background: var(--navy); }
+    .bg-green { background: var(--green); }
+    .bg-blue { background: var(--blue); }
+    .bg-orange { background: var(--orange); }
+    .bg-purple { background: var(--purple); }
+    .bg-teal { background: var(--teal); }
 
-        .sec-head {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px;
-        }
-        .sec-head h2 { font-size: 1.02rem; font-weight: 800; color: #0f172a; }
-        .sec-count { font-size: 0.74rem; font-weight: 700; color: #64748b; background: #e2e8f0; padding: 3px 9px; border-radius: 12px; }
+    .cat-list {
+      list-style: none;
+      padding: 8px 14px;
+      flex: 1;
+    }
+    .cat-list li {
+      padding: 9px 0;
+      border-bottom: 1px dashed #cbd5e1;
+      font-size: 0.91rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .cat-list li:last-child { border-bottom: none; }
+    .cat-list a {
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .cat-list a:hover { color: var(--blue); text-decoration: underline; }
+    .tag-new {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag-price {
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .cat-footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 8px 14px;
+      text-align: right;
+    }
+    .cat-footer a {
+      color: var(--blue);
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
 
-        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
-        .post-card {
-            background: white; border: 1px solid #e2e8f0; border-radius: 12px;
-            overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: 0.15s;
-        }
-        .post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.07); }
-        .card-banner { width: 100%; height: 150px; object-fit: cover; border-bottom: 1px solid #e2e8f0; }
-        .card-body { padding: 14px; flex: 1; }
-        .card-tags { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; gap: 6px; }
-        .tag-sub { background: #e0e7ff; color: #1e3a8a; font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 5px; }
-        .tag-date { font-size: 0.72rem; color: #64748b; font-weight: 600; }
-        .tag-offer { background: #dc2626; color: white; font-size: 0.7rem; font-weight: 800; padding: 3px 8px; border-radius: 5px; }
+    /* Search Filter Results Section */
+    #searchSection {
+      display: none;
+      background: #fff;
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
 
-        .post-card h3 { font-size: 0.96rem; font-weight: 800; color: #0f172a; line-height: 1.35; margin-bottom: 7px; }
-        .post-card h3 a { text-decoration: none; color: inherit; }
-        .post-card h3 a:hover { color: #1d4ed8; }
-        .post-card p { font-size: 0.81rem; color: #475569; line-height: 1.45; }
-
-        .price-strip {
-            background: #fffbeb; border: 1px solid #fde68a; border-radius: 7px;
-            padding: 7px 10px; margin-top: 10px; display: flex; align-items: center; gap: 8px;
-        }
-        .price-now { font-size: 1.15rem; font-weight: 800; color: #059669; }
-        .price-old { font-size: 0.82rem; color: #94a3b8; text-decoration: line-through; }
-
-        .card-footer {
-            padding: 10px 14px; background: #f8fafc; border-top: 1px solid #e2e8f0;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .btn-read {
-            background: #1e3a8a; color: white; text-decoration: none; padding: 7px 14px;
-            border-radius: 6px; font-size: 0.8rem; font-weight: 700; width: 100%; text-align: center;
-        }
-        .btn-read.legal { background: #d97706; }
-
-        .wa-float {
-            position: fixed; bottom: 16px; right: 16px; z-index: 99;
-            background: #16a34a; color: white; text-decoration: none;
-            width: 46px; height: 46px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.35rem; box-shadow: 0 6px 16px rgba(22,163,74,0.35);
-        }
-
-        footer {
-            background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 16px;
-            margin-top: 30px; font-size: 0.8rem;
-        }
-        .footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
-        .footer-links a { color: #e2e8f0; text-decoration: none; font-weight: 600; }
-
-        @media (max-width: 650px) {
-            .top-strip { font-size: 0.68rem; padding: 4px 10px; }
-            .brand-logo-img { height: 54px; max-width: 270px; }
-            .nav-links { display: none; }
-            .hero { padding: 14px 12px 16px; }
-            .hero h1 { font-size: 1.08rem; }
-            .hero p { font-size: 0.74rem; margin-bottom: 10px; }
-            .search-bar { max-width: 340px; }
-            .search-bar input { padding: 6px 9px; font-size: 0.78rem; }
-            .search-bar button { padding: 6px 12px; font-size: 0.76rem; }
-            .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .cat-card { padding: 9px 8px; }
-            .cat-card h3 { font-size: 0.81rem; }
-            .cat-card span { font-size: 0.67rem; }
-            .posts-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    /* Footer */
+    footer {
+      background: var(--navy);
+      color: #cbd5e1;
+      margin-top: 32px;
+      padding: 24px 16px;
+      font-size: 0.88rem;
+    }
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+      text-align: center;
+    }
+    .footer-links {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-links a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+    .footer-links a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-    <div class="top-strip">
-        <span><strong>Shiv Online Centre</strong> — Verified Digital Portal</span>
-        <span>shivmitra03@gmail.com</span>
+<header class="top-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <h1>Shiv<span>Mitra</span>.in</h1>
+      <p>Shiv Online Centre — Sarkari Bharti, Call Letter, Yojana, Legal Formats & Forms</p>
     </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search job, call letter, form..." onkeyup="filterPosts()" />
+      <button onclick="filterPosts()">Search</button>
+    </div>
+  </div>
+</header>
 
-    <header class="header">
-        <a href="index.html" style="text-decoration:none;">
-            <img src="logo.png" alt="ShivMitra.in - Shiv Online Centre" class="brand-logo-img">
-        </a>
-        <nav class="nav-links">
-            <a href="index.html" onclick="filterMain('ALL'); return false;">Home</a>
-            <a href="#jobs" onclick="filterMain('Jobs'); return false;">Jobs</a>
-            <a href="#callletter" onclick="filterMain('Call Letter'); return false;">Call Letter</a>
-            <a href="forms.html">Forms</a>
-            <a href="#services" onclick="filterMain('Online Service Details'); return false;">Online Services</a>
-            <a href="#legal" onclick="filterMain('Legal Format'); return false;">Legal Format</a>
-        </nav>
-    </header>
+<nav class="main-nav">
+  <ul class="nav-list">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="#sarkari-jobs">Sarkari Jobs</a></li>
+    <li><a href="#call-letters">Call Letters</a></li>
+    <li><a href="#bank-private">Bank & Private Jobs</a></li>
+    <li><a href="#sarkari-yojana">Sarkari Yojana</a></li>
+    <li><a href="#legal-services">Paid Legal Formats & Services</a></li>
+    <li><a href="#download-forms">Download Forms</a></li>
+  </ul>
+</nav>
 
-    <section class="hero">
-        <h1>Sarkari Jobs, Yojana, Forms Aur Legal Formats Ek Hi Jagah</h1>
-        <p>Verified recruitment updates, Call Letters, Yojana guides, printable forms & legal drafts.</p>
-        <div class="search-bar">
-            <input type="text" id="searchInput" onkeyup="renderFeed()" placeholder="Search Job, Form, Yojana, Legal Draft...">
-            <button onclick="renderFeed()">Search</button>
-        </div>
+<div class="ticker-wrap">
+  <div class="ticker-bar">
+    <div class="ticker-label">LATEST UPDATES</div>
+    <div class="ticker-content">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" id="breakingMarquee">
+        Loading latest recruitment & call letter updates...
+      </marquee>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Search Result Box -->
+  <div id="searchSection">
+    <h3 style="margin-bottom:10px; color:#0f2942;">Search Results</h3>
+    <ul class="cat-list" id="searchResultsList"></ul>
+  </div>
+
+  <!-- Top 6 Coloured Highlight Boxes (MaruGujarat Style) -->
+  <div class="highlight-grid" id="highlightGrid"></div>
+
+  <!-- 6-Box Multi-Category Grid -->
+  <div class="portal-grid">
+
+    <!-- Box 1: Sarkari Jobs -->
+    <section class="cat-box" id="sarkari-jobs">
+      <div class="cat-header bg-navy">
+        <span>Sarkari Bharti (OJAS / GPSC / SSC)</span>
+        <span>&#128188;</span>
+      </div>
+      <ul class="cat-list" id="listSarkari"><li>Loading...</li></ul>
+      <div class="cat-footer"><a href="#sarkari-jobs" onclick="showAllCategory('Sarkari Jobs')">View All Sarkari Jobs &rarr;</a></div>
     </section>
 
-    <div class="container">
-        <div id="adHeaderSlot" class="ad-slot" style="display:none;"></div>
+    <!-- Box 2: Call Letter / Admit Card -->
+    <section class="cat-box" id="call-letters">
+      <div class="cat-header bg-green">
+        <span>Call Letter / Admit Card</span>
+        <span>&#127915;</span>
+      </div>
+      <ul class="cat-list" id="listCallLetter"><li>Loading...</li></ul>
+      <div class="cat-footer"><a href="#call-letters" onclick="showAllCategory('Call Letter')">View All Call Letters &rarr;</a></div>
+    </section>
 
-        <div class="cat-grid">
-            <div class="cat-card active" id="card-ALL" onclick="filterMain('ALL', this)">
-                <div class="cat-icon">&#128240;</div>
-                <h3>All Updates</h3>
-                <span>Latest jobs, call letters & schemes</span>
-            </div>
-            <div class="cat-card" id="card-Jobs" onclick="filterMain('Jobs', this)">
-                <div class="cat-icon">&#128188;</div>
-                <h3>1. Jobs Portal</h3>
-                <span>Sarkari, Bank, Private & Apprentice</span>
-            </div>
-            <div class="cat-card" id="card-Call Letter" onclick="filterMain('Call Letter', this)">
-                <div class="cat-icon">&#127915;</div>
-                <h3>2. Call Letter</h3>
-                <span>OJAS, GPSC, SSC & Bank Admit Card</span>
-            </div>
-            <div class="cat-card" id="card-Sarkari Yojana" onclick="filterMain('Sarkari Yojana', this)">
-                <div class="cat-icon">&#127963;</div>
-                <h3>3. Sarkari Yojana</h3>
-                <span>Central & State Govt Schemes</span>
-            </div>
-            <a href="forms.html" class="cat-card">
-                <div class="cat-icon">&#128196;</div>
-                <h3>4. Forms Directory &#8599;</h3>
-                <span>Aadhaar, PAN, Ration, Bank & RTO PDF</span>
-            </a>
-            <div class="cat-card" id="card-Legal Format" onclick="filterMain('Legal Format', this)">
-                <div class="cat-icon">&#9878;</div>
-                <h3>5. Legal Format</h3>
-                <span>Rent Agreement, Affidavit & NOC</span>
-            </div>
-            <div class="cat-card" id="card-Online Service Details" onclick="filterMain('Online Service Details', this)" style="grid-column: span 2;">
-                <div class="cat-icon">&#128187;</div>
-                <h3>6. Online Service Guides</h3>
-                <span>PAN, Aadhaar, Digital Gujarat & Certificate Step-by-Step Guides</span>
-            </div>
-        </div>
+    <!-- Box 3: Bank, Private & Apprenticeship Jobs -->
+    <section class="cat-box" id="bank-private">
+      <div class="cat-header bg-blue">
+        <span>Bank, Private & Apprentice Jobs</span>
+        <span>&#127974;</span>
+      </div>
+      <ul class="cat-list" id="listBankPrivate"><li>Loading...</li></ul>
+      <div class="cat-footer"><a href="#bank-private" onclick="showAllCategory('Bank')">View All Bank & Private &rarr;</a></div>
+    </section>
 
-        <div class="sub-pills" id="subPillsBar"></div>
+    <!-- Box 4: Sarkari Yojana -->
+    <section class="cat-box" id="sarkari-yojana">
+      <div class="cat-header bg-orange">
+        <span>Sarkari Yojana (Govt Schemes)</span>
+        <span>&#127963;</span>
+      </div>
+      <ul class="cat-list" id="listYojana"><li>Loading...</li></ul>
+      <div class="cat-footer"><a href="#sarkari-yojana" onclick="showAllCategory('Yojana')">View All Schemes &rarr;</a></div>
+    </section>
 
-        <div class="sec-head">
-            <h2 id="feedHeading">Latest Updates</h2>
-            <span class="sec-count" id="feedCount">0 Results</span>
-        </div>
+    <!-- Box 5: Paid Legal Formats & Online Services -->
+    <section class="cat-box" id="legal-services">
+      <div class="cat-header bg-purple">
+        <span>Legal Paid Formats & Online Services</span>
+        <span>&#9878;</span>
+      </div>
+      <ul class="cat-list" id="listLegalServices"><li>Loading...</li></ul>
+      <div class="cat-footer"><a href="#legal-services" onclick="showAllCategory('Legal')">View All Services &rarr;</a></div>
+    </section>
 
-        <div class="posts-grid" id="postsGrid">
-            <p style="color:#64748b; padding:20px;">Loading latest updates...</p>
-        </div>
+    <!-- Box 6: Download Bank & Government Forms -->
+    <section class="cat-box" id="download-forms">
+      <div class="cat-header bg-teal">
+        <span>Download Bank & Govt Forms</span>
+        <span>&#128196;</span>
+      </div>
+      <ul class="cat-list" id="listForms"><li>Loading...</li></ul>
+      <div class="cat-footer"><a href="#download-forms" onclick="showAllCategory('Forms')">View All Forms &rarr;</a></div>
+    </section>
 
-        <div id="adFooterSlot" class="ad-slot" style="display:none; margin-top:24px;"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="terms.html">Terms & Conditions</a>
     </div>
+    <p>&copy; 2026 Shiv Online Centre (ShivMitra.in). All Rights Reserved.</p>
+    <p style="font-size:0.78rem; color:#94a3b8; margin-top:6px;">
+      Disclaimer: ShivMitra.in is an informational and digital facilitation portal. Always verify dates and instructions from the official government notification before applying.
+    </p>
+  </div>
+</footer>
 
-    <a href="https://wa.me/919999999999?text=Hello%20ShivMitra.in" target="_blank" class="wa-float" title="WhatsApp Support">&#128172;</a>
+<script>
+  let ALL_LIVE_POSTS = [];
 
-    <footer>
-        <div class="footer-links">
-            <a href="pages.html?page=about">About Us</a>
-            <a href="pages.html?page=contact">Contact Us</a>
-            <a href="pages.html?page=privacy">Privacy Policy</a>
-            <a href="pages.html?page=disclaimer">Disclaimer</a>
-            <a href="pages.html?page=terms">Terms & Conditions</a>
-        </div>
-        <div>&copy; 2026 Shiv Online Centre (ShivMitra.in). All Rights Reserved.</div>
-    </footer>
+  function renderItemRow(post) {
+    const badge = post.price
+      ? `<span class="tag-price">${post.price}</span>`
+      : `<span class="tag-new">NEW</span>`;
+    return `
+      <li>
+        <a href="post.html?id=${post.id}">&#9656; ${post.title}</a>
+        ${badge}
+      </li>
+    `;
+  }
 
-    <script>
-        let allPosts = [];
-        let activeMain = "ALL";
-        let activeSub = "ALL";
+  function fillBox(elementId, items, emptyMsg) {
+    const el = document.getElementById(elementId);
+    if (!items.length) {
+      el.innerHTML = `<li style="color:#64748b; font-size:0.86rem;">${emptyMsg}</li>`;
+      return;
+    }
+    el.innerHTML = items.slice(0, 10).map(renderItemRow).join("");
+  }
 
-        function initGoogleAnalytics(gaId) {
-            if (!gaId || localStorage.getItem('shiv_gh_auth')) return;
-            const s1 = document.createElement('script');
-            s1.async = true;
-            s1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-            document.head.appendChild(s1);
+  async function initPortal() {
+    try {
+      const resp = await fetch(`posts.json?t=${Date.now()}`);
+      const rawPosts = await resp.json();
+      ALL_LIVE_POSTS = rawPosts.filter(p => p.status === "live" || !p.status);
 
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', gaId);
-        }
+      // 1. Breaking News Marquee
+      const marquee = document.getElementById("breakingMarquee");
+      if (ALL_LIVE_POSTS.length) {
+        marquee.innerHTML = ALL_LIVE_POSTS.slice(0, 6).map(p =>
+          `<a href="post.html?id=${p.id}">&#9733; ${p.title}</a>`
+        ).join("");
+      } else {
+        marquee.innerHTML = "Welcome to ShivMitra.in — Latest Recruitment & Call Letter Updates";
+      }
 
-        window.onload = async function() {
-            const params = new URLSearchParams(window.location.search);
-            const urlCat = params.get('cat');
-            if (urlCat) activeMain = urlCat;
-            await loadSiteConfig();
-            await loadPosts();
-        };
+      // 2. Top 6 Coloured Highlight Boxes
+      const hlGrid = document.getElementById("highlightGrid");
+      hlGrid.innerHTML = ALL_LIVE_POSTS.slice(0, 6).map((p, idx) =>
+        `<a href="post.html?id=${p.id}" class="hl-box hl-${idx % 6}">${p.title}</a>`
+      ).join("");
 
-        async function loadSiteConfig() {
-            try {
-                const res = await fetch(`ads.json?t=${Date.now()}`);
-                if (!res.ok) return;
-                const cfg = await res.json();
-                if (cfg.gaId) initGoogleAnalytics(cfg.gaId);
-                if (cfg.headerAd) { const h = document.getElementById('adHeaderSlot'); h.style.display = 'flex'; h.innerHTML = cfg.headerAd; }
-                if (cfg.sidebarAd) { const f = document.getElementById('adFooterSlot'); f.style.display = 'flex'; f.innerHTML = cfg.sidebarAd; }
-            } catch (e) {}
-        }
+      // 3. Categorize Posts into the 6 Boxes
+      const sarkari = ALL_LIVE_POSTS.filter(p =>
+        p.subCat === "Sarkari Jobs" || (p.mainCat === "Jobs" && !["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat))
+      );
+      const callLetters = ALL_LIVE_POSTS.filter(p =>
+        p.mainCat === "Call Letter" || (p.subCat || "").toLowerCase().includes("call letter") || (p.subCat || "").toLowerCase().includes("admit")
+      );
+      const bankPrivate = ALL_LIVE_POSTS.filter(p =>
+        ["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat)
+      );
+      const yojana = ALL_LIVE_POSTS.filter(p =>
+        (p.mainCat || "").toLowerCase().includes("yojana") || (p.subCat || "").toLowerCase().includes("yojana") || (p.subCat || "").toLowerCase().includes("scheme")
+      );
+      const legalServices = ALL_LIVE_POSTS.filter(p =>
+        (p.mainCat || "").toLowerCase().includes("legal") || (p.mainCat || "").toLowerCase().includes("service") || (p.subCat || "").toLowerCase().includes("legal") || (p.subCat || "").toLowerCase().includes("service") || Boolean(p.price)
+      );
+      const forms = ALL_LIVE_POSTS.filter(p =>
+        (p.mainCat || "").toLowerCase().includes("form") || (p.subCat || "").toLowerCase().includes("form")
+      );
 
-        async function loadPosts() {
-            try {
-                const res = await fetch(`posts.json?t=${Date.now()}`);
-                const data = await res.json();
-                allPosts = (data || []).filter(p => p.status !== 'draft');
-                if (activeMain !== 'ALL') {
-                    const cardEl = document.getElementById(`card-${activeMain}`);
-                    if (cardEl) filterMain(activeMain, cardEl);
-                    else renderFeed();
-                } else {
-                    buildSubPills();
-                    renderFeed();
-                }
-            } catch (e) {
-                document.getElementById('postsGrid').innerHTML = `<p style="color:#dc2626;">Unable to load posts right now.</p>`;
-            }
-        }
+      fillBox("listSarkari", sarkari, "No Sarkari Jobs published yet.");
+      fillBox("listCallLetter", callLetters, "No Call Letters published yet.");
+      fillBox("listBankPrivate", bankPrivate, "No Bank / Private Jobs published yet.");
+      fillBox("listYojana", yojana, "No Sarkari Yojana updates yet.");
+      fillBox("listLegalServices", legalServices, "Legal Formats & Online Services coming soon.");
+      fillBox("listForms", forms, "Downloadable Bank & Govt Forms coming soon.");
+    } catch (err) {
+      console.error("Error loading posts.json:", err);
+    }
+  }
 
-        function filterMain(cat, el) {
-            activeMain = cat;
-            activeSub = "ALL";
-            document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
-            if (el) el.classList.add('active');
-            document.getElementById('feedHeading').innerText = cat === 'ALL' ? 'Latest Updates' : `${cat} Updates`;
-            buildSubPills();
-            renderFeed();
-        }
+  function filterPosts() {
+    const q = document.getElementById("searchInput").value.trim().toLowerCase();
+    const sec = document.getElementById("searchSection");
+    const list = document.getElementById("searchResultsList");
+    if (!q) {
+      sec.style.display = "none";
+      return;
+    }
+    const matches = ALL_LIVE_POSTS.filter(p =>
+      (p.title || "").toLowerCase().includes(q) || (p.subCat || "").toLowerCase().includes(q)
+    );
+    sec.style.display = "block";
+    list.innerHTML = matches.length
+      ? matches.map(renderItemRow).join("")
+      : `<li style="color:#b91c1c;">No matching updates found for "${q}".</li>`;
+  }
 
-        function buildSubPills() {
-            const bar = document.getElementById('subPillsBar');
-            const relevant = activeMain === 'ALL'
-                ? allPosts.filter(p => p.mainCat !== 'Forms')
-                : allPosts.filter(p => p.mainCat === activeMain || (activeMain === 'Legal Format' && p.mainCat === 'Legal Paid Format'));
+  function showAllCategory(keyword) {
+    document.getElementById("searchInput").value = keyword;
+    filterPosts();
+    window.scrollTo({ top: 150, behavior: "smooth" });
+  }
 
-            const subs = ["ALL", ...new Set(relevant.map(p => p.subCat).filter(Boolean))];
-            if (subs.length <= 1) { bar.innerHTML = ""; return; }
-            bar.innerHTML = subs.map(s => `
-                <button class="sub-pill ${activeSub === s ? 'active' : ''}" onclick="filterSub('${s}')">
-                    ${s === 'ALL' ? 'All Sub-Categories' : s}
-                </button>
-            `).join('');
-        }
-
-        function filterSub(sub) { activeSub = sub; buildSubPills(); renderFeed(); }
-
-        function renderFeed() {
-            const q = document.getElementById('searchInput').value.toLowerCase().trim();
-            const grid = document.getElementById('postsGrid');
-
-            const filtered = allPosts.filter(p => {
-                if (!q && activeMain === 'ALL' && p.mainCat === 'Forms') return false;
-                const isLegalMatch = activeMain === 'Legal Format' && (p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format');
-                const matchMain = q ? true : (activeMain === 'ALL' || p.mainCat === activeMain || isLegalMatch);
-                const matchSub = q ? true : (activeSub === 'ALL' || p.subCat === activeSub);
-                const matchText = !q || p.title.toLowerCase().includes(q) || (p.summary || '').toLowerCase().includes(q) || (p.subCat || '').toLowerCase().includes(q);
-                return matchMain && matchSub && matchText;
-            });
-
-            document.getElementById('feedHeading').innerText = q ? `Search Results for "${q}"` : (activeMain === 'ALL' ? 'Latest Updates' : `${activeMain} Updates`);
-            document.getElementById('feedCount').innerText = `${filtered.length} Results`;
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<p style="color:#64748b; padding:16px;">No updates found matching your search.</p>`;
-                return;
-            }
-
-            grid.innerHTML = filtered.map(p => {
-                const isLegal = p.mainCat === 'Legal Format' || p.mainCat === 'Legal Paid Format';
-                const isForm = p.mainCat === 'Forms';
-                const targetUrl = isForm ? 'forms.html' : `post.html?id=${p.id}`;
-                const bannerHtml = p.bannerImg ? `<img src="${p.bannerImg}" class="card-banner" alt="${p.title}">` : "";
-                const offerBadge = isLegal && p.discountPercent > 0
-                    ? `<span class="tag-offer">${p.discountPercent}% OFF</span>`
-                    : `<span class="tag-date">${p.date || ''}</span>`;
-
-                const priceHtml = isLegal && p.price
-                    ? `<div class="price-strip">
-                        <span class="price-now">₹${p.price}</span>
-                        ${p.originalPrice && Number(p.originalPrice) > Number(p.price) ? `<span class="price-old">₹${p.originalPrice}</span>` : ''}
-                        <span style="font-size:0.74rem; color:#b45309; font-weight:700;">Instant Download</span>
-                       </div>`
-                    : "";
-
-                return `
-                    <article class="post-card">
-                        <div>
-                            ${bannerHtml}
-                            <div class="card-body">
-                                <div class="card-tags">
-                                    <span class="tag-sub">${p.subCat || p.mainCat}</span>
-                                    ${offerBadge}
-                                </div>
-                                <h3><a href="${targetUrl}">${p.title}</a></h3>
-                                <p>${p.summary || ''}</p>
-                                ${priceHtml}
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="${targetUrl}" class="btn-read ${isLegal ? 'legal' : ''}">
-                                ${isForm ? 'Open Forms Directory & Download &#8594;' : (isLegal ? 'View Offer & Download Format &#8594;' : 'Read Full Details & Links &#8594;')}
-                            </a>
-                        </div>
-                    </article>
-                `;
-            }).join('');
-        }
-    </script>
+  initPortal();
+</script>
 </body>
 </html>
