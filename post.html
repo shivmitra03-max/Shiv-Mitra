@@ -4,276 +4,86 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loading Post... | ShivMitra.in</title>
+  <meta name="description" id="metaDesc" content="Shiv Online Centre (ShivMitra.in) - Official Recruitment, Call Letter & Citizen Service Details." />
+  <meta property="og:title" id="ogTitle" content="ShivMitra.in Update" />
+  <meta property="og:description" id="ogDesc" content="Check full official details & direct links on ShivMitra.in" />
   <style>
     :root {
-      --navy: #0f2942;
-      --blue: #1d4ed8;
-      --green: #15803d;
-      --orange: #c2410c;
-      --red: #b91c1c;
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --border: #cbd5e1;
-      --text: #1e293b;
+      --navy: #0f2942; --blue: #1d4ed8; --green: #15803d;
+      --orange: #c2410c; --red: #b91c1c; --bg: #f1f5f9;
+      --card: #ffffff; --border: #cbd5e1; --text: #1e293b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.65; }
 
-    /* Top Header */
-    .top-header {
-      background: var(--navy);
-      color: #fff;
-      padding: 14px 20px;
-      border-bottom: 3px solid #38bdf8;
-    }
-    .header-inner {
-      max-width: 1140px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .top-header { background: var(--navy); color: #fff; padding: 14px 20px; border-bottom: 3px solid #38bdf8; }
+    .header-inner { max-width: 1140px; margin: auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .brand { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; }
     .brand span { color: #38bdf8; }
-    .nav-links a {
-      color: #e2e8f0;
-      text-decoration: none;
-      margin-left: 16px;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
+    .nav-links a { color: #e2e8f0; text-decoration: none; margin-left: 16px; font-size: 0.9rem; font-weight: 700; }
     .nav-links a:hover { color: #38bdf8; }
 
-    /* Main Grid Layout */
-    .container {
-      max-width: 1140px;
-      margin: 20px auto;
-      padding: 0 14px;
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 20px;
-    }
-    @media (max-width: 880px) {
-      .container { grid-template-columns: 1fr; }
-    }
+    .container { max-width: 1140px; margin: 20px auto; padding: 0 14px; display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+    @media (max-width: 880px) { .container { grid-template-columns: 1fr; } }
 
-    /* Main Article Box */
-    .article-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-    .breadcrumb {
-      font-size: 0.84rem;
-      color: #64748b;
-      margin-bottom: 10px;
-      background: #f8fafc;
-      padding: 6px 10px;
-      border-radius: 5px;
-      border: 1px solid #e2e8f0;
-    }
+    .article-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+    .breadcrumb { font-size: 0.84rem; color: #64748b; margin-bottom: 10px; background: #f8fafc; padding: 6px 10px; border-radius: 5px; border: 1px solid #e2e8f0; }
     .breadcrumb a { color: var(--blue); text-decoration: none; font-weight: 600; }
 
-    .meta-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 12px 0;
-      flex-wrap: wrap;
-    }
-    .cat-tag {
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.78rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-    .date-tag {
-      font-size: 0.85rem;
-      color: #475569;
-      font-weight: 600;
-    }
-    .price-tag {
-      background: #dcfce7;
-      color: var(--green);
-      font-size: 0.85rem;
-      font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 4px;
-      border: 1px solid #86efac;
-    }
+    .meta-row { display: flex; align-items: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
+    .cat-tag { background: var(--blue); color: #fff; font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
+    .date-tag { font-size: 0.85rem; color: #475569; font-weight: 600; }
+    .price-tag { background: #dcfce7; color: var(--green); font-size: 0.85rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; border: 1px solid #86efac; }
 
-    h1.article-title {
-      font-size: 1.6rem;
-      color: #0f172a;
-      line-height: 1.35;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--navy);
-    }
+    h1.article-title { font-size: 1.6rem; color: #0f172a; line-height: 1.35; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--navy); }
+    .featured-img { width: 100%; max-height: 380px; object-fit: contain; background: #f8fafc; border-radius: 6px; margin-bottom: 18px; border: 1px solid var(--border); }
 
-    .featured-img {
-      width: 100%;
-      max-height: 380px;
-      object-fit: contain;
-      background: #f8fafc;
-      border-radius: 6px;
-      margin-bottom: 18px;
-      border: 1px solid var(--border);
-    }
-
-    /* Article Content & Tables (MaruGujarat Style) */
-    .post-content .note-box {
-      background: #fefce8;
-      border: 1px solid #fde047;
-      border-left: 5px solid #eab308;
-      padding: 13px 16px;
-      border-radius: 6px;
-      margin-bottom: 18px;
-      font-size: 0.96rem;
-      color: #1e293b;
-    }
-    .post-content p {
-      margin-bottom: 14px;
-      font-size: 0.98rem;
-      color: #1e293b;
-    }
-    .post-content h3 {
-      background: var(--navy);
-      color: #fff;
-      padding: 9px 14px;
-      font-size: 1.05rem;
-      border-radius: 5px 5px 0 0;
-      margin-top: 22px;
-      margin-bottom: 0;
-    }
-    .post-content table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 18px;
-      font-size: 0.94rem;
-      background: #fff;
-    }
-    .post-content th, .post-content td {
-      border: 1px solid var(--border);
-      padding: 10px 13px;
-      text-align: left;
-      vertical-align: top;
-    }
-    .post-content th {
-      background: #e2e8f0;
-      color: #0f172a;
-      font-weight: 700;
-    }
+    .post-content .note-box { background: #fefce8; border: 1px solid #fde047; border-left: 5px solid #eab308; padding: 13px 16px; border-radius: 6px; margin-bottom: 18px; font-size: 0.96rem; }
+    .post-content p { margin-bottom: 14px; font-size: 0.98rem; }
+    .post-content h3 { background: var(--navy); color: #fff; padding: 9px 14px; font-size: 1.05rem; border-radius: 5px 5px 0 0; margin-top: 22px; margin-bottom: 0; }
+    .post-content table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 0.94rem; }
+    .post-content th, .post-content td { border: 1px solid var(--border); padding: 10px 13px; text-align: left; vertical-align: top; }
+    .post-content th { background: #e2e8f0; color: #0f172a; font-weight: 700; }
     .post-content tr:nth-child(even) { background: #f8fafc; }
 
-    /* Important Links Box (Exact MaruGujarat Style Table) */
-    .imp-links-wrapper {
-      margin-top: 26px;
-      border: 2px solid var(--navy);
-      border-radius: 7px;
-      overflow: hidden;
-    }
-    .imp-links-title {
-      background: var(--red);
-      color: #fff;
-      text-align: center;
-      font-weight: 800;
-      font-size: 1.08rem;
-      padding: 10px;
-      letter-spacing: 0.3px;
-    }
-    .imp-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .imp-table td {
-      border-bottom: 1px solid var(--border);
-      padding: 12px 15px;
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
+    .imp-links-wrapper { margin-top: 26px; border: 2px solid var(--navy); border-radius: 7px; overflow: hidden; }
+    .imp-links-title { background: var(--red); color: #fff; text-align: center; font-weight: 800; font-size: 1.08rem; padding: 10px; }
+    .imp-table { width: 100%; border-collapse: collapse; }
+    .imp-table td { border-bottom: 1px solid var(--border); padding: 12px 15px; font-weight: 700; font-size: 0.95rem; }
     .imp-table tr:last-child td { border-bottom: none; }
     .imp-table td:last-child { text-align: center; width: 42%; background: #f8fafc; }
 
-    .action-btn {
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 5px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.88rem;
-      transition: opacity 0.2s;
-    }
-    .action-btn:hover { opacity: 0.88; }
+    .action-btn { display: inline-block; padding: 8px 16px; border-radius: 5px; color: #fff; text-decoration: none; font-weight: 800; font-size: 0.88rem; }
     .btn-green { background: var(--green); }
     .btn-blue { background: var(--blue); }
     .btn-orange { background: var(--orange); }
 
-    /* Share Buttons */
-    .share-strip {
-      margin-top: 22px;
-      padding-top: 15px;
-      border-top: 1px dashed var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    /* Shiv Online Centre Lead Generation Box */
+    .centre-help-box {
+      margin-top: 22px; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 2px solid #10b981; border-radius: 8px; padding: 16px 18px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
     }
-    .share-btn {
-      padding: 8px 15px;
-      border-radius: 5px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.88rem;
+    .centre-help-box h4 { color: #065f46; font-size: 1.02rem; margin-bottom: 4px; }
+    .centre-help-box p { font-size: 0.88rem; color: #047857; margin: 0; }
+    .btn-centre-wa {
+      background: #059669; color: #fff; padding: 10px 16px; border-radius: 6px;
+      text-decoration: none; font-weight: 800; font-size: 0.88rem; white-space: nowrap;
     }
+
+    .share-strip { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .share-btn { padding: 8px 15px; border-radius: 5px; color: #fff; text-decoration: none; font-weight: 700; font-size: 0.88rem; }
     .wa-bg { background: #16a34a; }
     .tg-bg { background: #0284c7; }
 
-    /* Sidebar */
-    .side-widget {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 18px;
-    }
-    .side-header {
-      background: var(--navy);
-      color: #fff;
-      padding: 10px 14px;
-      font-weight: 800;
-      font-size: 0.98rem;
-    }
+    .side-widget { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 18px; }
+    .side-header { background: var(--navy); color: #fff; padding: 10px 14px; font-weight: 800; font-size: 0.98rem; }
     .side-list { list-style: none; padding: 8px 14px; }
-    .side-list li {
-      padding: 9px 0;
-      border-bottom: 1px dashed #cbd5e1;
-      font-size: 0.89rem;
-    }
+    .side-list li { padding: 9px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.89rem; }
     .side-list li:last-child { border-bottom: none; }
-    .side-list a {
-      color: #0f172a;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .side-list a:hover { color: var(--blue); text-decoration: underline; }
+    .side-list a { color: #0f172a; text-decoration: none; font-weight: 600; }
 
-    footer {
-      background: var(--navy);
-      color: #cbd5e1;
-      text-align: center;
-      padding: 20px 14px;
-      margin-top: 32px;
-      font-size: 0.86rem;
-    }
+    footer { background: var(--navy); color: #cbd5e1; text-align: center; padding: 20px 14px; margin-top: 32px; font-size: 0.86rem; }
     footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; font-weight: 600; }
   </style>
 </head>
@@ -300,16 +110,12 @@
   <aside>
     <div class="side-widget">
       <div class="side-header">Latest Jobs & Call Letters</div>
-      <ul class="side-list" id="sidebarLatest">
-        <li>Loading...</li>
-      </ul>
+      <ul class="side-list" id="sidebarLatest"><li>Loading...</li></ul>
     </div>
 
     <div class="side-widget">
       <div class="side-header" style="background:#6d28d9;">Online Services & Paid Formats</div>
-      <ul class="side-list" id="sidebarServices">
-        <li>Loading...</li>
-      </ul>
+      <ul class="side-list" id="sidebarServices"><li>Loading...</li></ul>
     </div>
   </aside>
 </div>
@@ -320,12 +126,16 @@
     <a href="about.html">About Us</a> |
     <a href="contact.html">Contact Us</a> |
     <a href="privacy.html">Privacy Policy</a> |
-    <a href="disclaimer.html">Disclaimer</a>
+    <a href="disclaimer.html">Disclaimer</a> |
+    <a href="terms.html">Terms & Conditions</a>
   </div>
   <p>&copy; 2026 Shiv Online Centre (ShivMitra.in) — All Rights Reserved.</p>
 </footer>
 
 <script>
+  // Apna Shiv Online Centre WhatsApp Number yahan set karein (91 + 10 digit number)
+  const CENTRE_WHATSAPP_NUMBER = "919999999999";
+
   async function renderSinglePost() {
     const params = new URLSearchParams(window.location.search);
     const idParam = params.get("id");
@@ -336,11 +146,9 @@
       const allPosts = await res.json();
       const livePosts = allPosts.filter(p => p.status === "live" || !p.status);
 
-      // Fill Sidebar Latest
       document.getElementById("sidebarLatest").innerHTML =
         livePosts.slice(0, 8).map(p => `<li><a href="post.html?id=${p.id}">&#9656; ${p.title}</a></li>`).join("") || "<li>No posts available</li>";
 
-      // Fill Sidebar Services
       const services = livePosts.filter(p => Boolean(p.price) || (p.subCat || "").toLowerCase().includes("service") || (p.subCat || "").toLowerCase().includes("legal"));
       document.getElementById("sidebarServices").innerHTML =
         services.slice(0, 6).map(p => `<li><a href="post.html?id=${p.id}">&#9656; ${p.title}</a></li>`).join("") || "<li>Visit Home for all services</li>";
@@ -352,17 +160,16 @@
       }
 
       document.title = `${post.title} | ShivMitra.in`;
+      document.getElementById("metaDesc").setAttribute("content", post.summary || post.title);
+      document.getElementById("ogTitle").setAttribute("content", post.title);
+      document.getElementById("ogDesc").setAttribute("content", post.summary || post.title);
 
-      const imgHtml = post.bannerImg
-        ? `<img src="${post.bannerImg}" alt="${post.title}" class="featured-img" />`
-        : "";
-
-      const priceBadge = post.price
-        ? `<span class="price-tag">Fee / Charge: ${post.price}</span>`
-        : "";
+      const imgHtml = post.bannerImg ? `<img src="${post.bannerImg}" alt="${post.title}" class="featured-img" />` : "";
+      const priceBadge = post.price ? `<span class="price-tag">Fee / Charge: ${post.price}</span>` : "";
 
       const shareUrl = encodeURIComponent(window.location.href);
       const shareTitle = encodeURIComponent(post.title);
+      const centreInquiryMsg = encodeURIComponent(`Namaste Shiv Online Centre, mujhe "${post.title}" ke liye online apply / document help chahiye.`);
 
       const primaryBtnLabel = post.price ? "Book / Download Now &rarr;" : "Click Here &rarr;";
       const primaryRowLabel = post.price
@@ -381,12 +188,8 @@
         </div>
 
         <h1 class="article-title">${post.title}</h1>
-
         ${imgHtml}
-
-        <div class="post-content">
-          ${post.content}
-        </div>
+        <div class="post-content">${post.content}</div>
 
         <div class="imp-links-wrapper">
           <div class="imp-links-title">Important Direct Official Links</div>
@@ -404,6 +207,16 @@
               <td><a href="${post.officialSite}" target="_blank" rel="noopener" class="action-btn btn-orange">Visit Website &rarr;</a></td>
             </tr>
           </table>
+        </div>
+
+        <div class="centre-help-box">
+          <div>
+            <h4>&#128187; Shiv Online Centre — Ghar Baithe Form Bharwayein!</h4>
+            <p>Online form bharne, Income/Caste Certificate, ya Legal Affidavit ke liye seedha WhatsApp par sampark karein.</p>
+          </div>
+          <a href="https://wa.me/${CENTRE_WHATSAPP_NUMBER}?text=${centreInquiryMsg}" target="_blank" rel="noopener" class="btn-centre-wa">
+            WhatsApp Apply Help &rarr;
+          </a>
         </div>
 
         <div class="share-strip">
