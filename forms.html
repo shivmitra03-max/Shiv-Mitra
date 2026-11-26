@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download All Government & Bank Forms (PDF/Word) - ShivMitra.in</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; color: #0f172a; }
+        
+        .navbar {
+            background: #ffffff; padding: 8px 16px; border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+        .brand-logo-img { height: 58px; width: auto; max-width: 290px; object-fit: contain; display: block; }
+        .navbar a.nav-item { color: #1e293b; text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+
+        .hero-box {
+            background: linear-gradient(135deg, #0d9488 0%, #1e3a8a 100%);
+            color: white; padding: 18px 14px 22px; text-align: center;
+        }
+        .hero-box h1 { font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; }
+        .hero-box p { color: #e2e8f0; font-size: 0.8rem; max-width: 560px; margin: 0 auto 12px; }
+
+        .search-wrap { max-width: 420px; margin: 0 auto; }
+        .search-wrap input {
+            width: 100%; padding: 8px 14px; border-radius: 8px; border: none;
+            font-size: 0.84rem; outline: none; box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+        }
+
+        .container { max-width: 1120px; margin: 18px auto; padding: 0 14px; }
+        .ad-slot-container {
+            min-height: 90px; background: #e2e8f0; border-radius: 8px;
+            margin-bottom: 16px; display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
+
+        .cat-tabs { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 14px; scrollbar-width: none; }
+        .cat-tabs::-webkit-scrollbar { display: none; }
+        .cat-tab {
+            background: white; border: 1px solid #cbd5e1; color: #334155;
+            padding: 6px 13px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
+            white-space: nowrap; cursor: pointer;
+        }
+        .cat-tab.active { background: #0d9488; color: white; border-color: #0d9488; }
+
+        .forms-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow-x: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+        th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f1f5f9; color: #1e293b; font-weight: 700; }
+
+        .badge-cat { background: #e0f2fe; color: #0369a1; padding: 3px 9px; border-radius: 5px; font-size: 0.74rem; font-weight: 700; }
+        .badge-type { background: #fef3c7; color: #b45309; padding: 3px 7px; border-radius: 5px; font-size: 0.73rem; font-weight: 800; }
+
+        .btn-dl {
+            background: #059669; color: white; border: none; padding: 7px 14px;
+            border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
+            text-decoration: none; display: inline-block; white-space: nowrap;
+        }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 20px; margin-top: 36px; font-size: 0.8rem; }
+        @media (max-width: 650px) { .nav-links { display: none; } .brand-logo-img { height: 50px; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html"><img src="logo.png" alt="ShivMitra.in - Shiv Online Centre" class="brand-logo-img"></a>
+        <div class="nav-links" style="display:flex; gap:16px;">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="index.html?cat=Jobs" class="nav-item">Jobs</a>
+            <a href="index.html?cat=Call Letter" class="nav-item">Call Letter</a>
+            <a href="forms.html" class="nav-item" style="color:#0d9488;">Forms Directory</a>
+            <a href="index.html?cat=Legal Format" class="nav-item">Legal Format</a>
+        </div>
+    </nav>
+
+    <div class="hero-box">
+        <h1>All Government, Bank & Citizen Forms Directory</h1>
+        <p>Download printable Aadhaar, PAN, Ration Card, Income/Caste Certificate & Bank KYC Forms in 1-Click.</p>
+        <div class="search-wrap">
+            <input type="text" id="formSearchInput" onkeyup="renderFormsTable()" placeholder="Search form (e.g., Aadhaar, PAN 49A, Income Certificate)...">
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="adHeaderBox" class="ad-slot-container" style="display:none;"></div>
+        <div class="cat-tabs" id="formCatTabs"></div>
+        <div class="forms-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Form Title</th>
+                        <th>Category</th>
+                        <th>Format</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="formsDirectoryBody">
+                    <tr><td colspan="4" style="text-align:center; padding:24px; color:#64748b;">Loading forms directory...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="adFooterBox" class="ad-slot-container" style="display:none; margin-top:20px;"></div>
+    </div>
+
+    <footer>&copy; 2026 Shiv Online Centre (ShivMitra.in) — Official Forms & Citizen Services Portal</footer>
+
+    <script>
+        let allForms = [];
+        let activeCategory = "ALL";
+
+        function initGoogleAnalytics(gaId) {
+            if (!gaId || localStorage.getItem('shiv_gh_auth')) return;
+            const s1 = document.createElement('script');
+            s1.async = true;
+            s1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+            document.head.appendChild(s1);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', gaId);
+        }
+
+        window.onload = async function() {
+            await loadSiteConfig();
+            await loadForms();
+        };
+
+        async function loadSiteConfig() {
+            try {
+                const res = await fetch(`ads.json?t=${Date.now()}`);
+                if (!res.ok) return;
+                const cfg = await res.json();
+                if (cfg.gaId) initGoogleAnalytics(cfg.gaId);
+                if (cfg.headerAd) { const h = document.getElementById('adHeaderBox'); h.style.display = 'flex'; h.innerHTML = cfg.headerAd; }
+                if (cfg.sidebarAd) { const f = document.getElementById('adFooterBox'); f.style.display = 'flex'; f.innerHTML = cfg.sidebarAd; }
+            } catch (e) {}
+        }
+
+        async function loadForms() {
+            try {
+                const res = await fetch(`posts.json?t=${Date.now()}`);
+                const data = await res.json();
+                allForms = (data || []).filter(p => p.mainCat === 'Forms' && p.status !== 'draft');
+                buildCategoryTabs();
+                renderFormsTable();
+            } catch (e) {
+                document.getElementById('formsDirectoryBody').innerHTML = `<tr><td colspan="4" style="color:#dc2626;">Unable to load forms.</td></tr>`;
+            }
+        }
+
+        function buildCategoryTabs() {
+            const cats = ["ALL", ...new Set(allForms.map(f => f.subCat))];
+            document.getElementById('formCatTabs').innerHTML = cats.map(c => `
+                <button class="cat-tab ${activeCategory === c ? 'active' : ''}" onclick="selectCat('${c}')">
+                    ${c === 'ALL' ? `All Forms (${allForms.length})` : c}
+                </button>`).join('');
+        }
+
+        function selectCat(cat) { activeCategory = cat; buildCategoryTabs(); renderFormsTable(); }
+
+        function downloadUploadedFile(index) {
+            const item = allForms[index];
+            if (!item || !item.formFileData) return;
+            const link = document.createElement('a');
+            link.href = item.formFileData.dataUrl;
+            link.download = item.formFileData.name || `${item.title}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function renderFormsTable() {
+            const query = document.getElementById('formSearchInput').value.toLowerCase().trim();
+            const tbody = document.getElementById('formsDirectoryBody');
+            const filtered = allForms.filter(f => {
+                const matchCat = activeCategory === 'ALL' || f.subCat === activeCategory;
+                const matchText = !query || f.title.toLowerCase().includes(query) || f.subCat.toLowerCase().includes(query);
+                return matchCat && matchText;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:24px; color:#64748b;">No forms found matching your selection.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(f => {
+                const origIndex = allForms.indexOf(f);
+                const actionBtn = f.formFileData
+                    ? `<button class="btn-dl" onclick="downloadUploadedFile(${origIndex})">&#11015; Download ${f.fileType || 'File'}</button>`
+                    : `<a href="${f.pdfLink || f.actionLink}" target="_blank" class="btn-dl">&#11015; Download Form</a>`;
+                return `
+                    <tr>
+                        <td><strong>${f.title}</strong><br><small style="color:#64748b;">Updated: ${f.date || '2026'}</small></td>
+                        <td><span class="badge-cat">${f.subCat}</span></td>
+                        <td><span class="badge-type">${f.fileType || 'PDF'}</span></td>
+                        <td>${actionBtn}</td>
+                    </tr>`;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

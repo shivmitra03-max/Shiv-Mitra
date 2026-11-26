@@ -1,291 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Details - ShivMitra.in</title>
-    <meta name="description" content="Complete recruitment details, important dates, eligibility, call letter and direct official links at ShivMitra.in.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f1f5f9; color: #0f172a; line-height: 1.65; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading Post... | ShivMitra.in</title>
+  <style>
+    :root {
+      --navy: #0f2942;
+      --blue: #1d4ed8;
+      --green: #15803d;
+      --orange: #c2410c;
+      --red: #b91c1c;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #cbd5e1;
+      --text: #1e293b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.65; }
 
-        .topbar {
-            background: #0f172a; color: #cbd5e1; font-size: 0.78rem;
-            padding: 7px 5%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-        }
-        header {
-            background: white; padding: 14px 5%; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
-            flex-wrap: wrap; gap: 12px;
-        }
-        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0f172a; font-weight: 800; font-size: 1.25rem; }
-        .brand-badge {
-            background: #1e3a8a; color: white; width: 34px; height: 34px; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center; font-weight: 800;
-        }
-        .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
-        .nav-links a { text-decoration: none; color: #334155; font-size: 0.88rem; font-weight: 600; }
-        .nav-links a:hover { color: #1e3a8a; }
+    /* Top Header */
+    .top-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 20px;
+      border-bottom: 3px solid #38bdf8;
+    }
+    .header-inner {
+      max-width: 1140px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; }
+    .brand span { color: #38bdf8; }
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      margin-left: 16px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .nav-links a:hover { color: #38bdf8; }
 
-        .container { max-width: 1180px; margin: 22px auto; padding: 0 18px; }
-        .breadcrumb { font-size: 0.82rem; color: #64748b; margin-bottom: 16px; }
-        .breadcrumb a { color: #2563eb; text-decoration: none; font-weight: 600; }
+    /* Main Grid Layout */
+    .container {
+      max-width: 1140px;
+      margin: 20px auto;
+      padding: 0 14px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+    }
+    @media (max-width: 880px) {
+      .container { grid-template-columns: 1fr; }
+    }
 
-        .layout-grid { display: grid; grid-template-columns: 1fr 330px; gap: 24px; align-items: start; }
+    /* Main Article Box */
+    .article-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: #64748b;
+      margin-bottom: 10px;
+      background: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: 1px solid #e2e8f0;
+    }
+    .breadcrumb a { color: var(--blue); text-decoration: none; font-weight: 600; }
 
-        .article-card {
-            background: white; border-radius: 12px; padding: 28px;
-            border: 1px solid #e2e8f0; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-        .cat-pill {
-            display: inline-block; background: #dbeafe; color: #1e40af;
-            font-size: 0.74rem; font-weight: 800; padding: 4px 11px; border-radius: 6px;
-            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;
-        }
-        .article-card h1 { font-size: 1.55rem; font-weight: 800; color: #0f172a; line-height: 1.35; margin-bottom: 10px; }
-        .meta-line { font-size: 0.82rem; color: #64748b; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; margin-bottom: 20px; display: flex; gap: 18px; flex-wrap: wrap; }
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .cat-tag {
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .date-tag {
+      font-size: 0.85rem;
+      color: #475569;
+      font-weight: 600;
+    }
+    .price-tag {
+      background: #dcfce7;
+      color: var(--green);
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid #86efac;
+    }
 
-        .post-banner {
-            width: 100%; max-height: 360px; object-fit: cover; border-radius: 10px;
-            margin-bottom: 22px; border: 1px solid #cbd5e1; display: none;
-        }
+    h1.article-title {
+      font-size: 1.6rem;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--navy);
+    }
 
-        .section-box { margin-bottom: 24px; border: 1px solid #cbd5e1; border-radius: 9px; overflow: hidden; }
-        .section-header { background: #1e3a8a; color: white; padding: 11px 16px; font-weight: 700; font-size: 0.96rem; }
+    .featured-img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 6px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+    }
 
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        th, td { padding: 11px 15px; border-bottom: 1px solid #e2e8f0; text-align: left; }
-        th { background: #f8fafc; color: #1e3a8a; font-weight: 700; }
-        tr:last-child td { border-bottom: none; }
+    /* Article Content & Tables (MaruGujarat Style) */
+    .post-content .note-box {
+      background: #fefce8;
+      border: 1px solid #fde047;
+      border-left: 5px solid #eab308;
+      padding: 13px 16px;
+      border-radius: 6px;
+      margin-bottom: 18px;
+      font-size: 0.96rem;
+      color: #1e293b;
+    }
+    .post-content p {
+      margin-bottom: 14px;
+      font-size: 0.98rem;
+      color: #1e293b;
+    }
+    .post-content h3 {
+      background: var(--navy);
+      color: #fff;
+      padding: 9px 14px;
+      font-size: 1.05rem;
+      border-radius: 5px 5px 0 0;
+      margin-top: 22px;
+      margin-bottom: 0;
+    }
+    .post-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 18px;
+      font-size: 0.94rem;
+      background: #fff;
+    }
+    .post-content th, .post-content td {
+      border: 1px solid var(--border);
+      padding: 10px 13px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .post-content th {
+      background: #e2e8f0;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .post-content tr:nth-child(even) { background: #f8fafc; }
 
-        .article-body { font-size: 0.96rem; color: #1e293b; margin-bottom: 25px; }
-        .article-body h3 { color: #1e3a8a; font-size: 1.12rem; margin: 22px 0 10px; padding-left: 10px; border-left: 4px solid #f59e0b; }
-        .article-body p { margin-bottom: 14px; }
-        .article-body table { border: 1px solid #cbd5e1; margin: 14px 0 20px; border-radius: 6px; overflow: hidden; }
-        .article-body .inline-media img { max-width: 100%; border-radius: 8px; margin: 14px 0; border: 1px solid #cbd5e1; }
-        .article-body .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 16px 0; border-radius: 8px; }
-        .article-body .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .article-body .note-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 13px 16px; border-radius: 6px; margin: 15px 0; color: #78350f; }
+    /* Important Links Box (Exact MaruGujarat Style Table) */
+    .imp-links-wrapper {
+      margin-top: 26px;
+      border: 2px solid var(--navy);
+      border-radius: 7px;
+      overflow: hidden;
+    }
+    .imp-links-title {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.08rem;
+      padding: 10px;
+      letter-spacing: 0.3px;
+    }
+    .imp-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .imp-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 15px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .imp-table tr:last-child td { border-bottom: none; }
+    .imp-table td:last-child { text-align: center; width: 42%; background: #f8fafc; }
 
-        .btn-action {
-            display: inline-block; background: #2563eb; color: white; padding: 8px 18px;
-            border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85rem;
-        }
-        .btn-action:hover { background: #1d4ed8; }
-        .btn-wa { background: #16a34a; }
-        .btn-home { background: #475569; }
+    .action-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 5px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.88rem;
+      transition: opacity 0.2s;
+    }
+    .action-btn:hover { opacity: 0.88; }
+    .btn-green { background: var(--green); }
+    .btn-blue { background: var(--blue); }
+    .btn-orange { background: var(--orange); }
 
-        .share-bar {
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px;
-            padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-        }
+    /* Share Buttons */
+    .share-strip {
+      margin-top: 22px;
+      padding-top: 15px;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .share-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .wa-bg { background: #16a34a; }
+    .tg-bg { background: #0284c7; }
 
-        .sidebar-card {
-            background: white; border-radius: 12px; padding: 20px;
-            border: 1px solid #e2e8f0; margin-bottom: 20px;
-        }
-        .sidebar-card h3 { color: #1e3a8a; font-size: 1rem; padding-bottom: 10px; border-bottom: 2px solid #1e3a8a; margin-bottom: 14px; }
-        .recent-item { display: block; padding: 10px 0; border-bottom: 1px solid #f1f5f9; text-decoration: none; color: #0f172a; font-size: 0.87rem; font-weight: 600; }
-        .recent-item:hover { color: #2563eb; }
-        .recent-item small { display: block; color: #64748b; font-weight: 400; font-size: 0.76rem; margin-top: 2px; }
+    /* Sidebar */
+    .side-widget {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .side-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 14px;
+      font-weight: 800;
+      font-size: 0.98rem;
+    }
+    .side-list { list-style: none; padding: 8px 14px; }
+    .side-list li {
+      padding: 9px 0;
+      border-bottom: 1px dashed #cbd5e1;
+      font-size: 0.89rem;
+    }
+    .side-list li:last-child { border-bottom: none; }
+    .side-list a {
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .side-list a:hover { color: var(--blue); text-decoration: underline; }
 
-        .cat-link {
-            display: flex; justify-content: space-between; padding: 10px 13px;
-            border: 1px solid #e2e8f0; border-radius: 7px; margin-bottom: 9px;
-            text-decoration: none; color: #1e293b; font-size: 0.86rem; font-weight: 600;
-        }
-        .cat-link:hover { background: #eff6ff; border-color: #2563eb; color: #1e3a8a; }
-
-        @media (max-width: 900px) {
-            .layout-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    footer {
+      background: var(--navy);
+      color: #cbd5e1;
+      text-align: center;
+      padding: 20px 14px;
+      margin-top: 32px;
+      font-size: 0.86rem;
+    }
+    footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; font-weight: 600; }
+  </style>
 </head>
 <body>
 
-    <div class="topbar">
-        <span>ShivMitra.in — Sarkari Jobs, Yojana, Call Letter & Forms</span>
-        <span>Updated Daily</span>
+<header class="top-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">Shiv<span>Mitra</span>.in</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#sarkari-jobs">Sarkari Jobs</a>
+      <a href="index.html#call-letters">Call Letters</a>
+      <a href="index.html#sarkari-yojana">Yojana</a>
+      <a href="index.html#legal-services">Services & Formats</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <main class="article-box" id="postContainer">
+    <p>Loading notification details...</p>
+  </main>
+
+  <aside>
+    <div class="side-widget">
+      <div class="side-header">Latest Jobs & Call Letters</div>
+      <ul class="side-list" id="sidebarLatest">
+        <li>Loading...</li>
+      </ul>
     </div>
 
-    <header>
-        <a href="index.html" class="brand">
-            <div class="brand-badge">S</div>
-            <span>SHIVMITRA.IN</span>
-        </a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="pages.html?page=about">About Us</a>
-            <a href="pages.html?page=privacy">Privacy Policy</a>
-            <a href="pages.html?page=contact">Contact Us</a>
-            <a href="pages.html?page=disclaimer">Disclaimer</a>
-        </div>
-    </header>
+    <div class="side-widget">
+      <div class="side-header" style="background:#6d28d9;">Online Services & Paid Formats</div>
+      <ul class="side-list" id="sidebarServices">
+        <li>Loading...</li>
+      </ul>
+    </div>
+  </aside>
+</div>
 
-    <div class="container">
+<footer>
+  <div style="margin-bottom:8px;">
+    <a href="index.html">Home</a> |
+    <a href="about.html">About Us</a> |
+    <a href="contact.html">Contact Us</a> |
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+  <p>&copy; 2026 Shiv Online Centre (ShivMitra.in) — All Rights Reserved.</p>
+</footer>
+
+<script>
+  async function renderSinglePost() {
+    const params = new URLSearchParams(window.location.search);
+    const idParam = params.get("id");
+    const container = document.getElementById("postContainer");
+
+    try {
+      const res = await fetch(`posts.json?t=${Date.now()}`);
+      const allPosts = await res.json();
+      const livePosts = allPosts.filter(p => p.status === "live" || !p.status);
+
+      // Fill Sidebar Latest
+      document.getElementById("sidebarLatest").innerHTML =
+        livePosts.slice(0, 8).map(p => `<li><a href="post.html?id=${p.id}">&#9656; ${p.title}</a></li>`).join("") || "<li>No posts available</li>";
+
+      // Fill Sidebar Services
+      const services = livePosts.filter(p => Boolean(p.price) || (p.subCat || "").toLowerCase().includes("service") || (p.subCat || "").toLowerCase().includes("legal"));
+      document.getElementById("sidebarServices").innerHTML =
+        services.slice(0, 6).map(p => `<li><a href="post.html?id=${p.id}">&#9656; ${p.title}</a></li>`).join("") || "<li>Visit Home for all services</li>";
+
+      const post = livePosts.find(p => String(p.id) === String(idParam)) || livePosts[0];
+      if (!post) {
+        container.innerHTML = `<h2>Post Not Found</h2><p><a href="index.html">&larr; Back to Home</a></p>`;
+        return;
+      }
+
+      document.title = `${post.title} | ShivMitra.in`;
+
+      const imgHtml = post.bannerImg
+        ? `<img src="${post.bannerImg}" alt="${post.title}" class="featured-img" />`
+        : "";
+
+      const priceBadge = post.price
+        ? `<span class="price-tag">Fee / Charge: ${post.price}</span>`
+        : "";
+
+      const shareUrl = encodeURIComponent(window.location.href);
+      const shareTitle = encodeURIComponent(post.title);
+
+      const primaryBtnLabel = post.price ? "Book / Download Now &rarr;" : "Click Here &rarr;";
+      const primaryRowLabel = post.price
+        ? "Apply Online / Instant Download"
+        : (post.mainCat === "Call Letter" ? "Download Call Letter / Admit Card" : "Apply Online / Official Portal");
+
+      container.innerHTML = `
         <div class="breadcrumb">
-            <a href="index.html">Home</a> &raquo; <span id="bcCat">Updates</span> &raquo; Details
+          <a href="index.html">Home</a> &raquo; <span>${post.mainCat || "Updates"}</span> &raquo; <span>${post.subCat || "Details"}</span>
         </div>
 
-        <div class="layout-grid">
-            <div class="article-card">
-                <span class="cat-pill" id="postSubCat">CATEGORY</span>
-                <h1 id="postTitle">Loading...</h1>
-                <div class="meta-line">
-                    <span>Updated: <strong id="postDate">Today</strong></span>
-                    <span>Author: <strong>ShivMitra Editorial Team</strong></span>
-                </div>
-
-                <img id="postBannerImg" class="post-banner" alt="Post Banner">
-
-                <div class="section-box">
-                    <div class="section-header">Quick Overview & Highlights</div>
-                    <table>
-                        <tr><td style="width:42%; font-weight:700; color:#1e3a8a;">Portal Name</td><td>ShivMitra.in</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Category / Type</td><td id="ovCategory">-</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Post / Scheme Name</td><td id="ovName">-</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Apply / Process Mode</td><td id="ovMode">Online / Official Portal</td></tr>
-                        <tr><td style="font-weight:700; color:#1e3a8a;">Update Date</td><td id="ovDate">-</td></tr>
-                    </table>
-                </div>
-
-                <div class="article-body" id="postContentArea"></div>
-
-                <div class="section-box">
-                    <div class="section-header">Important Links & Official Portal</div>
-                    <table>
-                        <tr>
-                            <td style="font-weight:700; color:#1e3a8a;" id="linkLabel">Official Website / Apply Online Link</td>
-                            <td style="text-align:center;"><a id="officialActionBtn" href="index.html" target="_blank" rel="noopener noreferrer" class="btn-action">Click Here &rarr;</a></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight:700; color:#1e3a8a;">Join WhatsApp / Support Desk</td>
-                            <td style="text-align:center;"><a href="pages.html?page=contact" class="btn-action btn-wa">Join Now</a></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight:700; color:#1e3a8a;">ShivMitra Home Page (More Jobs & Yojana)</td>
-                            <td style="text-align:center;"><a href="index.html" class="btn-action btn-home">Visit Home</a></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="share-bar">
-                    <span style="font-size:0.86rem; font-weight:600; color:#334155;">Share this update with friends & groups:</span>
-                    <a id="waShareBtn" href="#" target="_blank" class="btn-action btn-wa">Share on WhatsApp</a>
-                </div>
-            </div>
-
-            <div>
-                <div class="sidebar-card">
-                    <h3>Latest Updates & Jobs</h3>
-                    <div id="recentPostsList"><small style="color:#64748b;">Loading latest updates...</small></div>
-                </div>
-
-                <div class="sidebar-card">
-                    <h3>Browse Categories</h3>
-                    <a href="index.html?cat=Jobs" class="cat-link"><span>1. Sarkari & Bank Jobs</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Call%20Letter" class="cat-link"><span>2. Call Letter / Admit Card</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Sarkari%20Yojana" class="cat-link"><span>3. All Sarkari Yojana</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Forms" class="cat-link"><span>4. Sarkari & Bank Forms</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Legal%20Paid%20Format" class="cat-link"><span>5. Legal Paid Formats</span><span>&rarr;</span></a>
-                    <a href="index.html?cat=Online%20Service%20Details" class="cat-link"><span>6. Online Service Details</span><span>&rarr;</span></a>
-                </div>
-            </div>
+        <div class="meta-row">
+          <span class="cat-tag">${post.subCat || post.mainCat}</span>
+          <span class="date-tag">Published / Updated: ${post.date}</span>
+          ${priceBadge}
         </div>
-    </div>
 
-    <script>
-        async function loadPostDetails() {
-            const params = new URLSearchParams(window.location.search);
-            const postId = params.get('id');
+        <h1 class="article-title">${post.title}</h1>
 
-            try {
-                const res = await fetch(`posts.json?t=${Date.now()}`);
-                const allPosts = await res.json();
-                const livePosts = allPosts.filter(p => p.status !== 'draft');
+        ${imgHtml}
 
-                // Populate sidebar recent posts
-                const recentContainer = document.getElementById('recentPostsList');
-                recentContainer.innerHTML = "";
-                livePosts.slice(0, 6).forEach(item => {
-                    recentContainer.innerHTML += `
-                        <a href="post.html?id=${item.id}" class="recent-item">
-                            ${item.title}
-                            <small>${item.subCat || item.mainCat} • ${item.date || ''}</small>
-                        </a>
-                    `;
-                });
+        <div class="post-content">
+          ${post.content}
+        </div>
 
-                // Find matching post (supports both string and number IDs)
-                let post = livePosts.find(p => String(p.id) === String(postId));
-                if (!post && livePosts.length > 0) {
-                    post = livePosts[0];
-                }
+        <div class="imp-links-wrapper">
+          <div class="imp-links-title">Important Direct Official Links</div>
+          <table class="imp-table">
+            <tr>
+              <td>${primaryRowLabel}</td>
+              <td><a href="${post.actionLink}" target="_blank" rel="noopener" class="action-btn btn-green">${primaryBtnLabel}</a></td>
+            </tr>
+            <tr>
+              <td>Official Notification / PDF / Jaherat</td>
+              <td><a href="${post.pdfLink}" target="_blank" rel="noopener" class="action-btn btn-blue">View / Download PDF &rarr;</a></td>
+            </tr>
+            <tr>
+              <td>Official Website Homepage</td>
+              <td><a href="${post.officialSite}" target="_blank" rel="noopener" class="action-btn btn-orange">Visit Website &rarr;</a></td>
+            </tr>
+          </table>
+        </div>
 
-                if (!post) {
-                    document.getElementById('postTitle').innerText = "Post Not Found";
-                    document.getElementById('postContentArea').innerHTML = "<p>The requested post is currently unavailable. Please return to the homepage.</p>";
-                    return;
-                }
+        <div class="share-strip">
+          <strong style="font-size:0.9rem;">Share this update:</strong>
+          <a href="https://api.whatsapp.com/send?text=${shareTitle}%0A%0ACheck%20details:%20${shareUrl}" target="_blank" rel="noopener" class="share-btn wa-bg">WhatsApp</a>
+          <a href="https://t.me/share/url?url=${shareUrl}&text=${shareTitle}" target="_blank" rel="noopener" class="share-btn tg-bg">Telegram</a>
+        </div>
+      `;
+    } catch (e) {
+      container.innerHTML = `<p>Unable to load post details. Please refresh the page.</p>`;
+    }
+  }
 
-                document.title = `${post.title} - ShivMitra.in`;
-                document.getElementById('bcCat').innerText = post.mainCat || "Updates";
-                document.getElementById('postSubCat').innerText = post.subCat || post.mainCat || "UPDATE";
-                document.getElementById('postTitle').innerText = post.title;
-                document.getElementById('postDate').innerText = post.date || "Recently Updated";
-
-                document.getElementById('ovCategory').innerText = `${post.mainCat || ''} (${post.subCat || ''})`;
-                document.getElementById('ovName').innerText = post.title;
-                document.getElementById('ovDate').innerText = post.date || "Recently Updated";
-
-                if (post.price && Number(post.price) > 0) {
-                    document.getElementById('ovMode').innerText = `Instant Digital Draft (₹${post.price})`;
-                    document.getElementById('linkLabel').innerText = `Download / Order Paid Format (₹${post.price})`;
-                } else if (post.mainCat === 'Call Letter') {
-                    document.getElementById('ovMode').innerText = "Online Admit Card / Call Letter Download";
-                    document.getElementById('linkLabel').innerText = "Download Call Letter / Admit Card Direct Link";
-                }
-
-                if (post.bannerImg) {
-                    const bannerEl = document.getElementById('postBannerImg');
-                    bannerEl.src = post.bannerImg;
-                    bannerEl.style.display = 'block';
-                }
-
-                document.getElementById('postContentArea').innerHTML = post.content || `<p>${post.summary || ''}</p>`;
-
-                const actionBtn = document.getElementById('officialActionBtn');
-                let finalUrl = (post.actionLink || "").trim();
-                const lowerTitle = (post.title || "").toLowerCase();
-
-                // Agar link khali ho ya news.google.com ho, toh title ke hisab se official site set karein
-                if (!finalUrl || finalUrl.includes('news.google.com')) {
-                    if (lowerTitle.includes('ibps')) finalUrl = 'https://www.ibps.in/';
-                    else if (lowerTitle.includes('ojas') || lowerTitle.includes('gsssb') || lowerTitle.includes('gujarat') || lowerTitle.includes('lokrakshak') || lowerTitle.includes('lrd')) finalUrl = 'https://ojas.gujarat.gov.in/';
-                    else if (lowerTitle.includes('gpsc')) finalUrl = 'https://gpsc-ojas.gujarat.gov.in/';
-                    else if (lowerTitle.includes('ssc')) finalUrl = 'https://ssc.gov.in/';
-                    else if (lowerTitle.includes('rrb') || lowerTitle.includes('railway')) finalUrl = 'https://www.rrbapply.gov.in/';
-                    else if (lowerTitle.includes('sbi')) finalUrl = 'https://sbi.co.in/web/careers';
-                    else finalUrl = 'https://www.ncs.gov.in/';
-                }
-                actionBtn.href = finalUrl;
-                if (post.actionLink && post.actionLink.trim() !== "") {
-                    actionBtn.href = post.actionLink;
-                } else {
-                    actionBtn.href = "index.html";
-                }
-
-                const shareText = encodeURIComponent(`${post.title}\nCheck full details here: ${window.location.href}`);
-                document.getElementById('waShareBtn').href = `https://api.whatsapp.com/send?text=${shareText}`;
-
-            } catch (err) {
-                document.getElementById('postTitle').innerText = "Unable to Load Post";
-                document.getElementById('postContentArea').innerHTML = "<p>Please check your internet connection and refresh the page.</p>";
-            }
-        }
-
-        window.onload = loadPostDetails;
-    </script>
+  renderSinglePost();
+</script>
 </body>
 </html>
