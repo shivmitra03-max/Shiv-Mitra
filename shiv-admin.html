@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f1f5f9; color: #0f172a; }
 
-        /* Centered & Clickable Login Screen */
+        /* Login Screen */
         .login-wrapper {
             min-height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center;
             background: linear-gradient(180deg, #0f2942 50%, #f1f5f9 50%); padding: 20px;
@@ -32,46 +32,56 @@
             border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
         }
 
+        /* Clean & Structured Sidebar Menu */
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
-            width: 270px; background: #0f2942; color: white; padding: 18px 14px;
-            position: fixed; height: 100%; overflow-y: auto;
+            width: 268px; background: linear-gradient(180deg, #0b1f33 0%, #0f2942 100%);
+            color: white; padding: 16px 12px; position: fixed; height: 100%; overflow-y: auto;
+            border-right: 1px solid rgba(255,255,255,0.08);
         }
+        .sidebar::-webkit-scrollbar { width: 5px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
         .sidebar-brand-box {
-            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 12px 10px; border-radius: 10px; margin-bottom: 14px; text-align: center;
+            background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 13px 10px; border-radius: 10px; margin-bottom: 14px; text-align: center;
         }
-        .sidebar-brand-box h2 { font-size: 1.35rem; font-weight: 800; color: #fff; }
+        .sidebar-brand-box h2 { font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
         .sidebar-brand-box h2 span { color: #38bdf8; }
         .sidebar-brand-box small { color: #94a3b8; font-size: 0.72rem; font-weight: 600; display: block; margin-top: 2px; }
 
-        .side-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
-        .side-btn {
-            width: 100%; text-align: left; background: transparent; color: #cbd5e1;
-            border: none; padding: 9px 12px; border-radius: 8px; cursor: pointer;
-            font-size: 0.86rem; font-weight: 600; margin-bottom: 4px; display: block;
+        .menu-group { margin-bottom: 14px; }
+        .side-label {
+            font-size: 0.67rem; color: #7dd3fc; text-transform: uppercase; letter-spacing: 1.1px;
+            margin: 10px 8px 6px; font-weight: 800; opacity: 0.85;
         }
-        .side-btn:hover, .side-btn.active { background: #1d4ed8; color: white; }
-        .side-btn.accent-amber { background: rgba(245, 158, 11, 0.14); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-        .side-btn.accent-amber.active { background: #d97706; color: white; }
-        .side-btn.accent-teal { background: rgba(13, 148, 136, 0.16); color: #5eead4; border: 1px solid rgba(13, 148, 136, 0.35); }
-        .side-btn.accent-teal.active { background: #0d9488; color: white; }
-        .side-btn.accent-purple { background: rgba(124, 58, 237, 0.16); color: #c4b5fd; border: 1px solid rgba(124, 58, 237, 0.35); }
-        .side-btn.accent-purple.active { background: #7c3aed; color: white; }
+        .side-btn {
+            width: 100%; text-align: left; background: transparent; color: #e2e8f0;
+            border: 1px solid transparent; padding: 9px 12px; border-radius: 8px; cursor: pointer;
+            font-size: 0.84rem; font-weight: 600; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 9px; transition: all 0.18s ease;
+        }
+        .side-btn:hover { background: rgba(255,255,255,0.09); color: #fff; transform: translateX(2px); }
+        .side-btn.active {
+            background: #2563eb; color: #fff; font-weight: 700;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35); border-color: rgba(255,255,255,0.18);
+        }
+        .side-btn .m-ico { width: 18px; text-align: center; font-size: 0.95rem; }
 
-        .main-content { margin-left: 270px; padding: 24px; }
+        .main-content { margin-left: 268px; padding: 22px 24px; }
         .topbar {
-            background: white; padding: 14px 20px; border-radius: 10px;
+            background: white; padding: 13px 20px; border-radius: 10px;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
+            border: 1px solid #e2e8f0;
         }
 
         .analytics-banner {
             background: linear-gradient(135deg, #0f2942 0%, #1e3a8a 100%);
-            color: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 20px;
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+            color: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 18px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
         }
-        .ga-input-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .ga-input-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
         .ga-input-row input {
             width: 220px; margin-bottom: 0; padding: 8px 12px; font-size: 0.84rem;
             border-radius: 7px; border: 1px solid rgba(255,255,255,0.25);
@@ -79,15 +89,24 @@
         }
         .ga-input-row input::placeholder { color: #cbd5e1; }
         .btn-ga-open {
-            background: #f59e0b; color: #0f172a; text-decoration: none; padding: 10px 18px;
-            border-radius: 8px; font-weight: 800; font-size: 0.86rem; display: inline-block;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            background: #f59e0b; color: #0f172a; text-decoration: none; padding: 10px 16px;
+            border-radius: 8px; font-weight: 800; font-size: 0.84rem; display: inline-block;
         }
 
         .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 20px; }
         .stat-box { background: white; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0; }
-        .stat-box small { color: #64748b; font-weight: 700; font-size: 0.75rem; }
+        .stat-box small { color: #64748b; font-weight: 700; font-size: 0.74rem; }
         .stat-box h2 { color: #0f2942; font-size: 1.55rem; margin-top: 4px; }
+
+        /* Home Dashboard Quick Cards */
+        .home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px; }
+        .quick-action-card {
+            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px;
+            cursor: pointer; transition: all 0.18s ease; text-align: left;
+        }
+        .quick-action-card:hover { border-color: #2563eb; background: #eff6ff; transform: translateY(-2px); }
+        .quick-action-card h4 { font-size: 0.96rem; color: #0f2942; margin-bottom: 4px; }
+        .quick-action-card p { font-size: 0.8rem; color: #475569; line-height: 1.4; }
 
         .panel-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 22px; }
         .panel-card h3 { color: #0f2942; font-size: 1.15rem; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
@@ -212,13 +231,13 @@
 
         /* Post-Publish WhatsApp Share Modal */
         .wa-share-card {
-            max-width: 540px; margin: 30px auto; background: #fff; border-radius: 12px;
+            max-width: 560px; margin: 24px auto; background: #fff; border-radius: 12px;
             overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.35);
         }
         .wa-preview-box {
             background: #dcf8c6; border: 1px solid #bbf7d0; border-radius: 10px;
             padding: 14px; font-size: 0.86rem; color: #1e293b; white-space: pre-wrap;
-            line-height: 1.5; max-height: 280px; overflow-y: auto; margin-top: 10px;
+            line-height: 1.55; max-height: 300px; overflow-y: auto; margin-top: 10px;
         }
 
         @media (max-width: 900px) {
@@ -243,31 +262,71 @@
     </div>
 
     <div id="dashboardView" class="admin-layout">
-        <div class="sidebar">
+        <!-- ORGANIZED SIDEBAR MENU -->
+        <aside class="sidebar">
             <div class="sidebar-brand-box">
                 <h2>Shiv<span>Mitra</span>.in</h2>
-                <small>Shiv Online Centre Admin</small>
+                <small>Shiv Online Centre Control Panel</small>
             </div>
-            
-            <div class="side-label">Dedicated Content Studios</div>
-            <button class="side-btn active" id="nav-create" onclick="switchTab('tab-create', this)">+ Jobs / Yojana / Call Letter</button>
-            <button class="side-btn accent-teal" id="nav-forms" onclick="switchTab('tab-forms', this)">&#128196; Forms Upload Studio</button>
-            <button class="side-btn accent-purple" id="nav-service" onclick="switchTab('tab-service', this)">&#128187; Online Service Studio</button>
-            <button class="side-btn accent-amber" id="nav-legal" onclick="switchTab('tab-legal', this)">&#9878; Legal Format Studio</button>
-            
-            <div class="side-label">Automation & Monetization</div>
-            <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">Auto-Jobs Server Queue</button>
-            <button class="side-btn" id="nav-ads" onclick="switchTab('tab-ads', this)">&#128176; AdSense & Ads Manager</button>
 
-            <div class="side-label">Manage Live Content</div>
-            <button class="side-btn" id="nav-manage-all" onclick="viewCategoryPosts('ALL', this)">All Published Items</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">1. Jobs (Govt/Bank/Private)</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">2. Government Schemes</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">3. Forms Directory</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">4. Online Service Guides</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">5. Legal Format Store</button>
-            <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">6. Call Letter / Admit Card</button>
-        </div>
+            <div class="menu-group">
+                <div class="side-label">Main Overview</div>
+                <button class="side-btn active" id="nav-home" onclick="switchTab('tab-home', this)">
+                    <span class="m-ico">&#127968;</span> Home Dashboard
+                </button>
+            </div>
+
+            <div class="menu-group">
+                <div class="side-label">Content Studios</div>
+                <button class="side-btn" id="nav-create" onclick="switchTab('tab-create', this)">
+                    <span class="m-ico">&#10133;</span> Jobs / Yojana / Call Letter
+                </button>
+                <button class="side-btn" id="nav-forms" onclick="switchTab('tab-forms', this)">
+                    <span class="m-ico">&#128196;</span> Forms Upload Studio
+                </button>
+                <button class="side-btn" id="nav-service" onclick="switchTab('tab-service', this)">
+                    <span class="m-ico">&#128187;</span> Online Service Studio
+                </button>
+                <button class="side-btn" id="nav-legal" onclick="switchTab('tab-legal', this)">
+                    <span class="m-ico">&#9878;</span> Legal Format Studio
+                </button>
+            </div>
+
+            <div class="menu-group">
+                <div class="side-label">Automation & Monetization</div>
+                <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">
+                    <span class="m-ico">&#129302;</span> Auto-Jobs Server Queue
+                </button>
+                <button class="side-btn" id="nav-ads" onclick="switchTab('tab-ads', this)">
+                    <span class="m-ico">&#128176;</span> AdSense & Ads Manager
+                </button>
+            </div>
+
+            <div class="menu-group">
+                <div class="side-label">Manage Live Content</div>
+                <button class="side-btn" id="nav-manage-all" onclick="viewCategoryPosts('ALL', this)">
+                    <span class="m-ico">&#128203;</span> All Published Items
+                </button>
+                <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">
+                    <span class="m-ico">&#128188;</span> Jobs (Govt/Bank/Pvt)
+                </button>
+                <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">
+                    <span class="m-ico">&#127963;</span> Government Schemes
+                </button>
+                <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">
+                    <span class="m-ico">&#128193;</span> Forms Directory
+                </button>
+                <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">
+                    <span class="m-ico">&#128295;</span> Online Service Guides
+                </button>
+                <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">
+                    <span class="m-ico">&#128220;</span> Legal Format Store
+                </button>
+                <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">
+                    <span class="m-ico">&#127915;</span> Call Letter / Admit Card
+                </button>
+            </div>
+        </aside>
 
         <div class="main-content">
             <div class="topbar">
@@ -307,8 +366,41 @@
                 <div class="stat-box"><small>LEGAL FORMATS</small><h2 id="statPaid">0</h2></div>
             </div>
 
+            <!-- TAB 0: HOME DASHBOARD -->
+            <div id="tab-home" class="panel-card tab-section">
+                <h3>&#127968; Shiv Online Centre — Home Dashboard</h3>
+                <p style="font-size:0.86rem; color:#475569; margin-bottom:16px;">
+                    Quickly create new posts, review bot drafts, or share live updates to your WhatsApp Group/Channel.
+                </p>
+
+                <div class="home-grid">
+                    <div class="quick-action-card" onclick="switchTab('tab-create', document.getElementById('nav-create'))">
+                        <h4>&#10133; New Job / Yojana Post</h4>
+                        <p>Publish Sarkari Bharti, Bank Job, Yojana, or Call Letter with poster & preview.</p>
+                    </div>
+                    <div class="quick-action-card" onclick="switchTab('tab-auto', document.getElementById('nav-auto'))">
+                        <h4>&#129302; Review Bot Drafts</h4>
+                        <p>Approve & publish auto-generated recruitment drafts from the server queue.</p>
+                    </div>
+                    <div class="quick-action-card" onclick="switchTab('tab-forms', document.getElementById('nav-forms'))">
+                        <h4>&#128196; Upload Govt / Bank Form</h4>
+                        <p>Add downloadable PDF/Word forms directly to your Forms Directory.</p>
+                    </div>
+                    <div class="quick-action-card" onclick="viewCategoryPosts('ALL', document.getElementById('nav-manage-all'))">
+                        <h4>&#128242; Share Live Posts on WhatsApp</h4>
+                        <p>Open published posts list to edit or share with image & qualification details.</p>
+                    </div>
+                </div>
+
+                <h4 style="font-size:0.96rem; color:#0f2942; margin-bottom:10px;">Recent Live Updates (Quick Share & Edit)</h4>
+                <table>
+                    <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Quick Actions</th></tr></thead>
+                    <tbody id="homeRecentTableBody"></tbody>
+                </table>
+            </div>
+
             <!-- TAB 1: JOBS / YOJANA / CALL LETTER POST CREATOR -->
-            <div id="tab-create" class="panel-card tab-section">
+            <div id="tab-create" class="panel-card tab-section" style="display:none;">
                 <h3 id="formHeading">+ Create Job / Yojana / Call Letter Post</h3>
                 <input type="hidden" id="editPostId">
 
@@ -329,10 +421,15 @@
 
                 <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Recruitment 2026: Apply Online)">
                 
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                    <input type="text" id="pQualification" placeholder="Qualification / Eligibility (e.g., 10th / 12th / Any Graduate — for WhatsApp Share)">
+                    <input type="text" id="pLastDate" placeholder="Last Date / Exam Date (e.g., 25 Dec 2026 — for WhatsApp Share)">
+                </div>
+
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                         <div>
-                            <strong style="font-size:0.86rem; color:#0f2942;">Post Feature Image (Auto-Compressed WebP/JPG):</strong>
+                            <strong style="font-size:0.86rem; color:#0f2942;">Post Feature Image (Auto-Compressed WebP):</strong>
                             <span id="bannerSizeInfo" style="font-size:0.75rem; color:#15803d; font-weight:700; margin-left:6px;"></span>
                         </div>
                         <div style="display:flex; gap:8px;">
@@ -348,7 +445,7 @@
                 </div>
 
                 <div class="studio-box">
-                    <h4>Direct Official Portal & PDF Links:</h4>
+                    <h4>Direct Official Portal & PDF Links (Shown Inside Website Article):</h4>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                         <input type="text" id="pLink" style="background:white;" placeholder="1. Apply Online / Call Letter Direct Link">
                         <input type="text" id="pPdfLink" style="background:white;" placeholder="2. Official Notification / Exam Notice PDF Link">
@@ -356,12 +453,7 @@
                     </div>
                 </div>
 
-                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-                    <button type="button" class="btn-auto-fill" onclick="fillTemplate('JOB')">&#128188; Insert Job Table Format</button>
-                    <button type="button" class="btn-auto-fill" style="background:#0d9488;" onclick="fillTemplate('CALL_LETTER')">&#127915; Insert Call Letter Format</button>
-                </div>
-
-                <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on the homepage card)..."></textarea>
+                <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on the homepage card & WhatsApp message)..."></textarea>
 
                 <div class="insert-toolbar">
                     <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Insert Anywhere:</span>
@@ -622,11 +714,11 @@
         </div>
     </div>
 
-    <!-- WHATSAPP SHARE MODAL (OPENS AFTER PUBLISH OR FROM MANAGE TABLE) -->
+    <!-- WHATSAPP SHARE MODAL -->
     <div id="waShareModal" class="modal-overlay">
         <div class="wa-share-card">
             <div class="modal-top-bar" style="background:#15803d; border-bottom-color:#86efac;">
-                <strong>&#128242; Share Post on WhatsApp (Image + Full Details)</strong>
+                <strong>&#128242; Share on WhatsApp (Image + Qualification + Full Details)</strong>
                 <button type="button" class="btn-sm btn-del" onclick="closeWaShareModal()">&#10005;</button>
             </div>
             <div style="padding:20px;">
@@ -634,7 +726,7 @@
                 <p style="font-size:0.82rem; color:#475569; font-weight:600;">Ready-Made WhatsApp Group / Channel Message:</p>
                 <div class="wa-preview-box" id="waMessagePreview"></div>
                 <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
-                    <button type="button" class="btn-wa" style="flex:1;" onclick="triggerNativeOrWebWhatsApp()">&#128640; Share with Image & Link on WhatsApp</button>
+                    <button type="button" class="btn-wa" style="flex:1;" onclick="triggerNativeOrWebWhatsApp()">&#128640; Share with Image & Details on WhatsApp</button>
                     <button type="button" class="btn-sm" style="background:#0f2942; color:#fff; padding:11px 16px;" onclick="copyWaMessage()">&#128203; Copy Text</button>
                 </div>
                 <p id="waShareHint" style="font-size:0.76rem; color:#64748b; margin-top:10px; line-height:1.45;"></p>
@@ -738,6 +830,7 @@
                 if (!Array.isArray(posts)) posts = [];
 
                 refreshStats();
+                renderHomeRecent();
                 renderManageTable();
                 renderDrafts();
                 statusEl.style.color = "#15803d";
@@ -748,6 +841,7 @@
                     if (pubRes.ok) {
                         posts = await pubRes.json();
                         refreshStats();
+                        renderHomeRecent();
                         renderManageTable();
                         renderDrafts();
                         statusEl.style.color = "#d97706";
@@ -865,6 +959,8 @@
             const mainCat = document.getElementById('pMainCat').value;
             const subCat = document.getElementById('pSubCat').value;
             const title = document.getElementById('pTitle').value.trim();
+            const qualification = document.getElementById('pQualification').value.trim();
+            const lastDate = document.getElementById('pLastDate').value.trim();
             const actionLink = document.getElementById('pLink').value.trim();
             const pdfLink = document.getElementById('pPdfLink').value.trim();
             const officialSite = document.getElementById('pOfficialSite').value.trim();
@@ -875,7 +971,7 @@
 
             return {
                 id: editId ? Number(editId) : Date.now(),
-                mainCat, subCat, title, date: today,
+                mainCat, subCat, title, qualification, lastDate, date: today,
                 actionLink, pdfLink, officialSite,
                 price: "", summary, content, bannerImg, status: 'live'
             };
@@ -906,6 +1002,7 @@
                     <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                         <span style="background:#1d4ed8; color:#fff; font-size:0.75rem; font-weight:700; padding:3px 9px; border-radius:4px;">${p.subCat}</span>
                         <span style="font-size:0.8rem; color:#475569; font-weight:600;">Date: ${p.date}</span>
+                        ${p.qualification ? `<span style="background:#dcfce7; color:#166534; font-size:0.75rem; font-weight:700; padding:3px 9px; border-radius:4px;">Qualification: ${p.qualification}</span>` : ''}
                     </div>
                     <h1>${p.title}</h1>
                     ${imgHtml}
@@ -946,34 +1043,75 @@
         }
 
         /* =========================================================
-           2. WHATSAPP SHARE (IMAGE + FULL DETAILS + DIRECT LINK)
+           2. WHATSAPP SHARE (IMAGE + QUALIFICATION + VADHARE MAHITI)
         ========================================================= */
+        function extractExtraDetailsFromHtml(htmlStr) {
+            if (!htmlStr) return { qual: "", lastDt: "", bullets: [] };
+            const temp = document.createElement('div');
+            temp.innerHTML = htmlStr;
+            let qual = "";
+            let lastDt = "";
+            const bullets = [];
+
+            temp.querySelectorAll('tr').forEach(tr => {
+                const cells = tr.querySelectorAll('td, th');
+                if (cells.length >= 2) {
+                    const k = cells[0].innerText.trim();
+                    const v = cells[1].innerText.trim();
+                    const kl = k.toLowerCase();
+                    if (!qual && (kl.includes('qualification') || kl.includes('લાયકાત') || kl.includes('eligibility') || kl.includes('post'))) {
+                        qual = v;
+                    }
+                    if (!lastDt && (kl.includes('last date') || kl.includes('છેલ્લી તારીખ') || kl.includes('exam date'))) {
+                        lastDt = v;
+                    }
+                    if (k && v && bullets.length < 4 && !kl.includes('event') && !kl.includes('વિગત')) {
+                        bullets.push(`▪ *${k}:* ${v}`);
+                    }
+                }
+            });
+            return { qual, lastDt, bullets };
+        }
+
         function buildWhatsAppPostMessage(p) {
             const postUrl = `${SITE_DOMAIN}/post.html?id=${p.id}`;
             const catLabel = p.subCat || p.mainCat || "Latest Update";
+            const extracted = extractExtraDetailsFromHtml(p.content);
+
+            const finalQual = (p.qualification || "").trim() || extracted.qual || "Official Notification Mujab (All Eligible Candidates)";
+            const finalDate = (p.lastDate || "").trim() || extracted.lastDt;
+
             let lines = [
                 `📢 *${catLabel.toUpperCase()} — SHIV ONLINE CENTRE*`,
+                `━━━━━━━━━━━━━━━━━━━━`,
+                `📌 *${p.title}*`,
                 ``,
-                `*${p.title}*`,
-                ``,
-                `📝 *Details:* ${p.summary || ""}`
+                `🎓 *લાયકાત (Qualification):* ${finalQual}`
             ];
 
+            if (finalDate) {
+                lines.push(`📅 *મહત્વની તારીખ (Date):* ${finalDate}`);
+            }
             if (p.price) {
-                lines.push(`💰 *Offer Price:* ${p.price}`);
-            }
-            if (p.actionLink && p.actionLink !== "#" && !p.actionLink.startsWith("#")) {
-                lines.push(`🔗 *Apply / Direct Link:* ${p.actionLink}`);
-            }
-            if (p.pdfLink && p.pdfLink !== "#" && p.pdfLink !== p.actionLink && !p.pdfLink.startsWith("#")) {
-                lines.push(`📄 *Official PDF:* ${p.pdfLink}`);
+                lines.push(`💰 *ઓફર કિંમત (Offer Price):* ${p.price}`);
             }
 
             lines.push(``);
-            lines.push(`👉 *Full Notification & Details:*`);
-            lines.push(`${postUrl}`);
+            lines.push(`📝 *સંપૂર્ણ વિગત (Full Information):*`);
+            lines.push(`${p.summary || ""}`);
+
+            if (extracted.bullets.length > 0) {
+                lines.push(``);
+                lines.push(`📋 *મુખ્ય હાઇલાઇટ્સ (Key Highlights):*`);
+                extracted.bullets.forEach(b => lines.push(b));
+            }
+
             lines.push(``);
-            lines.push(`📲 _Daily Bharti, Yojana & Forms ke liye ShivMitra.in par judein._`);
+            lines.push(`👉 *વધુ માહિતી, ઓફિશિયલ નોટિફિકેશન અને ઓનલાઇન ફોર્મ ભરવા માટે નીચેની લિંક ખોલો:*`);
+            lines.push(`🔗 ${postUrl}`);
+            lines.push(``);
+            lines.push(`🏢 *Shiv Online Centre (ShivMitra.in)*`);
+            lines.push(`📲 _દરરોજ નવી સરકારી ભરતી, યોજના અને ફોર્મની માહિતી માટે અમારા ગ્રુપમાં જોડાયેલા રહો._`);
 
             return lines.join('\n');
         }
@@ -987,13 +1125,13 @@
             if (postObj.bannerImg) {
                 bannerWrap.innerHTML = `<img src="${postObj.bannerImg}" alt="Poster" style="max-height:150px; border-radius:8px; border:1px solid #cbd5e1;">`;
             } else {
-                bannerWrap.innerHTML = `<span style="font-size:0.78rem; color:#64748b;">(No banner attached — text + direct link will be shared)</span>`;
+                bannerWrap.innerHTML = `<span style="font-size:0.78rem; color:#64748b;">(No banner attached — qualification, full details & website link will be shared)</span>`;
             }
 
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             document.getElementById('waShareHint').innerText = isMobile
-                ? "Mobile par button dabate hi Poster Image + Poori Jaankari + Link seedha WhatsApp mein attach ho jayega."
-                : "PC par button dabate hi Poster Image download ho jayegi aur WhatsApp Web mein poori jaankari + link ready-made khul jayega (image ko drag-drop karke Send kar dein).";
+                ? "Mobile par button dabate hi Poster Image + Qualification + Poori Jaankari seedha WhatsApp mein attach ho jayegi."
+                : "PC par button dabate hi Poster Image download ho jayegi aur WhatsApp Web mein Qualification + Poori Jaankari ready-made khul jayegi.";
 
             document.getElementById('waShareModal').style.display = 'block';
         }
@@ -1023,7 +1161,6 @@
             if (!activeSharePost) return;
             const shareText = buildWhatsAppPostMessage(activeSharePost);
 
-            // 1. Mobile / Supported Browser: Native Web Share with Image File + Caption Text + URL
             if (activeSharePost.bannerImg && navigator.canShare) {
                 try {
                     const imgFile = await dataUrlToImageFile(activeSharePost.bannerImg, `shivmitra_${activeSharePost.id}`);
@@ -1040,7 +1177,6 @@
                 }
             }
 
-            // 2. Desktop / Fallback: Auto-download Poster Image (if present) + Open WhatsApp with Full Formatted Text
             if (activeSharePost.bannerImg && activeSharePost.bannerImg.startsWith('data:image')) {
                 const a = document.createElement('a');
                 a.href = activeSharePost.bannerImg;
@@ -1181,6 +1317,7 @@
                 document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             }
+            if (tabId === 'tab-home') renderHomeRecent();
             if (tabId === 'tab-auto') renderDrafts();
             if (tabId === 'tab-legal') updateLegalPreview();
         }
@@ -1190,6 +1327,27 @@
             switchTab('tab-manage', btn);
             document.getElementById('manageHeading').innerText = cat === 'ALL' ? 'All Published Items' : `${cat} — Published Items`;
             renderManageTable();
+        }
+
+        function renderHomeRecent() {
+            const tbody = document.getElementById('homeRecentTableBody');
+            if (!tbody) return;
+            const live = posts.filter(p => p.status !== 'draft').slice(0, 6);
+            if (live.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live posts yet. Click "+ New Job / Yojana Post" above to publish your first update!</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = live.map(p => `
+                <tr>
+                    <td><b>${p.title}</b></td>
+                    <td>${p.subCat || p.mainCat}</td>
+                    <td>${p.date || '-'}</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn-sm btn-wa-sm" onclick="shareExistingPostById(${p.id})">&#128242; WhatsApp</button>
+                        <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
         async function handleFormFileUpload(event) {
@@ -1236,6 +1394,7 @@
             const formPost = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Forms", subCat, title, date: today,
+                qualification: "All Citizens / Applicants",
                 fileType: fileFormatLabel, fileSize: fileSizeLabel,
                 pdfLink: finalUrl, actionLink: finalUrl,
                 officialSite: "forms.html",
@@ -1250,7 +1409,7 @@
             else { posts.unshift(formPost); }
             await pushToGitHub(`Publish Form: ${title}`, formPost);
             btn.innerText = "📄 Publish Form to Website"; btn.disabled = false;
-            resetFormStudio(); refreshStats(); renderManageTable();
+            resetFormStudio(); refreshStats(); renderHomeRecent(); renderManageTable();
         }
 
         function resetFormStudio() {
@@ -1282,9 +1441,10 @@
             const servicePost = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Online Service Details", subCat, title, date: today,
+                qualification: "All Indian / Gujarat Citizens",
                 serviceMeta: { fee, procTime, mode, docsRaw, stepsRaw },
                 actionLink: portalLink || "index.html", officialSite: portalLink || "index.html", pdfLink: portalLink || "index.html",
-                summary: `Step-by-step guide for ${title}. Required documents, fee (${fee}) & official portal link.`,
+                summary: `Step-by-step guide for ${title}. Required documents, fee (${fee}) & official process.`,
                 content: contentHtml, status: "live"
             };
 
@@ -1294,7 +1454,7 @@
             else { posts.unshift(servicePost); }
             await pushToGitHub(`Publish Online Service: ${title}`, servicePost);
             btn.innerText = "💻 Publish Online Service Guide"; btn.disabled = false;
-            resetServiceStudio(); refreshStats(); renderManageTable();
+            resetServiceStudio(); refreshStats(); renderHomeRecent(); renderManageTable();
         }
 
         function resetServiceStudio() {
@@ -1399,6 +1559,7 @@
             const postPayload = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Legal Format", subCat, title, date: today,
+                qualification: `Editable Word + PDF (${lang})`,
                 price: `₹${offerPrice}`, originalPrice: String(origPrice),
                 discountPercent: discountPct, offerTag, language: lang,
                 actionLink: extLink || "#buy-legal-format", pdfLink: extLink || "#buy-legal-format", officialSite: "index.html",
@@ -1413,7 +1574,7 @@
             else { posts.unshift(postPayload); }
             await pushToGitHub(`Publish Legal Format: ${title}`, postPayload);
             btn.innerText = "⚖ Publish Legal Format Offer Live"; btn.disabled = false;
-            resetLegalForm(); refreshStats(); renderManageTable();
+            resetLegalForm(); refreshStats(); renderHomeRecent(); renderManageTable();
         }
 
         function resetLegalForm() {
@@ -1457,24 +1618,13 @@
             textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(start);
         }
 
-        function fillTemplate(type) {
-            const title = document.getElementById('pTitle').value.trim() || "Official Update 2026";
-            if (type === 'CALL_LETTER') {
-                document.getElementById('pMainCat').value = 'Call Letter';
-                updateSubOptions('Gujarat Call Letter (OJAS/GPSC)');
-                document.getElementById('pSummary').value = `${title} Admit Card / Call Letter released. Check Exam Date and download steps below.`;
-                document.getElementById('pContent').value = `<div class="note-box"><strong>Quick Overview:</strong> ${title} Call Letter is now available for download.</div><h3>1. Exam & Call Letter Schedule</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Release Date</td><td>DD/MM/2026</td></tr><tr><td>Exam Date</td><td>DD/MM/2026</td></tr></table><h3>2. Required Login Details</h3><table><tr><th>Field</th><th>Format</th></tr><tr><td>Confirmation / Roll No.</td><td>As per Application Form</td></tr><tr><td>Date of Birth</td><td>DD-MM-YYYY</td></tr></table>`;
-            } else {
-                document.getElementById('pSummary').value = `${title} official notification released. Check Important Dates, Eligibility, Fee, and Apply Online link below.`;
-                document.getElementById('pContent').value = `<div class="note-box"><strong>Quick Overview:</strong> ${title} notification details are given below.</div><h3>1. Important Dates</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Start Date</td><td>DD/MM/2026</td></tr><tr><td>Last Date</td><td>DD/MM/2026</td></tr></table><h3>2. Eligibility & Fee</h3><table><tr><th>Criteria</th><th>Details</th></tr><tr><td>Qualification</td><td>10th / 12th / Graduate</td></tr><tr><td>Fee</td><td>₹100/- (General) | ₹0/- (Reserved)</td></tr></table>`;
-            }
-        }
-
         async function savePost() {
             const editId = document.getElementById('editPostId').value;
             const mainCat = document.getElementById('pMainCat').value;
             const subCat = document.getElementById('pSubCat').value;
             const title = document.getElementById('pTitle').value.trim();
+            const qualification = document.getElementById('pQualification').value.trim();
+            const lastDate = document.getElementById('pLastDate').value.trim();
             const actionLink = document.getElementById('pLink').value.trim();
             const pdfLink = document.getElementById('pPdfLink').value.trim();
             const officialSite = document.getElementById('pOfficialSite').value.trim();
@@ -1491,17 +1641,17 @@
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
                 if (idx !== -1) {
-                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
+                    posts[idx] = { ...posts[idx], mainCat, subCat, title, qualification, lastDate, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
                     savedPostObj = posts[idx];
                 }
             } else {
-                savedPostObj = { id: Date.now(), mainCat, subCat, title, date: today, actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live' };
+                savedPostObj = { id: Date.now(), mainCat, subCat, title, qualification, lastDate, date: today, actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live' };
                 posts.unshift(savedPostObj);
             }
 
             await pushToGitHub(`Publish post: ${title}`, savedPostObj);
             btn.innerText = "🚀 Preview & Publish Live"; btn.disabled = false;
-            resetForm(); refreshStats(); renderManageTable();
+            resetForm(); refreshStats(); renderHomeRecent(); renderManageTable();
         }
 
         function editPost(id) {
@@ -1559,6 +1709,8 @@
             document.getElementById('pMainCat').value = p.mainCat || 'Jobs';
             updateSubOptions(p.subCat);
             document.getElementById('pTitle').value = p.title;
+            document.getElementById('pQualification').value = p.qualification || "";
+            document.getElementById('pLastDate').value = p.lastDate || "";
             document.getElementById('pLink').value = p.actionLink || "";
             document.getElementById('pPdfLink').value = p.pdfLink || "";
             document.getElementById('pOfficialSite').value = p.officialSite || "";
@@ -1576,6 +1728,8 @@
             document.getElementById('formHeading').innerText = "+ Create Job / Yojana / Call Letter Post";
             document.getElementById('editPostId').value = "";
             document.getElementById('pTitle').value = "";
+            document.getElementById('pQualification').value = "";
+            document.getElementById('pLastDate').value = "";
             document.getElementById('pBannerData').value = "";
             document.getElementById('bannerSizeInfo').innerText = "";
             document.getElementById('bannerPreview').style.display = 'none';
@@ -1591,7 +1745,7 @@
             if (!confirm("Permanently delete this item?")) return;
             posts = posts.filter(x => x.id != id);
             await pushToGitHub("Delete item from website");
-            renderManageTable(); renderDrafts(); refreshStats();
+            renderHomeRecent(); renderManageTable(); renderDrafts(); refreshStats();
         }
 
         function renderManageTable() {
@@ -1684,7 +1838,7 @@
                 posts[idx].status = 'live';
                 posts[idx].date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
                 await pushToGitHub(`Approve draft: ${posts[idx].title}`, posts[idx]);
-                renderDrafts(); refreshStats(); renderManageTable();
+                renderDrafts(); refreshStats(); renderHomeRecent(); renderManageTable();
             }
         }
 
