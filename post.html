@@ -7,6 +7,8 @@
   <meta name="description" id="metaDesc" content="Shiv Online Centre (ShivMitra.in) - Official Recruitment, Call Letter & Citizen Service Details." />
   <meta property="og:title" id="ogTitle" content="ShivMitra.in Update" />
   <meta property="og:description" id="ogDesc" content="Check full official details & direct links on ShivMitra.in" />
+  <meta property="og:image" id="ogImage" content="" />
+  <meta property="og:type" content="article" />
   <style>
     :root {
       --navy: #0f2942; --blue: #1d4ed8; --green: #15803d;
@@ -45,6 +47,9 @@
     .post-content th, .post-content td { border: 1px solid var(--border); padding: 10px 13px; text-align: left; vertical-align: top; }
     .post-content th { background: #e2e8f0; color: #0f172a; font-weight: 700; }
     .post-content tr:nth-child(even) { background: #f8fafc; }
+    .post-content .inline-media img { max-width: 100%; height: auto; border-radius: 6px; margin: 12px 0; border: 1px solid var(--border); }
+    .post-content .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 14px 0; border-radius: 8px; }
+    .post-content .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
     .imp-links-wrapper { margin-top: 26px; border: 2px solid var(--navy); border-radius: 7px; overflow: hidden; }
     .imp-links-title { background: var(--red); color: #fff; text-align: center; font-weight: 800; font-size: 1.08rem; padding: 10px; }
@@ -72,7 +77,7 @@
     }
 
     .share-strip { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .share-btn { padding: 8px 15px; border-radius: 5px; color: #fff; text-decoration: none; font-weight: 700; font-size: 0.88rem; }
+    .share-btn { padding: 8px 15px; border-radius: 5px; color: #fff; text-decoration: none; font-weight: 700; font-size: 0.88rem; border: none; cursor: pointer; }
     .wa-bg { background: #16a34a; }
     .tg-bg { background: #0284c7; }
 
@@ -135,6 +140,47 @@
 <script>
   // Apna Shiv Online Centre WhatsApp Number yahan set karein (91 + 10 digit number)
   const CENTRE_WHATSAPP_NUMBER = "919999999999";
+  let currentLoadedPost = null;
+
+  async function sharePostRichWhatsApp() {
+    if (!currentLoadedPost) return;
+    const p = currentLoadedPost;
+    const pageUrl = window.location.href;
+    const catLabel = p.subCat || p.mainCat || "Latest Update";
+
+    const lines = [
+      `📢 *${catLabel.toUpperCase()} — SHIV ONLINE CENTRE*`,
+      ``,
+      `*${p.title}*`,
+      ``,
+      `📝 *Details:* ${p.summary || ""}`
+    ];
+
+    if (p.price) lines.push(`💰 *Offer Price:* ${p.price}`);
+    if (p.actionLink && !p.actionLink.startsWith("#")) lines.push(`🔗 *Apply / Direct Link:* ${p.actionLink}`);
+    if (p.pdfLink && p.pdfLink !== p.actionLink && !p.pdfLink.startsWith("#")) lines.push(`📄 *Official PDF:* ${p.pdfLink}`);
+
+    lines.push(``, `👉 *Full Details & Links:*`, pageUrl);
+    const fullText = lines.join('\n');
+
+    // Mobile par Poster Image + Poori Jaankari ek saath share karne ke liye
+    if (p.bannerImg && navigator.canShare) {
+      try {
+        const res = await fetch(p.bannerImg);
+        const blob = await res.blob();
+        const ext = blob.type.includes('webp') ? 'webp' : 'jpg';
+        const file = new File([blob], `ShivMitra_${p.id}.${ext}`, { type: blob.type || 'image/jpeg' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: p.title, text: fullText });
+          return;
+        }
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
+      }
+    }
+
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(fullText)}`, '_blank', 'noopener');
+  }
 
   async function renderSinglePost() {
     const params = new URLSearchParams(window.location.search);
@@ -159,10 +205,15 @@
         return;
       }
 
+      currentLoadedPost = post;
+
       document.title = `${post.title} | ShivMitra.in`;
       document.getElementById("metaDesc").setAttribute("content", post.summary || post.title);
       document.getElementById("ogTitle").setAttribute("content", post.title);
       document.getElementById("ogDesc").setAttribute("content", post.summary || post.title);
+      if (post.bannerImg) {
+        document.getElementById("ogImage").setAttribute("content", post.bannerImg);
+      }
 
       const imgHtml = post.bannerImg ? `<img src="${post.bannerImg}" alt="${post.title}" class="featured-img" />` : "";
       const priceBadge = post.price ? `<span class="price-tag">Fee / Charge: ${post.price}</span>` : "";
@@ -221,7 +272,7 @@
 
         <div class="share-strip">
           <strong style="font-size:0.9rem;">Share this update:</strong>
-          <a href="https://api.whatsapp.com/send?text=${shareTitle}%0A%0ACheck%20details:%20${shareUrl}" target="_blank" rel="noopener" class="share-btn wa-bg">WhatsApp</a>
+          <button type="button" onclick="sharePostRichWhatsApp()" class="share-btn wa-bg">WhatsApp (Image + Details)</button>
           <a href="https://t.me/share/url?url=${shareUrl}&text=${shareTitle}" target="_blank" rel="noopener" class="share-btn tg-bg">Telegram</a>
         </div>
       `;

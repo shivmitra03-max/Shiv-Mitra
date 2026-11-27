@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - ShivMitra.in</title>
-    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -21,7 +20,8 @@
             border-radius: 14px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); text-align: center;
             margin: 0 auto; position: relative; z-index: 20;
         }
-        .login-logo { height: 64px; width: auto; max-width: 260px; object-fit: contain; margin: 0 auto 10px; display: block; }
+        .brand-heading { font-size: 1.7rem; font-weight: 800; color: #0f2942; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .brand-heading span { color: #1d4ed8; }
         .login-card p { color: #64748b; font-size: 0.85rem; margin-bottom: 20px; }
         .login-card input {
             display: block; width: 100%; padding: 11px 13px; margin-bottom: 12px;
@@ -37,11 +37,13 @@
             width: 270px; background: #0f2942; color: white; padding: 18px 14px;
             position: fixed; height: 100%; overflow-y: auto;
         }
-        .sidebar-logo-box {
-            background: white; padding: 8px 10px; border-radius: 10px;
-            margin-bottom: 14px; text-align: center;
+        .sidebar-brand-box {
+            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 12px 10px; border-radius: 10px; margin-bottom: 14px; text-align: center;
         }
-        .sidebar-logo-box img { height: 48px; width: auto; max-width: 220px; object-fit: contain; display: block; margin: 0 auto; }
+        .sidebar-brand-box h2 { font-size: 1.35rem; font-weight: 800; color: #fff; }
+        .sidebar-brand-box h2 span { color: #38bdf8; }
+        .sidebar-brand-box small { color: #94a3b8; font-size: 0.72rem; font-weight: 600; display: block; margin-top: 2px; }
 
         .side-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin: 14px 10px 6px; font-weight: 700; }
         .side-btn {
@@ -98,6 +100,8 @@
 
         .btn-primary { background: #1d4ed8; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
         .btn-green { background: #15803d; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-preview { background: #0f2942; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-wa { background: #16a34a; color: white; border: none; padding: 11px 18px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-teal { background: #0d9488; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-sm { padding: 6px 11px; border-radius: 5px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
@@ -105,6 +109,7 @@
         .btn-del { background: #dc2626; color: white; }
         .btn-pub { background: #15803d; color: white; }
         .btn-view { background: #0f2942; color: white; }
+        .btn-wa-sm { background: #16a34a; color: white; }
         .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 
         .studio-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
@@ -161,6 +166,61 @@
         th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #e2e8f0; }
         th { background: #f8fafc; color: #475569; font-weight: 700; }
 
+        /* DEMO PREVIEW & WHATSAPP SHARE MODAL */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78);
+            z-index: 9999; overflow-y: auto; padding: 20px;
+        }
+        .modal-shell {
+            max-width: 860px; margin: 10px auto; background: #fff; border-radius: 12px;
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+            transition: max-width 0.25s ease;
+        }
+        .modal-shell.mobile-mode { max-width: 410px; }
+        .modal-top-bar {
+            background: #0f2942; color: #fff; padding: 12px 18px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+            border-bottom: 3px solid #38bdf8;
+        }
+        .modal-body-preview { padding: 22px; background: #f8fafc; }
+        .demo-article-card {
+            background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 20px;
+        }
+        .demo-article-card h1 {
+            font-size: 1.45rem; color: #0f172a; margin: 10px 0 14px; padding-bottom: 10px;
+            border-bottom: 2px solid #0f2942; line-height: 1.35;
+        }
+        .demo-article-card img.demo-banner {
+            width: 100%; max-height: 320px; object-fit: contain; background: #f1f5f9;
+            border-radius: 6px; border: 1px solid #cbd5e1; margin-bottom: 14px;
+        }
+        .demo-content .note-box {
+            background: #fefce8; border: 1px solid #fde047; border-left: 5px solid #eab308;
+            padding: 12px 14px; border-radius: 6px; margin-bottom: 14px; font-size: 0.92rem;
+        }
+        .demo-content h3 {
+            background: #0f2942; color: #fff; padding: 8px 12px; font-size: 1rem;
+            border-radius: 5px 5px 0 0; margin-top: 16px;
+        }
+        .demo-content table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+        .demo-content th, .demo-content td { border: 1px solid #cbd5e1; padding: 8px 11px; font-size: 0.88rem; }
+        .demo-content th { background: #e2e8f0; }
+        .modal-footer-bar {
+            background: #fff; padding: 14px 20px; border-top: 1px solid #cbd5e1;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+
+        /* Post-Publish WhatsApp Share Modal */
+        .wa-share-card {
+            max-width: 540px; margin: 30px auto; background: #fff; border-radius: 12px;
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+        }
+        .wa-preview-box {
+            background: #dcf8c6; border: 1px solid #bbf7d0; border-radius: 10px;
+            padding: 14px; font-size: 0.86rem; color: #1e293b; white-space: pre-wrap;
+            line-height: 1.5; max-height: 280px; overflow-y: auto; margin-top: 10px;
+        }
+
         @media (max-width: 900px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .main-content { margin-left: 0; }
@@ -172,8 +232,8 @@
 
     <div id="loginView" class="login-wrapper">
         <div class="login-card">
-            <img src="logo.png" alt="ShivMitra.in - Shiv Online Centre" class="login-logo">
-            <p>GitHub Direct Publish Admin Login</p>
+            <div class="brand-heading">Shiv<span>Mitra</span>.in</div>
+            <p>Shiv Online Centre — GitHub Direct Publish Admin Login</p>
             <input type="text" id="ghUser" value="shivmitra03-max" placeholder="GitHub Username (e.g., shivmitra03-max)">
             <input type="text" id="ghRepo" value="Shiv-Mitra" placeholder="Repository Name (e.g., Shiv-Mitra)">
             <input type="password" id="ghToken" placeholder="GitHub Fine-Grained Token (github_pat_...)">
@@ -184,8 +244,9 @@
 
     <div id="dashboardView" class="admin-layout">
         <div class="sidebar">
-            <div class="sidebar-logo-box">
-                <img src="logo.png" alt="ShivMitra.in">
+            <div class="sidebar-brand-box">
+                <h2>Shiv<span>Mitra</span>.in</h2>
+                <small>Shiv Online Centre Admin</small>
             </div>
             
             <div class="side-label">Dedicated Content Studios</div>
@@ -270,7 +331,10 @@
                 
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                        <strong style="font-size:0.86rem; color:#0f2942;">Post Feature Image (Upload Custom Banner):</strong>
+                        <div>
+                            <strong style="font-size:0.86rem; color:#0f2942;">Post Feature Image (Auto-Compressed WebP/JPG):</strong>
+                            <span id="bannerSizeInfo" style="font-size:0.75rem; color:#15803d; font-weight:700; margin-left:6px;"></span>
+                        </div>
                         <div style="display:flex; gap:8px;">
                             <label class="btn-sm" style="background:#0f2942; color:white; cursor:pointer;">
                                 &#128247; Upload Custom Image
@@ -310,8 +374,9 @@
                 </div>
                 <textarea id="pContent" rows="9" style="border-radius:0 0 7px 7px;" placeholder="Write your full article details here..."></textarea>
 
-                <div style="display:flex; gap:10px;">
-                    <button class="btn-green" id="publishBtn" onclick="savePost()">&#128640; Publish Live to Website</button>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="btn-preview" onclick="openDemoPreview()">&#128065; Demo Preview Before Publish</button>
+                    <button type="button" class="btn-green" id="publishBtn" onclick="openDemoPreview(true)">&#128640; Preview & Publish Live</button>
                     <button id="cancelEditBtn" class="btn-sm btn-del" style="display:none; padding:11px 18px;" onclick="resetForm()">Cancel Edit</button>
                 </div>
             </div>
@@ -532,7 +597,54 @@
         </div>
     </div>
 
+    <!-- DEMO PREVIEW MODAL (OPENS BEFORE PUBLISHING) -->
+    <div id="demoPreviewModal" class="modal-overlay">
+        <div class="modal-shell" id="demoModalShell">
+            <div class="modal-top-bar">
+                <div>
+                    <strong>&#128065; Live Website Demo Preview</strong>
+                    <span style="font-size:0.78rem; color:#93c5fd; margin-left:8px;">Check layout before publishing</span>
+                </div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button type="button" class="btn-sm" style="background:#38bdf8; color:#0f172a;" onclick="setDemoViewport('desktop')">&#128187; Desktop</button>
+                    <button type="button" class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="setDemoViewport('mobile')">&#128241; Mobile</button>
+                    <button type="button" class="btn-sm btn-del" onclick="closeDemoPreview()">&#10005; Close</button>
+                </div>
+            </div>
+            <div class="modal-body-preview" id="demoPreviewContent"></div>
+            <div class="modal-footer-bar">
+                <button type="button" class="btn-sm" style="background:#e2e8f0; color:#0f172a; padding:10px 16px;" onclick="closeDemoPreview()">&#8592; Back to Edit</button>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="btn-wa" onclick="shareDraftPreviewToWhatsApp()">&#128242; Test WhatsApp Share (Image + Details)</button>
+                    <button type="button" class="btn-green" id="confirmPublishFromDemoBtn" onclick="confirmPublishFromDemo()">&#9989; Confirm & Publish Live</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHATSAPP SHARE MODAL (OPENS AFTER PUBLISH OR FROM MANAGE TABLE) -->
+    <div id="waShareModal" class="modal-overlay">
+        <div class="wa-share-card">
+            <div class="modal-top-bar" style="background:#15803d; border-bottom-color:#86efac;">
+                <strong>&#128242; Share Post on WhatsApp (Image + Full Details)</strong>
+                <button type="button" class="btn-sm btn-del" onclick="closeWaShareModal()">&#10005;</button>
+            </div>
+            <div style="padding:20px;">
+                <div id="waBannerPreviewWrap" style="text-align:center; margin-bottom:12px;"></div>
+                <p style="font-size:0.82rem; color:#475569; font-weight:600;">Ready-Made WhatsApp Group / Channel Message:</p>
+                <div class="wa-preview-box" id="waMessagePreview"></div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+                    <button type="button" class="btn-wa" style="flex:1;" onclick="triggerNativeOrWebWhatsApp()">&#128640; Share with Image & Link on WhatsApp</button>
+                    <button type="button" class="btn-sm" style="background:#0f2942; color:#fff; padding:11px 16px;" onclick="copyWaMessage()">&#128203; Copy Text</button>
+                </div>
+                <p id="waShareHint" style="font-size:0.76rem; color:#64748b; margin-top:10px; line-height:1.45;"></p>
+            </div>
+        </div>
+    </div>
+
     <script>
+        const SITE_DOMAIN = "https://shivmitra.in";
+
         const subMap = {
             'Jobs': ['Sarkari Jobs', 'Bank Jobs', 'Private Jobs', 'Apprenticeship / Contract Jobs'],
             'Sarkari Yojana': ['Central Yojana', 'State Yojana'],
@@ -546,6 +658,7 @@
         let currentDraftFilter = "ALL";
         let legalUploadedFiles = [];
         let uploadedFormFile = null;
+        let activeSharePost = null;
 
         window.onload = function() {
             localStorage.removeItem('shiv_traffic_logs');
@@ -652,16 +765,15 @@
             if (!auth) return;
             try {
                 const livePosts = posts.filter(p => p.status !== 'draft');
-                const baseUrl = "https://shivmitra.in";
                 const todayIso = new Date().toISOString().split('T')[0];
                 const staticPages = ["", "forms.html", "about.html", "contact.html", "privacy.html", "disclaimer.html", "terms.html"];
 
                 const urls = staticPages.map(sp => {
-                    const loc = sp ? `${baseUrl}/${sp}` : baseUrl;
+                    const loc = sp ? `${SITE_DOMAIN}/${sp}` : SITE_DOMAIN;
                     return `  <url><loc>${loc}</loc><lastmod>${todayIso}</lastmod><priority>0.9</priority></url>`;
                 });
                 livePosts.forEach(p => {
-                    if (p.id) urls.push(`  <url><loc>${baseUrl}/post.html?id=${p.id}</loc><lastmod>${todayIso}</lastmod><priority>0.8</priority></url>`);
+                    if (p.id) urls.push(`  <url><loc>${SITE_DOMAIN}/post.html?id=${p.id}</loc><lastmod>${todayIso}</lastmod><priority>0.8</priority></url>`);
                 });
 
                 const xmlStr = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
@@ -681,7 +793,7 @@
             } catch (_) {}
         }
 
-        async function pushToGitHub(commitMsg) {
+        async function pushToGitHub(commitMsg, postForShare = null) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             try {
                 const latestRes = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/posts.json?t=${Date.now()}`, {
@@ -709,13 +821,17 @@
                 await updateSitemapXml();
                 document.getElementById('syncStatus').style.color = "#15803d";
                 document.getElementById('syncStatus').innerText = `(Synced ✔ ${posts.length} items)`;
-                alert("Success! Saved, Sitemap updated & published live.");
+
+                if (postForShare) {
+                    openWaShareModal(postForShare);
+                } else {
+                    alert("Success! Saved, Sitemap updated & published live.");
+                }
             } catch (e) {
                 alert("Error: " + e.message);
             }
         }
 
-        // Upload binary file directly to /uploads/ folder on GitHub so posts.json stays ultra-fast
         async function uploadBinaryToGitHubUploads(file) {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             const safeName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
@@ -739,6 +855,253 @@
             });
             if (!res.ok) throw new Error("File upload to GitHub /uploads/ failed");
             return ghPath;
+        }
+
+        /* =========================================================
+           1. DEMO PREVIEW MODAL BEFORE PUBLISHING
+        ========================================================= */
+        function getDraftFormObject() {
+            const editId = document.getElementById('editPostId').value;
+            const mainCat = document.getElementById('pMainCat').value;
+            const subCat = document.getElementById('pSubCat').value;
+            const title = document.getElementById('pTitle').value.trim();
+            const actionLink = document.getElementById('pLink').value.trim();
+            const pdfLink = document.getElementById('pPdfLink').value.trim();
+            const officialSite = document.getElementById('pOfficialSite').value.trim();
+            const summary = document.getElementById('pSummary').value.trim();
+            const content = document.getElementById('pContent').value.trim();
+            const bannerImg = document.getElementById('pBannerData').value;
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            return {
+                id: editId ? Number(editId) : Date.now(),
+                mainCat, subCat, title, date: today,
+                actionLink, pdfLink, officialSite,
+                price: "", summary, content, bannerImg, status: 'live'
+            };
+        }
+
+        function openDemoPreview(highlightPublish = false) {
+            const p = getDraftFormObject();
+            if (!p.title || !p.summary || !p.content) {
+                alert("Pehle Post Title, Short Summary aur Full Content bharein!");
+                return;
+            }
+
+            const imgHtml = p.bannerImg
+                ? `<img src="${p.bannerImg}" alt="${p.title}" class="demo-banner">`
+                : `<div style="background:#fef2f2; color:#991b1b; padding:10px; border-radius:6px; font-size:0.82rem; margin-bottom:12px;">&#9888; No Banner Image Selected (WhatsApp share ke liye banner lagana best rehta hai)</div>`;
+
+            const linksRows = `
+                <tr><td>Apply Online / Direct Portal</td><td><strong>${p.actionLink || 'Not Added'}</strong></td></tr>
+                <tr><td>Official Notification / PDF</td><td><strong>${p.pdfLink || 'Not Added'}</strong></td></tr>
+                <tr><td>Official Website</td><td><strong>${p.officialSite || 'Not Added'}</strong></td></tr>
+            `;
+
+            document.getElementById('demoPreviewContent').innerHTML = `
+                <div class="demo-article-card">
+                    <div style="font-size:0.8rem; color:#64748b; margin-bottom:8px;">
+                        Home &raquo; ${p.mainCat} &raquo; <strong>${p.subCat}</strong>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                        <span style="background:#1d4ed8; color:#fff; font-size:0.75rem; font-weight:700; padding:3px 9px; border-radius:4px;">${p.subCat}</span>
+                        <span style="font-size:0.8rem; color:#475569; font-weight:600;">Date: ${p.date}</span>
+                    </div>
+                    <h1>${p.title}</h1>
+                    ${imgHtml}
+                    <div style="background:#eff6ff; border-left:4px solid #1d4ed8; padding:10px 12px; border-radius:5px; font-size:0.88rem; margin-bottom:14px;">
+                        <strong>Homepage Card Summary:</strong> ${p.summary}
+                    </div>
+                    <div class="demo-content">${p.content}</div>
+                    <div style="margin-top:18px; border:2px solid #0f2942; border-radius:7px; overflow:hidden;">
+                        <div style="background:#b91c1c; color:#fff; text-align:center; font-weight:800; padding:8px; font-size:0.92rem;">Important Direct Official Links Preview</div>
+                        <table style="margin:0;">${linksRows}</table>
+                    </div>
+                </div>
+            `;
+
+            const pubBtn = document.getElementById('confirmPublishFromDemoBtn');
+            pubBtn.style.boxShadow = highlightPublish ? "0 0 0 3px #86efac" : "none";
+            document.getElementById('demoPreviewModal').style.display = 'block';
+        }
+
+        function closeDemoPreview() {
+            document.getElementById('demoPreviewModal').style.display = 'none';
+        }
+
+        function setDemoViewport(mode) {
+            const shell = document.getElementById('demoModalShell');
+            if (mode === 'mobile') shell.classList.add('mobile-mode');
+            else shell.classList.remove('mobile-mode');
+        }
+
+        async function confirmPublishFromDemo() {
+            closeDemoPreview();
+            await savePost();
+        }
+
+        function shareDraftPreviewToWhatsApp() {
+            const p = getDraftFormObject();
+            openWaShareModal(p);
+        }
+
+        /* =========================================================
+           2. WHATSAPP SHARE (IMAGE + FULL DETAILS + DIRECT LINK)
+        ========================================================= */
+        function buildWhatsAppPostMessage(p) {
+            const postUrl = `${SITE_DOMAIN}/post.html?id=${p.id}`;
+            const catLabel = p.subCat || p.mainCat || "Latest Update";
+            let lines = [
+                `📢 *${catLabel.toUpperCase()} — SHIV ONLINE CENTRE*`,
+                ``,
+                `*${p.title}*`,
+                ``,
+                `📝 *Details:* ${p.summary || ""}`
+            ];
+
+            if (p.price) {
+                lines.push(`💰 *Offer Price:* ${p.price}`);
+            }
+            if (p.actionLink && p.actionLink !== "#" && !p.actionLink.startsWith("#")) {
+                lines.push(`🔗 *Apply / Direct Link:* ${p.actionLink}`);
+            }
+            if (p.pdfLink && p.pdfLink !== "#" && p.pdfLink !== p.actionLink && !p.pdfLink.startsWith("#")) {
+                lines.push(`📄 *Official PDF:* ${p.pdfLink}`);
+            }
+
+            lines.push(``);
+            lines.push(`👉 *Full Notification & Details:*`);
+            lines.push(`${postUrl}`);
+            lines.push(``);
+            lines.push(`📲 _Daily Bharti, Yojana & Forms ke liye ShivMitra.in par judein._`);
+
+            return lines.join('\n');
+        }
+
+        function openWaShareModal(postObj) {
+            activeSharePost = postObj;
+            const msg = buildWhatsAppPostMessage(postObj);
+            document.getElementById('waMessagePreview').innerText = msg;
+
+            const bannerWrap = document.getElementById('waBannerPreviewWrap');
+            if (postObj.bannerImg) {
+                bannerWrap.innerHTML = `<img src="${postObj.bannerImg}" alt="Poster" style="max-height:150px; border-radius:8px; border:1px solid #cbd5e1;">`;
+            } else {
+                bannerWrap.innerHTML = `<span style="font-size:0.78rem; color:#64748b;">(No banner attached — text + direct link will be shared)</span>`;
+            }
+
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            document.getElementById('waShareHint').innerText = isMobile
+                ? "Mobile par button dabate hi Poster Image + Poori Jaankari + Link seedha WhatsApp mein attach ho jayega."
+                : "PC par button dabate hi Poster Image download ho jayegi aur WhatsApp Web mein poori jaankari + link ready-made khul jayega (image ko drag-drop karke Send kar dein).";
+
+            document.getElementById('waShareModal').style.display = 'block';
+        }
+
+        function closeWaShareModal() {
+            document.getElementById('waShareModal').style.display = 'none';
+        }
+
+        function shareExistingPostById(id) {
+            const p = posts.find(x => String(x.id) === String(id));
+            if (p) openWaShareModal(p);
+        }
+
+        function copyWaMessage() {
+            const text = document.getElementById('waMessagePreview').innerText;
+            navigator.clipboard.writeText(text).then(() => alert("WhatsApp message copied!"));
+        }
+
+        async function dataUrlToImageFile(dataUrl, fileName) {
+            const res = await fetch(dataUrl);
+            const blob = await res.blob();
+            const ext = blob.type.includes('webp') ? 'webp' : 'jpg';
+            return new File([blob], `${fileName}.${ext}`, { type: blob.type || 'image/jpeg' });
+        }
+
+        async function triggerNativeOrWebWhatsApp() {
+            if (!activeSharePost) return;
+            const shareText = buildWhatsAppPostMessage(activeSharePost);
+
+            // 1. Mobile / Supported Browser: Native Web Share with Image File + Caption Text + URL
+            if (activeSharePost.bannerImg && navigator.canShare) {
+                try {
+                    const imgFile = await dataUrlToImageFile(activeSharePost.bannerImg, `shivmitra_${activeSharePost.id}`);
+                    if (navigator.canShare({ files: [imgFile] })) {
+                        await navigator.share({
+                            files: [imgFile],
+                            title: activeSharePost.title,
+                            text: shareText
+                        });
+                        return;
+                    }
+                } catch (err) {
+                    if (err && err.name === 'AbortError') return;
+                }
+            }
+
+            // 2. Desktop / Fallback: Auto-download Poster Image (if present) + Open WhatsApp with Full Formatted Text
+            if (activeSharePost.bannerImg && activeSharePost.bannerImg.startsWith('data:image')) {
+                const a = document.createElement('a');
+                a.href = activeSharePost.bannerImg;
+                a.download = `ShivMitra_Poster_${activeSharePost.id}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+
+            const encodedText = encodeURIComponent(shareText);
+            window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
+        }
+
+        /* =========================================================
+           3. AUTO IMAGE COMPRESSION (1200px MAX, ~80-120 KB)
+        ========================================================= */
+        function compressImageFile(file, maxWidth = 1200, quality = 0.78) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxWidth) {
+                            h = Math.round((h * maxWidth) / w);
+                            w = maxWidth;
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        const compressedDataUrl = canvas.toDataURL('image/webp', quality);
+                        resolve(compressedDataUrl);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function uploadFeaturePhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const sizeInfo = document.getElementById('bannerSizeInfo');
+            sizeInfo.innerText = "Compressing...";
+            const compressed = await compressImageFile(file, 1200, 0.78);
+            const approxKb = Math.round((compressed.length * 3) / 4 / 1024);
+            document.getElementById('pBannerData').value = compressed;
+            const prev = document.getElementById('bannerPreview');
+            prev.src = compressed;
+            prev.style.display = 'block';
+            sizeInfo.innerText = `(Ready: ~${approxKb} KB)`;
+        }
+
+        function removeBannerImage() {
+            document.getElementById('pBannerData').value = "";
+            document.getElementById('bannerSizeInfo').innerText = "";
+            const prev = document.getElementById('bannerPreview');
+            prev.src = ""; prev.style.display = 'none';
         }
 
         async function loadSiteConfig() {
@@ -885,7 +1248,7 @@
             btn.innerText = "Publishing Form..."; btn.disabled = true;
             if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = formPost; }
             else { posts.unshift(formPost); }
-            await pushToGitHub(`Publish Form: ${title}`);
+            await pushToGitHub(`Publish Form: ${title}`, formPost);
             btn.innerText = "📄 Publish Form to Website"; btn.disabled = false;
             resetFormStudio(); refreshStats(); renderManageTable();
         }
@@ -929,7 +1292,7 @@
             btn.innerText = "Publishing..."; btn.disabled = true;
             if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = servicePost; }
             else { posts.unshift(servicePost); }
-            await pushToGitHub(`Publish Online Service: ${title}`);
+            await pushToGitHub(`Publish Online Service: ${title}`, servicePost);
             btn.innerText = "💻 Publish Online Service Guide"; btn.disabled = false;
             resetServiceStudio(); refreshStats(); renderManageTable();
         }
@@ -978,12 +1341,11 @@
                 </div>`).join('');
         }
 
-        function uploadLegalCover(event) {
+        async function uploadLegalCover(event) {
             const file = event.target.files[0];
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) { document.getElementById('lfCoverData').value = e.target.result; };
-            reader.readAsDataURL(file);
+            const compressed = await compressImageFile(file, 1000, 0.78);
+            document.getElementById('lfCoverData').value = compressed;
         }
 
         function updateLegalPreview() {
@@ -1049,7 +1411,7 @@
             btn.innerText = "Publishing..."; btn.disabled = true;
             if (editId) { const idx = posts.findIndex(x => x.id == editId); if (idx !== -1) posts[idx] = postPayload; }
             else { posts.unshift(postPayload); }
-            await pushToGitHub(`Publish Legal Format: ${title}`);
+            await pushToGitHub(`Publish Legal Format: ${title}`, postPayload);
             btn.innerText = "⚖ Publish Legal Format Offer Live"; btn.disabled = false;
             resetLegalForm(); refreshStats(); renderManageTable();
         }
@@ -1068,20 +1430,6 @@
             updateLegalPreview();
         }
 
-        function uploadFeaturePhoto(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('pBannerData').value = e.target.result;
-                const prev = document.getElementById('bannerPreview');
-                prev.src = e.target.result; prev.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function removeBannerImage() { document.getElementById('pBannerData').value = ""; const prev = document.getElementById('bannerPreview'); prev.src = ""; prev.style.display = 'none'; }
-
         function insertAtCursor(type) {
             const textarea = document.getElementById('pContent');
             let snippet = "";
@@ -1099,17 +1447,14 @@
             textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(textarea.selectionEnd);
         }
 
-        function insertInlineImage(event) {
+        async function insertInlineImage(event) {
             const file = event.target.files[0];
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const textarea = document.getElementById('pContent');
-                const snippet = `\n<div class="inline-media"><img src="${e.target.result}" alt="Infographic"></div>\n`;
-                const start = textarea.selectionStart;
-                textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(start);
-            };
-            reader.readAsDataURL(file);
+            const compressed = await compressImageFile(file, 1000, 0.78);
+            const textarea = document.getElementById('pContent');
+            const snippet = `\n<div class="inline-media"><img src="${compressed}" alt="Infographic" style="max-width:100%; border-radius:6px;"></div>\n`;
+            const start = textarea.selectionStart;
+            textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(start);
         }
 
         function fillTemplate(type) {
@@ -1142,15 +1487,20 @@
             const btn = document.getElementById('publishBtn');
             btn.innerText = "Publishing Live..."; btn.disabled = true;
 
+            let savedPostObj = null;
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
-                if (idx !== -1) posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
+                if (idx !== -1) {
+                    posts[idx] = { ...posts[idx], mainCat, subCat, title, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
+                    savedPostObj = posts[idx];
+                }
             } else {
-                posts.unshift({ id: Date.now(), mainCat, subCat, title, date: today, actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live' });
+                savedPostObj = { id: Date.now(), mainCat, subCat, title, date: today, actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live' };
+                posts.unshift(savedPostObj);
             }
 
-            await pushToGitHub(`Publish post: ${title}`);
-            btn.innerText = "🚀 Publish Live to Website"; btn.disabled = false;
+            await pushToGitHub(`Publish post: ${title}`, savedPostObj);
+            btn.innerText = "🚀 Preview & Publish Live"; btn.disabled = false;
             resetForm(); refreshStats(); renderManageTable();
         }
 
@@ -1215,6 +1565,7 @@
             document.getElementById('pSummary').value = p.summary || "";
             document.getElementById('pContent').value = p.content || "";
             document.getElementById('pBannerData').value = p.bannerImg || "";
+            document.getElementById('bannerSizeInfo').innerText = "";
             const prev = document.getElementById('bannerPreview');
             if (p.bannerImg) { prev.src = p.bannerImg; prev.style.display = 'block'; }
             else { prev.style.display = 'none'; }
@@ -1226,6 +1577,7 @@
             document.getElementById('editPostId').value = "";
             document.getElementById('pTitle').value = "";
             document.getElementById('pBannerData').value = "";
+            document.getElementById('bannerSizeInfo').innerText = "";
             document.getElementById('bannerPreview').style.display = 'none';
             document.getElementById('pLink').value = "";
             document.getElementById('pPdfLink').value = "";
@@ -1263,6 +1615,7 @@
                         <td>${p.mainCat === 'Legal Paid Format' ? 'Legal Format' : (p.mainCat || 'Jobs')}</td>
                         <td>${p.subCat || '-'}</td>
                         <td style="white-space:nowrap;">
+                            <button class="btn-sm btn-wa-sm" onclick="shareExistingPostById(${p.id})">&#128242; WhatsApp</button>
                             <a href="post.html?id=${p.id}" target="_blank" class="btn-sm btn-view">View &#8599;</a>
                             <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Delete</button>
@@ -1330,7 +1683,7 @@
             if (idx !== -1) {
                 posts[idx].status = 'live';
                 posts[idx].date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-                await pushToGitHub(`Approve draft: ${posts[idx].title}`);
+                await pushToGitHub(`Approve draft: ${posts[idx].title}`, posts[idx]);
                 renderDrafts(); refreshStats(); renderManageTable();
             }
         }
