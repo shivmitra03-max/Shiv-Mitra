@@ -1,42 +1,5 @@
 [
   {
-    "id": 1795851081299,
-    "mainCat": "Online Service Details",
-    "subCat": "PAN & Aadhaar Services",
-    "title": "LINK",
-    "date": "28 Nov 2026",
-    "qualification": "All Indian / Gujarat Citizens",
-    "serviceMeta": {
-      "fee": "50",
-      "procTime": "7",
-      "mode": "ONLINE",
-      "docsRaw": "PANCARD",
-      "stepsRaw": "STEP BY STEP"
-    },
-    "actionLink": "index.html",
-    "officialSite": "index.html",
-    "pdfLink": "index.html",
-    "summary": "Step-by-step guide for LINK. Required documents, fee (50) & official process.",
-    "content": "<div class=\"note-box\"><strong>Quick Service Summary:</strong> Apply online for LINK. Govt Fee: 50 | Processing Time: 7.</div><h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>50</td></tr><tr><td>Processing Time</td><td>7</td></tr><tr><td>Mode</td><td>ONLINE</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr><tr><td>&#10004; PANCARD</td></tr></table><h3>3. Step-by-Step Process</h3><p><strong>Step 1:</strong> STEP BY STEP</p>",
-    "status": "live"
-  },
-  {
-    "id": 1795849868876,
-    "mainCat": "Forms",
-    "subCat": "Aadhaar Card Forms",
-    "title": "A4",
-    "date": "28 Nov 2026",
-    "qualification": "All Citizens / Applicants",
-    "fileType": "JPEG",
-    "fileSize": "147 KB",
-    "pdfLink": "uploads/1795849857411_WhatsApp_Image_2026-11-28_at_10.41.29.jpeg",
-    "actionLink": "uploads/1795849857411_WhatsApp_Image_2026-11-28_at_10.41.29.jpeg",
-    "officialSite": "forms.html",
-    "summary": "Download official A4 (JPEG) under Aadhaar Card Forms.",
-    "content": "<p>Official printable form for <strong>A4</strong> (Aadhaar Card Forms).</p>",
-    "status": "live"
-  },
-  {
     "id": 1795845316188,
     "mainCat": "Call Letter",
     "subCat": "Gujarat Call Letter (OJAS/GPSC)",
