@@ -1,5 +1,32 @@
 [
   {
+    "id": 1795867772102,
+    "mainCat": "Legal Format",
+    "subCat": "Rent Agreement",
+    "title": "bhadakarar",
+    "date": "28 Nov 2026",
+    "qualification": "Editable Word + PDF (Gujarati + English)",
+    "price": "₹4",
+    "originalPrice": "100",
+    "discountPercent": 96,
+    "language": "Gujarati + English",
+    "actionLink": "uploads/1795867765126_FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf",
+    "pdfLink": "uploads/1795867765126_FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf",
+    "officialSite": "legal-formats.html",
+    "legalFiles": [
+      {
+        "name": "FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf",
+        "size": "172 KB",
+        "url": "uploads/1795867765126_FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf"
+      }
+    ],
+    "samplePreview": "lelo iska fayda",
+    "summary": "rent agreement",
+    "content": "<p>rent agreement</p>",
+    "bannerImg": "",
+    "status": "live"
+  },
+  {
     "id": 1795857774871,
     "mainCat": "Legal Format",
     "subCat": "NOC & Other Drafts",
