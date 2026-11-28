@@ -32,10 +32,10 @@
             border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
         }
 
-        /* Clean & Structured Sidebar Menu */
+        /* Sidebar with Dropdown Accordions */
         .admin-layout { display: none; min-height: 100vh; }
         .sidebar {
-            width: 268px; background: linear-gradient(180deg, #0b1f33 0%, #0f2942 100%);
+            width: 272px; background: linear-gradient(180deg, #0b1f33 0%, #0f2942 100%);
             color: white; padding: 16px 12px; position: fixed; height: 100%; overflow-y: auto;
             border-right: 1px solid rgba(255,255,255,0.08);
         }
@@ -50,7 +50,7 @@
         .sidebar-brand-box h2 span { color: #38bdf8; }
         .sidebar-brand-box small { color: #94a3b8; font-size: 0.72rem; font-weight: 600; display: block; margin-top: 2px; }
 
-        .menu-group { margin-bottom: 14px; }
+        .menu-group { margin-bottom: 10px; }
         .side-label {
             font-size: 0.67rem; color: #7dd3fc; text-transform: uppercase; letter-spacing: 1.1px;
             margin: 10px 8px 6px; font-weight: 800; opacity: 0.85;
@@ -59,16 +59,30 @@
             width: 100%; text-align: left; background: transparent; color: #e2e8f0;
             border: 1px solid transparent; padding: 9px 12px; border-radius: 8px; cursor: pointer;
             font-size: 0.84rem; font-weight: 600; margin-bottom: 4px;
-            display: flex; align-items: center; gap: 9px; transition: all 0.18s ease;
+            display: flex; align-items: center; justify-content: space-between; transition: all 0.18s ease;
         }
-        .side-btn:hover { background: rgba(255,255,255,0.09); color: #fff; transform: translateX(2px); }
+        .side-btn-left { display: flex; align-items: center; gap: 9px; }
+        .side-btn:hover { background: rgba(255,255,255,0.09); color: #fff; }
         .side-btn.active {
             background: #2563eb; color: #fff; font-weight: 700;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35); border-color: rgba(255,255,255,0.18);
         }
-        .side-btn .m-ico { width: 18px; text-align: center; font-size: 0.95rem; }
+        .dropdown-toggle {
+            background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08);
+        }
+        .dropdown-arrow { font-size: 0.72rem; transition: transform 0.2s ease; }
+        .dropdown-toggle.open .dropdown-arrow { transform: rotate(180deg); }
+        .dropdown-sublist {
+            display: none; padding-left: 12px; margin-bottom: 6px;
+            border-left: 2px solid rgba(56, 189, 248, 0.35); margin-left: 14px;
+        }
+        .dropdown-sublist.show { display: block; }
+        .dropdown-sublist .side-btn {
+            font-size: 0.81rem; padding: 7px 10px; color: #cbd5e1;
+        }
+        .m-ico { width: 18px; text-align: center; font-size: 0.95rem; }
 
-        .main-content { margin-left: 268px; padding: 22px 24px; }
+        .main-content { margin-left: 272px; padding: 22px 24px; }
         .topbar {
             background: white; padding: 13px 20px; border-radius: 10px;
             display: flex; justify-content: space-between; align-items: center;
@@ -115,20 +129,25 @@
             width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1;
             border-radius: 7px; font-size: 0.9rem; outline: none;
         }
+        input[type="checkbox"] { width: 16px; height: 16px; margin: 0; cursor: pointer; accent-color: #1d4ed8; }
         input:focus, select:focus, textarea:focus { border-color: #2563eb; }
 
         .btn-primary { background: #1d4ed8; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; width: 100%; }
         .btn-green { background: #15803d; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-preview { background: #0f2942; color: white; border: none; padding: 11px 20px; border-radius: 7px; font-weight: 700; cursor: pointer; }
-        .btn-wa { background: #16a34a; color: white; border: none; padding: 11px 18px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-wa { background: #16a34a; color: white; border: none; padding: 11px 16px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-tg { background: #0284c7; color: white; border: none; padding: 11px 16px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+        .btn-both { background: linear-gradient(135deg, #16a34a 0%, #0284c7 100%); color: white; border: none; padding: 11px 16px; border-radius: 7px; font-weight: 800; cursor: pointer; }
         .btn-amber { background: #d97706; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
         .btn-teal { background: #0d9488; color: white; border: none; padding: 12px 22px; border-radius: 7px; font-weight: 700; cursor: pointer; }
-        .btn-sm { padding: 6px 11px; border-radius: 5px; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-sm { padding: 5px 9px; border-radius: 5px; border: none; font-size: 0.76rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
         .btn-edit { background: #1d4ed8; color: white; }
         .btn-del { background: #dc2626; color: white; }
         .btn-pub { background: #15803d; color: white; }
         .btn-view { background: #0f2942; color: white; }
         .btn-wa-sm { background: #16a34a; color: white; }
+        .btn-tg-sm { background: #0284c7; color: white; }
+        .btn-both-sm { background: #7c3aed; color: white; }
         .btn-auto-fill { background: #7c3aed; color: white; padding: 8px 14px; border-radius: 6px; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 
         .studio-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
@@ -158,10 +177,10 @@
             font-weight: 800; padding: 3px 9px; border-radius: 4px; margin-bottom: 8px;
         }
 
-        .draft-toolbar {
+        .bulk-bar {
             display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
-            background: #f8fafc; padding: 12px; border-radius: 9px; border: 1px solid #e2e8f0;
+            flex-wrap: wrap; gap: 10px; margin-bottom: 12px;
+            background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0;
         }
         .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
         .filter-pill {
@@ -179,13 +198,13 @@
             padding: 5px 10px; border-radius: 5px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
         }
         .banner-studio { background: #eff6ff; border: 1px dashed #2563eb; border-radius: 10px; padding: 15px; margin-bottom: 14px; }
-        .banner-preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; border: 2px solid #0f2942; }
+        .banner-preview-img { max-width: 100%; max-height: 250px; border-radius: 8px; margin-top: 12px; display: none; border: 2px solid #0f2942; }
 
-        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+        th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
         th { background: #f8fafc; color: #475569; font-weight: 700; }
 
-        /* DEMO PREVIEW & WHATSAPP SHARE MODAL */
+        /* DEMO PREVIEW & SOCIAL SHARE MODAL */
         .modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78);
             z-index: 9999; overflow-y: auto; padding: 20px;
@@ -229,15 +248,15 @@
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
         }
 
-        /* Post-Publish WhatsApp Share Modal */
+        /* Social Share Modal (WhatsApp + Telegram) */
         .wa-share-card {
-            max-width: 560px; margin: 24px auto; background: #fff; border-radius: 12px;
+            max-width: 620px; margin: 20px auto; background: #fff; border-radius: 12px;
             overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.35);
         }
         .wa-preview-box {
-            background: #dcf8c6; border: 1px solid #bbf7d0; border-radius: 10px;
-            padding: 14px; font-size: 0.86rem; color: #1e293b; white-space: pre-wrap;
-            line-height: 1.55; max-height: 300px; overflow-y: auto; margin-top: 10px;
+            width: 100%; background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px;
+            padding: 14px; font-size: 0.85rem; color: #1e293b;
+            line-height: 1.55; min-height: 270px; margin-top: 8px; resize: vertical;
         }
 
         @media (max-width: 900px) {
@@ -252,7 +271,7 @@
     <div id="loginView" class="login-wrapper">
         <div class="login-card">
             <div class="brand-heading">Shiv<span>Mitra</span>.in</div>
-            <p>Shiv Online Centre — GitHub Direct Publish Admin Login</p>
+            <p>Shiv Online Center — GitHub Direct Publish Admin Login</p>
             <input type="text" id="ghUser" value="shivmitra03-max" placeholder="GitHub Username (e.g., shivmitra03-max)">
             <input type="text" id="ghRepo" value="Shiv-Mitra" placeholder="Repository Name (e.g., Shiv-Mitra)">
             <input type="password" id="ghToken" placeholder="GitHub Fine-Grained Token (github_pat_...)">
@@ -262,68 +281,82 @@
     </div>
 
     <div id="dashboardView" class="admin-layout">
-        <!-- ORGANIZED SIDEBAR MENU -->
+        <!-- ORGANIZED SIDEBAR WITH DROPDOWN MENUS -->
         <aside class="sidebar">
             <div class="sidebar-brand-box">
                 <h2>Shiv<span>Mitra</span>.in</h2>
-                <small>Shiv Online Centre Control Panel</small>
+                <small>Shiv Online Center Control Panel</small>
             </div>
 
             <div class="menu-group">
                 <div class="side-label">Main Overview</div>
                 <button class="side-btn active" id="nav-home" onclick="switchTab('tab-home', this)">
-                    <span class="m-ico">&#127968;</span> Home Dashboard
+                    <span class="side-btn-left"><span class="m-ico">&#127968;</span> Home Dashboard</span>
                 </button>
             </div>
 
+            <!-- DROPDOWN 1: UPLOAD POST -->
             <div class="menu-group">
-                <div class="side-label">Content Studios</div>
-                <button class="side-btn" id="nav-create" onclick="switchTab('tab-create', this)">
-                    <span class="m-ico">&#10133;</span> Jobs / Yojana / Call Letter
+                <div class="side-label">Create & Upload</div>
+                <button type="button" class="side-btn dropdown-toggle open" id="dropToggleUpload" onclick="toggleSidebarDropdown('dropMenuUpload', this)">
+                    <span class="side-btn-left"><span class="m-ico">&#128228;</span> Upload Post</span>
+                    <span class="dropdown-arrow">&#9660;</span>
                 </button>
-                <button class="side-btn" id="nav-forms" onclick="switchTab('tab-forms', this)">
-                    <span class="m-ico">&#128196;</span> Forms Upload Studio
+                <div class="dropdown-sublist show" id="dropMenuUpload">
+                    <button class="side-btn" id="nav-create" onclick="switchTab('tab-create', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#10133;</span> Jobs / Yojana / Call Letter</span>
+                    </button>
+                    <button class="side-btn" id="nav-forms" onclick="switchTab('tab-forms', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128196;</span> Forms Upload Studio</span>
+                    </button>
+                    <button class="side-btn" id="nav-service" onclick="switchTab('tab-service', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128187;</span> Online Service Studio</span>
+                    </button>
+                    <button class="side-btn" id="nav-legal" onclick="switchTab('tab-legal', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#9878;</span> Legal Format Studio</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- DROPDOWN 2: ALL PUBLISHED ITEMS -->
+            <div class="menu-group">
+                <div class="side-label">Live Content Manager</div>
+                <button type="button" class="side-btn dropdown-toggle open" id="dropToggleManage" onclick="toggleSidebarDropdown('dropMenuManage', this)">
+                    <span class="side-btn-left"><span class="m-ico">&#128203;</span> All Published Items</span>
+                    <span class="dropdown-arrow">&#9660;</span>
                 </button>
-                <button class="side-btn" id="nav-service" onclick="switchTab('tab-service', this)">
-                    <span class="m-ico">&#128187;</span> Online Service Studio
-                </button>
-                <button class="side-btn" id="nav-legal" onclick="switchTab('tab-legal', this)">
-                    <span class="m-ico">&#9878;</span> Legal Format Studio
-                </button>
+                <div class="dropdown-sublist show" id="dropMenuManage">
+                    <button class="side-btn" id="nav-manage-all" onclick="viewCategoryPosts('ALL', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128194;</span> All Items (Combined)</span>
+                    </button>
+                    <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128188;</span> Jobs (Govt/Bank/Pvt)</span>
+                    </button>
+                    <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#127963;</span> Government Schemes</span>
+                    </button>
+                    <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128193;</span> Forms Directory</span>
+                    </button>
+                    <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128295;</span> Online Service Guides</span>
+                    </button>
+                    <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#128220;</span> Legal Format Store</span>
+                    </button>
+                    <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">
+                        <span class="side-btn-left"><span class="m-ico">&#127915;</span> Call Letter / Admit Card</span>
+                    </button>
+                </div>
             </div>
 
             <div class="menu-group">
                 <div class="side-label">Automation & Monetization</div>
                 <button class="side-btn" id="nav-auto" onclick="switchTab('tab-auto', this)">
-                    <span class="m-ico">&#129302;</span> Auto-Jobs Server Queue
+                    <span class="side-btn-left"><span class="m-ico">&#129302;</span> Auto-Jobs Server Queue</span>
                 </button>
                 <button class="side-btn" id="nav-ads" onclick="switchTab('tab-ads', this)">
-                    <span class="m-ico">&#128176;</span> AdSense & Ads Manager
-                </button>
-            </div>
-
-            <div class="menu-group">
-                <div class="side-label">Manage Live Content</div>
-                <button class="side-btn" id="nav-manage-all" onclick="viewCategoryPosts('ALL', this)">
-                    <span class="m-ico">&#128203;</span> All Published Items
-                </button>
-                <button class="side-btn" onclick="viewCategoryPosts('Jobs', this)">
-                    <span class="m-ico">&#128188;</span> Jobs (Govt/Bank/Pvt)
-                </button>
-                <button class="side-btn" onclick="viewCategoryPosts('Sarkari Yojana', this)">
-                    <span class="m-ico">&#127963;</span> Government Schemes
-                </button>
-                <button class="side-btn" onclick="viewCategoryPosts('Forms', this)">
-                    <span class="m-ico">&#128193;</span> Forms Directory
-                </button>
-                <button class="side-btn" onclick="viewCategoryPosts('Online Service Details', this)">
-                    <span class="m-ico">&#128295;</span> Online Service Guides
-                </button>
-                <button class="side-btn" onclick="viewCategoryPosts('Legal Format', this)">
-                    <span class="m-ico">&#128220;</span> Legal Format Store
-                </button>
-                <button class="side-btn" onclick="viewCategoryPosts('Call Letter', this)">
-                    <span class="m-ico">&#127915;</span> Call Letter / Admit Card
+                    <span class="side-btn-left"><span class="m-ico">&#128176;</span> AdSense & Ads Manager</span>
                 </button>
             </div>
         </aside>
@@ -331,7 +364,7 @@
         <div class="main-content">
             <div class="topbar">
                 <div>
-                    <strong style="color:#0f2942;">Shiv Online Centre</strong> — Admin Panel
+                    <strong style="color:#0f2942;">Shiv Online Center</strong> — Admin Panel
                     <span id="syncStatus" style="font-size:0.82rem; font-weight:700; margin-left:6px;"></span>
                 </div>
                 <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
@@ -368,15 +401,15 @@
 
             <!-- TAB 0: HOME DASHBOARD -->
             <div id="tab-home" class="panel-card tab-section">
-                <h3>&#127968; Shiv Online Centre — Home Dashboard</h3>
+                <h3>&#127968; Shiv Online Center — Home Dashboard</h3>
                 <p style="font-size:0.86rem; color:#475569; margin-bottom:16px;">
-                    Quickly create new posts, review bot drafts, or share live updates to your WhatsApp Group/Channel.
+                    Create new posts, manage published items with multi-select delete, or preview & share updates directly on WhatsApp & Telegram.
                 </p>
 
                 <div class="home-grid">
                     <div class="quick-action-card" onclick="switchTab('tab-create', document.getElementById('nav-create'))">
-                        <h4>&#10133; New Job / Yojana Post</h4>
-                        <p>Publish Sarkari Bharti, Bank Job, Yojana, or Call Letter with poster & preview.</p>
+                        <h4>&#10133; New Job / Yojana / Call Letter</h4>
+                        <p>Dynamic headings & fields separately tailored for Jobs vs. Call Letter / Admit Card.</p>
                     </div>
                     <div class="quick-action-card" onclick="switchTab('tab-auto', document.getElementById('nav-auto'))">
                         <h4>&#129302; Review Bot Drafts</h4>
@@ -387,14 +420,31 @@
                         <p>Add downloadable PDF/Word forms directly to your Forms Directory.</p>
                     </div>
                     <div class="quick-action-card" onclick="viewCategoryPosts('ALL', document.getElementById('nav-manage-all'))">
-                        <h4>&#128242; Share Live Posts on WhatsApp</h4>
-                        <p>Open published posts list to edit or share with image & qualification details.</p>
+                        <h4>&#128242; All Published Posts Manager</h4>
+                        <p>Select multiple posts to delete or preview & share on WhatsApp & Telegram.</p>
                     </div>
                 </div>
 
-                <h4 style="font-size:0.96rem; color:#0f2942; margin-bottom:10px;">Recent Live Updates (Quick Share & Edit)</h4>
+                <div class="bulk-bar">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <input type="checkbox" id="homeSelectAll" onchange="toggleSelectAll('home', this.checked)">
+                        <strong style="font-size:0.88rem; color:#0f2942;">Select All Recent Posts</strong>
+                    </div>
+                    <button type="button" class="btn-sm btn-del" style="padding:7px 14px;" onclick="deleteSelectedPosts('home')">
+                        &#128465; Delete Selected (<span id="homeSelectedCount">0</span>)
+                    </button>
+                </div>
+
                 <table>
-                    <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Quick Actions</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th style="width:36px;">Sel</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Share (Preview + WA / TG)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
                     <tbody id="homeRecentTableBody"></tbody>
                 </table>
             </div>
@@ -407,10 +457,10 @@
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div>
                         <label style="font-size:0.8rem; font-weight:600;">Select Main Category:</label>
-                        <select id="pMainCat" onchange="updateSubOptions()">
-                            <option value="Jobs">Jobs</option>
+                        <select id="pMainCat" onchange="handleMainCategoryChange()">
+                            <option value="Jobs">Jobs (Bharti)</option>
+                            <option value="Call Letter">Call Letter / Admit Card</option>
                             <option value="Sarkari Yojana">Sarkari Yojana</option>
-                            <option value="Call Letter">Call Letter</option>
                         </select>
                     </div>
                     <div>
@@ -421,31 +471,82 @@
 
                 <input type="text" id="pTitle" placeholder="Post Title (e.g., Gujarat Police Recruitment 2026: Apply Online)">
                 
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-                    <input type="text" id="pQualification" placeholder="Qualification / Eligibility (e.g., 10th / 12th / Any Graduate — for WhatsApp Share)">
-                    <input type="text" id="pLastDate" placeholder="Last Date / Exam Date (e.g., 25 Dec 2026 — for WhatsApp Share)">
+                <!-- DYNAMIC FIELDS FOR JOBS / YOJANA -->
+                <div id="jobSpecificFields" class="studio-box" style="background:#f0f9ff; border-color:#bae6fd;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                        <h4 style="margin:0; color:#0369a1;">&#128188; Job / Yojana Specific Details (Used in Post, Banner & Social Share)</h4>
+                        <button type="button" class="btn-auto-fill" onclick="insertDynamicStructuredTemplate('JOB')">&#10024; Auto-Fill Job Headings & Table</button>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <input type="text" id="pQualification" style="background:white;" placeholder="Qualification / Eligibility (e.g., 10th / 12th / Any Graduate)">
+                        <input type="text" id="pLastDate" style="background:white;" placeholder="Last Date to Apply (e.g., 25 Dec 2026)">
+                        <input type="text" id="pAgeLimit" style="background:white;" placeholder="Age Limit (e.g., 18 to 35 Years)">
+                        <input type="text" id="pVacancy" style="background:white;" placeholder="Total Vacancies & Pay Scale (e.g., 450 Posts | ₹26,000/-)">
+                    </div>
+                    <input type="text" id="pExtraTopic" style="background:white; margin-bottom:0;" placeholder="Additional Topic / Highlight (Optional — e.g., Selection Process: Written Exam + Interview)">
                 </div>
 
+                <!-- DYNAMIC FIELDS FOR CALL LETTER / ADMIT CARD -->
+                <div id="callLetterSpecificFields" class="studio-box" style="display:none; background:#f0fdf4; border-color:#bbf7d0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                        <h4 style="margin:0; color:#15803d;">&#127915; Call Letter / Admit Card Specific Details (Used in Post, Banner & Share)</h4>
+                        <button type="button" class="btn-auto-fill" style="background:#0d9488;" onclick="insertDynamicStructuredTemplate('CALL_LETTER')">&#10024; Auto-Fill Call Letter Headings & Table</button>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <input type="text" id="clExamDate" style="background:white;" placeholder="Exam Date (e.g., 15 Jan 2027 — Sunday)">
+                        <input type="text" id="clReleaseDate" style="background:white;" placeholder="Call Letter Release Date (e.g., 05 Jan 2027)">
+                        <input type="text" id="clLoginReq" style="background:white;" placeholder="Required Details to Download (e.g., Confirmation No. & Birth Date)">
+                        <input type="text" id="clExamMode" style="background:white;" placeholder="Exam Mode / Center (e.g., OMR Offline / CBT Exam)">
+                    </div>
+                    <input type="text" id="clExtraTopic" style="background:white; margin-bottom:0;" placeholder="Additional Exam Instruction / Topic (Optional — e.g., Carry Original Photo ID Card)">
+                </div>
+
+                <!-- AUTO JAHERAT BANNER STUDIO + STORAGE-SAVER IMAGE UPLOADER -->
                 <div class="banner-studio">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                         <div>
-                            <strong style="font-size:0.86rem; color:#0f2942;">Post Feature Image (Auto-Compressed WebP):</strong>
+                            <strong style="font-size:0.88rem; color:#0f2942;">&#127912; Post Feature Image / Auto Jaherat Banner (Auto-Resized ≤55 KB WebP):</strong>
                             <span id="bannerSizeInfo" style="font-size:0.75rem; color:#15803d; font-weight:700; margin-left:6px;"></span>
                         </div>
-                        <div style="display:flex; gap:8px;">
-                            <label class="btn-sm" style="background:#0f2942; color:white; cursor:pointer;">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button type="button" class="btn-sm" style="background:linear-gradient(135deg,#7c3aed,#2563eb); color:white; padding:6px 12px;" onclick="generateAutoJaheratBanner(false)">
+                                &#10024; Auto-Generate Banner
+                            </button>
+                            <button type="button" class="btn-sm" style="background:#d97706; color:white; padding:6px 11px;" onclick="generateAutoJaheratBanner(true)">
+                                &#128260; Change Design
+                            </button>
+                            <label class="btn-sm" style="background:#0f2942; color:white; cursor:pointer; padding:6px 11px;">
                                 &#128247; Upload Custom Image
                                 <input type="file" accept="image/*" style="display:none;" onchange="uploadFeaturePhoto(event)">
                             </label>
-                            <button type="button" class="btn-sm btn-del" onclick="removeBannerImage()">Remove Image</button>
+                            <button type="button" class="btn-sm btn-del" onclick="removeBannerImage()">Remove</button>
                         </div>
                     </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:10px;">
+                        <div>
+                            <label style="font-size:0.73rem; font-weight:700; color:#475569;">Jaherat Banner Design Template:</label>
+                            <select id="bannerStyleSelect" style="margin-bottom:0; padding:7px 10px; font-size:0.82rem; background:white;" onchange="if(document.getElementById('pTitle').value.trim()) generateAutoJaheratBanner(false)">
+                                <option value="AUTO">Auto Match (Category Ke Hisab Se)</option>
+                                <option value="GOVT_JOB">1. Sarkari Bharti (Royal Navy & Gold)</option>
+                                <option value="CALL_LETTER">2. Call Letter / Admit Card (Green & Yellow)</option>
+                                <option value="BANK_JOB">3. Bank / Corporate Bharti (Blue & Cyan)</option>
+                                <option value="YOJANA">4. Sarkari Yojana (Saffron & Emerald)</option>
+                                <option value="URGENT">5. Urgent / Last Date Alert (Red & Gold)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.73rem; font-weight:700; color:#475569;">Banner Top Tagline (Optional):</label>
+                            <input type="text" id="bannerCustomTag" style="margin-bottom:0; padding:7px 10px; font-size:0.82rem; background:white;" placeholder="e.g., OFFICIAL NOTIFICATION 2026" oninput="if(document.getElementById('pBannerData').value && document.getElementById('pTitle').value.trim()) generateAutoJaheratBanner(false)">
+                        </div>
+                    </div>
+
                     <input type="hidden" id="pBannerData">
                     <img id="bannerPreview" class="banner-preview-img" alt="Banner Preview">
                 </div>
 
                 <div class="studio-box">
-                    <h4>Direct Official Portal & PDF Links (Shown Inside Website Article):</h4>
+                    <h4>Direct Official Portal & PDF Links (Shown ONLY Inside Website Article, Never in Social Share):</h4>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                         <input type="text" id="pLink" style="background:white;" placeholder="1. Apply Online / Call Letter Direct Link">
                         <input type="text" id="pPdfLink" style="background:white;" placeholder="2. Official Notification / Exam Notice PDF Link">
@@ -453,7 +554,7 @@
                     </div>
                 </div>
 
-                <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on the homepage card & WhatsApp message)..."></textarea>
+                <textarea id="pSummary" rows="2" placeholder="Short Summary (2-3 lines displayed on homepage & social share — external URLs auto-removed on share)..."></textarea>
 
                 <div class="insert-toolbar">
                     <span style="font-size:0.75rem; font-weight:700; color:#475569; align-self:center; margin-right:4px;">Insert Anywhere:</span>
@@ -540,7 +641,7 @@
                     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
                         <input type="text" id="osFee" placeholder="Govt Fee (e.g., ₹50 / Free)">
                         <input type="text" id="osTime" placeholder="Processing Time (e.g., 3 to 7 Days)">
-                        <input type="text" id="osMode" placeholder="Apply Mode (e.g., Online / CSC Centre)">
+                        <input type="text" id="osMode" placeholder="Apply Mode (e.g., Online / CSC Center)">
                     </div>
                     <textarea id="osDocs" rows="3" placeholder="Required Documents (One per line)..."></textarea>
                     <textarea id="osSteps" rows="5" placeholder="Step-by-Step Online Process (One step per line)..."></textarea>
@@ -649,7 +750,7 @@
             <!-- TAB 5: AUTO-JOBS SERVER QUEUE -->
             <div id="tab-auto" class="panel-card tab-section" style="display:none;">
                 <h3>Auto-Updating Jobs & Call Letters Queue (Pending Approval)</h3>
-                <div class="draft-toolbar">
+                <div class="bulk-bar">
                     <div class="filter-pills" id="draftFilterPills"></div>
                     <button type="button" class="btn-sm btn-del" style="padding:8px 14px; font-weight:700;" onclick="deleteFilteredDrafts()">
                         &#128465; Delete All (<span id="deleteCountBadge">0</span>)
@@ -678,11 +779,28 @@
                 <button class="btn-green" id="saveAdsBtn" onclick="saveSiteConfig()">&#128190; Save & Activate Ad Slots on Live Website</button>
             </div>
 
-            <!-- TAB 7: MANAGE LIVE POSTS -->
+            <!-- TAB 7: MANAGE LIVE POSTS (WITH MULTI-SELECT DELETE & WA/TG SHARE PREVIEW) -->
             <div id="tab-manage" class="panel-card tab-section" style="display:none;">
                 <h3 id="manageHeading">Published Posts Manager</h3>
+                <div class="bulk-bar">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <input type="checkbox" id="manageSelectAll" onchange="toggleSelectAll('manage', this.checked)">
+                        <strong style="font-size:0.88rem; color:#0f2942;">Select All Visible Items</strong>
+                    </div>
+                    <button type="button" class="btn-sm btn-del" style="padding:7px 14px;" onclick="deleteSelectedPosts('manage')">
+                        &#128465; Delete Selected (<span id="manageSelectedCount">0</span>)
+                    </button>
+                </div>
                 <table>
-                    <thead><tr><th>Title</th><th>Main Category</th><th>Sub-Category</th><th>Actions</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th style="width:36px;">Sel</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Share (Preview + WA / TG)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
                     <tbody id="postsTableBody"></tbody>
                 </table>
             </div>
@@ -707,29 +825,36 @@
             <div class="modal-footer-bar">
                 <button type="button" class="btn-sm" style="background:#e2e8f0; color:#0f172a; padding:10px 16px;" onclick="closeDemoPreview()">&#8592; Back to Edit</button>
                 <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <button type="button" class="btn-wa" onclick="shareDraftPreviewToWhatsApp()">&#128242; Test WhatsApp Share (Image + Details)</button>
+                    <button type="button" class="btn-wa" onclick="shareDraftPreviewToSocial()">&#128242; Preview Social Share (WA / TG)</button>
                     <button type="button" class="btn-green" id="confirmPublishFromDemoBtn" onclick="confirmPublishFromDemo()">&#9989; Confirm & Publish Live</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- WHATSAPP SHARE MODAL -->
+    <!-- SOCIAL SHARE PREVIEW MODAL (WHATSAPP + TELEGRAM + SHARE BOTH) -->
     <div id="waShareModal" class="modal-overlay">
         <div class="wa-share-card">
-            <div class="modal-top-bar" style="background:#15803d; border-bottom-color:#86efac;">
-                <strong>&#128242; Share on WhatsApp (Image + Qualification + Full Details)</strong>
+            <div class="modal-top-bar" style="background:#0f2942; border-bottom-color:#38bdf8;">
+                <strong>&#128242; Social Share Preview (WhatsApp & Telegram)</strong>
                 <button type="button" class="btn-sm btn-del" onclick="closeWaShareModal()">&#10005;</button>
             </div>
             <div style="padding:20px;">
                 <div id="waBannerPreviewWrap" style="text-align:center; margin-bottom:12px;"></div>
-                <p style="font-size:0.82rem; color:#475569; font-weight:600;">Ready-Made WhatsApp Group / Channel Message:</p>
-                <div class="wa-preview-box" id="waMessagePreview"></div>
-                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
-                    <button type="button" class="btn-wa" style="flex:1;" onclick="triggerNativeOrWebWhatsApp()">&#128640; Share with Image & Details on WhatsApp</button>
-                    <button type="button" class="btn-sm" style="background:#0f2942; color:#fff; padding:11px 16px;" onclick="copyWaMessage()">&#128203; Copy Text</button>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <p style="font-size:0.82rem; color:#0f2942; font-weight:700;">Share Message Preview (Editable — No Apply/PDF Links):</p>
+                    <button type="button" class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="resetSharePreviewText()">&#8635; Reset Text</button>
                 </div>
-                <p id="waShareHint" style="font-size:0.76rem; color:#64748b; margin-top:10px; line-height:1.45;"></p>
+                <textarea class="wa-preview-box" id="waMessagePreview"></textarea>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+                    <button type="button" class="btn-wa" id="modalBtnWa" onclick="shareToWhatsApp()">&#128994; Share on WhatsApp</button>
+                    <button type="button" class="btn-tg" id="modalBtnTg" onclick="shareToTelegram()">&#128309; Share on Telegram</button>
+                </div>
+                <div style="display:flex; gap:10px; margin-top:10px;">
+                    <button type="button" class="btn-both" id="modalBtnBoth" style="flex:1;" onclick="shareToBothSocial()">&#128640; Share on Both (WhatsApp + Telegram)</button>
+                    <button type="button" class="btn-sm" style="background:#0f2942; color:#fff; padding:11px 16px;" onclick="copyWaMessage()">&#128203; Copy</button>
+                </div>
+                <p id="waShareHint" style="font-size:0.76rem; color:#15803d; font-weight:600; margin-top:10px; line-height:1.45;"></p>
             </div>
         </div>
     </div>
@@ -739,8 +864,8 @@
 
         const subMap = {
             'Jobs': ['Sarkari Jobs', 'Bank Jobs', 'Private Jobs', 'Apprenticeship / Contract Jobs'],
-            'Sarkari Yojana': ['Central Yojana', 'State Yojana'],
-            'Call Letter': ['Gujarat Call Letter (OJAS/GPSC)', 'Central & Bank Admit Card']
+            'Call Letter': ['Gujarat Call Letter (OJAS/GPSC)', 'Central & Bank Admit Card'],
+            'Sarkari Yojana': ['Central Yojana', 'State Yojana']
         };
 
         let posts = [];
@@ -759,12 +884,85 @@
             if (savedAuth && savedAuth.token) {
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
-                updateSubOptions();
+                handleMainCategoryChange();
                 updateLegalPreview();
                 loadFromGitHub();
                 loadSiteConfig();
             }
         };
+
+        function toggleSidebarDropdown(menuId, toggleBtn) {
+            const menu = document.getElementById(menuId);
+            menu.classList.toggle('show');
+            toggleBtn.classList.toggle('open');
+        }
+
+        function handleMainCategoryChange(selectedSub = "") {
+            const main = document.getElementById('pMainCat').value;
+            const subSel = document.getElementById('pSubCat');
+            subSel.innerHTML = "";
+            (subMap[main] || []).forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s; opt.innerText = s;
+                if (s === selectedSub) opt.selected = true;
+                subSel.appendChild(opt);
+            });
+
+            const jobBox = document.getElementById('jobSpecificFields');
+            const clBox = document.getElementById('callLetterSpecificFields');
+            if (main === 'Call Letter') {
+                jobBox.style.display = 'none';
+                clBox.style.display = 'block';
+            } else {
+                jobBox.style.display = 'block';
+                clBox.style.display = 'none';
+            }
+        }
+
+        function insertDynamicStructuredTemplate(type) {
+            const title = document.getElementById('pTitle').value.trim() || "Official Notification 2026";
+            const summaryEl = document.getElementById('pSummary');
+            const contentEl = document.getElementById('pContent');
+
+            if (type === 'CALL_LETTER') {
+                const examDt = document.getElementById('clExamDate').value.trim() || "DD/MM/2026";
+                const relDt = document.getElementById('clReleaseDate').value.trim() || "DD/MM/2026";
+                const loginReq = document.getElementById('clLoginReq').value.trim() || "Confirmation Number & Date of Birth";
+                const mode = document.getElementById('clExamMode').value.trim() || "Written Exam (OMR / CBT)";
+                const extra = document.getElementById('clExtraTopic').value.trim();
+
+                if (!summaryEl.value.trim()) {
+                    summaryEl.value = `${title} Call Letter / Admit Card released. Exam Date: ${examDt}. Download your hall ticket using ${loginReq}.`;
+                }
+                let html = `<div class="note-box"><strong>Call Letter Update:</strong> ${title} Admit Card is now available for download.</div>` +
+                    `<h3>1. Exam & Call Letter Schedule</h3><table><tr><th>Event</th><th>Details</th></tr><tr><td>Call Letter Release Date</td><td>${relDt}</td></tr><tr><td>Exam Date</td><td>${examDt}</td></tr><tr><td>Exam Mode</td><td>${mode}</td></tr></table>` +
+                    `<h3>2. Required Login Details to Download</h3><table><tr><th>Field</th><th>Requirement</th></tr><tr><td>Login Credentials</td><td>${loginReq}</td></tr><tr><td>Mandatory ID Proof</td><td>Original Aadhaar / Voter ID / Driving Licence</td></tr></table>` +
+                    `<h3>3. How to Download Call Letter</h3><p><strong>Step 1:</strong> Open the official portal link given below.</p><p><strong>Step 2:</strong> Enter your ${loginReq} and click Submit.</p><p><strong>Step 3:</strong> Download & print your Call Letter.</p>`;
+                if (extra) {
+                    html += `<h3>4. Important Exam Instructions</h3><p>${extra}</p>`;
+                }
+                contentEl.value = html;
+            } else {
+                const qual = document.getElementById('pQualification').value.trim() || "10th / 12th / Graduate";
+                const lastDt = document.getElementById('pLastDate').value.trim() || "DD/MM/2026";
+                const age = document.getElementById('pAgeLimit').value.trim() || "18 to 35 Years";
+                const vac = document.getElementById('pVacancy').value.trim() || "As per Official Notification";
+                const extra = document.getElementById('pExtraTopic').value.trim();
+
+                if (!summaryEl.value.trim()) {
+                    summaryEl.value = `${title} notification released. Qualification: ${qual} | Last Date: ${lastDt}. Check full details below.`;
+                }
+                let html = `<div class="note-box"><strong>Quick Overview:</strong> ${title} official details are provided below.</div>` +
+                    `<h3>1. Important Dates</h3><table><tr><th>Event</th><th>Date</th></tr><tr><td>Last Date to Apply</td><td>${lastDt}</td></tr></table>` +
+                    `<h3>2. Vacancy, Qualification & Pay Scale</h3><table><tr><th>Criteria</th><th>Details</th></tr><tr><td>Post & Vacancies</td><td>${vac}</td></tr><tr><td>Educational Qualification</td><td>${qual}</td></tr></table>` +
+                    `<h3>3. Age Limit & Application Fee</h3><table><tr><th>Criteria</th><th>Details</th></tr><tr><td>Age Limit</td><td>${age}</td></tr><tr><td>Application Fee</td><td>As per Category Rules</td></tr></table>` +
+                    `<h3>4. How to Apply Online</h3><p><strong>Step 1:</strong> Read the official notification PDF carefully.</p><p><strong>Step 2:</strong> Click on the Apply Online link below and complete registration.</p><p><strong>Step 3:</strong> Upload photo/signature, pay fee (if applicable), and submit form.</p>`;
+                if (extra) {
+                    html += `<h3>5. Additional Selection & Notification Details</h3><p>${extra}</p>`;
+                }
+                contentEl.value = html;
+            }
+        }
 
         async function connectGitHub() {
             const user = document.getElementById('ghUser').value.trim();
@@ -788,7 +986,7 @@
                 localStorage.setItem('shiv_gh_auth', JSON.stringify({ user, repo, token }));
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('dashboardView').style.display = 'block';
-                updateSubOptions();
+                handleMainCategoryChange();
                 updateLegalPreview();
                 await loadFromGitHub();
                 await loadSiteConfig();
@@ -919,7 +1117,7 @@
                 if (postForShare) {
                     openWaShareModal(postForShare);
                 } else {
-                    alert("Success! Saved, Sitemap updated & published live.");
+                    alert("Success! Saved & updated.");
                 }
             } catch (e) {
                 alert("Error: " + e.message);
@@ -959,8 +1157,19 @@
             const mainCat = document.getElementById('pMainCat').value;
             const subCat = document.getElementById('pSubCat').value;
             const title = document.getElementById('pTitle').value.trim();
+
             const qualification = document.getElementById('pQualification').value.trim();
             const lastDate = document.getElementById('pLastDate').value.trim();
+            const ageLimit = document.getElementById('pAgeLimit').value.trim();
+            const vacancy = document.getElementById('pVacancy').value.trim();
+            const extraTopic = document.getElementById('pExtraTopic').value.trim();
+
+            const examDate = document.getElementById('clExamDate').value.trim();
+            const releaseDate = document.getElementById('clReleaseDate').value.trim();
+            const loginReq = document.getElementById('clLoginReq').value.trim();
+            const examMode = document.getElementById('clExamMode').value.trim();
+            const clExtraTopic = document.getElementById('clExtraTopic').value.trim();
+
             const actionLink = document.getElementById('pLink').value.trim();
             const pdfLink = document.getElementById('pPdfLink').value.trim();
             const officialSite = document.getElementById('pOfficialSite').value.trim();
@@ -971,7 +1180,9 @@
 
             return {
                 id: editId ? Number(editId) : Date.now(),
-                mainCat, subCat, title, qualification, lastDate, date: today,
+                mainCat, subCat, title, date: today,
+                qualification, lastDate, ageLimit, vacancy, extraTopic,
+                examDate, releaseDate, loginReq, examMode, clExtraTopic,
                 actionLink, pdfLink, officialSite,
                 price: "", summary, content, bannerImg, status: 'live'
             };
@@ -986,7 +1197,11 @@
 
             const imgHtml = p.bannerImg
                 ? `<img src="${p.bannerImg}" alt="${p.title}" class="demo-banner">`
-                : `<div style="background:#fef2f2; color:#991b1b; padding:10px; border-radius:6px; font-size:0.82rem; margin-bottom:12px;">&#9888; No Banner Image Selected (WhatsApp share ke liye banner lagana best rehta hai)</div>`;
+                : `<div style="background:#fef2f2; color:#991b1b; padding:10px; border-radius:6px; font-size:0.82rem; margin-bottom:12px;">&#9888; No Banner Image Selected</div>`;
+
+            const badgeInfo = p.mainCat === 'Call Letter'
+                ? (p.examDate ? `Exam Date: ${p.examDate}` : '')
+                : (p.qualification ? `Qualification: ${p.qualification}` : '');
 
             const linksRows = `
                 <tr><td>Apply Online / Direct Portal</td><td><strong>${p.actionLink || 'Not Added'}</strong></td></tr>
@@ -1002,7 +1217,7 @@
                     <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                         <span style="background:#1d4ed8; color:#fff; font-size:0.75rem; font-weight:700; padding:3px 9px; border-radius:4px;">${p.subCat}</span>
                         <span style="font-size:0.8rem; color:#475569; font-weight:600;">Date: ${p.date}</span>
-                        ${p.qualification ? `<span style="background:#dcfce7; color:#166534; font-size:0.75rem; font-weight:700; padding:3px 9px; border-radius:4px;">Qualification: ${p.qualification}</span>` : ''}
+                        ${badgeInfo ? `<span style="background:#dcfce7; color:#166534; font-size:0.75rem; font-weight:700; padding:3px 9px; border-radius:4px;">${badgeInfo}</span>` : ''}
                     </div>
                     <h1>${p.title}</h1>
                     ${imgHtml}
@@ -1022,9 +1237,7 @@
             document.getElementById('demoPreviewModal').style.display = 'block';
         }
 
-        function closeDemoPreview() {
-            document.getElementById('demoPreviewModal').style.display = 'none';
-        }
+        function closeDemoPreview() { document.getElementById('demoPreviewModal').style.display = 'none'; }
 
         function setDemoViewport(mode) {
             const shell = document.getElementById('demoModalShell');
@@ -1037,68 +1250,87 @@
             await savePost();
         }
 
-        function shareDraftPreviewToWhatsApp() {
+        function shareDraftPreviewToSocial() {
             const p = getDraftFormObject();
-            openWaShareModal(p);
+            openWaShareModal(p, 'MODAL');
         }
 
         /* =========================================================
-           2. WHATSAPP SHARE (IMAGE + QUALIFICATION + VADHARE MAHITI)
+           2. WHATSAPP & TELEGRAM SHARE PREVIEW (NO EXTERNAL URLS)
         ========================================================= */
+        function stripExternalLinks(text) {
+            if (!text) return "";
+            return text
+                .replace(/https?:\/\/[^\s)]+/gi, '')
+                .replace(/www\.[^\s)]+/gi, '')
+                .replace(/\s{2,}/g, ' ')
+                .trim();
+        }
+
         function extractExtraDetailsFromHtml(htmlStr) {
-            if (!htmlStr) return { qual: "", lastDt: "", bullets: [] };
+            if (!htmlStr) return { qual: "", lastDt: "", examDt: "", bullets: [] };
             const temp = document.createElement('div');
             temp.innerHTML = htmlStr;
             let qual = "";
             let lastDt = "";
+            let examDt = "";
             const bullets = [];
 
             temp.querySelectorAll('tr').forEach(tr => {
                 const cells = tr.querySelectorAll('td, th');
                 if (cells.length >= 2) {
-                    const k = cells[0].innerText.trim();
-                    const v = cells[1].innerText.trim();
+                    const k = stripExternalLinks(cells[0].innerText);
+                    const v = stripExternalLinks(cells[1].innerText);
                     const kl = k.toLowerCase();
-                    if (!qual && (kl.includes('qualification') || kl.includes('લાયકાત') || kl.includes('eligibility') || kl.includes('post'))) {
-                        qual = v;
-                    }
-                    if (!lastDt && (kl.includes('last date') || kl.includes('છેલ્લી તારીખ') || kl.includes('exam date'))) {
-                        lastDt = v;
-                    }
-                    if (k && v && bullets.length < 4 && !kl.includes('event') && !kl.includes('વિગત')) {
+                    if (!qual && (kl.includes('qualification') || kl.includes('લાયકાત') || kl.includes('eligibility'))) qual = v;
+                    if (!lastDt && (kl.includes('last date') || kl.includes('છેલ્લી તારીખ'))) lastDt = v;
+                    if (!examDt && (kl.includes('exam date') || kl.includes('પરીક્ષા તારીખ'))) examDt = v;
+
+                    const isLinkRow = kl.includes('apply') || kl.includes('notification') || kl.includes('jaherat') || kl.includes('pdf') || kl.includes('official website') || kl.includes('link') || kl.includes('download');
+                    if (k && v && !isLinkRow && bullets.length < 4 && !kl.includes('event') && !kl.includes('વિગત')) {
                         bullets.push(`▪ *${k}:* ${v}`);
                     }
                 }
             });
-            return { qual, lastDt, bullets };
+            return { qual, lastDt, examDt, bullets };
         }
 
-        function buildWhatsAppPostMessage(p) {
+        function buildSocialPostMessage(p) {
             const postUrl = `${SITE_DOMAIN}/post.html?id=${p.id}`;
             const catLabel = p.subCat || p.mainCat || "Latest Update";
             const extracted = extractExtraDetailsFromHtml(p.content);
 
-            const finalQual = (p.qualification || "").trim() || extracted.qual || "Official Notification Mujab (All Eligible Candidates)";
-            const finalDate = (p.lastDate || "").trim() || extracted.lastDt;
-
             let lines = [
-                `📢 *${catLabel.toUpperCase()} — SHIV ONLINE CENTRE*`,
+                `📢 *${catLabel.toUpperCase()} — SHIV ONLINE CENTER*`,
                 `━━━━━━━━━━━━━━━━━━━━`,
-                `📌 *${p.title}*`,
-                ``,
-                `🎓 *લાયકાત (Qualification):* ${finalQual}`
+                `📌 *${stripExternalLinks(p.title)}*`,
+                ``
             ];
 
-            if (finalDate) {
-                lines.push(`📅 *મહત્વની તારીખ (Date):* ${finalDate}`);
-            }
-            if (p.price) {
-                lines.push(`💰 *ઓફર કિંમત (Offer Price):* ${p.price}`);
+            if (p.mainCat === 'Call Letter') {
+                const finalExamDate = stripExternalLinks(p.examDate) || extracted.examDt;
+                if (finalExamDate) lines.push(`🗓️ *પરીક્ષા તારીખ (Exam Date):* ${finalExamDate}`);
+                if (p.releaseDate) lines.push(`🎫 *કોલ લેટર તારીખ (Release Date):* ${stripExternalLinks(p.releaseDate)}`);
+                if (p.loginReq) lines.push(`🔑 *ડાઉનલોડ વિગત (Login Info):* ${stripExternalLinks(p.loginReq)}`);
+                if (p.examMode) lines.push(`🏫 *પરીક્ષા પ્રકાર (Exam Mode):* ${stripExternalLinks(p.examMode)}`);
+                if (p.clExtraTopic) lines.push(`⚠️ *ખાસ સૂચના:* ${stripExternalLinks(p.clExtraTopic)}`);
+            } else {
+                const finalQual = stripExternalLinks(p.qualification) || extracted.qual || "Official Notification Mujab";
+                const finalDate = stripExternalLinks(p.lastDate) || extracted.lastDt;
+                lines.push(`🎓 *લાયકાત (Qualification):* ${finalQual}`);
+                if (p.vacancy) lines.push(`👥 *જગ્યાઓ / પગાર (Vacancy & Pay):* ${stripExternalLinks(p.vacancy)}`);
+                if (p.ageLimit) lines.push(`🎂 *વય મર્યાદા (Age Limit):* ${stripExternalLinks(p.ageLimit)}`);
+                if (finalDate) lines.push(`📅 *છેલ્લી તારીખ (Last Date):* ${finalDate}`);
+                if (p.price) lines.push(`💰 *ઓફર કિંમત (Offer Price):* ${stripExternalLinks(p.price)}`);
+                if (p.extraTopic) lines.push(`✨ *વધારાની વિગત:* ${stripExternalLinks(p.extraTopic)}`);
             }
 
-            lines.push(``);
-            lines.push(`📝 *સંપૂર્ણ વિગત (Full Information):*`);
-            lines.push(`${p.summary || ""}`);
+            const cleanSummary = stripExternalLinks(p.summary);
+            if (cleanSummary) {
+                lines.push(``);
+                lines.push(`📝 *સંપૂર્ણ માહિતી (Full Information):*`);
+                lines.push(cleanSummary);
+            }
 
             if (extracted.bullets.length > 0) {
                 lines.push(``);
@@ -1107,47 +1339,56 @@
             }
 
             lines.push(``);
-            lines.push(`👉 *વધુ માહિતી, ઓફિશિયલ નોટિફિકેશન અને ઓનલાઇન ફોર્મ ભરવા માટે નીચેની લિંક ખોલો:*`);
+            lines.push(`👉 *સંપૂર્ણ માહિતી અને ઓફિશિયલ લિંક માટે અમારી વેબસાઇટ ખોલો:*`);
             lines.push(`🔗 ${postUrl}`);
             lines.push(``);
-            lines.push(`🏢 *Shiv Online Centre (ShivMitra.in)*`);
-            lines.push(`📲 _દરરોજ નવી સરકારી ભરતી, યોજના અને ફોર્મની માહિતી માટે અમારા ગ્રુપમાં જોડાયેલા રહો._`);
+            lines.push(`🏢 *Shiv Online Center (ShivMitra.in)*`);
+            lines.push(`📲 _દરરોજ નવી સરકારી ભરતી, કોલ લેટર, યોજના અને ફોર્મની માહિતી માટે અમારી સાથે જોડાયેલા રહો._`);
 
             return lines.join('\n');
         }
 
-        function openWaShareModal(postObj) {
+        function openWaShareModal(postObj, preferredPlatform = 'MODAL') {
             activeSharePost = postObj;
-            const msg = buildWhatsAppPostMessage(postObj);
-            document.getElementById('waMessagePreview').innerText = msg;
+            document.getElementById('waMessagePreview').value = buildSocialPostMessage(postObj);
 
             const bannerWrap = document.getElementById('waBannerPreviewWrap');
             if (postObj.bannerImg) {
                 bannerWrap.innerHTML = `<img src="${postObj.bannerImg}" alt="Poster" style="max-height:150px; border-radius:8px; border:1px solid #cbd5e1;">`;
             } else {
-                bannerWrap.innerHTML = `<span style="font-size:0.78rem; color:#64748b;">(No banner attached — qualification, full details & website link will be shared)</span>`;
+                bannerWrap.innerHTML = `<span style="font-size:0.78rem; color:#64748b;">(No banner attached — full details & ShivMitra.in link will be shared)</span>`;
             }
 
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            document.getElementById('waShareHint').innerText = isMobile
-                ? "Mobile par button dabate hi Poster Image + Qualification + Poori Jaankari seedha WhatsApp mein attach ho jayegi."
-                : "PC par button dabate hi Poster Image download ho jayegi aur WhatsApp Web mein Qualification + Poori Jaankari ready-made khul jayegi.";
+            document.getElementById('modalBtnWa').style.outline = preferredPlatform === 'WA' ? '3px solid #0f2942' : 'none';
+            document.getElementById('modalBtnTg').style.outline = preferredPlatform === 'TG' ? '3px solid #0f2942' : 'none';
+            document.getElementById('modalBtnBoth').style.outline = preferredPlatform === 'BOTH' ? '3px solid #0f2942' : 'none';
 
+            document.getElementById('waShareHint').innerText =
+                "✔ Apply Link ane Jaherat PDF Link automatically remove kari deva ma aavya che. Upar message check/edit kari ne share button dabavo.";
             document.getElementById('waShareModal').style.display = 'block';
         }
 
-        function closeWaShareModal() {
-            document.getElementById('waShareModal').style.display = 'none';
+        function resetSharePreviewText() {
+            if (!activeSharePost) return;
+            document.getElementById('waMessagePreview').value = buildSocialPostMessage(activeSharePost);
         }
 
-        function shareExistingPostById(id) {
+        function closeWaShareModal() { document.getElementById('waShareModal').style.display = 'none'; }
+
+        function shareExistingPostById(id, platform = 'MODAL') {
             const p = posts.find(x => String(x.id) === String(id));
-            if (p) openWaShareModal(p);
+            if (!p) return;
+            openWaShareModal(p, platform);
+        }
+
+        function getEditedShareText() {
+            const box = document.getElementById('waMessagePreview');
+            return (box && box.value.trim()) ? box.value.trim() : buildSocialPostMessage(activeSharePost);
         }
 
         function copyWaMessage() {
-            const text = document.getElementById('waMessagePreview').innerText;
-            navigator.clipboard.writeText(text).then(() => alert("WhatsApp message copied!"));
+            const text = getEditedShareText();
+            navigator.clipboard.writeText(text).then(() => alert("Post message copied!"));
         }
 
         async function dataUrlToImageFile(dataUrl, fileName) {
@@ -1157,9 +1398,9 @@
             return new File([blob], `${fileName}.${ext}`, { type: blob.type || 'image/jpeg' });
         }
 
-        async function triggerNativeOrWebWhatsApp() {
+        async function shareToWhatsApp() {
             if (!activeSharePost) return;
-            const shareText = buildWhatsAppPostMessage(activeSharePost);
+            const shareText = getEditedShareText();
 
             if (activeSharePost.bannerImg && navigator.canShare) {
                 try {
@@ -1180,20 +1421,97 @@
             if (activeSharePost.bannerImg && activeSharePost.bannerImg.startsWith('data:image')) {
                 const a = document.createElement('a');
                 a.href = activeSharePost.bannerImg;
-                a.download = `ShivMitra_Poster_${activeSharePost.id}.jpg`;
+                a.download = `ShivMitra_Poster_${activeSharePost.id}.webp`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
             }
 
-            const encodedText = encodeURIComponent(shareText);
-            window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+        }
+
+        function shareToTelegram() {
+            if (!activeSharePost) return;
+            const postUrl = `${SITE_DOMAIN}/post.html?id=${activeSharePost.id}`;
+            const shareText = getEditedShareText();
+            const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`;
+            window.open(tgUrl, '_blank');
+        }
+
+        function shareToBothSocial() {
+            if (!activeSharePost) return;
+            const shareText = getEditedShareText();
+            const postUrl = `${SITE_DOMAIN}/post.html?id=${activeSharePost.id}`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+            setTimeout(() => {
+                window.open(`https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`, '_blank');
+            }, 600);
         }
 
         /* =========================================================
-           3. AUTO IMAGE COMPRESSION (1200px MAX, ~80-120 KB)
+           3. MULTI-SELECT CHECKBOXES & BULK DELETE
         ========================================================= */
-        function compressImageFile(file, maxWidth = 1200, quality = 0.78) {
+        function toggleSelectAll(scope, isChecked) {
+            const selector = scope === 'home' ? '.home-row-chk' : '.manage-row-chk';
+            document.querySelectorAll(selector).forEach(chk => { chk.checked = isChecked; });
+            updateSelectedCounter(scope);
+        }
+
+        function updateSelectedCounter(scope) {
+            const selector = scope === 'home' ? '.home-row-chk:checked' : '.manage-row-chk:checked';
+            const count = document.querySelectorAll(selector).length;
+            const badgeId = scope === 'home' ? 'homeSelectedCount' : 'manageSelectedCount';
+            const el = document.getElementById(badgeId);
+            if (el) el.innerText = count;
+        }
+
+        async function deleteSelectedPosts(scope) {
+            const selector = scope === 'home' ? '.home-row-chk:checked' : '.manage-row-chk:checked';
+            const checkedBoxes = Array.from(document.querySelectorAll(selector));
+            if (checkedBoxes.length === 0) {
+                alert("Pehle delete karva mate kam se kam 1 post select karo!");
+                return;
+            }
+            if (!confirm(`Selected ${checkedBoxes.length} posts ne permanently delete karvi che?`)) return;
+
+            const idsToRemove = new Set(checkedBoxes.map(cb => String(cb.value)));
+            posts = posts.filter(p => !idsToRemove.has(String(p.id)));
+            await pushToGitHub(`Bulk delete ${idsToRemove.size} posts`);
+
+            const masterChk = document.getElementById(scope === 'home' ? 'homeSelectAll' : 'manageSelectAll');
+            if (masterChk) masterChk.checked = false;
+            refreshStats();
+            renderHomeRecent();
+            renderManageTable();
+            renderDrafts();
+        }
+
+        /* =========================================================
+           4. STORAGE-SAVER AUTO RESIZE & COMPRESS (MAX ~55 KB WebP)
+        ========================================================= */
+        function compressCanvasToTargetKb(sourceCanvas, targetMaxKb = 55) {
+            let quality = 0.78;
+            let dataUrl = sourceCanvas.toDataURL('image/webp', quality);
+            let kb = Math.round((dataUrl.length * 3) / 4 / 1024);
+
+            while (kb > targetMaxKb && quality > 0.35) {
+                quality -= 0.08;
+                dataUrl = sourceCanvas.toDataURL('image/webp', quality);
+                kb = Math.round((dataUrl.length * 3) / 4 / 1024);
+            }
+
+            if (kb > targetMaxKb) {
+                const scaled = document.createElement('canvas');
+                scaled.width = Math.round(sourceCanvas.width * 0.78);
+                scaled.height = Math.round(sourceCanvas.height * 0.78);
+                scaled.getContext('2d').drawImage(sourceCanvas, 0, 0, scaled.width, scaled.height);
+                dataUrl = scaled.toDataURL('image/webp', 0.65);
+                kb = Math.round((dataUrl.length * 3) / 4 / 1024);
+            }
+            return { dataUrl, kb };
+        }
+
+        function compressImageFile(file, maxWidth = 900, targetMaxKb = 55) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -1208,10 +1526,9 @@
                         }
                         canvas.width = w;
                         canvas.height = h;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, w, h);
-                        const compressedDataUrl = canvas.toDataURL('image/webp', quality);
-                        resolve(compressedDataUrl);
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        const { dataUrl } = compressCanvasToTargetKb(canvas, targetMaxKb);
+                        resolve(dataUrl);
                     };
                     img.src = e.target.result;
                 };
@@ -1219,18 +1536,275 @@
             });
         }
 
+        /* =========================================================
+           5. AUTO JAHERAT BANNER GENERATOR (5 TEMPLATES + AUTO RESIZE)
+        ========================================================= */
+        let bannerDesignIndex = 0;
+        const BANNER_THEMES = {
+            GOVT_JOB: {
+                bg1: '#09192f', bg2: '#153e75', accent: '#facc15', accentText: '#0f172a',
+                pillBg: '#16a34a', stripBg: '#dc2626', badge: 'SARKARI BHARTI 2026', icon: '🏛️'
+            },
+            CALL_LETTER: {
+                bg1: '#062c22', bg2: '#0f5132', accent: '#fde047', accentText: '#0f172a',
+                pillBg: '#0284c7', stripBg: '#b91c1c', badge: 'CALL LETTER / ADMIT CARD OUT', icon: '🎫'
+            },
+            BANK_JOB: {
+                bg1: '#0c1e3e', bg2: '#1d4ed8', accent: '#38bdf8', accentText: '#0f172a',
+                pillBg: '#059669', stripBg: '#d97706', badge: 'BANK RECRUITMENT 2026', icon: '🏦'
+            },
+            YOJANA: {
+                bg1: '#271705', bg2: '#7c2d12', accent: '#fbbf24', accentText: '#0f172a',
+                pillBg: '#0d9488', stripBg: '#15803d', badge: 'SARKARI YOJANA UPDATE', icon: '🇮🇳'
+            },
+            URGENT: {
+                bg1: '#2b0909', bg2: '#7f1d1d', accent: '#fde047', accentText: '#0f172a',
+                pillBg: '#2563eb', stripBg: '#eab308', badge: 'IMPORTANT NOTICE / ALERT', icon: '📢'
+            }
+        };
+
+        function wrapCanvasLines(ctx, text, maxWidth, maxLines) {
+            const words = (text || "").split(/\s+/);
+            const lines = [];
+            let current = "";
+            for (let w of words) {
+                const test = current ? current + " " + w : w;
+                if (ctx.measureText(test).width <= maxWidth) {
+                    current = test;
+                } else {
+                    if (current) lines.push(current);
+                    current = w;
+                    if (lines.length === maxLines) break;
+                }
+            }
+            if (current && lines.length < maxLines) lines.push(current);
+            return lines;
+        }
+
+        function drawRoundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.arcTo(x + w, y, x + w, y + h, r);
+            ctx.arcTo(x + w, y + h, x, y + h, r);
+            ctx.arcTo(x, y + h, x, y, r);
+            ctx.arcTo(x, y, x + w, y, r);
+            ctx.closePath();
+        }
+
+        function generateAutoJaheratBanner(cycleNext = false) {
+            const title = document.getElementById('pTitle').value.trim();
+            if (!title) {
+                alert("Pehle upar Post Title likhein, phir Auto-Generate Banner par click karein!");
+                document.getElementById('pTitle').focus();
+                return;
+            }
+
+            const mainCat = document.getElementById('pMainCat').value;
+            const subCat = document.getElementById('pSubCat').value;
+            const styleSel = document.getElementById('bannerStyleSelect');
+            const themeKeys = Object.keys(BANNER_THEMES);
+
+            let chosenKey = styleSel.value;
+            if (cycleNext) {
+                bannerDesignIndex = (bannerDesignIndex + 1) % themeKeys.length;
+                chosenKey = themeKeys[bannerDesignIndex];
+                styleSel.value = chosenKey;
+            } else if (chosenKey === 'AUTO') {
+                if (mainCat === 'Call Letter') chosenKey = 'CALL_LETTER';
+                else if (mainCat === 'Sarkari Yojana') chosenKey = 'YOJANA';
+                else if ((subCat || '').toLowerCase().includes('bank')) chosenKey = 'BANK_JOB';
+                else chosenKey = 'GOVT_JOB';
+            }
+
+            const T = BANNER_THEMES[chosenKey] || BANNER_THEMES.GOVT_JOB;
+
+            let info1Label = "QUALIFICATION", info1Val = document.getElementById('pQualification').value.trim() || "10th / 12th / Graduate";
+            let info2Label = "VACANCY & PAY", info2Val = document.getElementById('pVacancy').value.trim() || "Official Notification Mujab";
+            let info3Label = "LAST DATE", info3Val = document.getElementById('pLastDate').value.trim() || "Apply Online Soon";
+            let extraNote = document.getElementById('pAgeLimit').value.trim()
+                ? `AGE LIMIT: ${document.getElementById('pAgeLimit').value.trim()}`
+                : (document.getElementById('pExtraTopic').value.trim() || "FULL DETAILS & OFFICIAL PDF ON SHIVMITRA.IN");
+
+            if (mainCat === 'Call Letter') {
+                info1Label = "EXAM DATE";
+                info1Val = document.getElementById('clExamDate').value.trim() || "Check Official Schedule";
+                info2Label = "DOWNLOAD INFO";
+                info2Val = document.getElementById('clLoginReq').value.trim() || "Confirmation No. & Birth Date";
+                info3Label = "RELEASE DATE";
+                info3Val = document.getElementById('clReleaseDate').value.trim() || "Available Now";
+                extraNote = document.getElementById('clExamMode').value.trim()
+                    ? `EXAM MODE: ${document.getElementById('clExamMode').value.trim()}`
+                    : "CARRY ORIGINAL PHOTO ID PROOF AT EXAM CENTER";
+            }
+
+            const customTag = document.getElementById('bannerCustomTag').value.trim() || T.badge;
+
+            // 960x540 (16:9 HD Ratio) for ultra-crisp text + tiny storage footprint (~35-50 KB)
+            const canvas = document.createElement('canvas');
+            canvas.width = 960;
+            canvas.height = 540;
+            const ctx = canvas.getContext('2d');
+
+            // 1. Background Rich Gradient
+            const grad = ctx.createLinearGradient(0, 0, 960, 540);
+            grad.addColorStop(0, T.bg1);
+            grad.addColorStop(1, T.bg2);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 960, 540);
+
+            ctx.save();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+            ctx.beginPath(); ctx.arc(900, 75, 210, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(110, 450, 175, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(14, 14, 932, 512);
+            ctx.restore();
+
+            // 2. Top Header Bar
+            drawRoundRect(ctx, 34, 28, 375, 38, 19);
+            ctx.fillStyle = 'rgba(255,255,255,0.14)';
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 16px Inter, Arial, sans-serif';
+            ctx.fillText(`${T.icon}  ${(subCat || mainCat || 'LATEST UPDATE').toUpperCase()}`, 50, 52);
+
+            // Top Right Brand Pill
+            drawRoundRect(ctx, 695, 26, 231, 40, 20);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.fillStyle = '#0f2942';
+            ctx.font = '900 18px Inter, Arial, sans-serif';
+            ctx.fillText('SHIVMITRA.IN', 735, 52);
+            ctx.fillStyle = '#16a34a';
+            ctx.beginPath(); ctx.arc(718, 46, 6, 0, Math.PI * 2); ctx.fill();
+
+            // 3. Left Visual Card
+            drawRoundRect(ctx, 34, 86, 272, 376, 15);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.97)';
+            ctx.fill();
+
+            drawRoundRect(ctx, 34, 86, 272, 60, 15);
+            ctx.fillStyle = T.accent;
+            ctx.fill();
+            ctx.fillRect(34, 124, 272, 22);
+            ctx.fillStyle = T.accentText;
+            ctx.font = '900 17px Inter, Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('SHIV ONLINE CENTER', 170, 122);
+
+            ctx.fillStyle = T.bg2;
+            ctx.beginPath(); ctx.arc(170, 212, 46, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = T.accent;
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            ctx.font = '42px Arial';
+            ctx.fillText(T.icon, 170, 227);
+
+            ctx.fillStyle = '#0f2942';
+            ctx.font = '800 16px Inter, Arial, sans-serif';
+            ctx.fillText('VERIFIED UPDATE', 170, 286);
+
+            drawRoundRect(ctx, 54, 304, 232, 42, 8);
+            ctx.fillStyle = '#f1f5f9';
+            ctx.fill();
+            ctx.fillStyle = '#334155';
+            ctx.font = '700 13px Inter, Arial, sans-serif';
+            ctx.fillText('✔ Official Notification Check', 170, 329);
+
+            drawRoundRect(ctx, 54, 356, 232, 42, 8);
+            ctx.fillStyle = '#f1f5f9';
+            ctx.fill();
+            ctx.fillStyle = '#334155';
+            ctx.font = '700 13px Inter, Arial, sans-serif';
+            ctx.fillText('✔ Step-by-Step Apply Guide', 170, 381);
+
+            drawRoundRect(ctx, 54, 408, 232, 38, 8);
+            ctx.fillStyle = T.pillBg;
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 14px Inter, Arial, sans-serif';
+            ctx.fillText('READ FULL DETAILS ➔', 170, 432);
+            ctx.textAlign = 'left';
+
+            // 4. Right Side Main Content Area
+            drawRoundRect(ctx, 330, 86, 596, 38, 8);
+            ctx.fillStyle = T.accent;
+            ctx.fill();
+            ctx.fillStyle = T.accentText;
+            ctx.font = '900 17px Inter, Arial, sans-serif';
+            ctx.fillText(`★  ${customTag.toUpperCase()}`, 346, 111);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 33px Inter, Arial, sans-serif';
+            const titleLines = wrapCanvasLines(ctx, title.toUpperCase(), 592, 3);
+            let titleY = 164;
+            titleLines.forEach(line => {
+                ctx.fillText(line, 330, titleY);
+                titleY += 40;
+            });
+
+            const cardStartY = Math.max(titleY + 6, 264);
+
+            // Card A
+            drawRoundRect(ctx, 330, cardStartY, 596, 52, 10);
+            ctx.fillStyle = T.pillBg;
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 18px Inter, Arial, sans-serif';
+            ctx.fillText(`🎓 ${info1Label}: ${info1Val.substring(0, 40)}`, 346, cardStartY + 32);
+
+            // Card B
+            drawRoundRect(ctx, 330, cardStartY + 62, 596, 52, 10);
+            ctx.fillStyle = 'rgba(255,255,255,0.96)';
+            ctx.fill();
+            ctx.fillStyle = '#0f172a';
+            ctx.font = '800 18px Inter, Arial, sans-serif';
+            ctx.fillText(`📋 ${info2Label}: ${info2Val.substring(0, 40)}`, 346, cardStartY + 94);
+
+            // Card C
+            drawRoundRect(ctx, 330, cardStartY + 124, 596, 52, 10);
+            ctx.fillStyle = T.stripBg;
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 18px Inter, Arial, sans-serif';
+            ctx.fillText(`📅 ${info3Label}: ${info3Val.toUpperCase().substring(0, 38)}`, 346, cardStartY + 156);
+
+            // 5. Bottom Full-Width Footer Bar
+            ctx.fillStyle = '#07111e';
+            ctx.fillRect(0, 486, 960, 54);
+            ctx.fillStyle = T.accent;
+            ctx.fillRect(0, 483, 960, 3);
+
+            ctx.fillStyle = T.accent;
+            ctx.font = '900 17px Inter, Arial, sans-serif';
+            ctx.fillText('🌐 VISIT WEBSITE:', 34, 519);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 17px Inter, Arial, sans-serif';
+            ctx.fillText(`WWW.SHIVMITRA.IN   |   ${extraNote.toUpperCase().substring(0, 44)}`, 205, 519);
+
+            // Auto-Compress to <= 55 KB WebP
+            const { dataUrl, kb } = compressCanvasToTargetKb(canvas, 55);
+
+            document.getElementById('pBannerData').value = dataUrl;
+            const prev = document.getElementById('bannerPreview');
+            prev.src = dataUrl;
+            prev.style.display = 'block';
+            document.getElementById('bannerSizeInfo').innerText = `(Auto Banner Ready: ~${kb} KB WebP)`;
+        }
+
         async function uploadFeaturePhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
             const sizeInfo = document.getElementById('bannerSizeInfo');
-            sizeInfo.innerText = "Compressing...";
-            const compressed = await compressImageFile(file, 1200, 0.78);
+            sizeInfo.innerText = "Auto-Resizing & Compressing...";
+            const compressed = await compressImageFile(file, 900, 55);
             const approxKb = Math.round((compressed.length * 3) / 4 / 1024);
             document.getElementById('pBannerData').value = compressed;
             const prev = document.getElementById('bannerPreview');
             prev.src = compressed;
             prev.style.display = 'block';
-            sizeInfo.innerText = `(Ready: ~${approxKb} KB)`;
+            sizeInfo.innerText = `(Resized & Ready: ~${approxKb} KB WebP)`;
         }
 
         function removeBannerImage() {
@@ -1298,18 +1872,6 @@
             }
         }
 
-        function updateSubOptions(selectedSub = "") {
-            const main = document.getElementById('pMainCat').value;
-            const subSel = document.getElementById('pSubCat');
-            subSel.innerHTML = "";
-            (subMap[main] || []).forEach(s => {
-                const opt = document.createElement('option');
-                opt.value = s; opt.innerText = s;
-                if (s === selectedSub) opt.selected = true;
-                subSel.appendChild(opt);
-            });
-        }
-
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-section').forEach(t => t.style.display = 'none');
             document.getElementById(tabId).style.display = 'block';
@@ -1332,19 +1894,27 @@
         function renderHomeRecent() {
             const tbody = document.getElementById('homeRecentTableBody');
             if (!tbody) return;
-            const live = posts.filter(p => p.status !== 'draft').slice(0, 6);
+            document.getElementById('homeSelectAll').checked = false;
+            document.getElementById('homeSelectedCount').innerText = "0";
+
+            const live = posts.filter(p => p.status !== 'draft').slice(0, 8);
             if (live.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live posts yet. Click "+ New Job / Yojana Post" above to publish your first update!</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="color:#64748b;">No live posts yet. Click "Upload Post" in the menu to create your first post!</td></tr>`;
                 return;
             }
             tbody.innerHTML = live.map(p => `
                 <tr>
+                    <td><input type="checkbox" class="home-row-chk" value="${p.id}" onchange="updateSelectedCounter('home')"></td>
                     <td><b>${p.title}</b></td>
                     <td>${p.subCat || p.mainCat}</td>
-                    <td>${p.date || '-'}</td>
                     <td style="white-space:nowrap;">
-                        <button class="btn-sm btn-wa-sm" onclick="shareExistingPostById(${p.id})">&#128242; WhatsApp</button>
+                        <button class="btn-sm btn-wa-sm" onclick="shareExistingPostById(${p.id}, 'WA')">WA</button>
+                        <button class="btn-sm btn-tg-sm" onclick="shareExistingPostById(${p.id}, 'TG')">TG</button>
+                        <button class="btn-sm btn-both-sm" onclick="shareExistingPostById(${p.id}, 'BOTH')">Both</button>
+                    </td>
+                    <td style="white-space:nowrap;">
                         <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
+                        <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Del</button>
                     </td>
                 </tr>
             `).join('');
@@ -1427,7 +1997,7 @@
             const title = document.getElementById('osTitle').value.trim();
             const fee = document.getElementById('osFee').value.trim() || "As per Govt Rules";
             const procTime = document.getElementById('osTime').value.trim() || "3 to 7 Working Days";
-            const mode = document.getElementById('osMode').value.trim() || "Online / CSC Centre";
+            const mode = document.getElementById('osMode').value.trim() || "Online / CSC Center";
             const docsRaw = document.getElementById('osDocs').value.trim();
             const stepsRaw = document.getElementById('osSteps').value.trim();
 
@@ -1504,7 +2074,7 @@
         async function uploadLegalCover(event) {
             const file = event.target.files[0];
             if (!file) return;
-            const compressed = await compressImageFile(file, 1000, 0.78);
+            const compressed = await compressImageFile(file, 850, 50);
             document.getElementById('lfCoverData').value = compressed;
         }
 
@@ -1602,7 +2172,7 @@
                 const match = rawUrl.trim().match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
                 if (!match || !match[1]) return alert("Invalid YouTube link!");
                 snippet = `\n<div class="video-embed"><iframe src="https://www.youtube.com/embed/${match[1]}" allowfullscreen></iframe></div>\n`;
-            } else if (type === 'TABLE') { snippet = `\n<table>\n  <tr><th>Post Name</th><th>Details</th></tr>\n  <tr><td>Post 1</td><td>Details</td></tr>\n</table>\n`; }
+            } else if (type === 'TABLE') { snippet = `\n<table>\n  <tr><th>Topic / Criteria</th><th>Details</th></tr>\n  <tr><td>Detail 1</td><td>Value 1</td></tr>\n</table>\n`; }
             else if (type === 'NOTE') { const n = prompt("Enter Highlight Note:"); if (!n) return; snippet = `\n<div class="note-box"><strong>Important Note:</strong> ${n}</div>\n`; }
             const start = textarea.selectionStart;
             textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(textarea.selectionEnd);
@@ -1611,7 +2181,7 @@
         async function insertInlineImage(event) {
             const file = event.target.files[0];
             if (!file) return;
-            const compressed = await compressImageFile(file, 1000, 0.78);
+            const compressed = await compressImageFile(file, 850, 45);
             const textarea = document.getElementById('pContent');
             const snippet = `\n<div class="inline-media"><img src="${compressed}" alt="Infographic" style="max-width:100%; border-radius:6px;"></div>\n`;
             const start = textarea.selectionStart;
@@ -1619,21 +2189,10 @@
         }
 
         async function savePost() {
-            const editId = document.getElementById('editPostId').value;
-            const mainCat = document.getElementById('pMainCat').value;
-            const subCat = document.getElementById('pSubCat').value;
-            const title = document.getElementById('pTitle').value.trim();
-            const qualification = document.getElementById('pQualification').value.trim();
-            const lastDate = document.getElementById('pLastDate').value.trim();
-            const actionLink = document.getElementById('pLink').value.trim();
-            const pdfLink = document.getElementById('pPdfLink').value.trim();
-            const officialSite = document.getElementById('pOfficialSite').value.trim();
-            const summary = document.getElementById('pSummary').value.trim();
-            const content = document.getElementById('pContent').value.trim();
-            const bannerImg = document.getElementById('pBannerData').value;
+            const p = getDraftFormObject();
+            if (!p.title || !p.summary || !p.content) return alert("Title, Summary, and Content are required!");
 
-            if (!title || !summary || !content) return alert("Title, Summary, and Content are required!");
-            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            const editId = document.getElementById('editPostId').value;
             const btn = document.getElementById('publishBtn');
             btn.innerText = "Publishing Live..."; btn.disabled = true;
 
@@ -1641,15 +2200,15 @@
             if (editId) {
                 const idx = posts.findIndex(x => x.id == editId);
                 if (idx !== -1) {
-                    posts[idx] = { ...posts[idx], mainCat, subCat, title, qualification, lastDate, actionLink, pdfLink, officialSite, summary, content, bannerImg, date: today, status: 'live' };
+                    posts[idx] = { ...posts[idx], ...p, id: Number(editId), status: 'live' };
                     savedPostObj = posts[idx];
                 }
             } else {
-                savedPostObj = { id: Date.now(), mainCat, subCat, title, qualification, lastDate, date: today, actionLink, pdfLink, officialSite, price: "", summary, content, bannerImg, status: 'live' };
+                savedPostObj = p;
                 posts.unshift(savedPostObj);
             }
 
-            await pushToGitHub(`Publish post: ${title}`, savedPostObj);
+            await pushToGitHub(`Publish post: ${p.title}`, savedPostObj);
             btn.innerText = "🚀 Preview & Publish Live"; btn.disabled = false;
             resetForm(); refreshStats(); renderHomeRecent(); renderManageTable();
         }
@@ -1707,10 +2266,21 @@
             document.getElementById('formHeading').innerText = "Edit & Update Post";
             document.getElementById('editPostId').value = p.id;
             document.getElementById('pMainCat').value = p.mainCat || 'Jobs';
-            updateSubOptions(p.subCat);
+            handleMainCategoryChange(p.subCat);
             document.getElementById('pTitle').value = p.title;
+
             document.getElementById('pQualification').value = p.qualification || "";
             document.getElementById('pLastDate').value = p.lastDate || "";
+            document.getElementById('pAgeLimit').value = p.ageLimit || "";
+            document.getElementById('pVacancy').value = p.vacancy || "";
+            document.getElementById('pExtraTopic').value = p.extraTopic || "";
+
+            document.getElementById('clExamDate').value = p.examDate || "";
+            document.getElementById('clReleaseDate').value = p.releaseDate || "";
+            document.getElementById('clLoginReq').value = p.loginReq || "";
+            document.getElementById('clExamMode').value = p.examMode || "";
+            document.getElementById('clExtraTopic').value = p.clExtraTopic || "";
+
             document.getElementById('pLink').value = p.actionLink || "";
             document.getElementById('pPdfLink').value = p.pdfLink || "";
             document.getElementById('pOfficialSite').value = p.officialSite || "";
@@ -1730,6 +2300,16 @@
             document.getElementById('pTitle').value = "";
             document.getElementById('pQualification').value = "";
             document.getElementById('pLastDate').value = "";
+            document.getElementById('pAgeLimit').value = "";
+            document.getElementById('pVacancy').value = "";
+            document.getElementById('pExtraTopic').value = "";
+            document.getElementById('clExamDate').value = "";
+            document.getElementById('clReleaseDate').value = "";
+            document.getElementById('clLoginReq').value = "";
+            document.getElementById('clExamMode').value = "";
+            document.getElementById('clExtraTopic').value = "";
+            document.getElementById('bannerStyleSelect').value = "AUTO";
+            document.getElementById('bannerCustomTag').value = "";
             document.getElementById('pBannerData').value = "";
             document.getElementById('bannerSizeInfo').innerText = "";
             document.getElementById('bannerPreview').style.display = 'none';
@@ -1751,6 +2331,9 @@
         function renderManageTable() {
             const tbody = document.getElementById('postsTableBody');
             tbody.innerHTML = "";
+            document.getElementById('manageSelectAll').checked = false;
+            document.getElementById('manageSelectedCount').innerText = "0";
+
             const list = posts.filter(p => {
                 if (p.status === 'draft') return false;
                 if (currentFilterCat === 'ALL') return true;
@@ -1758,18 +2341,22 @@
                 return p.mainCat === currentFilterCat;
             });
             if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;">No live items found in this category yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="color:#64748b;">No live items found in this category yet.</td></tr>`;
                 return;
             }
             list.forEach(p => {
                 const badge = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.price}</span>` : (p.fileType ? ` <span style="background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.fileType}</span>` : "");
                 tbody.innerHTML += `
                     <tr>
+                        <td><input type="checkbox" class="manage-row-chk" value="${p.id}" onchange="updateSelectedCounter('manage')"></td>
                         <td><b>${p.title}</b>${badge}</td>
-                        <td>${p.mainCat === 'Legal Paid Format' ? 'Legal Format' : (p.mainCat || 'Jobs')}</td>
-                        <td>${p.subCat || '-'}</td>
+                        <td>${p.subCat || p.mainCat || 'Jobs'}</td>
                         <td style="white-space:nowrap;">
-                            <button class="btn-sm btn-wa-sm" onclick="shareExistingPostById(${p.id})">&#128242; WhatsApp</button>
+                            <button class="btn-sm btn-wa-sm" onclick="shareExistingPostById(${p.id}, 'WA')">WA</button>
+                            <button class="btn-sm btn-tg-sm" onclick="shareExistingPostById(${p.id}, 'TG')">TG</button>
+                            <button class="btn-sm btn-both-sm" onclick="shareExistingPostById(${p.id}, 'BOTH')">Both</button>
+                        </td>
+                        <td style="white-space:nowrap;">
                             <a href="post.html?id=${p.id}" target="_blank" class="btn-sm btn-view">View &#8599;</a>
                             <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Delete</button>
