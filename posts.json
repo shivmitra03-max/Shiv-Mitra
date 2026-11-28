@@ -1,5 +1,32 @@
 [
   {
+    "id": 1795857774871,
+    "mainCat": "Legal Format",
+    "subCat": "NOC & Other Drafts",
+    "title": "noc",
+    "date": "28 Nov 2026",
+    "qualification": "Editable Word + PDF (English Only)",
+    "price": "₹10",
+    "originalPrice": "50",
+    "discountPercent": 80,
+    "language": "English Only",
+    "actionLink": "uploads/1795857770201_FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf",
+    "pdfLink": "uploads/1795857770201_FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf",
+    "officialSite": "legal-formats.html",
+    "legalFiles": [
+      {
+        "name": "FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf",
+        "size": "172 KB",
+        "url": "uploads/1795857770201_FORMATS_dcb3c920-1728-4411-a2ff1705651159270_thc.itbuyer.pdf"
+      }
+    ],
+    "samplePreview": "sssss",
+    "summary": "noc",
+    "content": "<p>noc</p>",
+    "bannerImg": "",
+    "status": "live"
+  },
+  {
     "id": 1795851081299,
     "mainCat": "Online Service Details",
     "subCat": "PAN & Aadhaar Services",
