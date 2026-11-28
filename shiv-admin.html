@@ -801,6 +801,9 @@
                         <strong style="font-size:0.88rem; color:#0f2942;">Select All Visible Items</strong>
                     </div>
                     <button type="button" class="btn-sm btn-del" style="padding:7px 14px;" onclick="deleteSelectedPosts('manage')">
+                    <button type="button" onclick="removeDuplicatePosts()" style="background:#d97706; color:#fff; border:none; padding:8px 14px; border-radius:6px; font-weight:700; cursor:pointer; margin-left:8px;">
+  &#128465; Remove Duplicate Posts
+</button>
                         &#128465; Delete Selected (<span id="manageSelectedCount">0</span>)
                     </button>
                 </div>
@@ -1496,7 +1499,86 @@
             renderManageTable();
             renderDrafts();
         }
+            function normalizeDupTitle(str) {
+    return (str || "")
+        .toLowerCase()
+        .replace(/\b(202[4-9]|recruitment|bharti|notification|apply online|last date|call letter|admit card|for|posts|post|gujarat|india|jobs|job)\b/g, " ")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
 
+function normalizeDupUrl(url) {
+    if (!url) return "";
+    const clean = url.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+    if (["ojas.gujarat.gov.in", "gpsc.gujarat.gov.in", "gsssb.gujarat.gov.in", "ssc.gov.in"].includes(clean)) return "";
+    return clean;
+}
+
+function getWordSimilarity(a, b) {
+    if (!a || !b) return 0;
+    if (a === b) return 1;
+    const setA = new Set(a.split(" ").filter(w => w.length > 2));
+    const setB = new Set(b.split(" ").filter(w => w.length > 2));
+    if (!setA.size || !setB.size) return 0;
+    let common = 0;
+    setA.forEach(w => { if (setB.has(w)) common++; });
+    return (2 * common) / (setA.size + setB.size);
+}
+
+async function removeDuplicatePosts() {
+    if (!Array.isArray(posts) || posts.length === 0) {
+        alert("Abhi koi posts load nahi hain!");
+        return;
+    }
+
+    const kept = [];
+    const duplicates = [];
+
+    for (const post of posts) {
+        const normTitle = normalizeDupTitle(post.title);
+        const normAction = normalizeDupUrl(post.actionLink || post.applyLink);
+        const normPdf = normalizeDupUrl(post.pdfLink);
+
+        const isDup = kept.some(existing => {
+            if (String(existing.id) === String(post.id)) return true;
+            if ((existing.title || "").trim().toLowerCase() === (post.title || "").trim().toLowerCase()) return true;
+
+            const exAction = normalizeDupUrl(existing.actionLink || existing.applyLink);
+            const exPdf = normalizeDupUrl(existing.pdfLink);
+            if (normAction && exAction && normAction === exAction && normAction.length > 18) return true;
+            if (normPdf && exPdf && normPdf === exPdf && normPdf.length > 18) return true;
+
+            const exTitle = normalizeDupTitle(existing.title);
+            if (normTitle && exTitle && normTitle === exTitle) return true;
+            if (existing.mainCat === post.mainCat && getWordSimilarity(normTitle, exTitle) >= 0.80) return true;
+            return false;
+        });
+
+        if (isDup) {
+            duplicates.push(post);
+        } else {
+            kept.push(post);
+        }
+    }
+
+    if (duplicates.length === 0) {
+        alert("Koi bhi duplicate post nahi mili! Aapka dashboard bilkul clean hai.");
+        return;
+    }
+
+    const listPreview = duplicates.slice(0, 8).map((d, i) => `${i + 1}. [${d.status || "live"}] ${d.title}`).join("\n");
+    if (!confirm(`Total ${duplicates.length} duplicate post(s) mili hain:\n\n${listPreview}${duplicates.length > 8 ? "\n..." : ""}\n\nInhein permanently delete karke GitHub par save kar dein?`)) return;
+
+    posts = kept;
+    await pushToGitHub(`Removed ${duplicates.length} duplicate posts`);
+
+    refreshStats();
+    renderHomeRecent();
+    renderManageTable();
+    renderDrafts();
+    alert(`${duplicates.length} duplicate post(s) delete ho gayi hain aur GitHub par save ho gaya hai!`);
+}
         /* =========================================================
            4. STORAGE-SAVER AUTO RESIZE & COMPRESS (MAX ~55 KB WebP)
         ========================================================= */
