@@ -176,6 +176,10 @@
             display: inline-block; background: #dc2626; color: white; font-size: 0.74rem;
             font-weight: 800; padding: 3px 9px; border-radius: 4px; margin-bottom: 8px;
         }
+        .sample-preview-mini {
+            background: #fffdf7; border: 1px dashed #b45309; padding: 10px;
+            border-radius: 7px; font-size: 0.78rem; color: #334155; margin-bottom: 12px; line-height: 1.45;
+        }
 
         .bulk-bar {
             display: flex; justify-content: space-between; align-items: center;
@@ -370,6 +374,7 @@
                 <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <button class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="loadFromGitHub()">&#8635; Refresh</button>
                     <a href="forms.html" target="_blank" style="background:#0d9488; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Forms Page &#8599;</a>
+                    <a href="legal-formats.html" target="_blank" style="background:#b45309; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">Legal Store &#8599;</a>
                     <a href="index.html" target="_blank" style="background:#0f2942; color:white; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.82rem;">View Live Website &#8599;</a>
                     <button class="btn-sm btn-del" onclick="doLogout()">Logout</button>
                 </div>
@@ -419,9 +424,9 @@
                         <h4>&#128196; Upload Govt / Bank Form</h4>
                         <p>Add downloadable PDF/Word forms directly to your Forms Directory.</p>
                     </div>
-                    <div class="quick-action-card" onclick="viewCategoryPosts('ALL', document.getElementById('nav-manage-all'))">
-                        <h4>&#128242; All Published Posts Manager</h4>
-                        <p>Select multiple posts to delete or preview & share on WhatsApp & Telegram.</p>
+                    <div class="quick-action-card" onclick="switchTab('tab-legal', document.getElementById('nav-legal'))">
+                        <h4>&#9878; Upload Legal Format</h4>
+                        <p>Publish Rent Agreement / Affidavit with watermarked sample preview & instant UPI unlock.</p>
                     </div>
                 </div>
 
@@ -653,9 +658,9 @@
                 </div>
             </div>
 
-            <!-- TAB 4: DEDICATED LEGAL FORMAT STUDIO -->
+            <!-- TAB 4: DEDICATED LEGAL FORMAT STUDIO (CLEANED & ESSENTIAL FIELDS ONLY) -->
             <div id="tab-legal" class="panel-card tab-section" style="display:none;">
-                <h3 style="color:#b45309;">&#9878; Legal Format Studio — Professional Drafts & Bundle Uploader</h3>
+                <h3 style="color:#b45309;">&#9878; Legal Format Studio — Clean Store Uploader</h3>
                 <input type="hidden" id="editLegalId">
 
                 <div class="legal-studio-grid">
@@ -676,11 +681,11 @@
                                     <option value="Hindi + English">Hindi + English</option>
                                 </select>
                             </div>
-                            <input type="text" id="lfTitle" oninput="updateLegalPreview()" placeholder="Format Title">
+                            <input type="text" id="lfTitle" oninput="updateLegalPreview()" placeholder="Format Title (e.g., 11 Months Residential Rent Agreement — Word + PDF)" style="margin-bottom:0;">
                         </div>
 
                         <div class="studio-box">
-                            <h4>2. Smart Pricing & Discount Offer</h4>
+                            <h4>2. Pricing & Active Store UPI ID</h4>
                             <div class="price-calc-row">
                                 <div>
                                     <label style="font-size:0.75rem; font-weight:700; color:#475569;">Original Price (₹):</label>
@@ -695,36 +700,32 @@
                                     <div id="lfDiscountBox" class="discount-pill">30% OFF</div>
                                 </div>
                             </div>
-                            <div style="background:#f0fdf4; border:1px solid #86efac; padding:12px; border-radius:8px; margin-bottom:14px;">
-  <strong style="font-size:0.84rem; color:#166534;">&#128179; Store UPI ID (For Customer QR Payment):</strong>
-  <div style="display:flex; gap:8px; margin-top:6px;">
-    <input type="text" id="adminUpiIdInput" placeholder="e.g., shivonline@okaxis or 9876543210@ybl" style="flex:1; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-weight:700;">
-    <input type="hidden" id="adminPayeeNameInput" value="Shiv Online Center">
-    <button type="button" onclick="saveAdsAndUpiSettings()" style="background:#16a34a; color:white; border:none; padding:8px 14px; border-radius:6px; font-weight:800; cursor:pointer;">Save UPI</button>
-  </div>
-</div>
-                            <input type="text" id="lfOfferTag" oninput="updateLegalPreview()" value="Limited Time Offer — Instant Download">
+
+                            <div style="background:#f0fdf4; border:1px solid #86efac; padding:12px; border-radius:8px;">
+                                <strong style="font-size:0.82rem; color:#166534;">&#128179; Store UPI ID (Bank Handle zaroor likhein, e.g., shivsp340@okicici):</strong>
+                                <div style="display:flex; gap:8px; margin-top:6px;">
+                                    <input type="text" id="adminUpiIdInput" placeholder="e.g., shivsp340@okicici or 9876543210@ybl" style="flex:1; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-weight:700; margin-bottom:0; background:white;">
+                                    <input type="hidden" id="adminPayeeNameInput" value="Shiv Online Center">
+                                    <button type="button" id="saveUpiBtn" onclick="saveAdsAndUpiSettings()" style="background:#16a34a; color:white; border:none; padding:8px 14px; border-radius:6px; font-weight:800; cursor:pointer; white-space:nowrap;">Save UPI</button>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="studio-box">
-                            <h4>3. Upload Formats & Merge Multiple Drafts (Saved to /uploads/)</h4>
-                            <label class="file-upload-zone" style="border-color:#d97706; background:#fffbeb;">
-                                <strong style="color:#b45309;">&#128193; Click to Upload One or Multiple Legal Files (.doc, .docx, .pdf, .zip)</strong>
+                            <h4>3. Upload Editable Word / PDF Files (Unlocks After Payment)</h4>
+                            <label class="file-upload-zone" style="border-color:#d97706; background:#fffbeb; margin-bottom:8px;">
+                                <strong style="color:#b45309;">&#128193; Click to Upload Legal Files (.doc, .docx, .pdf, .zip)</strong>
                                 <input type="file" id="lfFileInput" multiple accept=".doc,.docx,.pdf,.rtf,.txt,.zip" style="display:none;" onchange="handleLegalFiles(event)">
                             </label>
                             <div id="uploadedFilesList"></div>
-                            <input type="text" id="lfExternalDriveLink" oninput="updateLegalPreview()" placeholder="OR Paste Google Drive / Payment Download Link (Optional)">
                         </div>
 
                         <div class="studio-box">
-                            <h4>4. Customer Convincing Details & Key Highlights</h4>
-                            <textarea id="lfPitch" rows="3" oninput="updateLegalPreview()" placeholder="Write why the customer must buy this format..."></textarea>
-                            <textarea id="lfSamplePreview" rows="3" placeholder="Short Sample Preview (First 5-6 lines shown to customer before payment)..."></textarea>
-                            <textarea id="lfHighlights" rows="4" oninput="updateLegalPreview()">✔ 100% Advocate Verified & Notary Ready Format
-✔ Instant Editable MS Word (.docx) + Print-Ready PDF Included
-✔ Easy Fill-in-the-Blank Fields (Save ₹500+ Advocate Drafting Fee)
-✔ Instant Download Access Immediately After Payment</textarea>
-                            <input type="file" accept="image/*" onchange="uploadLegalCover(event)">
+                            <h4>4. Short Summary, Watermarked Sample Preview & Cover Image</h4>
+                            <textarea id="lfPitch" rows="2" oninput="updateLegalPreview()" placeholder="Short summary (e.g., 100% Advocate-verified format ready to print on stamp paper.)"></textarea>
+                            <textarea id="lfSamplePreview" rows="4" oninput="updateLegalPreview()" placeholder="Short Sample Preview (First 5-6 lines shown watermarked to customer before payment)..."></textarea>
+                            <label style="font-size:0.78rem; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Optional Cover Image:</label>
+                            <input type="file" accept="image/*" onchange="uploadLegalCover(event)" style="margin-bottom:0; background:white;">
                             <input type="hidden" id="lfCoverData">
                         </div>
 
@@ -738,7 +739,7 @@
                         <div style="position:sticky; top:20px;">
                             <h4 style="font-size:0.85rem; color:#64748b; text-transform:uppercase; margin-bottom:10px;">Live Customer Store Preview</h4>
                             <div class="live-offer-card">
-                                <span class="offer-badge" id="prevBadge">30% OFF • LIMITED TIME OFFER</span>
+                                <span class="offer-badge" id="prevBadge">30% OFF • INSTANT DOWNLOAD</span>
                                 <div style="font-size:0.75rem; color:#b45309; font-weight:700; margin-bottom:4px;" id="prevSubCat">RENT AGREEMENT • GUJARATI + ENGLISH</div>
                                 <h3 style="font-size:1.15rem; color:#0f172a; margin-bottom:10px; border:none; padding:0;" id="prevTitle">11 Months Residential Rent Agreement</h3>
                                 <div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:8px; margin-bottom:12px; display:flex; align-items:baseline; gap:10px;">
@@ -746,10 +747,13 @@
                                     <span style="font-size:1rem; color:#94a3b8; text-decoration:line-through;" id="prevOrigPrice">₹100</span>
                                     <span style="font-size:0.8rem; font-weight:700; color:#dc2626;" id="prevSaveText">(You Save ₹30)</span>
                                 </div>
-                                <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:12px;" id="prevPitch">100% Advocate verified draft ready for stamp paper printing.</p>
-                                <div style="background:#f8fafc; padding:10px; border-radius:8px; font-size:0.8rem; color:#1e293b; line-height:1.6; margin-bottom:12px;" id="prevHighlights"></div>
+                                <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:10px;" id="prevPitch">100% Advocate verified draft ready for stamp paper printing.</p>
+                                <div class="sample-preview-mini">
+                                    <strong style="color:#92400e; display:block; margin-bottom:3px;">&#128196; Sample Preview (Shown Before Payment):</strong>
+                                    <div id="prevSampleText">THIS RENT AGREEMENT is made and executed on this ___ day of ________, 2026...</div>
+                                </div>
                                 <div style="font-size:0.78rem; font-weight:700; color:#0f2942; margin-bottom:12px;" id="prevFilesInfo">Included Format: Word + PDF</div>
-                                <button type="button" class="btn-green" style="width:100%; pointer-events:none;">Download Instant Format Now</button>
+                                <button type="button" class="btn-green" style="width:100%; pointer-events:none;">Buy & Unlock Download Now</button>
                             </div>
                         </div>
                     </div>
@@ -852,7 +856,7 @@
                 <div id="waBannerPreviewWrap" style="text-align:center; margin-bottom:12px;"></div>
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <p style="font-size:0.82rem; color:#0f2942; font-weight:700;">Share Message Preview (Editable — No Apply/PDF Links):</p>
-                    <button type="button" class="btn-sm" style="background:#e2e8f0; color:#0f172a;" onclick="resetSharePreviewText()">&#8635; Reset Text</button>
+                    <button type="button" class="btn-sm" style="background:#e2e8f0; color:#0f2942;" onclick="resetSharePreviewText()">&#8635; Reset Text</button>
                 </div>
                 <textarea class="wa-preview-box" id="waMessagePreview"></textarea>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
@@ -1067,14 +1071,14 @@
             try {
                 const livePosts = posts.filter(p => p.status !== 'draft');
                 const todayIso = new Date().toISOString().split('T')[0];
-                const staticPages = ["", "forms.html", "about.html", "contact.html", "privacy.html", "disclaimer.html", "terms.html"];
+                const staticPages = ["", "forms.html", "legal-formats.html", "about.html", "contact.html", "privacy.html", "disclaimer.html", "terms.html"];
 
                 const urls = staticPages.map(sp => {
                     const loc = sp ? `${SITE_DOMAIN}/${sp}` : SITE_DOMAIN;
                     return `  <url><loc>${loc}</loc><lastmod>${todayIso}</lastmod><priority>0.9</priority></url>`;
                 });
                 livePosts.forEach(p => {
-                    if (p.id) urls.push(`  <url><loc>${SITE_DOMAIN}/post.html?id=${p.id}</loc><lastmod>${todayIso}</lastmod><priority>0.8</priority></url>`);
+                    if (p.id) urls.push(`  <url><loc>${getSmartShareUrl(p)}</loc><lastmod>${todayIso}</lastmod><priority>0.8</priority></url>`);
                 });
 
                 const xmlStr = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
@@ -1265,8 +1269,16 @@
         }
 
         /* =========================================================
-           2. WHATSAPP & TELEGRAM SHARE PREVIEW (NO EXTERNAL URLS)
+           2. WHATSAPP & TELEGRAM SHARE PREVIEW (SMART LINKS)
         ========================================================= */
+        function getSmartShareUrl(p) {
+            const isLegalItem = (p.mainCat || '').toLowerCase().includes('legal') || Boolean(p.price);
+            const isFormItem = (p.mainCat || '').toLowerCase().includes('form');
+            if (isLegalItem) return `${SITE_DOMAIN}/legal-formats.html?item=${p.id}`;
+            if (isFormItem) return `${SITE_DOMAIN}/forms.html?form=${p.id}`;
+            return `${SITE_DOMAIN}/post.html?id=${p.id}`;
+        }
+
         function stripExternalLinks(text) {
             if (!text) return "";
             return text
@@ -1303,14 +1315,9 @@
             });
             return { qual, lastDt, examDt, bullets };
         }
-function buildSocialPostMessage(p) {
-            const isLegalItem = (p.mainCat || '').toLowerCase().includes('legal') || Boolean(p.price);
-            const isFormItem = (p.mainCat || '').toLowerCase().includes('form');
-            const postUrl = isLegalItem
-                ? `${SITE_DOMAIN}/legal-formats.html?item=${p.id}`
-                : isFormItem
-                    ? `${SITE_DOMAIN}/forms.html?form=${p.id}`
-                    : `${SITE_DOMAIN}/post.html?id=${p.id}`;
+
+        function buildSocialPostMessage(p) {
+            const postUrl = getSmartShareUrl(p);
             const catLabel = (p.subCat || p.mainCat || "Update").toUpperCase();
             const extracted = extractExtraDetailsFromHtml(p.content);
 
@@ -1338,7 +1345,6 @@ function buildSocialPostMessage(p) {
                 if (p.extraTopic) lines.push(`✨ *ખાસ વિગત:* ${stripExternalLinks(p.extraTopic)}`);
             }
 
-            // Short 1-line summary (capped at 130 chars so WhatsApp never triggers "Read more")
             const cleanSummary = stripExternalLinks(p.summary);
             if (cleanSummary) {
                 const shortSum = cleanSummary.length > 130 ? cleanSummary.slice(0, 127).trim() + "..." : cleanSummary;
@@ -1348,8 +1354,7 @@ function buildSocialPostMessage(p) {
             lines.push(`👉 *વધુ વિગતો માટે નીચે આપેલી લિંક ખોલો 👇:*`);
             lines.push(`🔗 ${postUrl}`);
             lines.push(`🏢 *Shiv Online Center (ShivMitra.in)*`);
-            lines.push(`📲 દરરોજ નવી સરકારી ભરતી, કોલ લેટર, યોજના અને ફોર્મની માહિતી માટે અમારી સાથે જોડાયેલા રહો.*`);
-            
+            lines.push(`📲 *દરરોજ નવી સરકારી ભરતી, કોલ લેટર, યોજના અને ફોર્મની માહિતી માટે અમારી સાથે જોડાયેલા રહો.*`);
 
             return lines.join('\n');
         }
@@ -1438,7 +1443,7 @@ function buildSocialPostMessage(p) {
 
         function shareToTelegram() {
             if (!activeSharePost) return;
-            const postUrl = `${SITE_DOMAIN}/post.html?id=${activeSharePost.id}`;
+            const postUrl = getSmartShareUrl(activeSharePost);
             const shareText = getEditedShareText();
             const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`;
             window.open(tgUrl, '_blank');
@@ -1447,7 +1452,7 @@ function buildSocialPostMessage(p) {
         function shareToBothSocial() {
             if (!activeSharePost) return;
             const shareText = getEditedShareText();
-            const postUrl = `${SITE_DOMAIN}/post.html?id=${activeSharePost.id}`;
+            const postUrl = getSmartShareUrl(activeSharePost);
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
             setTimeout(() => {
                 window.open(`https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`, '_blank');
@@ -1645,13 +1650,11 @@ function buildSocialPostMessage(p) {
 
             const customTag = document.getElementById('bannerCustomTag').value.trim() || T.badge;
 
-            // 960x540 (16:9 HD Ratio) for ultra-crisp text + tiny storage footprint (~35-50 KB)
             const canvas = document.createElement('canvas');
             canvas.width = 960;
             canvas.height = 540;
             const ctx = canvas.getContext('2d');
 
-            // 1. Background Rich Gradient
             const grad = ctx.createLinearGradient(0, 0, 960, 540);
             grad.addColorStop(0, T.bg1);
             grad.addColorStop(1, T.bg2);
@@ -1667,7 +1670,6 @@ function buildSocialPostMessage(p) {
             ctx.strokeRect(14, 14, 932, 512);
             ctx.restore();
 
-            // 2. Top Header Bar
             drawRoundRect(ctx, 34, 28, 375, 38, 19);
             ctx.fillStyle = 'rgba(255,255,255,0.14)';
             ctx.fill();
@@ -1675,7 +1677,6 @@ function buildSocialPostMessage(p) {
             ctx.font = '800 16px Inter, Arial, sans-serif';
             ctx.fillText(`${T.icon}  ${(subCat || mainCat || 'LATEST UPDATE').toUpperCase()}`, 50, 52);
 
-            // Top Right Brand Pill
             drawRoundRect(ctx, 695, 26, 231, 40, 20);
             ctx.fillStyle = '#ffffff';
             ctx.fill();
@@ -1685,7 +1686,6 @@ function buildSocialPostMessage(p) {
             ctx.fillStyle = '#16a34a';
             ctx.beginPath(); ctx.arc(718, 46, 6, 0, Math.PI * 2); ctx.fill();
 
-            // 3. Left Visual Card
             drawRoundRect(ctx, 34, 86, 272, 376, 15);
             ctx.fillStyle = 'rgba(255, 255, 255, 0.97)';
             ctx.fill();
@@ -1733,7 +1733,6 @@ function buildSocialPostMessage(p) {
             ctx.fillText('READ FULL DETAILS ➔', 170, 432);
             ctx.textAlign = 'left';
 
-            // 4. Right Side Main Content Area
             drawRoundRect(ctx, 330, 86, 596, 38, 8);
             ctx.fillStyle = T.accent;
             ctx.fill();
@@ -1752,7 +1751,6 @@ function buildSocialPostMessage(p) {
 
             const cardStartY = Math.max(titleY + 6, 264);
 
-            // Card A
             drawRoundRect(ctx, 330, cardStartY, 596, 52, 10);
             ctx.fillStyle = T.pillBg;
             ctx.fill();
@@ -1760,7 +1758,6 @@ function buildSocialPostMessage(p) {
             ctx.font = '800 18px Inter, Arial, sans-serif';
             ctx.fillText(`🎓 ${info1Label}: ${info1Val.substring(0, 40)}`, 346, cardStartY + 32);
 
-            // Card B
             drawRoundRect(ctx, 330, cardStartY + 62, 596, 52, 10);
             ctx.fillStyle = 'rgba(255,255,255,0.96)';
             ctx.fill();
@@ -1768,7 +1765,6 @@ function buildSocialPostMessage(p) {
             ctx.font = '800 18px Inter, Arial, sans-serif';
             ctx.fillText(`📋 ${info2Label}: ${info2Val.substring(0, 40)}`, 346, cardStartY + 94);
 
-            // Card C
             drawRoundRect(ctx, 330, cardStartY + 124, 596, 52, 10);
             ctx.fillStyle = T.stripBg;
             ctx.fill();
@@ -1776,7 +1772,6 @@ function buildSocialPostMessage(p) {
             ctx.font = '900 18px Inter, Arial, sans-serif';
             ctx.fillText(`📅 ${info3Label}: ${info3Val.toUpperCase().substring(0, 38)}`, 346, cardStartY + 156);
 
-            // 5. Bottom Full-Width Footer Bar
             ctx.fillStyle = '#07111e';
             ctx.fillRect(0, 486, 960, 54);
             ctx.fillStyle = T.accent;
@@ -1789,7 +1784,6 @@ function buildSocialPostMessage(p) {
             ctx.font = '800 17px Inter, Arial, sans-serif';
             ctx.fillText(`WWW.SHIVMITRA.IN   |   ${extraNote.toUpperCase().substring(0, 44)}`, 205, 519);
 
-            // Auto-Compress to <= 55 KB WebP
             const { dataUrl, kb } = compressCanvasToTargetKb(canvas, 55);
 
             document.getElementById('pBannerData').value = dataUrl;
@@ -1820,6 +1814,9 @@ function buildSocialPostMessage(p) {
             prev.src = ""; prev.style.display = 'none';
         }
 
+        /* =========================================================
+           6. SITE CONFIG (GA4 + ADSENSE + STORE UPI ID IN ads.json)
+        ========================================================= */
         async function loadSiteConfig() {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             if (!auth) return;
@@ -1835,6 +1832,12 @@ function buildSocialPostMessage(p) {
                     document.getElementById('adHeaderSlot').value = decoded.headerAd || "";
                     document.getElementById('adArticleSlot').value = decoded.articleAd || "";
                     document.getElementById('adSidebarSlot').value = decoded.sidebarAd || "";
+                    if (document.getElementById('adminUpiIdInput')) {
+                        document.getElementById('adminUpiIdInput').value = decoded.upiId || "";
+                    }
+                    if (document.getElementById('adminPayeeNameInput') && decoded.payeeName) {
+                        document.getElementById('adminPayeeNameInput').value = decoded.payeeName;
+                    }
                 }
             } catch (e) {}
         }
@@ -1846,19 +1849,48 @@ function buildSocialPostMessage(p) {
             btn.innerText = "Save GA4 ID";
         }
 
-        async function saveSiteConfig(isGaOnly = false) {
+        async function saveAdsAndUpiSettings() {
+            const upiVal = (document.getElementById('adminUpiIdInput')?.value || "").trim();
+            if (!upiVal || !upiVal.includes('@')) {
+                alert("Kripya sahi UPI ID dalein (jismein '@' ho, jaise shivsp340@okicici ya 9876543210@ybl)");
+                return;
+            }
+            if (upiVal.toLowerCase().endsWith('@gmail') || upiVal.toLowerCase().endsWith('@gmail.com')) {
+                alert("Sirf '@gmail' email address hota hai, UPI ID nahi! Apne GPay/PhonePe app me dekhein—UPI ID ke end me '@okicici', '@oksbi', '@ybl', ya '@paytm' hota hai.");
+                return;
+            }
+
+            const btn = document.getElementById('saveUpiBtn');
+            if (btn) { btn.innerText = "Saving..."; btn.disabled = true; }
+            await saveSiteConfig(false, upiVal);
+            if (btn) { btn.innerText = "Save UPI"; btn.disabled = false; }
+        }
+
+        async function saveSiteConfig(isGaOnly = false, customUpiAlert = "") {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             const btn = document.getElementById('saveAdsBtn');
-            if (!isGaOnly) { btn.innerText = "Saving Ads..."; btn.disabled = true; }
+            if (!isGaOnly && !customUpiAlert && btn) { btn.innerText = "Saving Ads..."; btn.disabled = true; }
+
+            try {
+                const latestRes = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/ads.json?t=${Date.now()}`, {
+                    headers: { 'Authorization': `Bearer ${auth.token}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (latestRes.ok) {
+                    const latestData = await latestRes.json();
+                    configSha = latestData.sha;
+                }
+            } catch (_) {}
 
             const payloadObj = {
                 gaId: document.getElementById('gaMeasurementId').value.trim(),
                 headerAd: document.getElementById('adHeaderSlot').value.trim(),
                 articleAd: document.getElementById('adArticleSlot').value.trim(),
-                sidebarAd: document.getElementById('adSidebarSlot').value.trim()
+                sidebarAd: document.getElementById('adSidebarSlot').value.trim(),
+                upiId: (document.getElementById('adminUpiIdInput')?.value || "").trim(),
+                payeeName: (document.getElementById('adminPayeeNameInput')?.value || "Shiv Online Center").trim()
             };
             const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payloadObj, null, 2))));
-            const bodyData = { message: "Update GA4 & AdSense configuration", content: encoded };
+            const bodyData = { message: "Update Site, UPI & AdSense configuration", content: encoded };
             if (configSha) bodyData.sha = configSha;
 
             try {
@@ -1870,11 +1902,15 @@ function buildSocialPostMessage(p) {
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message);
                 configSha = result.content.sha;
-                alert(isGaOnly ? "Google Analytics 4 ID saved!" : "AdSense slots saved!");
+                if (customUpiAlert) {
+                    alert(`✅ UPI ID (${customUpiAlert}) saved to GitHub! Local testing ke liye terminal me 'git pull origin main' chalayein.`);
+                } else {
+                    alert(isGaOnly ? "Google Analytics 4 ID saved!" : "AdSense & Store settings saved!");
+                }
             } catch (e) {
                 alert("Error saving settings: " + e.message);
             } finally {
-                if (!isGaOnly) { btn.innerText = "💾 Save & Activate Ad Slots on Live Website"; btn.disabled = false; }
+                if (!isGaOnly && !customUpiAlert && btn) { btn.innerText = "💾 Save & Activate Ad Slots on Live Website"; btn.disabled = false; }
             }
         }
 
@@ -2045,16 +2081,18 @@ function buildSocialPostMessage(p) {
             document.getElementById('cancelServiceBtn').style.display = "none";
         }
 
+        /* =========================================================
+           7. CLEAN LEGAL FORMAT STUDIO FUNCTIONS
+        ========================================================= */
         async function handleLegalFiles(event) {
             const files = Array.from(event.target.files);
             if (!files.length) return;
+            const box = document.getElementById('uploadedFilesList');
+            box.innerHTML = `<div class="uploaded-file-chip"><span>&#9203; Uploading files to /uploads/...</span></div>`;
             for (const file of files) {
                 try {
                     const url = await uploadBinaryToGitHubUploads(file);
                     legalUploadedFiles.push({ name: file.name, size: Math.round(file.size / 1024) + " KB", url });
-                    if (!document.getElementById('lfExternalDriveLink').value.trim()) {
-                        document.getElementById('lfExternalDriveLink').value = url;
-                    }
                     renderUploadedFilesList();
                     updateLegalPreview();
                 } catch (e) {
@@ -2090,22 +2128,21 @@ function buildSocialPostMessage(p) {
             const title = document.getElementById('lfTitle').value.trim() || "11 Months Residential Rent Agreement — Editable Word + PDF";
             const orig = parseFloat(document.getElementById('lfOrigPrice').value) || 100;
             const offer = parseFloat(document.getElementById('lfOfferPrice').value) || 70;
-            const tag = document.getElementById('lfOfferTag').value.trim() || "Limited Time Offer";
             const pitch = document.getElementById('lfPitch').value.trim() || "100% Advocate verified legal format ready to print on stamp paper.";
-            const highlights = document.getElementById('lfHighlights').value.trim();
+            const sample = document.getElementById('lfSamplePreview').value.trim() || "THIS RENT AGREEMENT is made and executed on this ___ day of ________, 2026...";
 
             const discountPct = orig > offer ? Math.round(((orig - offer) / orig) * 100) : 0;
             const savings = orig > offer ? (orig - offer) : 0;
 
-            document.getElementById('lfDiscountBox').innerText = discountPct > 0 ? `${discountPct}% OFF` : "NO DISCOUNT";
-            document.getElementById('prevBadge').innerText = discountPct > 0 ? `${discountPct}% OFF • ${tag.toUpperCase()}` : tag.toUpperCase();
+            document.getElementById('lfDiscountBox').innerText = discountPct > 0 ? `${discountPct}% OFF` : "BEST PRICE";
+            document.getElementById('prevBadge').innerText = discountPct > 0 ? `${discountPct}% OFF • INSTANT DOWNLOAD` : "INSTANT DOWNLOAD";
             document.getElementById('prevSubCat').innerText = `${subCat.toUpperCase()} • ${lang.toUpperCase()}`;
             document.getElementById('prevTitle').innerText = title;
             document.getElementById('prevOfferPrice').innerText = `₹${offer}`;
             document.getElementById('prevOrigPrice').innerText = orig > offer ? `₹${orig}` : "";
             document.getElementById('prevSaveText').innerText = savings > 0 ? `(You Save ₹${savings})` : "";
             document.getElementById('prevPitch').innerText = pitch;
-            document.getElementById('prevHighlights').innerHTML = highlights.split('\n').filter(Boolean).join('<br>');
+            document.getElementById('prevSampleText').innerText = sample;
 
             const fileNames = legalUploadedFiles.map(f => f.name).join(', ');
             document.getElementById('prevFilesInfo').innerText = fileNames ? `Included Bundle (${legalUploadedFiles.length} Files): ${fileNames}` : "Included Format: Editable Word + PDF Package";
@@ -2118,31 +2155,29 @@ function buildSocialPostMessage(p) {
             const title = document.getElementById('lfTitle').value.trim();
             const origPrice = parseFloat(document.getElementById('lfOrigPrice').value) || 0;
             const offerPrice = parseFloat(document.getElementById('lfOfferPrice').value) || 0;
-            const offerTag = document.getElementById('lfOfferTag').value.trim();
-            const pitch = document.getElementById('lfPitch').value.trim();
-            const highlights = document.getElementById('lfHighlights').value.trim();
-            const extLink = document.getElementById('lfExternalDriveLink').value.trim();
+            const pitch = document.getElementById('lfPitch').value.trim() || "100% Advocate-verified legal format ready to print on stamp paper.";
+            const samplePreview = document.getElementById('lfSamplePreview').value.trim();
             const coverImg = document.getElementById('lfCoverData').value;
 
-            if (!title || !offerPrice || !pitch) return alert("Title, Offer Price, and Customer Description are required!");
+            if (!title || !offerPrice) return alert("Format Title and Offer Price are required!");
+            if (legalUploadedFiles.length === 0) return alert("Please upload at least one editable .doc, .docx, or .pdf file in Step 3!");
+
             const discountPct = origPrice > offerPrice ? Math.round(((origPrice - offerPrice) / origPrice) * 100) : 0;
             const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-            const highlightItems = highlights.split('\n').filter(Boolean).map(line => `<tr><td>${line}</td></tr>`).join('');
-            const filesSummaryHtml = legalUploadedFiles.length > 0 ? `<p><strong>Included Files (${legalUploadedFiles.length}):</strong> ${legalUploadedFiles.map(f => `${f.name} (${f.size})`).join(' | ')}</p>` : "";
+            const firstFileUrl = legalUploadedFiles[0].url;
 
-            const formattedHtml = `<div class="note-box"><strong>Special Discount Offer (${discountPct}% OFF):</strong> Original Price <del>₹${origPrice}</del> — Today's Offer Price <strong>₹${offerPrice}</strong> (${offerTag})</div><p>${pitch}</p><h3>Why Choose This Legal Format? (${lang})</h3><table><tr><th>Key Benefits</th></tr>${highlightItems}</table>${filesSummaryHtml}`;
-
-           const postPayload = {
+            const postPayload = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Legal Format", subCat, title, date: today,
                 qualification: `Editable Word + PDF (${lang})`,
                 price: `₹${offerPrice}`, originalPrice: String(origPrice),
-                discountPercent: discountPct, offerTag, language: lang,
-                actionLink: extLink || "#buy-legal-format", pdfLink: extLink || "#buy-legal-format", officialSite: "index.html",
+                discountPercent: discountPct, language: lang,
+                actionLink: firstFileUrl, pdfLink: firstFileUrl, officialSite: "legal-formats.html",
                 legalFiles: legalUploadedFiles,
-                samplePreview: (document.getElementById('lfSamplePreview')?.value || "").trim(),
-                summary: `${discountPct > 0 ? `[${discountPct}% OFF — ₹${offerPrice} Only] ` : `[₹${offerPrice}] `}${pitch}`,
-                content: formattedHtml, bannerImg: coverImg, status: "live"
+                samplePreview: samplePreview,
+                summary: pitch,
+                content: `<p>${pitch}</p>`,
+                bannerImg: coverImg, status: "live"
             };
 
             const btn = document.getElementById('publishLegalBtn');
@@ -2160,7 +2195,7 @@ function buildSocialPostMessage(p) {
             document.getElementById('lfOrigPrice').value = "100";
             document.getElementById('lfOfferPrice').value = "70";
             document.getElementById('lfPitch').value = "";
-            document.getElementById('lfExternalDriveLink').value = "";
+            document.getElementById('lfSamplePreview').value = "";
             document.getElementById('lfCoverData').value = "";
             legalUploadedFiles = [];
             renderUploadedFilesList();
@@ -2259,8 +2294,8 @@ function buildSocialPostMessage(p) {
                 document.getElementById('lfTitle').value = p.title;
                 document.getElementById('lfOrigPrice').value = p.originalPrice || String(p.price || "100").replace('₹', '');
                 document.getElementById('lfOfferPrice').value = String(p.price || "70").replace('₹', '');
-                document.getElementById('lfOfferTag').value = p.offerTag || "Limited Time Offer";
-                document.getElementById('lfExternalDriveLink').value = p.actionLink !== "#buy-legal-format" ? (p.actionLink || "") : "";
+                document.getElementById('lfPitch').value = p.summary || "";
+                document.getElementById('lfSamplePreview').value = p.samplePreview || "";
                 document.getElementById('lfCoverData').value = p.bannerImg || "";
                 legalUploadedFiles = p.legalFiles || [];
                 renderUploadedFilesList();
@@ -2353,6 +2388,7 @@ function buildSocialPostMessage(p) {
             }
             list.forEach(p => {
                 const badge = p.price ? ` <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.price}</span>` : (p.fileType ? ` <span style="background:#ccfbf1; color:#0f766e; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:700;">${p.fileType}</span>` : "");
+                const viewUrl = getSmartShareUrl(p).replace(SITE_DOMAIN + '/', '');
                 tbody.innerHTML += `
                     <tr>
                         <td><input type="checkbox" class="manage-row-chk" value="${p.id}" onchange="updateSelectedCounter('manage')"></td>
@@ -2364,7 +2400,7 @@ function buildSocialPostMessage(p) {
                             <button class="btn-sm btn-both-sm" onclick="shareExistingPostById(${p.id}, 'BOTH')">Both</button>
                         </td>
                         <td style="white-space:nowrap;">
-                            <a href="post.html?id=${p.id}" target="_blank" class="btn-sm btn-view">View &#8599;</a>
+                            <a href="${viewUrl}" target="_blank" class="btn-sm btn-view">View &#8599;</a>
                             <button class="btn-sm btn-edit" onclick="editPost(${p.id})">Edit</button>
                             <button class="btn-sm btn-del" onclick="deletePost(${p.id})">Delete</button>
                         </td>
