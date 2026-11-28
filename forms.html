@@ -83,6 +83,8 @@
         .footer-links { margin-bottom: 8px; }
         .footer-links a { color: #38bdf8; text-decoration: none; margin: 0 8px; font-weight: 600; }
         .footer-links a:hover { text-decoration: underline; }
+        .footer-social { margin: 12px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .footer-social a { padding: 6px 14px; border-radius: 5px; color: #fff; font-size: 0.82rem; font-weight: 700; text-decoration: none; }
 
         @media (max-width: 700px) {
             .filter-bar-wrap { grid-template-columns: 1fr; }
@@ -96,10 +98,10 @@
         <a href="index.html" class="brand">Shiv<span>Mitra</span>.in</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="index.html?cat=Jobs">Sarkari Jobs</a>
-            <a href="index.html?cat=Call Letter">Call Letters</a>
+            <a href="index.html#sarkari-jobs">Sarkari Jobs</a>
+            <a href="index.html#call-letters">Call Letters</a>
             <a href="forms.html" class="active">Forms Directory</a>
-            <a href="index.html?cat=Online Service Details">Services & Legal Formats</a>
+            <a href="index.html#online-services">Online Services</a>
         </div>
     </nav>
 
@@ -155,10 +157,29 @@
             <a href="info.html?page=disclaimer">Disclaimer</a> |
             <a href="info.html?page=terms">Terms & Conditions</a>
         </div>
+        <div class="footer-social">
+            <a id="footerWaGroupLink" href="#" target="_blank" rel="noopener" style="background:#16a34a;">Join WhatsApp Group</a>
+            <a id="footerTgLink" href="#" target="_blank" rel="noopener" style="background:#0284c7;">Join Telegram Channel</a>
+            <a id="footerMailLink" href="mailto:support@shivmitra.in" style="background:#334155;">Email: support@shivmitra.in</a>
+        </div>
         <div>&copy; 2026 Shiv Online Center (ShivMitra.in) — Official Forms & Citizen Services Portal</div>
     </footer>
 
     <script>
+        // =========================================================================
+        // APNE ASLI LINKS AUR EMAIL ID YAHAN PASTE KAREIN (SIRF IN 3 LINES MEIN)
+        // =========================================================================
+        const WHATSAPP_GROUP_LINK   = "https://chat.whatsapp.com/LKj02hAszYg4sQsgo9WiQX";
+        const TELEGRAM_CHANNEL_LINK = "https://t.me/+4Wt4gq7K_UszMzA1";
+        const OFFICIAL_EMAIL_ID     = "shivmitra03@gmail.com";
+        // =========================================================================
+
+        document.getElementById("footerWaGroupLink").href = WHATSAPP_GROUP_LINK;
+        document.getElementById("footerTgLink").href = TELEGRAM_CHANNEL_LINK;
+        const footerMail = document.getElementById("footerMailLink");
+        footerMail.href = `mailto:${OFFICIAL_EMAIL_ID}`;
+        footerMail.textContent = `Email: ${OFFICIAL_EMAIL_ID}`;
+
         let allForms = [];
         let highlightedFormId = "";
 

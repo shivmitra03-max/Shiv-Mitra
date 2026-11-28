@@ -60,6 +60,12 @@
     .info-box p { margin-bottom: 6px; }
     .info-box p:last-child { margin-bottom: 0; }
 
+    .social-action-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .social-pill {
+      display: inline-block; padding: 8px 16px; border-radius: 6px;
+      color: #fff; text-decoration: none; font-weight: 700; font-size: 0.88rem;
+    }
+
     .alert-box {
       background: #fefce8; border: 1px solid #fde047; border-left: 5px solid #eab308;
       padding: 15px 18px; border-radius: 8px; margin: 16px 0; font-size: 0.94rem;
@@ -68,6 +74,8 @@
     footer { background: #0f2942; color: #cbd5e1; text-align: center; padding: 24px 14px; font-size: 0.86rem; }
     footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; font-weight: 600; }
     footer a:hover { text-decoration: underline; }
+    .footer-social { margin: 12px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .footer-social a { padding: 6px 14px; border-radius: 5px; color: #fff; font-size: 0.84rem; margin: 0; text-decoration: none; }
 
     @media (max-width: 640px) {
       .card { padding: 22px 18px; }
@@ -104,10 +112,29 @@
     <a href="info.html?page=disclaimer">Disclaimer</a> |
     <a href="info.html?page=terms">Terms &amp; Conditions</a>
   </div>
+  <div class="footer-social">
+    <a id="footerWaGroupLink" href="#" target="_blank" rel="noopener" style="background:#16a34a;">Join WhatsApp Group</a>
+    <a id="footerTgLink" href="#" target="_blank" rel="noopener" style="background:#0284c7;">Join Telegram Channel</a>
+    <a id="footerMailLink" href="mailto:support@shivmitra.in" style="background:#334155;">Email: support@shivmitra.in</a>
+  </div>
   <p style="margin-top:10px; color:#cbd5e1;">&copy; 2026 Shiv Online Center (ShivMitra.in). All Rights Reserved.</p>
 </footer>
 
 <script>
+  // =========================================================================
+  // APNE ASLI LINKS AUR EMAIL ID YAHAN PASTE KAREIN (SIRF IN 3 LINES MEIN)
+  // =========================================================================
+  const WHATSAPP_GROUP_LINK   = "https://chat.whatsapp.com/LKj02hAszYg4sQsgo9WiQX";
+  const TELEGRAM_CHANNEL_LINK = "https://t.me/+4Wt4gq7K_UszMzA1";
+  const OFFICIAL_EMAIL_ID     = "shivmitra03@gmail.com";
+  // =========================================================================
+
+  document.getElementById("footerWaGroupLink").href = WHATSAPP_GROUP_LINK;
+  document.getElementById("footerTgLink").href = TELEGRAM_CHANNEL_LINK;
+  const footerMail = document.getElementById("footerMailLink");
+  footerMail.href = `mailto:${OFFICIAL_EMAIL_ID}`;
+  footerMail.textContent = `Email: ${OFFICIAL_EMAIL_ID}`;
+
   const PAGES = {
     about: {
       title: "About Us — Shiv Online Center (ShivMitra.in)",
@@ -134,8 +161,12 @@
         <div class="info-box">
           <p><strong>Portal Name:</strong> Shiv Online Center (ShivMitra.in)</p>
           <p><strong>Official Website:</strong> https://shivmitra.in</p>
-          <p><strong>Location:</strong> Surat, Gujarat, India</p>
-          <p><strong>Official Support Email:</strong> support@shivmitra.in</p>
+          <p><strong>Location:</strong> Patan, Gujarat, India</p>
+          <p><strong>Official Support Email:</strong> <a href="mailto:${OFFICIAL_EMAIL_ID}" style="color:#1d4ed8; font-weight:700;">${OFFICIAL_EMAIL_ID}</a></p>
+          <div class="social-action-row">
+            <a href="${WHATSAPP_GROUP_LINK}" target="_blank" rel="noopener" class="social-pill" style="background:#16a34a;">Join Official WhatsApp Group</a>
+            <a href="${TELEGRAM_CHANNEL_LINK}" target="_blank" rel="noopener" class="social-pill" style="background:#0284c7;">Join Official Telegram Channel</a>
+          </div>
         </div>
       `
     },
@@ -151,16 +182,21 @@
         <div class="info-box">
           <p><strong>Organization / Portal Name:</strong> Shiv Online Center (ShivMitra.in)</p>
           <p><strong>Website URL:</strong> https://shivmitra.in</p>
-          <p><strong>Email Support:</strong> support@shivmitra.in</p>
-          <p><strong>Office Location:</strong> Surat, Gujarat, India</p>
+          <p><strong>Email Support:</strong> <a href="mailto:${OFFICIAL_EMAIL_ID}" style="color:#1d4ed8; font-weight:700;">${OFFICIAL_EMAIL_ID}</a></p>
+          <p><strong>Office Location:</strong> Patan, Gujarat, India</p>
           <p><strong>Support Hours:</strong> Monday to Saturday, 10:00 AM to 7:00 PM IST (Closed on Sundays &amp; Public Holidays)</p>
+          <div class="social-action-row">
+            <a href="mailto:${OFFICIAL_EMAIL_ID}" class="social-pill" style="background:#1e293b;">Send Email</a>
+            <a href="${WHATSAPP_GROUP_LINK}" target="_blank" rel="noopener" class="social-pill" style="background:#16a34a;">Join WhatsApp Group</a>
+            <a href="${TELEGRAM_CHANNEL_LINK}" target="_blank" rel="noopener" class="social-pill" style="background:#0284c7;">Join Telegram Channel</a>
+          </div>
         </div>
 
         <h2>2. How We Can Assist You</h2>
         <ul>
           <li><strong>Content Corrections &amp; Feedback:</strong> If you notice any outdated date or link in any job or scheme post, please email us the article title and URL so our editorial team can update it promptly.</li>
           <li><strong>Form &amp; Guide Requests:</strong> If you are looking for a specific government or bank application form or citizen service tutorial, write to us and we will try to publish it in our directory.</li>
-          <li><strong>Copyright &amp; Policy Inquiries:</strong> For any legal, privacy, or DMCA-related communication, write directly to <strong>support@shivmitra.in</strong>.</li>
+          <li><strong>Copyright &amp; Policy Inquiries:</strong> For any legal, privacy, or DMCA-related communication, write directly to <strong>${OFFICIAL_EMAIL_ID}</strong>.</li>
         </ul>
 
         <div class="alert-box">
@@ -228,8 +264,8 @@
         <p>If you have any questions about this Privacy Policy or wish to exercise your privacy rights, please contact us at:</p>
         <div class="info-box">
           <p><strong>Portal Name:</strong> Shiv Online Center (ShivMitra.in)</p>
-          <p><strong>Support Email:</strong> support@shivmitra.in</p>
-          <p><strong>Address:</strong> Surat, Gujarat, India</p>
+          <p><strong>Support Email:</strong> <a href="mailto:${OFFICIAL_EMAIL_ID}" style="color:#1d4ed8; font-weight:700;">${OFFICIAL_EMAIL_ID}</a></p>
+          <p><strong>Address:</strong> Patan, Gujarat, India</p>
         </div>
       `
     },
@@ -280,7 +316,7 @@
         <p><strong>Shiv Online Center (ShivMitra.in)</strong> shall not be held liable for any direct, indirect, or consequential loss arising from missed application deadlines, typographical errors, server downtime on official government portals, or reliance on information published on this website.</p>
 
         <h2>4. Modifications &amp; Governing Law</h2>
-        <p>We reserve the right to update, modify, or discontinue any part of the website or these Terms &amp; Conditions at any time without prior notice. These terms shall be governed by and construed in accordance with the laws of India, subject to the jurisdiction of courts in <strong>Surat, Gujarat</strong>.</p>
+        <p>We reserve the right to update, modify, or discontinue any part of the website or these Terms &amp; Conditions at any time without prior notice. These terms shall be governed by and construed in accordance with the laws of India, subject to the jurisdiction of courts in <strong>Patan, Gujarat</strong>.</p>
       `
     }
   };

@@ -62,6 +62,7 @@
     .btn-green { background: var(--green); }
     .btn-blue { background: var(--blue); }
     .btn-orange { background: var(--orange); }
+    .btn-tg { background: #0284c7; }
 
     /* Shiv Online Centre Lead Generation Box */
     .centre-help-box {
@@ -88,8 +89,10 @@
     .side-list li:last-child { border-bottom: none; }
     .side-list a { color: #0f172a; text-decoration: none; font-weight: 600; }
 
-    footer { background: var(--navy); color: #cbd5e1; text-align: center; padding: 20px 14px; margin-top: 32px; font-size: 0.86rem; }
+    footer { background: var(--navy); color: #cbd5e1; text-align: center; padding: 22px 14px; margin-top: 32px; font-size: 0.86rem; }
     footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; font-weight: 600; }
+    .footer-social { margin: 12px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .footer-social a { padding: 6px 14px; border-radius: 5px; color: #fff; font-size: 0.84rem; margin: 0; }
   </style>
 </head>
 <body>
@@ -134,12 +137,31 @@
     <a href="info.html?page=disclaimer">Disclaimer</a> |
     <a href="info.html?page=terms">Terms & Conditions</a>
   </div>
+  <div class="footer-social">
+    <a id="footerWaLink" href="#" target="_blank" rel="noopener" style="background:#16a34a;">Join WhatsApp Channel</a>
+    <a id="footerTgLink" href="#" target="_blank" rel="noopener" style="background:#0284c7;">Join Telegram Channel</a>
+    <a id="footerMailLink" href="mailto:contact@shivmitra.in" style="background:#334155;">Email: contact@shivmitra.in</a>
+  </div>
   <p>&copy; 2026 Shiv Online Centre (ShivMitra.in) — All Rights Reserved.</p>
 </footer>
 
 <script>
-  // Apna Shiv Online Centre WhatsApp Number yahan set karein (91 + 10 digit number)
-  const CENTRE_WHATSAPP_NUMBER = "919999999999";
+  // =========================================================================
+  // APNE ASLI LINKS AUR EMAIL ID YAHAN PASTE KAREIN (SIRF IN 4 LINES MEIN)
+  // =========================================================================
+  const CENTRE_WHATSAPP_NUMBER = "919999999999"; // 91 + 10 digit WhatsApp number
+  const WHATSAPP_CHANNEL_LINK  = "https://chat.whatsapp.com/LKj02hAszYg4sQsgo9WiQX";
+  const TELEGRAM_CHANNEL_LINK  = "https://t.me/+4Wt4gq7K_UszMzA1";
+  const OFFICIAL_EMAIL_ID      = "shivmitra03@gmail.com";
+  // =========================================================================
+
+  // Footer ke links ko automatically upar wale config se set karein
+  document.getElementById("footerWaLink").href = WHATSAPP_CHANNEL_LINK;
+  document.getElementById("footerTgLink").href = TELEGRAM_CHANNEL_LINK;
+  const mailEl = document.getElementById("footerMailLink");
+  mailEl.href = `mailto:${OFFICIAL_EMAIL_ID}`;
+  mailEl.textContent = `Email: ${OFFICIAL_EMAIL_ID}`;
+
   let currentLoadedPost = null;
 
   async function sharePostRichWhatsApp() {
@@ -163,7 +185,6 @@
     lines.push(``, `👉 *Full Details & Links:*`, pageUrl);
     const fullText = lines.join('\n');
 
-    // Mobile par Poster Image + Poori Jaankari ek saath share karne ke liye
     if (p.bannerImg && navigator.canShare) {
       try {
         const res = await fetch(p.bannerImg);
@@ -256,6 +277,14 @@
             <tr>
               <td>Official Website Homepage</td>
               <td><a href="${post.officialSite}" target="_blank" rel="noopener" class="action-btn btn-orange">Visit Website &rarr;</a></td>
+            </tr>
+            <tr>
+              <td>Join Official WhatsApp Channel</td>
+              <td><a href="${WHATSAPP_CHANNEL_LINK}" target="_blank" rel="noopener" class="action-btn btn-green">Join WhatsApp &rarr;</a></td>
+            </tr>
+            <tr>
+              <td>Join Official Telegram Channel</td>
+              <td><a href="${TELEGRAM_CHANNEL_LINK}" target="_blank" rel="noopener" class="action-btn btn-tg">Join Telegram &rarr;</a></td>
             </tr>
           </table>
         </div>
