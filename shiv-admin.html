@@ -695,6 +695,14 @@
                                     <div id="lfDiscountBox" class="discount-pill">30% OFF</div>
                                 </div>
                             </div>
+                            <div style="background:#f0fdf4; border:1px solid #86efac; padding:12px; border-radius:8px; margin-bottom:14px;">
+  <strong style="font-size:0.84rem; color:#166534;">&#128179; Store UPI ID (For Customer QR Payment):</strong>
+  <div style="display:flex; gap:8px; margin-top:6px;">
+    <input type="text" id="adminUpiIdInput" placeholder="e.g., shivonline@okaxis or 9876543210@ybl" style="flex:1; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-weight:700;">
+    <input type="hidden" id="adminPayeeNameInput" value="Shiv Online Center">
+    <button type="button" onclick="saveAdsAndUpiSettings()" style="background:#16a34a; color:white; border:none; padding:8px 14px; border-radius:6px; font-weight:800; cursor:pointer;">Save UPI</button>
+  </div>
+</div>
                             <input type="text" id="lfOfferTag" oninput="updateLegalPreview()" value="Limited Time Offer — Instant Download">
                         </div>
 
@@ -711,6 +719,7 @@
                         <div class="studio-box">
                             <h4>4. Customer Convincing Details & Key Highlights</h4>
                             <textarea id="lfPitch" rows="3" oninput="updateLegalPreview()" placeholder="Write why the customer must buy this format..."></textarea>
+                            <textarea id="lfSamplePreview" rows="3" placeholder="Short Sample Preview (First 5-6 lines shown to customer before payment)..."></textarea>
                             <textarea id="lfHighlights" rows="4" oninput="updateLegalPreview()">✔ 100% Advocate Verified & Notary Ready Format
 ✔ Instant Editable MS Word (.docx) + Print-Ready PDF Included
 ✔ Easy Fill-in-the-Blank Fields (Save ₹500+ Advocate Drafting Fee)
@@ -1295,7 +1304,13 @@
             return { qual, lastDt, examDt, bullets };
         }
 function buildSocialPostMessage(p) {
-            const postUrl = `${SITE_DOMAIN}/post.html?id=${p.id}`;
+            const isLegalItem = (p.mainCat || '').toLowerCase().includes('legal') || Boolean(p.price);
+            const isFormItem = (p.mainCat || '').toLowerCase().includes('form');
+            const postUrl = isLegalItem
+                ? `${SITE_DOMAIN}/legal-formats.html?item=${p.id}`
+                : isFormItem
+                    ? `${SITE_DOMAIN}/forms.html?form=${p.id}`
+                    : `${SITE_DOMAIN}/post.html?id=${p.id}`;
             const catLabel = (p.subCat || p.mainCat || "Update").toUpperCase();
             const extracted = extractExtraDetailsFromHtml(p.content);
 
@@ -2117,7 +2132,7 @@ function buildSocialPostMessage(p) {
 
             const formattedHtml = `<div class="note-box"><strong>Special Discount Offer (${discountPct}% OFF):</strong> Original Price <del>₹${origPrice}</del> — Today's Offer Price <strong>₹${offerPrice}</strong> (${offerTag})</div><p>${pitch}</p><h3>Why Choose This Legal Format? (${lang})</h3><table><tr><th>Key Benefits</th></tr>${highlightItems}</table>${filesSummaryHtml}`;
 
-            const postPayload = {
+           const postPayload = {
                 id: editId ? Number(editId) : Date.now(),
                 mainCat: "Legal Format", subCat, title, date: today,
                 qualification: `Editable Word + PDF (${lang})`,
@@ -2125,6 +2140,7 @@ function buildSocialPostMessage(p) {
                 discountPercent: discountPct, offerTag, language: lang,
                 actionLink: extLink || "#buy-legal-format", pdfLink: extLink || "#buy-legal-format", officialSite: "index.html",
                 legalFiles: legalUploadedFiles,
+                samplePreview: (document.getElementById('lfSamplePreview')?.value || "").trim(),
                 summary: `${discountPct > 0 ? `[${discountPct}% OFF — ₹${offerPrice} Only] ` : `[₹${offerPrice}] `}${pitch}`,
                 content: formattedHtml, bannerImg: coverImg, status: "live"
             };

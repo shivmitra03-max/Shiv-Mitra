@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShivMitra.in | Government Jobs, Call Letters, Schemes, Legal Formats & Forms</title>
-  <meta name="description" content="Shiv Online Center (ShivMitra.in) - Latest Gujarat & Central Government Jobs, Bank Recruitment, Call Letters, Government Schemes, Paid Legal Formats & Downloadable Forms." />
+  <title>ShivMitra.in | Government Jobs, Call Letters, Schemes, Online Services & Legal Formats</title>
+  <meta name="description" content="Shiv Online Center (ShivMitra.in) - Latest Gujarat & Central Government Jobs, Call Letters, Government Schemes, Online Citizen Service Guides, Legal Formats & Forms." />
   <style>
     :root {
       --navy: #0f2942; --blue: #1d4ed8; --red: #b91c1c; --green: #15803d;
-      --purple: #6d28d9; --orange: #c2410c; --teal: #0f766e;
+      --purple: #6d28d9; --orange: #c2410c; --teal: #0f766e; --amber: #b45309;
       --bg: #f1f5f9; --card: #ffffff; --border: #cbd5e1; --text: #1e293b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -23,13 +23,13 @@
     .search-box input { padding: 8px 12px; border-radius: 6px; border: none; width: 240px; font-size: 0.9rem; }
     .search-box button { background: #0284c7; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; }
 
-    /* Navigation Bar with Sub-Category Dropdowns */
+    /* Navigation Bar */
     .main-nav { background: #1e3a8a; box-shadow: 0 2px 6px rgba(0,0,0,0.14); position: sticky; top: 0; z-index: 200; }
     .nav-list { max-width: 1180px; margin: auto; display: flex; flex-wrap: wrap; list-style: none; }
     .nav-item { position: relative; }
     .nav-link {
       display: flex; align-items: center; gap: 5px; color: #fff; text-decoration: none;
-      padding: 11px 14px; font-size: 0.88rem; font-weight: 700;
+      padding: 11px 13px; font-size: 0.86rem; font-weight: 700;
       border-right: 1px solid rgba(255,255,255,0.12); cursor: pointer;
     }
     .nav-link:hover, .nav-link.active { background: #0f2942; color: #38bdf8; }
@@ -86,7 +86,7 @@
     .cat-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
     .cat-header { padding: 11px 15px; color: #fff; font-weight: 800; font-size: 1rem; display: flex; justify-content: space-between; align-items: center; }
     .bg-navy { background: var(--navy); } .bg-green { background: var(--green); } .bg-blue { background: var(--blue); }
-    .bg-orange { background: var(--orange); } .bg-purple { background: var(--purple); } .bg-teal { background: var(--teal); }
+    .bg-orange { background: var(--orange); } .bg-purple { background: var(--purple); } .bg-teal { background: var(--teal); } .bg-amber { background: var(--amber); }
 
     .cat-list { list-style: none; padding: 8px 14px; flex: 1; }
     .cat-list li { padding: 9px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.91rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
@@ -94,9 +94,20 @@
     .cat-list a { color: #0f172a; text-decoration: none; font-weight: 600; line-height: 1.4; }
     .cat-list a:hover { color: var(--blue); text-decoration: underline; }
     .tag-new { background: #fee2e2; color: #b91c1c; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-    .tag-price { background: #dcfce7; color: #15803d; font-size: 0.74rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
     .cat-footer { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 8px 14px; text-align: right; }
     .cat-footer button { background: none; border: none; color: var(--blue); font-size: 0.84rem; font-weight: 700; cursor: pointer; }
+
+    /* Dedicated Legal Formats Banner Strip */
+    .legal-store-banner {
+      margin-top: 22px; background: linear-gradient(120deg, #78350f 0%, #b45309 100%);
+      color: #fff; border-radius: 10px; padding: 18px 22px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+      box-shadow: 0 4px 14px rgba(180, 83, 9, 0.22);
+    }
+    .btn-legal-store {
+      background: #fef08a; color: #0f172a; text-decoration: none; padding: 10px 18px;
+      border-radius: 7px; font-weight: 800; font-size: 0.88rem; display: inline-block;
+    }
 
     #filteredSection { display: none; background: #fff; border: 2px solid var(--blue); border-radius: 8px; padding: 16px; margin-bottom: 20px; }
     .filter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
@@ -119,10 +130,10 @@
   <div class="header-inner">
     <div class="logo-area">
       <h1>Shiv<span>Mitra</span>.in</h1>
-      <p>Shiv Online Center — Government Jobs, Call Letters, Schemes, Legal Formats & Forms</p>
+      <p>Shiv Online Center — Government Jobs, Call Letters, Schemes, Online Services & Legal Formats</p>
     </div>
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search job, call letter, form..." onkeyup="filterPosts()" />
+      <input type="text" id="searchInput" placeholder="Search job, call letter, scheme..." onkeyup="filterPosts()" />
       <button onclick="filterPosts()">Search</button>
     </div>
   </div>
@@ -132,7 +143,7 @@
   <ul class="nav-list">
     <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
 
-    <!-- 1. Government Jobs Dropdown -->
+    <!-- 1. FIRST PRIORITY: Government Jobs -->
     <li class="nav-item">
       <a class="nav-link" onclick="toggleNavDropdown(event, this)">Government Jobs <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
@@ -143,7 +154,7 @@
       </ul>
     </li>
 
-    <!-- 2. Call Letters Dropdown -->
+    <!-- 2. FIRST PRIORITY: Call Letters -->
     <li class="nav-item">
       <a class="nav-link" onclick="toggleNavDropdown(event, this)">Call Letters <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
@@ -153,7 +164,7 @@
       </ul>
     </li>
 
-    <!-- 3. Bank & Private Jobs Dropdown -->
+    <!-- 3. Bank & Private Jobs -->
     <li class="nav-item">
       <a class="nav-link" onclick="toggleNavDropdown(event, this)">Bank & Private Jobs <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
@@ -164,7 +175,7 @@
       </ul>
     </li>
 
-    <!-- 4. Government Schemes Dropdown -->
+    <!-- 4. SECOND PRIORITY: Government Schemes -->
     <li class="nav-item">
       <a class="nav-link" onclick="toggleNavDropdown(event, this)">Government Schemes <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
@@ -174,30 +185,40 @@
       </ul>
     </li>
 
-    <!-- 5. Paid Legal Formats & Services Dropdown -->
+    <!-- 5. THIRD PRIORITY: Online Service Guides -->
     <li class="nav-item">
-      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Paid Legal Formats & Services <span class="caret">&#9662;</span></a>
+      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Online Services <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
-        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'ALL')">All Legal Formats & Services</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'Rent Agreement')">Rent Agreement Formats</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'Affidavit')">Affidavit & NOC Drafts</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('LEGAL_SERVICES', 'Online Service')">Online Citizen Service Guides</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('ONLINE_SERVICES', 'ALL')">All Online Service Guides</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('ONLINE_SERVICES', 'PAN & Aadhaar')">PAN & Aadhaar Services</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('ONLINE_SERVICES', 'Ration Card')">Ration Card & Civil Supplies</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('ONLINE_SERVICES', 'Certificates')">Income / Caste / Domicile</a></li>
+        <li><a href="javascript:void(0)" onclick="openCategoryView('ONLINE_SERVICES', 'Digital Gujarat')">Digital Gujarat & PM Kisan</a></li>
       </ul>
     </li>
 
-    <!-- 6. Download Forms Dropdown -->
+    <!-- 6. SEPARATE PAGE: Legal Formats -->
+    <li class="nav-item">
+      <a href="legal-formats.html" class="nav-link" onclick="if(window.innerWidth <= 900){ toggleNavDropdown(event, this); }">Legal Formats <span class="caret">&#9662;</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="legal-formats.html" class="view-all-sub">Open Legal Format Store &rarr;</a></li>
+        <li><a href="legal-formats.html?cat=Rent%20Agreement">Rent Agreement Formats</a></li>
+        <li><a href="legal-formats.html?cat=Affidavit">Affidavit (All Types)</a></li>
+        <li><a href="legal-formats.html?cat=NOC%20%26%20Other%20Drafts">NOC &amp; Other Legal Drafts</a></li>
+        <li><a href="legal-formats.html?cat=Merged%20Combo%20Pack">Merged Legal Combo Packs</a></li>
+      </ul>
+    </li>
+
+    <!-- 7. SEPARATE PAGE: Download Forms -->
     <li class="nav-item">
       <a href="forms.html" class="nav-link" onclick="if(window.innerWidth <= 900){ toggleNavDropdown(event, this); }">Download Forms <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
         <li><a href="forms.html" class="view-all-sub">Open Full Forms Directory &rarr;</a></li>
         <li><a href="forms.html?cat=Aadhaar%20Card%20Forms">Aadhaar Card Forms</a></li>
         <li><a href="forms.html?cat=PAN%20Card%20Forms">PAN Card Forms</a></li>
-        <li><a href="forms.html?cat=Ration%20Card%20%26%20Civil%20Supplies">Ration Card &amp; Civil Supplies</a></li>
         <li><a href="forms.html?cat=Certificates%20(Caste%20%2F%20Income%20%2F%20Domicile)">Caste / Income / Domicile Forms</a></li>
         <li><a href="forms.html?cat=Bank%20Account%2C%20KYC%20%26%20Loan%20Forms">Bank KYC &amp; Account Forms</a></li>
         <li><a href="forms.html?cat=Driving%20Licence%20%26%20RTO%20Forms">RTO / Driving Licence Forms</a></li>
-        <li><a href="forms.html?cat=Passport%20%26%20Voter%20ID%20Forms">Passport &amp; Voter ID Forms</a></li>
-        <li><a href="forms.html?cat=Scholarship%20%26%20Pension%20Forms">Scholarship &amp; Pension Forms</a></li>
       </ul>
     </li>
   </ul>
@@ -238,46 +259,63 @@
     <ul class="cat-list" id="filteredResultsList"></ul>
   </div>
 
-  <!-- Top 6 Coloured Highlight Boxes -->
+  <!-- Top 6 Coloured Highlight Boxes (1st Priority: Jobs & Call Letters, 2nd: Schemes) -->
   <div class="highlight-grid" id="highlightGrid"></div>
 
-  <!-- 6-Box Multi-Category Grid -->
+  <!-- PRIORITY ORDERED 6-BOX PORTAL GRID -->
   <div class="portal-grid">
+    <!-- 1st Priority: Government Jobs -->
     <section class="cat-box" id="sarkari-jobs">
       <div class="cat-header bg-navy"><span>Government Jobs (OJAS / GPSC / SSC)</span><span>&#128188;</span></div>
       <ul class="cat-list" id="listSarkari"><li>Loading...</li></ul>
       <div class="cat-footer"><button onclick="openCategoryView('SARKARI', 'ALL')">View All Government Jobs &rarr;</button></div>
     </section>
 
+    <!-- 1st Priority: Call Letters -->
     <section class="cat-box" id="call-letters">
       <div class="cat-header bg-green"><span>Call Letter / Admit Card</span><span>&#127915;</span></div>
       <ul class="cat-list" id="listCallLetter"><li>Loading...</li></ul>
       <div class="cat-footer"><button onclick="openCategoryView('CALL_LETTER', 'ALL')">View All Call Letters &rarr;</button></div>
     </section>
 
+    <!-- 1st Priority: Bank, Private & Apprentice Jobs -->
     <section class="cat-box" id="bank-private">
       <div class="cat-header bg-blue"><span>Bank, Private & Apprentice Jobs</span><span>&#127974;</span></div>
       <ul class="cat-list" id="listBankPrivate"><li>Loading...</li></ul>
       <div class="cat-footer"><button onclick="openCategoryView('BANK_PRIVATE', 'ALL')">View All Bank & Private &rarr;</button></div>
     </section>
 
+    <!-- 2nd Priority: Government Schemes -->
     <section class="cat-box" id="sarkari-yojana">
       <div class="cat-header bg-orange"><span>Government Schemes</span><span>&#127963;</span></div>
       <ul class="cat-list" id="listYojana"><li>Loading...</li></ul>
       <div class="cat-footer"><button onclick="openCategoryView('YOJANA', 'ALL')">View All Schemes &rarr;</button></div>
     </section>
 
-    <section class="cat-box" id="legal-services">
-      <div class="cat-header bg-purple"><span>Legal Paid Formats & Online Services</span><span>&#9878;</span></div>
-      <ul class="cat-list" id="listLegalServices"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('LEGAL_SERVICES', 'ALL')">View All Services &rarr;</button></div>
+    <!-- 3rd Priority: Online Service Guides -->
+    <section class="cat-box" id="online-services">
+      <div class="cat-header bg-purple"><span>Online Citizen Service Guides</span><span>&#128187;</span></div>
+      <ul class="cat-list" id="listOnlineServices"><li>Loading...</li></ul>
+      <div class="cat-footer"><button onclick="openCategoryView('ONLINE_SERVICES', 'ALL')">View All Service Guides &rarr;</button></div>
     </section>
 
+    <!-- Forms Directory Card -->
     <section class="cat-box" id="download-forms">
       <div class="cat-header bg-teal"><span>Download Bank & Govt Forms</span><span>&#128196;</span></div>
       <ul class="cat-list" id="listForms"><li>Loading...</li></ul>
       <div class="cat-footer"><button onclick="window.location.href='forms.html'">View All Forms &rarr;</button></div>
     </section>
+  </div>
+
+  <!-- Dedicated Legal Formats Store Strip (Links to legal-formats.html) -->
+  <div class="legal-store-banner">
+    <div>
+      <strong style="font-size:1.12rem;">&#9878; Advocate-Verified Legal Formats Store (Rent Agreement, Affidavit, NOC)</strong>
+      <div style="font-size:0.86rem; color:#fef3c7; margin-top:3px;">
+        Download ready-to-print Editable MS Word (.docx) &amp; PDF legal drafts with special discounts.
+      </div>
+    </div>
+    <a href="legal-formats.html" class="btn-legal-store">Browse Legal Formats Store &rarr;</a>
   </div>
 </div>
 
@@ -287,6 +325,8 @@
   <div class="footer-inner">
     <div class="footer-links">
       <a href="index.html">Home</a> |
+      <a href="forms.html">Forms Directory</a> |
+      <a href="legal-formats.html">Legal Formats</a> |
       <a href="about.html">About Us</a> |
       <a href="contact.html">Contact Us</a> |
       <a href="privacy.html">Privacy Policy</a> |
@@ -327,18 +367,12 @@
       { key: "State Yojana", label: "Gujarat State Schemes" },
       { key: "Central Yojana", label: "Central Govt Schemes" }
     ],
-    LEGAL_SERVICES: [
-      { key: "ALL", label: "All Formats & Services" },
-      { key: "Rent Agreement", label: "Rent Agreement" },
-      { key: "Affidavit", label: "Affidavit & NOC" },
-      { key: "Online Service", label: "Online Service Guides" }
-    ],
-    FORMS: [
-      { key: "ALL", label: "All Forms" },
-      { key: "Aadhaar", label: "Aadhaar & PAN" },
-      { key: "Certificates", label: "Caste / Income / Domicile" },
-      { key: "Bank", label: "Bank KYC & Loan" },
-      { key: "RTO", label: "RTO / Driving Licence" }
+    ONLINE_SERVICES: [
+      { key: "ALL", label: "All Service Guides" },
+      { key: "PAN & Aadhaar", label: "PAN & Aadhaar" },
+      { key: "Ration Card", label: "Ration Card" },
+      { key: "Certificates", label: "Income / Caste / Domicile" },
+      { key: "Digital Gujarat", label: "Digital Gujarat & PM Kisan" }
     ]
   };
 
@@ -356,14 +390,14 @@
   });
 
   function getPostHref(post) {
-    return (post.mainCat === 'Forms') ? `forms.html?form=${post.id}` : `post.html?id=${post.id}`;
+    const mc = (post.mainCat || "").toLowerCase();
+    if (mc === "forms" || mc.includes("form")) return `forms.html?form=${post.id}`;
+    if (mc.includes("legal") || Boolean(post.price)) return `legal-formats.html?item=${post.id}`;
+    return `post.html?id=${post.id}`;
   }
 
   function renderItemRow(post) {
-    const badge = post.price
-      ? `<span class="tag-price">${post.price}</span>`
-      : `<span class="tag-new">NEW</span>`;
-    return `<li><a href="${getPostHref(post)}">&#9656; ${post.title}</a>${badge}</li>`;
+    return `<li><a href="${getPostHref(post)}">&#9656; ${post.title}</a><span class="tag-new">NEW</span></li>`;
   }
 
   function fillBox(elementId, items, emptyMsg) {
@@ -398,29 +432,36 @@
       const rawPosts = await resp.json();
       ALL_LIVE_POSTS = rawPosts.filter(p => p.status === "live" || !p.status);
 
-      const marquee = document.getElementById("breakingMarquee");
-      marquee.innerHTML = ALL_LIVE_POSTS.length
-        ? ALL_LIVE_POSTS.slice(0, 6).map(p => `<a href="${getPostHref(p)}">&#9733; ${p.title}</a>`).join("")
-        : "Welcome to ShivMitra.in — Latest Recruitment & Call Letter Updates";
-
-      document.getElementById("highlightGrid").innerHTML = ALL_LIVE_POSTS.slice(0, 6).map((p, idx) =>
-        `<a href="${getPostHref(p)}" class="hl-box hl-${idx % 6}">${p.title}</a>`
-      ).join("");
-
       CAT_BUCKETS = {
         SARKARI: ALL_LIVE_POSTS.filter(p => p.subCat === "Sarkari Jobs" || (p.mainCat === "Jobs" && !["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat))),
         CALL_LETTER: ALL_LIVE_POSTS.filter(p => p.mainCat === "Call Letter" || (p.subCat || "").toLowerCase().includes("call letter") || (p.subCat || "").toLowerCase().includes("admit")),
         BANK_PRIVATE: ALL_LIVE_POSTS.filter(p => ["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat)),
         YOJANA: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("yojana") || (p.subCat || "").toLowerCase().includes("yojana")),
-        LEGAL_SERVICES: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("legal") || (p.mainCat || "").toLowerCase().includes("service") || Boolean(p.price)),
+        ONLINE_SERVICES: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("service") && !(p.mainCat || "").toLowerCase().includes("legal") && !p.price),
         FORMS: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("form"))
       };
+
+      // Strict Priority Order for Top Marquee & 6 Highlight Boxes:
+      // 1st: Jobs & Call Letters | 2nd: Government Schemes | 3rd: Online Service Guides
+      const firstPriority = ALL_LIVE_POSTS.filter(p => p.mainCat === "Jobs" || p.mainCat === "Call Letter");
+      const secondPriority = CAT_BUCKETS.YOJANA;
+      const thirdPriority = CAT_BUCKETS.ONLINE_SERVICES;
+      const topFeatured = [...firstPriority, ...secondPriority, ...thirdPriority];
+
+      const marquee = document.getElementById("breakingMarquee");
+      marquee.innerHTML = topFeatured.length
+        ? topFeatured.slice(0, 6).map(p => `<a href="${getPostHref(p)}">&#9733; ${p.title}</a>`).join("")
+        : "Welcome to ShivMitra.in — Latest Government Jobs & Call Letter Updates";
+
+      document.getElementById("highlightGrid").innerHTML = topFeatured.slice(0, 6).map((p, idx) =>
+        `<a href="${getPostHref(p)}" class="hl-box hl-${idx % 6}">${p.title}</a>`
+      ).join("");
 
       fillBox("listSarkari", CAT_BUCKETS.SARKARI, "No Government Jobs published yet.");
       fillBox("listCallLetter", CAT_BUCKETS.CALL_LETTER, "No Call Letters published yet.");
       fillBox("listBankPrivate", CAT_BUCKETS.BANK_PRIVATE, "No Bank / Private Jobs published yet.");
       fillBox("listYojana", CAT_BUCKETS.YOJANA, "No Government Scheme updates yet.");
-      fillBox("listLegalServices", CAT_BUCKETS.LEGAL_SERVICES, "Legal Formats & Online Services coming soon.");
+      fillBox("listOnlineServices", CAT_BUCKETS.ONLINE_SERVICES, "Online Citizen Service Guides coming soon.");
       fillBox("listForms", CAT_BUCKETS.FORMS, "Downloadable Bank & Govt Forms coming soon.");
     } catch (err) {
       console.error("Error loading posts.json:", err);
@@ -434,8 +475,7 @@
       CALL_LETTER: "Call Letters & Admit Cards",
       BANK_PRIVATE: "Bank, Private & Apprenticeship Jobs",
       YOJANA: "Government Schemes (State & Central)",
-      LEGAL_SERVICES: "Paid Legal Formats & Online Services",
-      FORMS: "Downloadable Bank & Government Forms"
+      ONLINE_SERVICES: "Online Citizen Service Guides"
     };
 
     const baseItems = CAT_BUCKETS[bucketKey] || [];
