@@ -1,5 +1,26 @@
 [
   {
+    "id": 1795851081299,
+    "mainCat": "Online Service Details",
+    "subCat": "PAN & Aadhaar Services",
+    "title": "LINK",
+    "date": "28 Nov 2026",
+    "qualification": "All Indian / Gujarat Citizens",
+    "serviceMeta": {
+      "fee": "50",
+      "procTime": "7",
+      "mode": "ONLINE",
+      "docsRaw": "PANCARD",
+      "stepsRaw": "STEP BY STEP"
+    },
+    "actionLink": "index.html",
+    "officialSite": "index.html",
+    "pdfLink": "index.html",
+    "summary": "Step-by-step guide for LINK. Required documents, fee (50) & official process.",
+    "content": "<div class=\"note-box\"><strong>Quick Service Summary:</strong> Apply online for LINK. Govt Fee: 50 | Processing Time: 7.</div><h3>1. Service Overview</h3><table><tr><th>Parameter</th><th>Details</th></tr><tr><td>Govt Fee</td><td>50</td></tr><tr><td>Processing Time</td><td>7</td></tr><tr><td>Mode</td><td>ONLINE</td></tr></table><h3>2. Required Documents</h3><table><tr><th>Documents</th></tr><tr><td>&#10004; PANCARD</td></tr></table><h3>3. Step-by-Step Process</h3><p><strong>Step 1:</strong> STEP BY STEP</p>",
+    "status": "live"
+  },
+  {
     "id": 1795851013155,
     "mainCat": "Legal Format",
     "subCat": "Rent Agreement",
