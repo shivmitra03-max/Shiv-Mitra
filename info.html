@@ -3,36 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Information & Policies | Shiv Online Center (ShivMitra.in)</title>
+  <title>Information & Legal Policies | Shiv Online Center (ShivMitra.in)</title>
+  <meta name="description" content="Official About Us, Contact Us, Privacy Policy, Disclaimer, and Terms & Conditions of Shiv Online Center (ShivMitra.in)." />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    body { background: #f1f5f9; color: #1e293b; line-height: 1.7; }
-    header { background: #0f2942; color: #fff; padding: 15px 20px; border-bottom: 3px solid #38bdf8; }
-    .nav { max-width: 960px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav a { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.35rem; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body { background: #f1f5f9; color: #1e293b; line-height: 1.75; }
+
+    header { background: #0f2942; color: #fff; padding: 16px 20px; border-bottom: 3px solid #38bdf8; }
+    .nav { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .nav a { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.4rem; }
     .nav a span { color: #38bdf8; }
+    .back-btn {
+      background: rgba(255,255,255,0.12); padding: 7px 14px; border-radius: 6px;
+      font-size: 0.88rem !important; font-weight: 700 !important;
+    }
+    .back-btn:hover { background: #1d4ed8; }
+
     .tabs-bar {
-      max-width: 960px; margin: 18px auto 0; padding: 0 12px;
+      max-width: 1000px; margin: 20px auto 0; padding: 0 14px;
       display: flex; flex-wrap: wrap; gap: 8px;
     }
     .tab-btn {
       background: #fff; border: 1px solid #cbd5e1; color: #0f2942;
-      padding: 8px 14px; border-radius: 6px; text-decoration: none;
-      font-size: 0.88rem; font-weight: 700;
+      padding: 9px 16px; border-radius: 7px; text-decoration: none;
+      font-size: 0.9rem; font-weight: 700; transition: all 0.15s ease;
     }
-    .tab-btn.active { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+    .tab-btn:hover { border-color: #1d4ed8; color: #1d4ed8; }
+    .tab-btn.active { background: #1d4ed8; color: #fff; border-color: #1d4ed8; box-shadow: 0 3px 10px rgba(29, 78, 216, 0.22); }
+
     .card {
-      max-width: 960px; margin: 14px auto 28px; background: #fff;
-      padding: 28px; border-radius: 10px; border: 1px solid #cbd5e1;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      max-width: 1000px; margin: 16px auto 34px; background: #fff;
+      padding: 32px 34px; border-radius: 12px; border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
     }
-    h1 { color: #0f2942; margin-bottom: 14px; border-bottom: 2px solid #0f2942; padding-bottom: 8px; font-size: 1.55rem; }
-    h2 { color: #1e3a8a; font-size: 1.12rem; margin: 18px 0 8px; }
-    p, li { margin-bottom: 10px; font-size: 0.96rem; }
-    ul { padding-left: 20px; }
-    .contact-box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 16px; border-radius: 8px; margin-top: 12px; }
-    footer { background: #0f2942; color: #cbd5e1; text-align: center; padding: 20px 14px; font-size: 0.86rem; }
+    .last-updated {
+      display: inline-block; background: #eff6ff; color: #1e3a8a;
+      border: 1px solid #bfdbfe; padding: 4px 12px; border-radius: 6px;
+      font-size: 0.82rem; font-weight: 700; margin-bottom: 14px;
+    }
+    h1 {
+      color: #0f2942; margin-bottom: 14px; border-bottom: 2px solid #0f2942;
+      padding-bottom: 10px; font-size: 1.65rem; line-height: 1.3;
+    }
+    h2 {
+      color: #1e3a8a; font-size: 1.15rem; margin: 24px 0 8px;
+      border-left: 4px solid #2563eb; padding-left: 10px;
+    }
+    p { margin-bottom: 12px; font-size: 0.97rem; color: #334155; }
+    ul { padding-left: 22px; margin-bottom: 14px; }
+    li { margin-bottom: 8px; font-size: 0.96rem; color: #334155; }
+
+    .info-box {
+      background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0f2942;
+      padding: 18px 20px; border-radius: 8px; margin: 16px 0;
+    }
+    .info-box p { margin-bottom: 6px; }
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .alert-box {
+      background: #fefce8; border: 1px solid #fde047; border-left: 5px solid #eab308;
+      padding: 15px 18px; border-radius: 8px; margin: 16px 0; font-size: 0.94rem;
+    }
+
+    footer { background: #0f2942; color: #cbd5e1; text-align: center; padding: 24px 14px; font-size: 0.86rem; }
     footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .card { padding: 22px 18px; }
+      h1 { font-size: 1.35rem; }
+    }
   </style>
 </head>
 <body>
@@ -40,7 +80,7 @@
 <header>
   <div class="nav">
     <a href="index.html">Shiv<span>Mitra</span>.in</a>
-    <a href="index.html" style="font-size:0.9rem;">&larr; Back to Home</a>
+    <a href="index.html" class="back-btn">&larr; Back to Home</a>
   </div>
 </header>
 
@@ -49,7 +89,7 @@
   <a href="info.html?page=contact" class="tab-btn" data-key="contact">Contact Us</a>
   <a href="info.html?page=privacy" class="tab-btn" data-key="privacy">Privacy Policy</a>
   <a href="info.html?page=disclaimer" class="tab-btn" data-key="disclaimer">Disclaimer</a>
-  <a href="info.html?page=terms" class="tab-btn" data-key="terms">Terms & Conditions</a>
+  <a href="info.html?page=terms" class="tab-btn" data-key="terms">Terms &amp; Conditions</a>
 </div>
 
 <div class="card" id="pageContent"></div>
@@ -57,13 +97,14 @@
 <footer>
   <div>
     <a href="index.html">Home</a> |
+    <a href="forms.html">Forms Directory</a> |
     <a href="info.html?page=about">About Us</a> |
     <a href="info.html?page=contact">Contact Us</a> |
     <a href="info.html?page=privacy">Privacy Policy</a> |
     <a href="info.html?page=disclaimer">Disclaimer</a> |
-    <a href="info.html?page=terms">Terms & Conditions</a>
+    <a href="info.html?page=terms">Terms &amp; Conditions</a>
   </div>
-  <p style="margin-top:8px;">&copy; 2026 Shiv Online Center (ShivMitra.in). All Rights Reserved.</p>
+  <p style="margin-top:10px; color:#cbd5e1;">&copy; 2026 Shiv Online Center (ShivMitra.in). All Rights Reserved.</p>
 </footer>
 
 <script>
@@ -71,62 +112,175 @@
     about: {
       title: "About Us — Shiv Online Center (ShivMitra.in)",
       html: `
+        <span class="last-updated">Last Updated: November 28, 2026</span>
         <h1>About Us — Shiv Online Center (ShivMitra.in)</h1>
-        <p>Welcome to <strong>ShivMitra.in</strong>, a digital information and citizen facilitation portal managed by <strong>Shiv Online Center</strong>. Our goal is to deliver accurate, structured, and easy-to-read updates on Gujarat and Central Government Recruitment notifications, Exam Call Letters, Government Schemes, downloadable official forms, and advocate-verified legal document formats.</p>
-        <h2>What We Provide</h2>
+        <p>Welcome to <strong>ShivMitra.in</strong>, a comprehensive digital information and citizen facilitation portal operated by <strong>Shiv Online Center</strong>. We are dedicated to simplifying access to verified public recruitment updates, exam admit card alerts, government welfare schemes, downloadable official forms, and step-by-step online service guides for students, job seekers, and citizens across Gujarat and India.</p>
+
+        <h2>1. Our Mission &amp; Vision</h2>
+        <p>Every day, thousands of candidates and citizens miss important deadlines or face confusion due to scattered, lengthy official notifications. Our mission at <strong>Shiv Online Center</strong> is to summarize official recruitment advertisements, exam schedules, and government scheme guidelines into clear, structured, and easy-to-understand articles with direct links to official portals.</p>
+
+        <h2>2. What We Provide on ShivMitra.in</h2>
         <ul>
-          <li><strong>Recruitment & Call Letter Updates:</strong> Clear summaries of OJAS, GPSC, GSSSB, SSC, Railway, and Bank notifications along with direct official portal and PDF links.</li>
-          <li><strong>Government Schemes & Citizen Guides:</strong> Step-by-step guides on government welfare schemes and online certificate applications.</li>
-          <li><strong>Downloadable Forms & Legal Formats:</strong> Printable bank/government forms and ready-to-use editable legal templates provided by Shiv Online Center.</li>
+          <li><strong>Government &amp; Private Recruitment Updates:</strong> Verified summaries of OJAS Gujarat, GPSC, GSSSB, SSC, RRB Railway, IBPS/SBI Bank, Apprenticeship, and Private sector job openings with clear eligibility, age limit, fee, and date tables.</li>
+          <li><strong>Exam Call Letters &amp; Admit Cards:</strong> Timely alerts and step-by-step instructions for downloading hall tickets and exam schedules.</li>
+          <li><strong>Government Schemes (Sarkari Yojana):</strong> Detailed eligibility criteria, required document checklists, and application steps for Gujarat State and Central Government welfare schemes.</li>
+          <li><strong>Online Citizen Service Guides:</strong> Practical step-by-step tutorials for PAN Card, Aadhaar services, Ration Card, Income/Caste/Domicile certificates, and Digital Gujarat portals.</li>
+          <li><strong>Forms Directory:</strong> Easy access to printable bank and government application forms prepared for public convenience.</li>
         </ul>
+
+        <h2>3. Editorial Standards &amp; Transparency</h2>
+        <p>All informational articles on <strong>ShivMitra.in</strong> are curated from official government websites, employment newspapers, and public notices. We always provide direct official website and PDF links so visitors can cross-verify every detail directly from the primary source.</p>
+
+        <div class="info-box">
+          <p><strong>Portal Name:</strong> Shiv Online Center (ShivMitra.in)</p>
+          <p><strong>Official Website:</strong> https://shivmitra.in</p>
+          <p><strong>Location:</strong> Surat, Gujarat, India</p>
+          <p><strong>Official Support Email:</strong> support@shivmitra.in</p>
+        </div>
       `
     },
+
     contact: {
       title: "Contact Us — Shiv Online Center (ShivMitra.in)",
       html: `
+        <span class="last-updated">Last Updated: November 28, 2026</span>
         <h1>Contact Us — Shiv Online Center</h1>
-        <p>If you have any questions regarding a recruitment notification, need assistance with online form filling, or want to report a correction on <strong>ShivMitra.in</strong>, please reach out to our support desk:</p>
-        <div class="contact-box">
-          <p><strong>Organization Name:</strong> Shiv Online Center</p>
-          <p><strong>Official Website:</strong> https://shivmitra.in</p>
+        <p>Thank you for visiting <strong>ShivMitra.in</strong>. If you have any questions regarding a recruitment notification, need help finding an official form, want to report a broken link or typographical correction, or have general feedback about our portal, please feel free to contact us.</p>
+
+        <h2>1. Official Support &amp; Grievance Desk</h2>
+        <div class="info-box">
+          <p><strong>Organization / Portal Name:</strong> Shiv Online Center (ShivMitra.in)</p>
+          <p><strong>Website URL:</strong> https://shivmitra.in</p>
           <p><strong>Email Support:</strong> support@shivmitra.in</p>
-          <p><strong>Working Hours:</strong> Monday to Saturday, 10:00 AM to 7:00 PM IST</p>
+          <p><strong>Office Location:</strong> Surat, Gujarat, India</p>
+          <p><strong>Support Hours:</strong> Monday to Saturday, 10:00 AM to 7:00 PM IST (Closed on Sundays &amp; Public Holidays)</p>
         </div>
-        <p style="margin-top:12px;"><em>Note: For official exam or recruitment queries, candidates are advised to also contact the respective government recruiting board directly.</em></p>
+
+        <h2>2. How We Can Assist You</h2>
+        <ul>
+          <li><strong>Content Corrections &amp; Feedback:</strong> If you notice any outdated date or link in any job or scheme post, please email us the article title and URL so our editorial team can update it promptly.</li>
+          <li><strong>Form &amp; Guide Requests:</strong> If you are looking for a specific government or bank application form or citizen service tutorial, write to us and we will try to publish it in our directory.</li>
+          <li><strong>Copyright &amp; Policy Inquiries:</strong> For any legal, privacy, or DMCA-related communication, write directly to <strong>support@shivmitra.in</strong>.</li>
+        </ul>
+
+        <div class="alert-box">
+          <strong>Important Notice:</strong> Shiv Online Center (ShivMitra.in) is a private informational and facilitation portal, not a government recruitment board. For official exam center changes, hall ticket errors, or application form rejections, candidates must contact the respective government authority (such as OJAS, GPSC, GSSSB, SSC, or IBPS) directly.
+        </div>
       `
     },
+
     privacy: {
       title: "Privacy Policy — Shiv Online Center (ShivMitra.in)",
       html: `
+        <span class="last-updated">Last Updated: November 28, 2026</span>
         <h1>Privacy Policy</h1>
-        <p>At <strong>ShivMitra.in</strong> (operated by <strong>Shiv Online Center</strong>), visitor privacy is a top priority. This Privacy Policy explains what information is collected and how it is used.</p>
-        <h2>1. Log Files & Analytics</h2>
-        <p>ShivMitra.in follows standard web analytics practices using Google Analytics 4 (GA4) to understand visitor traffic trends, browser types, and popular pages. This data is aggregated and does not personally identify individual visitors.</p>
-        <h2>2. Google AdSense & Advertising Cookies</h2>
-        <p>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
-        <h2>3. External Official Links</h2>
-        <p>Our articles contain direct links to official government portals (.gov.in / .nic.in). Once you leave ShivMitra.in, we are not responsible for the privacy practices of external websites.</p>
+        <p>Welcome to <strong>Shiv Online Center</strong> (<strong>"we," "our," or "us"</strong>), accessible at <strong>https://shivmitra.in</strong>. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains what information we collect, how we use it, and what rights you have when you visit and use our website.</p>
+        <p>By accessing or using <strong>ShivMitra.in</strong>, you agree to the collection and use of information in accordance with this Privacy Policy.</p>
+
+        <h2>1. Information We Collect</h2>
+        <p>We collect personal information that you voluntarily provide to us when you fill out a contact inquiry or subscribe to our update channels. This may include:</p>
+        <ul>
+          <li><strong>Personal Details:</strong> Your name and email address provided voluntarily when contacting our support desk via email.</li>
+          <li><strong>Automatically Collected Technical Data:</strong> When you browse ShivMitra.in, standard analytical and log data such as your IP address (anonymized), browser type, device type, operating system, referring URLs, and pages visited are automatically collected to maintain site security and performance.</li>
+        </ul>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>We use the information we collect for legitimate operational purposes, including to:</p>
+        <ul>
+          <li>Provide, operate, maintain, and improve the informational content and usability of <strong>ShivMitra.in</strong>.</li>
+          <li>Respond to your reader inquiries, feedback, and link correction requests.</li>
+          <li>Analyze visitor traffic trends to publish more relevant recruitment and scheme updates.</li>
+          <li>Detect, prevent, and address spam, misuse, or technical security issues.</li>
+        </ul>
+
+        <h2>3. Cookies and Tracking Technologies</h2>
+        <p>We use cookies and similar tracking technologies to analyze website traffic and enhance your browsing experience. You can instruct your web browser to refuse all cookies or to indicate when a cookie is being sent. However, if you disable cookies, some parts of our website or third-party features may not function as intended.</p>
+
+        <h2>4. Google AdSense &amp; Third-Party Advertising</h2>
+        <p>We partner with third-party advertising networks, including <strong>Google AdSense</strong>, to display advertisements on our website:</p>
+        <ul>
+          <li>Third-party vendors, including Google, use cookies (such as the DoubleClick DART cookie) to serve ads based on a user's prior visits to <strong>ShivMitra.in</strong> or other websites on the internet.</li>
+          <li>Google's use of advertising cookies enables it and its partners to serve relevant ads to our visitors.</li>
+          <li>Users may opt out of personalized advertising at any time by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener" style="color:#1d4ed8; font-weight:700;">Google Ads Settings</a> or <a href="https://www.aboutads.info/" target="_blank" rel="noopener" style="color:#1d4ed8; font-weight:700;">www.aboutads.info</a>.</li>
+        </ul>
+
+        <h2>5. Third-Party Services and Data Sharing</h2>
+        <p><strong>We do not sell, trade, or rent your personal information to any third parties.</strong> We only rely on trusted third-party service providers that help us operate our website—such as website hosting (GitHub Pages), traffic analytics (Google Analytics 4), and advertising services (Google AdSense)—under strict data protection and privacy standards.</p>
+
+        <h2>6. Data Security</h2>
+        <p>We implement HTTPS encryption and appropriate technical and organizational security safeguards to protect our website and any communication shared with us from unauthorized access, alteration, disclosure, or destruction. However, please note that no method of data transmission over the internet is 100% secure.</p>
+
+        <h2>7. Your Privacy Rights (India DPDP Act &amp; Global Standards)</h2>
+        <p>In accordance with applicable laws, including India's <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong>, you have the right to:</p>
+        <ul>
+          <li>Request access to, correction of, or deletion of any personal information you have voluntarily emailed to us.</li>
+          <li>Opt out of promotional or channel updates at any time.</li>
+          <li>Withdraw your consent for non-essential data processing by contacting our support desk.</li>
+        </ul>
+
+        <h2>8. Children's Privacy</h2>
+        <p><strong>ShivMitra.in</strong> is intended for general audiences and job seekers and is not directed toward children under the age of 13 (or 18 without parental consent). We do not knowingly collect personal information from children. If you believe a child has provided personal data on our platform, please contact us immediately so we can delete it.</p>
+
+        <h2>9. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in legal requirements or website features. Any updates will be published on this page with a revised "Last Updated" date. We encourage visitors to review this page periodically.</p>
+
+        <h2>10. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy or wish to exercise your privacy rights, please contact us at:</p>
+        <div class="info-box">
+          <p><strong>Portal Name:</strong> Shiv Online Center (ShivMitra.in)</p>
+          <p><strong>Support Email:</strong> support@shivmitra.in</p>
+          <p><strong>Address:</strong> Surat, Gujarat, India</p>
+        </div>
       `
     },
+
     disclaimer: {
       title: "Disclaimer — Shiv Online Center (ShivMitra.in)",
       html: `
+        <span class="last-updated">Last Updated: November 28, 2026</span>
         <h1>Disclaimer</h1>
-        <p><strong>ShivMitra.in</strong> (operated by <strong>Shiv Online Center</strong>) is an independent private informational and digital facilitation portal. <strong>We are NOT affiliated with, endorsed by, or connected to any Government entity, Ministry, OJAS, GPSC, GSSSB, SSC, IBPS, or Railway Recruitment Board.</strong></p>
-        <h2>Accuracy of Information</h2>
-        <p>All recruitment summaries, exam dates, and scheme details published on ShivMitra.in are compiled from official public notifications and newspapers for informational convenience. Candidates must always verify final dates, eligibility rules, and fee details from the official PDF notification before applying.</p>
+        <div class="alert-box">
+          <strong>Non-Government Affiliation Notice:</strong> <strong>ShivMitra.in</strong> (managed by <strong>Shiv Online Center</strong>) is a private, independent informational and digital facilitation portal. <strong>We are NOT affiliated with, associated with, authorized by, endorsed by, or in any way officially connected with the Government of India, the Government of Gujarat, OJAS, GPSC, GSSSB, SSC, UPSC, IBPS, Railway Recruitment Boards (RRB), or any other government agency or ministry.</strong>
+        </div>
+
+        <h2>1. Informational Purpose Only</h2>
+        <p>All recruitment summaries, exam dates, syllabus details, call letter instructions, and government scheme overviews published on <strong>ShivMitra.in</strong> are compiled from official public notifications, government press releases, and employment newspapers solely for general informational convenience.</p>
+
+        <h2>2. Verification from Official Sources</h2>
+        <p>While we strive to keep all information accurate and up to date, dates, vacancy counts, fee structures, and eligibility rules can be modified by recruiting authorities at any time. Candidates and applicants are strongly advised to always read and verify the complete official PDF notification on the respective official government portal (<code>.gov.in</code> or <code>.nic.in</code>) before submitting any application or paying any examination fee.</p>
+
+        <h2>3. External Links Disclaimer</h2>
+        <p>Our articles contain external links pointing to official government portals and third-party resources for user convenience. <strong>Shiv Online Center</strong> has no control over the nature, content, uptime, or availability of those external websites and assumes no responsibility for any technical issues or changes on third-party portals.</p>
+
+        <h2>4. Citizen Guides &amp; Forms Disclaimer</h2>
+        <p>The downloadable forms and step-by-step online service guides published on <strong>ShivMitra.in</strong> are provided solely for educational and reference assistance. Users should always confirm the latest form format and portal instructions on the respective official government or bank website.</p>
       `
     },
+
     terms: {
       title: "Terms & Conditions — Shiv Online Center (ShivMitra.in)",
       html: `
-        <h1>Terms & Conditions</h1>
-        <p>By accessing and using <strong>ShivMitra.in</strong> (managed by <strong>Shiv Online Center</strong>), you agree to comply with the following terms:</p>
+        <span class="last-updated">Last Updated: November 28, 2026</span>
+        <h1>Terms &amp; Conditions</h1>
+        <p>Welcome to <strong>ShivMitra.in</strong>, operated by <strong>Shiv Online Center</strong>. By accessing, browsing, or using this website, you agree to be bound by the following Terms and Conditions.</p>
+
+        <h2>1. Acceptable Use of Website Content</h2>
         <ul>
-          <li>All original articles, structured tables, and guides on this portal are for personal informational use only and may not be scraped or republished without permission.</li>
-          <li>Digital legal formats and facilitation services offered by Shiv Online Center are provided as standard templates; users should verify legal suitability for their specific requirement.</li>
-          <li>Shiv Online Center reserves the right to update, modify, or remove any content or service listing at any time without prior notice.</li>
+          <li>All original summaries, structured comparison tables, citizen guides, and website layouts published on <strong>ShivMitra.in</strong> are intended for personal, non-commercial informational use.</li>
+          <li>Automated scraping, bulk copying, framing, or republishing our original articles on other websites or apps without prior written permission from <strong>Shiv Online Center</strong> is strictly prohibited.</li>
         </ul>
+
+        <h2>2. User Responsibilities</h2>
+        <ul>
+          <li>Users agree to use this website only for lawful purposes and in a manner that does not infringe the rights of or restrict the use of this website by any third party.</li>
+          <li>Users must independently verify official application deadlines, eligibility rules, and portal instructions on official government websites before applying.</li>
+        </ul>
+
+        <h2>3. Limitation of Liability</h2>
+        <p><strong>Shiv Online Center (ShivMitra.in)</strong> shall not be held liable for any direct, indirect, or consequential loss arising from missed application deadlines, typographical errors, server downtime on official government portals, or reliance on information published on this website.</p>
+
+        <h2>4. Modifications &amp; Governing Law</h2>
+        <p>We reserve the right to update, modify, or discontinue any part of the website or these Terms &amp; Conditions at any time without prior notice. These terms shall be governed by and construed in accordance with the laws of India, subject to the jurisdiction of courts in <strong>Surat, Gujarat</strong>.</p>
       `
     }
   };
