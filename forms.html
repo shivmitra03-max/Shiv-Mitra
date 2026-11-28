@@ -260,5 +260,192 @@
 
         window.onload = loadFormsDirectory;
     </script>
+
+    <!-- Floating Auto-Translate Switcher (EN / GU / HI) -->
+<style>
+  /* Google Translate ki top ugly bar aur tooltip ko hide rakhne ke liye */
+  .goog-te-banner-frame.skiptranslate,
+  iframe.skiptranslate,
+  #goog-gt-tt,
+  .goog-te-balloon-frame {
+    display: none !important;
+  }
+  body {
+    top: 0px !important;
+  }
+  .goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Bottom-Left Floating Language Switcher */
+  #shivLangWidget {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    z-index: 2147483647 !important;
+    display: block !important;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  .lang-main-btn {
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 8px 13px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .lang-main-btn:hover {
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+  }
+  .lang-menu-popup {
+    display: none;
+    position: absolute;
+    bottom: 46px;
+    left: 0;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    min-width: 165px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.22);
+    overflow: hidden;
+  }
+  .lang-menu-popup.open {
+    display: block;
+  }
+  .lang-option {
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .lang-option:last-child {
+    border-bottom: none;
+  }
+  .lang-option:hover,
+  .lang-option.active {
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+</style>
+
+<div id="google_translate_element" style="display:none;"></div>
+
+<div id="shivLangWidget" class="notranslate" style="position:fixed !important; bottom:20px !important; left:20px !important; z-index:2147483647 !important; display:block !important;">
+  <div class="lang-menu-popup" id="langMenuPopup">
+    <button type="button" class="lang-option" data-lang="en" onclick="changeSiteLanguage('en')">
+      <svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px; box-shadow:0 0 2px rgba(0,0,0,0.3); flex-shrink:0;"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
+      <span>English (EN)</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="gu" onclick="changeSiteLanguage('gu')">
+      <svg width="22" height="15" viewBox="0 0 30 20" style="border-radius:2px; box-shadow:0 0 2px rgba(0,0,0,0.3); flex-shrink:0;"><rect width="30" height="6.67" y="0" fill="#FF9933"/><rect width="30" height="6.67" y="6.67" fill="#FFFFFF"/><rect width="30" height="6.67" y="13.33" fill="#138808"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="#000080" stroke-width="0.9"/></svg>
+      <span>ગુજરાતી (GU)</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="hi" onclick="changeSiteLanguage('hi')">
+      <svg width="22" height="15" viewBox="0 0 30 20" style="border-radius:2px; box-shadow:0 0 2px rgba(0,0,0,0.3); flex-shrink:0;"><rect width="30" height="6.67" y="0" fill="#FF9933"/><rect width="30" height="6.67" y="6.67" fill="#FFFFFF"/><rect width="30" height="6.67" y="13.33" fill="#138808"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="#000080" stroke-width="0.9"/></svg>
+      <span>हिन्दी (HI)</span>
+    </button>
+  </div>
+
+  <button type="button" class="lang-main-btn" id="langToggleBtn" onclick="toggleLangMenu(event)">
+    <span id="activeLangFlag" style="display:inline-flex; align-items:center;"></span>
+    <span id="activeLangCode">EN</span>
+    <span style="font-size:0.75rem; color:#475569;">&#9650;</span>
+  </button>
+</div>
+
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,gu,hi',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
+  function toggleLangMenu(e) {
+    e.stopPropagation();
+    document.getElementById('langMenuPopup').classList.toggle('open');
+  }
+
+  document.addEventListener('click', function () {
+    const popup = document.getElementById('langMenuPopup');
+    if (popup) popup.classList.remove('open');
+  });
+
+  function updateLangButtonUI(lang) {
+    const ukSvg = '<svg width="24" height="16" viewBox="0 0 60 30" style="border-radius:2px; box-shadow:0 0 2px rgba(0,0,0,0.3);"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>';
+    const inSvg = '<svg width="24" height="16" viewBox="0 0 30 20" style="border-radius:2px; box-shadow:0 0 2px rgba(0,0,0,0.3);"><rect width="30" height="6.67" y="0" fill="#FF9933"/><rect width="30" height="6.67" y="6.67" fill="#FFFFFF"/><rect width="30" height="6.67" y="13.33" fill="#138808"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="#000080" stroke-width="0.9"/></svg>';
+
+    const map = {
+      en: { flag: ukSvg, code: 'EN' },
+      gu: { flag: inSvg, code: 'GU' },
+      hi: { flag: inSvg, code: 'HI' }
+    };
+    const info = map[lang] || map.en;
+    document.getElementById('activeLangFlag').innerHTML = info.flag;
+    document.getElementById('activeLangCode').textContent = info.code;
+    document.querySelectorAll('.lang-option').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+  }
+
+  function setGoogTransCookie(lang) {
+    const val = lang === 'en' ? '' : `/en/${lang}`;
+    const host = window.location.hostname;
+    if (val) {
+      document.cookie = `googtrans=${val}; path=/`;
+      if (host && host !== 'localhost') {
+        document.cookie = `googtrans=${val}; path=/; domain=.${host}`;
+      }
+    } else {
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      if (host && host !== 'localhost') {
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${host};`;
+      }
+    }
+  }
+
+  function changeSiteLanguage(lang) {
+    localStorage.setItem('shiv_site_lang', lang);
+    updateLangButtonUI(lang);
+    document.getElementById('langMenuPopup').classList.remove('open');
+    setGoogTransCookie(lang);
+
+    const selectEl = document.querySelector('.goog-te-combo');
+    if (selectEl) {
+      selectEl.value = lang;
+      selectEl.dispatchEvent(new Event('change'));
+    } else {
+      window.location.reload();
+    }
+  }
+
+  (function initSavedLanguage() {
+    const saved = localStorage.getItem('shiv_site_lang') || 'en';
+    updateLangButtonUI(saved);
+    if (saved !== 'en') {
+      setGoogTransCookie(saved);
+    }
+  })();
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
