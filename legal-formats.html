@@ -268,11 +268,8 @@
     </footer>
 
     <script>
-        /* ==============================================================
-           APNI UPI ID YAHAN SET KAREIN
-        ============================================================== */
         const STORE_CONFIG = {
-            upiId: "shivonlinecenter@upi",          // <-- Apna asli UPI ID yahan dalein
+            upiId: "",
             payeeName: "Shiv Online Center"
         };
 
@@ -301,6 +298,16 @@
         }
 
         async function loadLegalFormats() {
+            // Auto-load UPI ID & Payee Name saved from shiv-admin.html (ads.json)
+            try {
+                const cfgRes = await fetch(`ads.json?t=${Date.now()}`);
+                if (cfgRes.ok) {
+                    const cfg = await cfgRes.json();
+                    if (cfg.upiId) STORE_CONFIG.upiId = cfg.upiId.trim();
+                    if (cfg.payeeName) STORE_CONFIG.payeeName = cfg.payeeName.trim();
+                }
+            } catch (_) {}
+
             const params = new URLSearchParams(window.location.search);
             const cat = params.get('cat');
             targetItemId = params.get('item') || "";
@@ -393,7 +400,7 @@
 
         function getSampleSnippet(p) {
             if (p.samplePreview && p.samplePreview.trim()) {
-                return p.samplePreview.trim();
+                return p.samplePreview.trim().replace(/\n/g, '<br>');
             }
             const sub = (p.subCat || '').toLowerCase();
             if (sub.includes('rent')) {
@@ -450,7 +457,8 @@
                 ? `Included Files (${p.legalFiles.length}): ${p.legalFiles.map(f => f.name).join(', ')}`
                 : `Editable MS Word (.docx) + Print-Ready PDF (${p.language || 'Gujarati + English'})`;
 
-            const upiUri = `upi://pay?pa=${encodeURIComponent(STORE_CONFIG.upiId)}&pn=${encodeURIComponent(STORE_CONFIG.payeeName)}&am=${offerNum}&cu=INR&tn=${encodeURIComponent(p.title.slice(0, 40))}`;
+            const activeUpi = STORE_CONFIG.upiId || "UPI Not Set in Admin";
+            const upiUri = `upi://pay?pa=${encodeURIComponent(activeUpi)}&pn=${encodeURIComponent(STORE_CONFIG.payeeName)}&am=${offerNum}&cu=INR&tn=${encodeURIComponent(p.title.slice(0, 40))}`;
             const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUri)}`;
 
             if (tabName === 'PREVIEW') {
@@ -501,19 +509,21 @@
                     </div>
                 `;
             } else {
+                const qrBlockHtml = STORE_CONFIG.upiId
+                    ? `<img src="${qrImgUrl}" alt="UPI QR Code">
+                       <strong style="color:#059669; font-size:0.95rem;">Amount: ₹${offerNum} Only</strong>
+                       <div class="upi-copy-row">
+                           <span id="upiIdText">${STORE_CONFIG.upiId}</span>
+                           <button type="button" class="btn-copy-upi" onclick="copyStoreUpi()">Copy UPI ID</button>
+                       </div>`
+                    : `<p style="color:#dc2626; font-weight:700; font-size:0.84rem; padding:16px;">UPI ID not configured yet. Please save UPI ID in Shiv Admin Panel and pull updates.</p>`;
+
                 document.getElementById('legalModalBody').innerHTML = `
                     <div class="modal-grid">
                         <div class="checkout-card">
                             <span class="step-badge">STEP 1: SCAN &amp; PAY ₹${offerNum}</span>
                             <p style="font-size:0.8rem; color:#475569;">Scan via GPay, PhonePe, Paytm or any UPI App:</p>
-                            <div class="qr-box">
-                                <img src="${qrImgUrl}" alt="UPI QR Code">
-                                <strong style="color:#059669; font-size:0.95rem;">Amount: ₹${offerNum} Only</strong>
-                                <div class="upi-copy-row">
-                                    <span id="upiIdText">${STORE_CONFIG.upiId}</span>
-                                    <button type="button" class="btn-copy-upi" onclick="copyStoreUpi()">Copy UPI ID</button>
-                                </div>
-                            </div>
+                            <div class="qr-box">${qrBlockHtml}</div>
                         </div>
 
                         <div class="checkout-card" style="display:flex; flex-direction:column; justify-content:space-between;">
@@ -546,7 +556,6 @@
             const utrRaw = document.getElementById('custPayUtr').value.trim();
             const errBox = document.getElementById('utrErrorMsg');
 
-            // Validate 12-digit numeric UPI UTR / Reference number
             if (!/^\d{12}$/.test(utrRaw)) {
                 errBox.style.display = 'block';
                 errBox.innerText = "Please enter a valid 12-digit numeric UPI UTR / Reference number from your payment receipt.";
@@ -562,14 +571,12 @@
         function renderUnlockedDownloadView(p) {
             const files = [];
 
-            // 1. Check uploaded legalFiles array from shiv-admin.html
             if (Array.isArray(p.legalFiles) && p.legalFiles.length > 0) {
                 p.legalFiles.forEach(f => {
                     if (f.url) files.push({ name: f.name || p.title, size: f.size || '', url: f.url });
                 });
             }
 
-            // 2. Fallback to pdfLink or actionLink if legalFiles array is empty
             if (files.length === 0) {
                 const directUrl = p.pdfLink || (p.actionLink && p.actionLink !== '#buy-legal-format' ? p.actionLink : '');
                 if (directUrl) {
@@ -607,6 +614,7 @@
         }
 
         function copyStoreUpi() {
+            if (!STORE_CONFIG.upiId) return;
             navigator.clipboard.writeText(STORE_CONFIG.upiId).then(() => {
                 alert("UPI ID copied: " + STORE_CONFIG.upiId);
             });
