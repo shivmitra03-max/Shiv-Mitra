@@ -701,13 +701,13 @@
                                 </div>
                             </div>
 
-                            <div style="background:#f0fdf4; border:1px solid #86efac; padding:12px; border-radius:8px;">
-                                <strong style="font-size:0.82rem; color:#166534;">&#128179; Store UPI ID (Bank Handle zaroor likhein, e.g., shivsp340@okicici):</strong>
-                                <div style="display:flex; gap:8px; margin-top:6px;">
-                                    <input type="text" id="adminUpiIdInput" placeholder="e.g., shivsp340@okicici or 9876543210@ybl" style="flex:1; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-weight:700; margin-bottom:0; background:white;">
-                                    <input type="hidden" id="adminPayeeNameInput" value="Shiv Online Center">
-                                    <button type="button" id="saveUpiBtn" onclick="saveAdsAndUpiSettings()" style="background:#16a34a; color:white; border:none; padding:8px 14px; border-radius:6px; font-weight:800; cursor:pointer; white-space:nowrap;">Save UPI</button>
+                            <div style="background:#eff6ff; border:1px solid #93c5fd; padding:12px; border-radius:8px;">
+                                <strong style="font-size:0.82rem; color:#1e3a8a;">&#128179; Payment Gateway (Razorpay Key ID OR Cashfree Payment Link):</strong>
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6px;">
+                                    <input type="text" id="adminRazorpayKeyInput" placeholder="Razorpay Key ID (rzp_live_... or rzp_test_...)" style="padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-weight:700; margin-bottom:0; background:white;">
+                                    <input type="text" id="adminCashfreeLinkInput" placeholder="OR Cashfree / Razorpay Payment Link" style="padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-weight:700; margin-bottom:0; background:white;">
                                 </div>
+                                <button type="button" id="saveGatewayBtn" onclick="saveAdsAndGatewaySettings()" style="margin-top:8px; background:#1d4ed8; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:800; cursor:pointer;">Save Payment Gateway</button>
                             </div>
                         </div>
 
@@ -1815,7 +1815,7 @@
         }
 
         /* =========================================================
-           6. SITE CONFIG (GA4 + ADSENSE + STORE UPI ID IN ads.json)
+           6. SITE CONFIG (GA4 + ADSENSE + RAZORPAY/CASHFREE IN ads.json)
         ========================================================= */
         async function loadSiteConfig() {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
@@ -1832,11 +1832,11 @@
                     document.getElementById('adHeaderSlot').value = decoded.headerAd || "";
                     document.getElementById('adArticleSlot').value = decoded.articleAd || "";
                     document.getElementById('adSidebarSlot').value = decoded.sidebarAd || "";
-                    if (document.getElementById('adminUpiIdInput')) {
-                        document.getElementById('adminUpiIdInput').value = decoded.upiId || "";
+                    if (document.getElementById('adminRazorpayKeyInput')) {
+                        document.getElementById('adminRazorpayKeyInput').value = decoded.razorpayKeyId || "";
                     }
-                    if (document.getElementById('adminPayeeNameInput') && decoded.payeeName) {
-                        document.getElementById('adminPayeeNameInput').value = decoded.payeeName;
+                    if (document.getElementById('adminCashfreeLinkInput')) {
+                        document.getElementById('adminCashfreeLinkInput').value = decoded.cashfreePaymentLink || "";
                     }
                 }
             } catch (e) {}
@@ -1849,27 +1849,23 @@
             btn.innerText = "Save GA4 ID";
         }
 
-        async function saveAdsAndUpiSettings() {
-            const upiVal = (document.getElementById('adminUpiIdInput')?.value || "").trim();
-            if (!upiVal || !upiVal.includes('@')) {
-                alert("Kripya sahi UPI ID dalein (jismein '@' ho, jaise shivsp340@okicici ya 9876543210@ybl)");
+        async function saveAdsAndGatewaySettings() {
+            const rzpKey = (document.getElementById('adminRazorpayKeyInput')?.value || "").trim();
+            const cfLink = (document.getElementById('adminCashfreeLinkInput')?.value || "").trim();
+            if (!rzpKey && !cfLink) {
+                alert("Kripya apna Razorpay Key ID (rzp_live_... ya rzp_test_...) OR Cashfree Payment Link dalein!");
                 return;
             }
-            if (upiVal.toLowerCase().endsWith('@gmail') || upiVal.toLowerCase().endsWith('@gmail.com')) {
-                alert("Sirf '@gmail' email address hota hai, UPI ID nahi! Apne GPay/PhonePe app me dekhein—UPI ID ke end me '@okicici', '@oksbi', '@ybl', ya '@paytm' hota hai.");
-                return;
-            }
-
-            const btn = document.getElementById('saveUpiBtn');
+            const btn = document.getElementById('saveGatewayBtn');
             if (btn) { btn.innerText = "Saving..."; btn.disabled = true; }
-            await saveSiteConfig(false, upiVal);
-            if (btn) { btn.innerText = "Save UPI"; btn.disabled = false; }
+            await saveSiteConfig(false, "Gateway Saved");
+            if (btn) { btn.innerText = "Save Payment Gateway"; btn.disabled = false; }
         }
 
-        async function saveSiteConfig(isGaOnly = false, customUpiAlert = "") {
+        async function saveSiteConfig(isGaOnly = false, customGatewayAlert = "") {
             const auth = JSON.parse(localStorage.getItem('shiv_gh_auth'));
             const btn = document.getElementById('saveAdsBtn');
-            if (!isGaOnly && !customUpiAlert && btn) { btn.innerText = "Saving Ads..."; btn.disabled = true; }
+            if (!isGaOnly && !customGatewayAlert && btn) { btn.innerText = "Saving Ads..."; btn.disabled = true; }
 
             try {
                 const latestRes = await fetch(`https://api.github.com/repos/${auth.user}/${auth.repo}/contents/ads.json?t=${Date.now()}`, {
@@ -1886,11 +1882,12 @@
                 headerAd: document.getElementById('adHeaderSlot').value.trim(),
                 articleAd: document.getElementById('adArticleSlot').value.trim(),
                 sidebarAd: document.getElementById('adSidebarSlot').value.trim(),
-                upiId: (document.getElementById('adminUpiIdInput')?.value || "").trim(),
-                payeeName: (document.getElementById('adminPayeeNameInput')?.value || "Shiv Online Center").trim()
+                razorpayKeyId: (document.getElementById('adminRazorpayKeyInput')?.value || "").trim(),
+                cashfreePaymentLink: (document.getElementById('adminCashfreeLinkInput')?.value || "").trim(),
+                payeeName: "Shiv Online Center"
             };
             const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payloadObj, null, 2))));
-            const bodyData = { message: "Update Site, UPI & AdSense configuration", content: encoded };
+            const bodyData = { message: "Update Site, Gateway & AdSense configuration", content: encoded };
             if (configSha) bodyData.sha = configSha;
 
             try {
@@ -1902,15 +1899,15 @@
                 const result = await res.json();
                 if (!res.ok) throw new Error(result.message);
                 configSha = result.content.sha;
-                if (customUpiAlert) {
-                    alert(`✅ UPI ID (${customUpiAlert}) saved to GitHub! Local testing ke liye terminal me 'git pull origin main' chalayein.`);
+                if (customGatewayAlert) {
+                    alert("✅ Razorpay / Cashfree Gateway details saved to GitHub! Local testing ke liye terminal me 'git pull origin main' chalayein.");
                 } else {
                     alert(isGaOnly ? "Google Analytics 4 ID saved!" : "AdSense & Store settings saved!");
                 }
             } catch (e) {
                 alert("Error saving settings: " + e.message);
             } finally {
-                if (!isGaOnly && !customUpiAlert && btn) { btn.innerText = "💾 Save & Activate Ad Slots on Live Website"; btn.disabled = false; }
+                if (!isGaOnly && !customGatewayAlert && btn) { btn.innerText = "💾 Save & Activate Ad Slots on Live Website"; btn.disabled = false; }
             }
         }
 

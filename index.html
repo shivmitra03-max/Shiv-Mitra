@@ -432,18 +432,48 @@
       const rawPosts = await resp.json();
       ALL_LIVE_POSTS = rawPosts.filter(p => p.status === "live" || !p.status);
 
+      const isNotLegalOrPaid = (p) =>
+        !(p.mainCat || "").toLowerCase().includes("legal") && !p.price;
+
       CAT_BUCKETS = {
-        SARKARI: ALL_LIVE_POSTS.filter(p => p.subCat === "Sarkari Jobs" || (p.mainCat === "Jobs" && !["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat))),
-        CALL_LETTER: ALL_LIVE_POSTS.filter(p => p.mainCat === "Call Letter" || (p.subCat || "").toLowerCase().includes("call letter") || (p.subCat || "").toLowerCase().includes("admit")),
-        BANK_PRIVATE: ALL_LIVE_POSTS.filter(p => ["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat)),
-        YOJANA: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("yojana") || (p.subCat || "").toLowerCase().includes("yojana")),
-        ONLINE_SERVICES: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("service") && !(p.mainCat || "").toLowerCase().includes("legal") && !p.price),
-        FORMS: ALL_LIVE_POSTS.filter(p => (p.mainCat || "").toLowerCase().includes("form"))
+        SARKARI: ALL_LIVE_POSTS.filter(p =>
+          isNotLegalOrPaid(p) &&
+          (p.subCat === "Sarkari Jobs" ||
+            ((p.mainCat || "").toLowerCase() === "jobs" &&
+              !["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat)))
+        ),
+        CALL_LETTER: ALL_LIVE_POSTS.filter(p =>
+          isNotLegalOrPaid(p) &&
+          ((p.mainCat || "").toLowerCase() === "call letter" ||
+            (p.subCat || "").toLowerCase().includes("call letter") ||
+            (p.subCat || "").toLowerCase().includes("admit"))
+        ),
+        BANK_PRIVATE: ALL_LIVE_POSTS.filter(p =>
+          isNotLegalOrPaid(p) &&
+          ["Bank Jobs", "Private Jobs", "Apprenticeship / Contract Jobs"].includes(p.subCat)
+        ),
+        YOJANA: ALL_LIVE_POSTS.filter(p =>
+          isNotLegalOrPaid(p) &&
+          ((p.mainCat || "").toLowerCase().includes("yojana") ||
+            (p.subCat || "").toLowerCase().includes("yojana"))
+        ),
+        ONLINE_SERVICES: ALL_LIVE_POSTS.filter(p =>
+          isNotLegalOrPaid(p) &&
+          ((p.mainCat || "").toLowerCase() === "online service details" ||
+            (p.mainCat || "").toLowerCase() === "online services")
+        ),
+        FORMS: ALL_LIVE_POSTS.filter(p =>
+          isNotLegalOrPaid(p) &&
+          (p.mainCat || "").toLowerCase() === "forms"
+        )
       };
 
       // Strict Priority Order for Top Marquee & 6 Highlight Boxes:
       // 1st: Jobs & Call Letters | 2nd: Government Schemes | 3rd: Online Service Guides
-      const firstPriority = ALL_LIVE_POSTS.filter(p => p.mainCat === "Jobs" || p.mainCat === "Call Letter");
+      const firstPriority = ALL_LIVE_POSTS.filter(p =>
+        isNotLegalOrPaid(p) &&
+        ((p.mainCat || "").toLowerCase() === "jobs" || (p.mainCat || "").toLowerCase() === "call letter")
+      );
       const secondPriority = CAT_BUCKETS.YOJANA;
       const thirdPriority = CAT_BUCKETS.ONLINE_SERVICES;
       const topFeatured = [...firstPriority, ...secondPriority, ...thirdPriority];

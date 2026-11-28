@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advocate-Verified Legal Formats Store - ShivMitra.in</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Official Razorpay Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f1f5f9; color: #0f172a; min-height: 100vh; display: flex; flex-direction: column; }
@@ -24,7 +26,7 @@
             color: white; padding: 36px 20px 42px; text-align: center;
         }
         .hero h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 8px; }
-        .hero p { font-size: 0.9rem; color: #fef3c7; max-width: 660px; margin: 0 auto 20px; }
+        .hero p { font-size: 0.9rem; color: #fef3c7; max-width: 680px; margin: 0 auto 20px; }
 
         .filter-bar-wrap {
             max-width: 820px; margin: 0 auto; display: grid;
@@ -47,9 +49,9 @@
         .legal-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(15, 41, 66, 0.12); }
         .legal-card.highlighted { border: 2px solid #d97706; background: #fffbeb; }
 
-        .card-cover { width: 100%; height: 165px; object-fit: cover; background: #fffbeb; border-bottom: 1px solid #fde68a; display: block; }
+        .card-cover { width: 100%; height: 175px; object-fit: cover; background: #fffbeb; border-bottom: 1px solid #fde68a; display: block; }
         .card-cover-placeholder {
-            width: 100%; height: 125px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            width: 100%; height: 130px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             display: flex; align-items: center; justify-content: center; flex-direction: column;
             color: #92400e; font-weight: 800; font-size: 0.85rem; border-bottom: 1px solid #fcd34d;
         }
@@ -92,7 +94,7 @@
             z-index: 9999; overflow-y: auto; padding: 16px;
         }
         .store-modal-box {
-            max-width: 860px; margin: 14px auto; background: white; border-radius: 14px;
+            max-width: 880px; margin: 14px auto; background: white; border-radius: 14px;
             overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.45);
         }
         .modal-header {
@@ -104,84 +106,82 @@
             border-radius: 6px; font-weight: 800; cursor: pointer; font-size: 0.84rem;
         }
 
-        .modal-tabs { display: flex; background: #f8fafc; border-bottom: 1px solid #cbd5e1; }
-        .m-tab-btn {
-            flex: 1; padding: 12px; border: none; background: transparent; font-weight: 800;
-            font-size: 0.88rem; color: #475569; cursor: pointer; border-bottom: 3px solid transparent;
-        }
-        .m-tab-btn.active { background: white; color: #0f2942; border-bottom-color: #d97706; }
+        .modal-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; padding: 22px; }
 
-        .modal-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; padding: 20px; }
-
-        /* Watermarked Sample Preview Sheet */
+        /* Real Sample Image + Watermarked Document Preview */
         .sample-doc-wrapper {
             position: relative; background: #fffdf7; border: 2px solid #cbd5e1; border-radius: 8px;
-            padding: 18px; font-family: 'Times New Roman', serif; color: #1e293b;
+            padding: 16px; color: #1e293b;
             user-select: none; -webkit-user-select: none; overflow: hidden;
         }
-        .sample-watermark {
-            position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%) rotate(-24deg);
-            font-family: 'Inter', sans-serif; font-size: 1.15rem; font-weight: 900;
-            color: rgba(180, 83, 9, 0.16); white-space: nowrap; pointer-events: none; letter-spacing: 1.5px;
+        .sample-img-container {
+            position: relative; width: 100%; border-radius: 6px; overflow: hidden;
+            border: 1px solid #cbd5e1; margin-bottom: 12px; background: #ffffff;
+        }
+        .sample-img-container img {
+            width: 100%; max-height: 290px; object-fit: contain; display: block;
+            pointer-events: none;
+        }
+        .img-watermark-overlay {
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                -28deg,
+                rgba(180, 83, 9, 0.06),
+                rgba(180, 83, 9, 0.06) 24px,
+                transparent 24px,
+                transparent 48px
+            );
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none;
+        }
+        .img-watermark-overlay span {
+            background: rgba(15, 41, 66, 0.75); color: #fef08a;
+            padding: 5px 12px; border-radius: 5px; font-size: 0.74rem;
+            font-weight: 800; letter-spacing: 1px; transform: rotate(-14deg);
         }
         .sample-doc-title {
             text-align: center; font-weight: 800; text-decoration: underline;
-            font-size: 1rem; margin-bottom: 10px; color: #0f172a;
+            font-size: 0.98rem; margin-bottom: 8px; color: #0f172a;
         }
-        .sample-doc-text { font-size: 0.84rem; line-height: 1.65; }
-        .sample-blur-lock {
-            margin-top: 8px; padding-top: 8px; border-top: 1px dashed #94a3b8;
-            filter: blur(3.5px); opacity: 0.55; font-size: 0.82rem; line-height: 1.55;
+        .sample-doc-text {
+            font-family: 'Times New Roman', serif; font-size: 0.86rem; line-height: 1.6;
+            background: white; padding: 10px 12px; border-radius: 6px; border: 1px solid #e2e8f0;
         }
         .sample-lock-banner {
             background: #fef3c7; border: 1px solid #f59e0b; color: #92400e;
-            padding: 8px 10px; border-radius: 6px; font-family: 'Inter', sans-serif;
+            padding: 8px 10px; border-radius: 6px;
             font-size: 0.76rem; font-weight: 800; text-align: center; margin-top: 10px;
         }
 
-        /* Checkout & Auto-Unlock Box */
-        .checkout-card {
-            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px;
-        }
-        .step-badge {
-            display: inline-block; background: #0f2942; color: white; font-size: 0.72rem;
-            font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px;
-        }
-        .qr-box {
-            background: white; border: 2px dashed #16a34a; border-radius: 10px;
-            padding: 12px; text-align: center; margin: 10px 0;
-        }
-        .qr-box img { width: 165px; height: 165px; object-fit: contain; margin: 4px auto; display: block; }
-        .upi-copy-row {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #f1f5f9; border: 1px solid #cbd5e1; padding: 7px 10px;
-            border-radius: 6px; font-size: 0.82rem; font-weight: 700; margin-top: 8px;
-        }
-        .btn-copy-upi {
-            background: #0f2942; color: white; border: none; padding: 4px 9px;
-            border-radius: 4px; font-size: 0.74rem; font-weight: 700; cursor: pointer;
+        /* Secure Gateway Pay Box */
+        .gateway-pay-box {
+            background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 14px; margin-top: 12px;
         }
         .pay-input {
-            width: 100%; padding: 10px 12px; margin-top: 6px; margin-bottom: 10px;
-            border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.88rem; font-weight: 600;
+            width: 100%; padding: 9px 11px; margin-top: 4px; margin-bottom: 8px;
+            border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; font-weight: 600; background: white;
         }
-        .btn-confirm-pay {
-            width: 100%; background: #16a34a; color: white; border: none; padding: 12px;
-            border-radius: 8px; font-weight: 800; font-size: 0.92rem; cursor: pointer;
+        .btn-razorpay-pay {
+            width: 100%; background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            color: white; border: none; padding: 13px 16px; border-radius: 8px;
+            font-weight: 800; font-size: 0.95rem; cursor: pointer;
+            box-shadow: 0 6px 16px rgba(29, 78, 216, 0.28);
         }
-        .btn-confirm-pay:hover { background: #15803d; }
+        .btn-razorpay-pay:hover { background: #1e3a8a; }
+        .gateway-trust-row {
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+            font-size: 0.72rem; font-weight: 700; color: #475569; margin-top: 8px;
+        }
 
         /* UNLOCKED INSTANT DOWNLOAD SCREEN */
-        .unlocked-panel {
-            padding: 26px; text-align: center; background: #f0fdf4;
-        }
+        .unlocked-panel { padding: 28px; text-align: center; background: #f0fdf4; }
         .unlocked-icon {
-            width: 58px; height: 58px; background: #16a34a; color: white; border-radius: 50%;
+            width: 60px; height: 60px; background: #16a34a; color: white; border-radius: 50%;
             display: inline-flex; align-items: center; justify-content: center;
-            font-size: 1.75rem; margin-bottom: 12px; box-shadow: 0 6px 16px rgba(22, 163, 74, 0.3);
+            font-size: 1.8rem; margin-bottom: 12px; box-shadow: 0 6px 16px rgba(22, 163, 74, 0.3);
         }
         .download-file-list {
-            max-width: 520px; margin: 18px auto 0; display: flex; flex-direction: column; gap: 10px;
+            max-width: 540px; margin: 18px auto 0; display: flex; flex-direction: column; gap: 10px;
         }
         .dl-file-item {
             background: white; border: 1px solid #86efac; border-radius: 9px; padding: 12px 16px;
@@ -189,10 +189,9 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         .btn-direct-dl {
-            background: #16a34a; color: white; text-decoration: none; padding: 9px 15px;
+            background: #16a34a; color: white; text-decoration: none; padding: 9px 16px;
             border-radius: 7px; font-size: 0.84rem; font-weight: 800; white-space: nowrap;
         }
-        .btn-direct-dl:hover { background: #15803d; }
 
         footer {
             background: #0b1f33; color: #cbd5e1; text-align: center;
@@ -214,13 +213,13 @@
             <a href="index.html">Home</a>
             <a href="forms.html">Forms Directory</a>
             <a href="legal-formats.html" class="active">Legal Formats Store</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="info.html?page=contact">Contact Us</a>
         </div>
     </nav>
 
     <section class="hero">
         <h1>&#9878; Advocate-Verified Legal Formats Store</h1>
-        <p>Check Short Sample Preview &rarr; Pay via UPI / QR &rarr; Instant Lock-Unlock &amp; Direct Download (.DOCX + .PDF)</p>
+        <p>View Sample Preview &rarr; Pay Securely via Razorpay / Cashfree (UPI, GPay, PhonePe, Card) &rarr; Instant Auto-Unlock Download</p>
         <div class="filter-bar-wrap">
             <input type="text" id="legalSearch" placeholder="Search Rent Agreement, Affidavit, NOC..." oninput="renderLegalStore()">
             <select id="legalCatFilter" onchange="renderLegalStore()">
@@ -239,16 +238,12 @@
         </div>
     </main>
 
-    <!-- IN-PAGE SAMPLE PREVIEW, PAYMENT & INSTANT UNLOCK MODAL -->
+    <!-- IN-PAGE SAMPLE PREVIEW & BANK-VERIFIED PAYMENT MODAL -->
     <div id="legalProductModal" class="store-modal-overlay" onclick="if(event.target === this) closeLegalModal()">
         <div class="store-modal-box">
             <div class="modal-header">
-                <strong style="font-size:0.96rem;">&#9878; Shiv Online Center — Sample Preview &amp; Instant Download</strong>
+                <strong style="font-size:0.96rem;">&#9878; Shiv Online Center — Format Preview &amp; Secure Checkout</strong>
                 <button type="button" class="modal-close-btn" onclick="closeLegalModal()">&#10005; Close</button>
-            </div>
-            <div class="modal-tabs" id="modalStepTabs">
-                <button type="button" class="m-tab-btn active" id="tabBtnPreview" onclick="switchModalTab('PREVIEW')">1. Short Sample Preview</button>
-                <button type="button" class="m-tab-btn" id="tabBtnPayment" onclick="switchModalTab('PAYMENT')">2. Pay &amp; Unlock Download</button>
             </div>
             <div id="legalModalBody"></div>
         </div>
@@ -268,49 +263,60 @@
     </footer>
 
     <script>
-        const STORE_CONFIG = {
-            upiId: "",
-            payeeName: "Shiv Online Center"
+        const GATEWAY_CONFIG = {
+            razorpayKeyId: "",           // Loaded automatically from ads.json (saved in shiv-admin.html)
+            cashfreePaymentLink: "",     // Optional Cashfree / Razorpay Payment Link fallback
+            storeName: "Shiv Online Center"
         };
 
         let allLegalItems = [];
         let targetItemId = "";
         let activeProduct = null;
 
-        function getUnlockedIds() {
-            try { return JSON.parse(localStorage.getItem('shiv_unlocked_formats') || '[]'); }
-            catch (_) { return []; }
+        function getUnlockedMap() {
+            try { return JSON.parse(localStorage.getItem('shiv_verified_purchases') || '{}'); }
+            catch (_) { return {}; }
         }
 
-        function markFormatUnlocked(id, utr) {
-            const list = getUnlockedIds();
-            if (!list.includes(String(id))) {
-                list.push(String(id));
-                localStorage.setItem('shiv_unlocked_formats', JSON.stringify(list));
-            }
-            const receipts = JSON.parse(localStorage.getItem('shiv_receipts') || '{}');
-            receipts[String(id)] = { utr, date: new Date().toLocaleString() };
-            localStorage.setItem('shiv_receipts', JSON.stringify(receipts));
+        function saveVerifiedPurchase(id, paymentId, buyerName, buyerPhone, amount) {
+            const map = getUnlockedMap();
+            map[String(id)] = {
+                paymentId,
+                buyerName,
+                buyerPhone,
+                amount,
+                verifiedAt: new Date().toLocaleString()
+            };
+            localStorage.setItem('shiv_verified_purchases', JSON.stringify(map));
         }
 
         function isFormatUnlocked(id) {
-            return getUnlockedIds().includes(String(id));
+            const map = getUnlockedMap();
+            return Boolean(map[String(id)] && map[String(id)].paymentId);
         }
 
         async function loadLegalFormats() {
-            // Auto-load UPI ID & Payee Name saved from shiv-admin.html (ads.json)
+            // 1. Load Razorpay Key ID / Cashfree Link saved from shiv-admin.html (ads.json)
             try {
                 const cfgRes = await fetch(`ads.json?t=${Date.now()}`);
                 if (cfgRes.ok) {
                     const cfg = await cfgRes.json();
-                    if (cfg.upiId) STORE_CONFIG.upiId = cfg.upiId.trim();
-                    if (cfg.payeeName) STORE_CONFIG.payeeName = cfg.payeeName.trim();
+                    if (cfg.razorpayKeyId) GATEWAY_CONFIG.razorpayKeyId = cfg.razorpayKeyId.trim();
+                    if (cfg.cashfreePaymentLink) GATEWAY_CONFIG.cashfreePaymentLink = cfg.cashfreePaymentLink.trim();
+                    if (cfg.payeeName) GATEWAY_CONFIG.storeName = cfg.payeeName.trim();
                 }
             } catch (_) {}
 
             const params = new URLSearchParams(window.location.search);
             const cat = params.get('cat');
             targetItemId = params.get('item') || "";
+
+            // 2. Check if customer just returned from Razorpay / Cashfree Payment Link redirect (?item=ID&paid=1&payment_id=...)
+            const paidFlag = params.get('paid');
+            const returnedTxnId = params.get('razorpay_payment_id') || params.get('payment_id') || params.get('cf_id') || "";
+            if (targetItemId && paidFlag === '1' && returnedTxnId.length >= 8) {
+                saveVerifiedPurchase(targetItemId, returnedTxnId, "Verified Buyer", "", "Paid Online");
+            }
 
             if (cat) {
                 const sel = document.getElementById('legalCatFilter');
@@ -332,7 +338,7 @@
                 renderLegalStore();
 
                 if (targetItemId) {
-                    openLegalProductModal(targetItemId, isFormatUnlocked(targetItemId) ? 'UNLOCKED' : 'PREVIEW');
+                    openLegalProductModal(targetItemId);
                 }
             } catch (_) {
                 document.getElementById('legalCardsGrid').innerHTML =
@@ -373,7 +379,7 @@
                         <div>
                             ${coverHtml}
                             <div class="card-body">
-                                ${unlocked ? `<span class="badge-unlocked">&#128275; UNLOCKED &amp; READY</span>` : `<span class="badge-off">${disc}</span>`}
+                                ${unlocked ? `<span class="badge-unlocked">&#128275; PAID &amp; UNLOCKED</span>` : `<span class="badge-off">${disc}</span>`}
                                 <div class="sub-label">${p.subCat || 'Legal Draft'} • ${p.language || 'Word + PDF'}</div>
                                 <h3>${p.title}</h3>
                                 <div class="price-row">
@@ -386,10 +392,10 @@
                         </div>
                         <div class="card-body" style="padding-top:0;">
                             <div class="card-actions">
-                                <button type="button" class="btn-details" onclick="openLegalProductModal('${p.id}', 'PREVIEW')">&#128065; Sample Preview</button>
+                                <button type="button" class="btn-details" onclick="openLegalProductModal('${p.id}')">&#128065; Sample Preview</button>
                                 ${unlocked
-                                    ? `<button type="button" class="btn-buy" onclick="openLegalProductModal('${p.id}', 'UNLOCKED')">&#11015; Download Now</button>`
-                                    : `<button type="button" class="btn-buy" onclick="openLegalProductModal('${p.id}', 'PAYMENT')">Buy &amp; Unlock (${p.price || '₹70'})</button>`
+                                    ? `<button type="button" class="btn-buy" onclick="openLegalProductModal('${p.id}')">&#11015; Download Now</button>`
+                                    : `<button type="button" class="btn-buy" onclick="openLegalProductModal('${p.id}')">Buy &amp; Unlock (${p.price || '₹70'})</button>`
                                 }
                             </div>
                         </div>
@@ -405,48 +411,31 @@
             const sub = (p.subCat || '').toLowerCase();
             if (sub.includes('rent')) {
                 return `THIS RENT AGREEMENT is made and executed on this ___ day of ________, 2026 at _________, Gujarat.<br><br>
-                <strong>BETWEEN:</strong> Shri/Smt. _________________________, Age: ___ Years, Residing at _________________________ (hereinafter called the <strong>"OWNER / LICENSOR"</strong>) of the ONE PART.<br><br>
-                <strong>AND:</strong> Shri/Smt. _________________________, Age: ___ Years, Aadhaar No. XXXX-XXXX-____ (hereinafter called the <strong>"TENANT / LICENSEE"</strong>) of the OTHER PART.<br><br>
-                1. That the Owner hereby agrees to let out the residential premises situated at _________________________ for a period of 11 (Eleven) Months commencing from ___/___/2026 at a monthly rent of ₹_______/-...`;
+                <strong>BETWEEN:</strong> Shri/Smt. _________________________, Age: ___ Years, Residing at _________________________ (<strong>OWNER</strong>).<br>
+                <strong>AND:</strong> Shri/Smt. _________________________, Age: ___ Years, Aadhaar No. XXXX-XXXX-____ (<strong>TENANT</strong>).<br><br>
+                1. Monthly Rent: ₹_______/- | Security Deposit: ₹_______/- | Period: 11 Months.`;
             }
             if (sub.includes('affidavit')) {
                 return `BEFORE THE EXECUTIVE MAGISTRATE / NOTARY PUBLIC AT _________<br><br>
                 <strong>AFFIDAVIT / સોગંદનામું</strong><br><br>
-                I, _________________________, Aged about ___ Years, Occupation: _________, Residing at _________________________, do hereby solemnly affirm and state on oath as under:<br><br>
-                1. That I am a permanent resident of the above-mentioned address and a citizen of India.<br>
-                2. That my true and correct name / details as per official records are _________________________...`;
+                I, _________________________, Aged about ___ Years, Residing at _________________________, do hereby solemnly affirm and state on oath as under:<br>
+                1. That I am a permanent resident of the above address and a citizen of India...`;
             }
             return `<strong>OFFICIAL LEGAL DRAFT — ${(p.title || 'DOCUMENT').toUpperCase()}</strong><br><br>
-            Executed on this ___ day of ________, 2026 by and between the concerned parties in accordance with applicable Gujarat &amp; Indian Stamp/Registration norms.<br><br>
-            1. Party Details, Identity Verification &amp; Address Clause.<br>
-            2. Terms, Conditions, Mutual Consent &amp; Declaration Clause...`;
+            Executed on this ___ day of ________, 2026 in accordance with applicable Gujarat &amp; Indian Stamp/Registration rules.<br>
+            Includes complete Party Details, Declaration Clauses, Witness Block &amp; Notary Verification Space.`;
         }
 
-        function openLegalProductModal(itemId, initialTab = 'PREVIEW') {
+        function openLegalProductModal(itemId) {
             const p = allLegalItems.find(x => String(x.id) === String(itemId));
             if (!p) return;
             activeProduct = p;
-            if (isFormatUnlocked(p.id) && initialTab === 'PAYMENT') {
-                initialTab = 'UNLOCKED';
-            }
-            switchModalTab(initialTab);
-            document.getElementById('legalProductModal').style.display = 'block';
-        }
 
-        function switchModalTab(tabName) {
-            if (!activeProduct) return;
-            const p = activeProduct;
-            const tabsBar = document.getElementById('modalStepTabs');
-
-            if (tabName === 'UNLOCKED') {
-                tabsBar.style.display = 'none';
+            if (isFormatUnlocked(p.id)) {
                 renderUnlockedDownloadView(p);
+                document.getElementById('legalProductModal').style.display = 'block';
                 return;
             }
-
-            tabsBar.style.display = 'flex';
-            document.getElementById('tabBtnPreview').classList.toggle('active', tabName === 'PREVIEW');
-            document.getElementById('tabBtnPayment').classList.toggle('active', tabName === 'PAYMENT');
 
             const offerNum = parseFloat(String(p.price || '70').replace(/[^\d.]/g, '')) || 70;
             const origNum = parseFloat(String(p.originalPrice || '0').replace(/[^\d.]/g, '')) || 0;
@@ -457,118 +446,136 @@
                 ? `Included Files (${p.legalFiles.length}): ${p.legalFiles.map(f => f.name).join(', ')}`
                 : `Editable MS Word (.docx) + Print-Ready PDF (${p.language || 'Gujarati + English'})`;
 
-            const activeUpi = STORE_CONFIG.upiId || "UPI Not Set in Admin";
-            const upiUri = `upi://pay?pa=${encodeURIComponent(activeUpi)}&pn=${encodeURIComponent(STORE_CONFIG.payeeName)}&am=${offerNum}&cu=INR&tn=${encodeURIComponent(p.title.slice(0, 40))}`;
-            const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUri)}`;
+            const realImagePreviewHtml = p.bannerImg
+                ? `<div class="sample-img-container">
+                       <img src="${p.bannerImg}" alt="${p.title} Sample Preview">
+                       <div class="img-watermark-overlay"><span>SHIV ONLINE CENTER • SAMPLE</span></div>
+                   </div>`
+                : '';
 
-            if (tabName === 'PREVIEW') {
-                document.getElementById('legalModalBody').innerHTML = `
-                    <div class="modal-grid">
+            document.getElementById('legalModalBody').innerHTML = `
+                <div class="modal-grid">
+                    <div>
+                        <div style="font-size:0.78rem; font-weight:800; color:#b45309; margin-bottom:6px;">
+                            &#128196; FORMAT SAMPLE PREVIEW (WATERMARKED)
+                        </div>
+                        <div class="sample-doc-wrapper" oncontextmenu="return false;">
+                            ${realImagePreviewHtml}
+                            <div class="sample-doc-title">${p.title}</div>
+                            <div class="sample-doc-text">${getSampleSnippet(p)}</div>
+                            <div class="sample-lock-banner">
+                                &#128274; Full Editable MS Word (.docx) + PDF Unlocks Automatically After Gateway Payment
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; justify-content:space-between;">
                         <div>
-                            <div style="font-size:0.78rem; font-weight:800; color:#b45309; margin-bottom:6px;">
-                                &#128196; SHORT SAMPLE PREVIEW (WATERMARKED)
+                            <div class="sub-label">${p.subCat || 'Legal Draft'} • ${p.language || 'Word + PDF'}</div>
+                            <h2 style="font-size:1.22rem; color:#0f172a; margin-bottom:10px;">${p.title}</h2>
+                            <div class="price-row">
+                                <span class="offer-amt">₹${offerNum}</span>
+                                ${origHtml}
+                                ${saveHtml}
                             </div>
-                            <div class="sample-doc-wrapper" oncontextmenu="return false;">
-                                <div class="sample-watermark">SHIV ONLINE CENTER • SAMPLE</div>
-                                <div class="sample-doc-title">${p.title}</div>
-                                <div class="sample-doc-text">${getSampleSnippet(p)}</div>
-                                <div class="sample-blur-lock">
-                                    3. Both parties agree that all statutory stamp duty, notary charges, and registration formalities shall be borne as mutually decided.<br>
-                                    4. IN WITNESS WHEREOF, the parties hereto have set their hands on the day, month, and year first above written.<br>
-                                    Signature of First Party: ______________ | Signature of Second Party: ______________ | Witnesses: 1. ________ 2. ________
-                                </div>
-                                <div class="sample-lock-banner">
-                                    &#128274; Full Editable MS Word (.docx) + PDF Unlocks Immediately After Payment
-                                </div>
+                            <div style="background:#f0fdf4; border:1px solid #86efac; color:#166534; padding:8px 10px; border-radius:7px; font-size:0.8rem; font-weight:700; margin-bottom:10px;">
+                                &#10004; ${filesText}
                             </div>
-                        </div>
+                            <p style="font-size:0.84rem; color:#334155; line-height:1.5; margin-bottom:10px;">${p.summary || ''}</p>
 
-                        <div style="display:flex; flex-direction:column; justify-content:space-between;">
-                            <div>
-                                <div class="sub-label">${p.subCat || 'Legal Draft'} • ${p.language || 'Word + PDF'}</div>
-                                <h2 style="font-size:1.22rem; color:#0f172a; margin-bottom:10px;">${p.title}</h2>
-                                <div class="price-row">
-                                    <span class="offer-amt">₹${offerNum}</span>
-                                    ${origHtml}
-                                    ${saveHtml}
-                                </div>
-                                <div style="background:#f0fdf4; border:1px solid #86efac; color:#166534; padding:8px 10px; border-radius:7px; font-size:0.8rem; font-weight:700; margin-bottom:10px;">
-                                    &#10004; ${filesText}
-                                </div>
-                                <p style="font-size:0.85rem; color:#334155; line-height:1.55; margin-bottom:12px;">${p.summary || ''}</p>
-                                <ul style="font-size:0.81rem; color:#1e293b; line-height:1.75; padding-left:18px;">
-                                    <li>100% Advocate-Verified &amp; Ready for Stamp Paper</li>
-                                    <li>Easy Fill-in-the-Blank Fields in MS Word</li>
-                                    <li>Instant Auto-Unlock &amp; Direct Download on This Screen</li>
-                                </ul>
-                            </div>
-                            <button type="button" class="btn-confirm-pay" style="margin-top:16px;" onclick="switchModalTab('PAYMENT')">
-                                Proceed to Pay ₹${offerNum} &amp; Unlock Download &rarr;
-                            </button>
-                        </div>
-                    </div>
-                `;
-            } else {
-                const qrBlockHtml = STORE_CONFIG.upiId
-                    ? `<img src="${qrImgUrl}" alt="UPI QR Code">
-                       <strong style="color:#059669; font-size:0.95rem;">Amount: ₹${offerNum} Only</strong>
-                       <div class="upi-copy-row">
-                           <span id="upiIdText">${STORE_CONFIG.upiId}</span>
-                           <button type="button" class="btn-copy-upi" onclick="copyStoreUpi()">Copy UPI ID</button>
-                       </div>`
-                    : `<p style="color:#dc2626; font-weight:700; font-size:0.84rem; padding:16px;">UPI ID not configured yet. Please save UPI ID in Shiv Admin Panel and pull updates.</p>`;
+                            <div class="gateway-pay-box">
+                                <strong style="font-size:0.82rem; color:#14532d; display:block; margin-bottom:6px;">
+                                    &#128274; Instant Bank-Verified Checkout
+                                </strong>
+                                <input type="text" id="gwBuyerName" class="pay-input" placeholder="Your Full Name (Required)">
+                                <input type="tel" id="gwBuyerPhone" class="pay-input" maxlength="10" placeholder="Your 10-Digit Mobile Number">
+                                <div id="gwErrMsg" style="color:#dc2626; font-size:0.76rem; font-weight:700; margin-bottom:6px; display:none;"></div>
 
-                document.getElementById('legalModalBody').innerHTML = `
-                    <div class="modal-grid">
-                        <div class="checkout-card">
-                            <span class="step-badge">STEP 1: SCAN &amp; PAY ₹${offerNum}</span>
-                            <p style="font-size:0.8rem; color:#475569;">Scan via GPay, PhonePe, Paytm or any UPI App:</p>
-                            <div class="qr-box">${qrBlockHtml}</div>
-                        </div>
-
-                        <div class="checkout-card" style="display:flex; flex-direction:column; justify-content:space-between;">
-                            <div>
-                                <span class="step-badge" style="background:#16a34a;">STEP 2: ENTER UTR TO UNLOCK INSTANTLY</span>
-                                <p style="font-size:0.81rem; color:#334155; margin-bottom:10px;">
-                                    Payment karne ke baad apna <strong>12-Digit UPI Transaction / UTR Number</strong> dalein — lock turant hat jayega aur direct download button khul jayega:
-                                </p>
-                                <label style="font-size:0.78rem; font-weight:700;">12-Digit UPI Transaction ID / UTR No.:</label>
-                                <input type="text" id="custPayUtr" class="pay-input" maxlength="16" placeholder="e.g., 432819045612">
-                                <div id="utrErrorMsg" style="color:#dc2626; font-size:0.78rem; font-weight:700; margin-bottom:8px; display:none;"></div>
-                            </div>
-
-                            <div>
-                                <button type="button" class="btn-confirm-pay" onclick="verifyAndUnlockNow()">
-                                    &#128275; Verify Payment &amp; Unlock Download Now
+                                <button type="button" class="btn-razorpay-pay" onclick="launchGatewayPayment()">
+                                    &#9889; Pay ₹${offerNum} Now &amp; Auto-Unlock File &rarr;
                                 </button>
-                                <p style="font-size:0.74rem; color:#64748b; margin-top:8px; line-height:1.45;">
-                                    * Instant Digital Delivery: Lock hatne ke baad aap seedha isi screen se apni .docx / .pdf file download kar sakte hain.
-                                </p>
+                                <div class="gateway-trust-row">
+                                    <span>&#10004; GPay / PhonePe / Paytm UPI</span>
+                                    <span>&#10004; Cards &amp; NetBanking</span>
+                                    <span>&#10004; Auto-Unlock</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                `;
-            }
+                </div>
+            `;
+
+            document.getElementById('legalProductModal').style.display = 'block';
         }
 
-        function verifyAndUnlockNow() {
+        function launchGatewayPayment() {
             if (!activeProduct) return;
-            const utrRaw = document.getElementById('custPayUtr').value.trim();
-            const errBox = document.getElementById('utrErrorMsg');
+            const buyerName = (document.getElementById('gwBuyerName')?.value || "").trim();
+            const buyerPhone = (document.getElementById('gwBuyerPhone')?.value || "").trim();
+            const errBox = document.getElementById('gwErrMsg');
 
-            if (!/^\d{12}$/.test(utrRaw)) {
+            if (buyerName.length < 2) {
                 errBox.style.display = 'block';
-                errBox.innerText = "Please enter a valid 12-digit numeric UPI UTR / Reference number from your payment receipt.";
+                errBox.innerText = "Please enter your Full Name before proceeding to payment.";
+                return;
+            }
+            if (!/^\d{10}$/.test(buyerPhone)) {
+                errBox.style.display = 'block';
+                errBox.innerText = "Please enter a valid 10-digit mobile number.";
+                return;
+            }
+            errBox.style.display = 'none';
+
+            const offerNum = parseFloat(String(activeProduct.price || '70').replace(/[^\d.]/g, '')) || 70;
+
+            // Mode 1: Direct Razorpay Standard Checkout Popup (100% Bank-Verified Callback)
+            if (GATEWAY_CONFIG.razorpayKeyId && typeof Razorpay !== "undefined") {
+                const options = {
+                    key: GATEWAY_CONFIG.razorpayKeyId,
+                    amount: Math.round(offerNum * 100), // Amount in paise
+                    currency: "INR",
+                    name: GATEWAY_CONFIG.storeName,
+                    description: activeProduct.title.slice(0, 120),
+                    prefill: {
+                        name: buyerName,
+                        contact: buyerPhone
+                    },
+                    notes: {
+                        format_id: String(activeProduct.id),
+                        format_title: activeProduct.title
+                    },
+                    theme: { color: "#0f2942" },
+                    handler: function (response) {
+                        // Triggered ONLY when Razorpay bank server confirms real payment success
+                        const realPaymentId = response.razorpay_payment_id;
+                        if (realPaymentId) {
+                            saveVerifiedPurchase(activeProduct.id, realPaymentId, buyerName, buyerPhone, `₹${offerNum}`);
+                            renderLegalStore();
+                            renderUnlockedDownloadView(activeProduct);
+                        }
+                    }
+                };
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function (resp) {
+                    alert("Payment Failed: " + (resp.error?.description || "Please try again."));
+                });
+                rzp.open();
                 return;
             }
 
-            errBox.style.display = 'none';
-            markFormatUnlocked(activeProduct.id, utrRaw);
-            renderLegalStore();
-            switchModalTab('UNLOCKED');
+            // Mode 2: Cashfree / Razorpay Payment Link Redirect Fallback
+            if (GATEWAY_CONFIG.cashfreePaymentLink) {
+                const sep = GATEWAY_CONFIG.cashfreePaymentLink.includes('?') ? '&' : '?';
+                const targetUrl = `${GATEWAY_CONFIG.cashfreePaymentLink}${sep}item=${encodeURIComponent(activeProduct.id)}&amount=${offerNum}&name=${encodeURIComponent(buyerName)}&phone=${encodeURIComponent(buyerPhone)}`;
+                window.open(targetUrl, '_blank');
+                return;
+            }
+
+            alert("Payment Gateway (Razorpay Key ID or Cashfree Payment Link) is not configured yet in Shiv Admin Panel (ads.json).");
         }
 
         function renderUnlockedDownloadView(p) {
+            const receipt = getUnlockedMap()[String(p.id)] || {};
             const files = [];
 
             if (Array.isArray(p.legalFiles) && p.legalFiles.length > 0) {
@@ -589,19 +596,20 @@
                     <div class="dl-file-item">
                         <div style="text-align:left;">
                             <strong style="font-size:0.9rem; color:#0f172a; display:block;">&#128196; ${f.name}</strong>
-                            <span style="font-size:0.76rem; color:#15803d; font-weight:700;">Unlocked • ${f.size || 'Ready to Download'}</span>
+                            <span style="font-size:0.76rem; color:#15803d; font-weight:700;">Verified Payment • ${f.size || 'Ready to Download'}</span>
                         </div>
                         <a href="${f.url}" download target="_blank" class="btn-direct-dl">&#11015; Download File</a>
                     </div>
                 `).join('')
-                : `<div class="dl-file-item"><span style="color:#b45309; font-weight:700;">File link not attached yet in Admin Panel. Please upload the .docx/.pdf file in Legal Format Studio.</span></div>`;
+                : `<div class="dl-file-item"><span style="color:#b45309; font-weight:700;">File not attached yet in Admin Panel.</span></div>`;
 
             document.getElementById('legalModalBody').innerHTML = `
                 <div class="unlocked-panel">
                     <div class="unlocked-icon">&#128275;</div>
                     <h2 style="color:#14532d; font-size:1.35rem; margin-bottom:6px;">Payment Verified — Format Unlocked!</h2>
-                    <p style="font-size:0.88rem; color:#166534;">
-                        Thank you! <strong>${p.title}</strong> is now unlocked. Click the button below to download your editable file directly:
+                    <p style="font-size:0.86rem; color:#166534;">
+                        Transaction ID: <strong>${receipt.paymentId || 'VERIFIED'}</strong><br>
+                        <strong>${p.title}</strong> is unlocked. Click below to download your editable file directly:
                     </p>
                     <div class="download-file-list">
                         ${filesHtml}
@@ -611,13 +619,6 @@
                     </div>
                 </div>
             `;
-        }
-
-        function copyStoreUpi() {
-            if (!STORE_CONFIG.upiId) return;
-            navigator.clipboard.writeText(STORE_CONFIG.upiId).then(() => {
-                alert("UPI ID copied: " + STORE_CONFIG.upiId);
-            });
         }
 
         function closeLegalModal() {
