@@ -1294,56 +1294,47 @@
             });
             return { qual, lastDt, examDt, bullets };
         }
-
-        function buildSocialPostMessage(p) {
+function buildSocialPostMessage(p) {
             const postUrl = `${SITE_DOMAIN}/post.html?id=${p.id}`;
-            const catLabel = p.subCat || p.mainCat || "Latest Update";
+            const catLabel = (p.subCat || p.mainCat || "Update").toUpperCase();
             const extracted = extractExtraDetailsFromHtml(p.content);
 
             let lines = [
-                `📢 *${catLabel.toUpperCase()} — SHIV ONLINE CENTER*`,
-                `━━━━━━━━━━━━━━━━━━━━`,
-                `📌 *${stripExternalLinks(p.title)}*`,
-                ``
+                `📢 *${catLabel} — SHIV ONLINE CENTER*`,
+                `📌 *${stripExternalLinks(p.title)}*`
             ];
 
             if (p.mainCat === 'Call Letter') {
                 const finalExamDate = stripExternalLinks(p.examDate) || extracted.examDt;
-                if (finalExamDate) lines.push(`🗓️ *પરીક્ષા તારીખ (Exam Date):* ${finalExamDate}`);
-                if (p.releaseDate) lines.push(`🎫 *કોલ લેટર તારીખ (Release Date):* ${stripExternalLinks(p.releaseDate)}`);
-                if (p.loginReq) lines.push(`🔑 *ડાઉનલોડ વિગત (Login Info):* ${stripExternalLinks(p.loginReq)}`);
-                if (p.examMode) lines.push(`🏫 *પરીક્ષા પ્રકાર (Exam Mode):* ${stripExternalLinks(p.examMode)}`);
-                if (p.clExtraTopic) lines.push(`⚠️ *ખાસ સૂચના:* ${stripExternalLinks(p.clExtraTopic)}`);
+                if (finalExamDate) lines.push(`🗓️ *પરીક્ષા તારીખ:* ${finalExamDate}`);
+                if (p.releaseDate) lines.push(`🎫 *કોલ લેટર તારીખ:* ${stripExternalLinks(p.releaseDate)}`);
+                if (p.loginReq) lines.push(`🔑 *ડાઉનલોડ વિગત:* ${stripExternalLinks(p.loginReq)}`);
+                if (p.examMode) lines.push(`🏫 *પરીક્ષા પ્રકાર:* ${stripExternalLinks(p.examMode)}`);
+                if (p.clExtraTopic) lines.push(`⚠️ *સૂચના:* ${stripExternalLinks(p.clExtraTopic)}`);
             } else {
                 const finalQual = stripExternalLinks(p.qualification) || extracted.qual || "Official Notification Mujab";
                 const finalDate = stripExternalLinks(p.lastDate) || extracted.lastDt;
-                lines.push(`🎓 *લાયકાત (Qualification):* ${finalQual}`);
-                if (p.vacancy) lines.push(`👥 *જગ્યાઓ / પગાર (Vacancy & Pay):* ${stripExternalLinks(p.vacancy)}`);
-                if (p.ageLimit) lines.push(`🎂 *વય મર્યાદા (Age Limit):* ${stripExternalLinks(p.ageLimit)}`);
-                if (finalDate) lines.push(`📅 *છેલ્લી તારીખ (Last Date):* ${finalDate}`);
-                if (p.price) lines.push(`💰 *ઓફર કિંમત (Offer Price):* ${stripExternalLinks(p.price)}`);
-                if (p.extraTopic) lines.push(`✨ *વધારાની વિગત:* ${stripExternalLinks(p.extraTopic)}`);
+                lines.push(``);
+                lines.push(`🎓 *લાયકાત:* ${finalQual}`);
+                if (p.vacancy) lines.push(`👥 *જગ્યા / પગાર:* ${stripExternalLinks(p.vacancy)}`);
+                if (p.ageLimit) lines.push(`🎂 *વય મર્યાદા:* ${stripExternalLinks(p.ageLimit)}`);
+                if (finalDate) lines.push(`📅 *છેલ્લી તારીખ:* ${finalDate}`);
+                if (p.price) lines.push(`💰 *ઓફર કિંમત:* ${stripExternalLinks(p.price)}`);
+                if (p.extraTopic) lines.push(`✨ *ખાસ વિગત:* ${stripExternalLinks(p.extraTopic)}`);
             }
 
+            // Short 1-line summary (capped at 130 chars so WhatsApp never triggers "Read more")
             const cleanSummary = stripExternalLinks(p.summary);
             if (cleanSummary) {
-                lines.push(``);
-                lines.push(`📝 *સંપૂર્ણ માહિતી (Full Information):*`);
-                lines.push(cleanSummary);
+                const shortSum = cleanSummary.length > 130 ? cleanSummary.slice(0, 127).trim() + "..." : cleanSummary;
+                lines.push(`📝 ${shortSum}`);
             }
-
-            if (extracted.bullets.length > 0) {
-                lines.push(``);
-                lines.push(`📋 *મુખ્ય હાઇલાઇટ્સ (Key Highlights):*`);
-                extracted.bullets.forEach(b => lines.push(b));
-            }
-
             lines.push(``);
-            lines.push(`👉 *સંપૂર્ણ માહિતી અને ઓફિશિયલ લિંક માટે અમારી વેબસાઇટ ખોલો:*`);
+            lines.push(`👉 *વધુ વિગતો માટે નીચે આપેલી લિંક ખોલો 👇:*`);
             lines.push(`🔗 ${postUrl}`);
-            lines.push(``);
             lines.push(`🏢 *Shiv Online Center (ShivMitra.in)*`);
-            lines.push(`📲 _દરરોજ નવી સરકારી ભરતી, કોલ લેટર, યોજના અને ફોર્મની માહિતી માટે અમારી સાથે જોડાયેલા રહો._`);
+            lines.push(`📲 દરરોજ નવી સરકારી ભરતી, કોલ લેટર, યોજના અને ફોર્મની માહિતી માટે અમારી સાથે જોડાયેલા રહો.*`);
+            
 
             return lines.join('\n');
         }

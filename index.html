@@ -187,13 +187,17 @@
 
     <!-- 6. Download Forms Dropdown -->
     <li class="nav-item">
-      <a class="nav-link" onclick="toggleNavDropdown(event, this)">Download Forms <span class="caret">&#9662;</span></a>
+      <a href="forms.html" class="nav-link" onclick="if(window.innerWidth <= 900){ toggleNavDropdown(event, this); }">Download Forms <span class="caret">&#9662;</span></a>
       <ul class="dropdown-menu">
         <li><a href="forms.html" class="view-all-sub">Open Full Forms Directory &rarr;</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'Aadhaar')">Aadhaar & PAN Card Forms</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'Certificates')">Caste / Income / Domicile Forms</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'Bank')">Bank KYC & Account Forms</a></li>
-        <li><a href="javascript:void(0)" onclick="openCategoryView('FORMS', 'RTO')">RTO / Driving Licence Forms</a></li>
+        <li><a href="forms.html?cat=Aadhaar%20Card%20Forms">Aadhaar Card Forms</a></li>
+        <li><a href="forms.html?cat=PAN%20Card%20Forms">PAN Card Forms</a></li>
+        <li><a href="forms.html?cat=Ration%20Card%20%26%20Civil%20Supplies">Ration Card &amp; Civil Supplies</a></li>
+        <li><a href="forms.html?cat=Certificates%20(Caste%20%2F%20Income%20%2F%20Domicile)">Caste / Income / Domicile Forms</a></li>
+        <li><a href="forms.html?cat=Bank%20Account%2C%20KYC%20%26%20Loan%20Forms">Bank KYC &amp; Account Forms</a></li>
+        <li><a href="forms.html?cat=Driving%20Licence%20%26%20RTO%20Forms">RTO / Driving Licence Forms</a></li>
+        <li><a href="forms.html?cat=Passport%20%26%20Voter%20ID%20Forms">Passport &amp; Voter ID Forms</a></li>
+        <li><a href="forms.html?cat=Scholarship%20%26%20Pension%20Forms">Scholarship &amp; Pension Forms</a></li>
       </ul>
     </li>
   </ul>
@@ -272,7 +276,7 @@
     <section class="cat-box" id="download-forms">
       <div class="cat-header bg-teal"><span>Download Bank & Govt Forms</span><span>&#128196;</span></div>
       <ul class="cat-list" id="listForms"><li>Loading...</li></ul>
-      <div class="cat-footer"><button onclick="openCategoryView('FORMS', 'ALL')">View All Forms &rarr;</button></div>
+      <div class="cat-footer"><button onclick="window.location.href='forms.html'">View All Forms &rarr;</button></div>
     </section>
   </div>
 </div>
@@ -355,7 +359,8 @@
     const badge = post.price
       ? `<span class="tag-price">${post.price}</span>`
       : `<span class="tag-new">NEW</span>`;
-    return `<li><a href="post.html?id=${post.id}">&#9656; ${post.title}</a>${badge}</li>`;
+   const targetHref = (post.mainCat === 'Forms') ? `forms.html?form=${post.id}` : `post.html?id=${post.id}`;
+return `<li><a href="${targetHref}">&#9656; ${post.title}</a>${badge}</li>`;
   }
 
   function fillBox(elementId, items, emptyMsg) {
